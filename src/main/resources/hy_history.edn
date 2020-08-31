@@ -17,3 +17,4 @@
 {:type :ok, :f :write, :value [y 2], :process 3, :time 17, :position 17, :link nil, :index 16}
 {:type :ok, :f :write, :value [x 5], :process 3, :time 18, :position 18, :link nil, :index 17}
 {:type :ok, :f :write, :value [b 1], :process 3, :time 19, :position 19, :link nil, :index 18}
+

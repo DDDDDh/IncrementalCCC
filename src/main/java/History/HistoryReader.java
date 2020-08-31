@@ -1,3 +1,10 @@
+
+/*
+从存储历史记录的文件中读取每个操作，并且返回一个操作的列表opList
+ */
+
+
+
 package History;
 
 import java.io.BufferedReader;
@@ -5,6 +12,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 import org.apache.commons.lang3.StringUtils;
+
 
 public class HistoryReader {
 
@@ -40,7 +48,7 @@ public class HistoryReader {
         return opList;
     }
 
-    Operation getOperation(String line) {
+    public Operation getOperation(String line) {
         String[] subs = line.split(",");
         String type = StringUtils.remove(subs[0], KEY_TYPE);
         if (!type.equals(":ok")) { //如果不是正常返回的操作，则忽略
@@ -60,16 +68,23 @@ public class HistoryReader {
         int process = Integer.parseInt(StringUtils.remove(subs[3], KEY_PROCESS));
         long time = Long.parseLong(StringUtils.remove(subs[4], KEY_TIME));
         long position = Long.parseLong(StringUtils.remove(subs[5], KEY_POSITION));
-        int index = idx++;
+        int index = idx++; //注意，这个index是读入正常操作之后进行的另外编号，与历史记录里本身的index无关
         return new Operation(f, key, value, process, time, position, index);
     }
 
     public static void main(String args[]) throws IOException{
         String url = "src/main/resources/hy_history.edn";
         HistoryReader reader = new HistoryReader(url);
-        LinkedList<Operation> opList = reader.readHistory();
-        for(int i = 0; i < opList.size(); i++){
-            System.out.println(i+opList.get(i).toString());
+//        LinkedList<Operation> opList = reader.readHistory();
+//        for(int i = 0; i < opList.size(); i++){
+//            System.out.println(i+opList.get(i).toString());
+//        }
+        History history = new History(reader.readHistory());
+        history.printOpGroupByKey();
+        history.printWriteReadHistories();
+        history.printOpGroupByProcess();
+        if(!history.isDifferentiated()){
+            System.out.println("Detected not differentiated.");
         }
 
     }
