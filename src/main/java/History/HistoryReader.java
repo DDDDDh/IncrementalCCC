@@ -11,6 +11,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
+
+import Relations.ProgramOrder;
+import Relations.ReadFrom;
 import org.apache.commons.lang3.StringUtils;
 
 
@@ -80,13 +83,20 @@ public class HistoryReader {
 //            System.out.println(i+opList.get(i).toString());
 //        }
         History history = new History(reader.readHistory());
+        history.setOpNum(reader.idx); //读取完一个历史记录之后，一定一定要记得设置总操作数...
         history.printOpGroupByKey();
         history.printWriteReadHistories();
         history.printOpGroupByProcess();
         if(!history.isDifferentiated()){
             System.out.println("Detected not differentiated.");
         }
-
+//        history.testProtection();
+        ProgramOrder po = new ProgramOrder(history.getOpNum());
+        po.caculateProgramOrder(history);
+//        po.printMatrx();
+        ReadFrom rf = new ReadFrom(history.getOpNum());
+        rf.caculateReadFrom(history);
+        rf.printMatrx();
     }
 
 }

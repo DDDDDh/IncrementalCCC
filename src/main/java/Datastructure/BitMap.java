@@ -24,12 +24,12 @@ public class BitMap {
                 bit2.set(i, true);
             }
         }
-        System.out.println("Bit1:");
-        for(int i = 0; i < bit1.size(); i++){
-            if(bit1.get(i)) {
-                System.out.println(i);
-            }
-        }
+//        System.out.println("Bit1:");
+//        for(int i = 0; i < bit1.size(); i++){
+//            if(bit1.get(i)) {
+//                System.out.println(i);
+//            }
+//        }
 
         System.out.println("Bit2:");
         for(int i = 0; i < bit2.size(); i++){
@@ -38,17 +38,28 @@ public class BitMap {
             }
         }
 
-        bit1.set(1);
+        System.out.println("Bit2 original:" + bit2.toString());
 
-        BitSet bit3 = (BitSet) bit2.clone();
-        bit3.or(bit1);
-
-        System.out.println("Bit3:");
-        for(int i = 0; i < bit3.size(); i++){
-            if(bit3.get(i)) {
-                System.out.println(i);
-            }
+        int nextTrue = bit2.nextSetBit(0);
+        while(nextTrue != -1){
+            System.out.println("Get: " + nextTrue);
+            nextTrue = bit2.nextSetBit(nextTrue+1);
         }
+        for(int i = bit2.nextSetBit(0); i >= 0; i = bit2.nextSetBit(i+1)){
+            System.out.println("Sample get:" + i);
+        }
+
+//        bit1.set(1);
+//
+//        BitSet bit3 = (BitSet) bit2.clone();
+//        bit3.or(bit1);
+//
+//        System.out.println("Bit3:");
+//        for(int i = 0; i < bit3.size(); i++){
+//            if(bit3.get(i)) {
+//                System.out.println(i);
+//            }
+//        }
 
     }
 

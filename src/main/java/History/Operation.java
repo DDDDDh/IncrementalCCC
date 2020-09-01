@@ -14,7 +14,7 @@ public class Operation {
     private int process;
     private long time;
     private long position;
-    private int index; //index等价于每个操作的全局标识符，很重要
+    private int id; //index等价于每个操作的全局标识符，很重要
     private BitSet visList;
     private int correspondingWriteIndex; //只有该操作是读操作时，对应的写操作下标才有意义，初值为-1；
 
@@ -26,7 +26,7 @@ public class Operation {
         this.setProcess(-1);
         this.setTime(-1);
         this.setPosition(-1);
-        this.setIndex(-1);
+        this.setID(-1);
         this.setVisList(null);
         this.setCorrespondingWriteIndex(-1);
     }
@@ -52,7 +52,7 @@ public class Operation {
         this.setProcess(process);
         this.setTime(time);
         this.setPosition(position);
-        this.setIndex(index);
+        this.setID(index);
     }
 
     public void copyOperation(Operation otherOp){
@@ -62,7 +62,7 @@ public class Operation {
         this.setProcess(otherOp.getProcess());
         this.setTime(otherOp.getTime());
         this.setPosition(otherOp.getPosition());
-        this.setIndex(otherOp.getIndex());
+        this.setID(otherOp.getID());
         this.setVisList(otherOp.getVisList());
         this.setCorrespondingWriteIndex(otherOp.getCorrespondingWriteIndex());
     }
@@ -103,13 +103,13 @@ public class Operation {
     public long getPosition(){
         return this.position;
     }
-    public void setIndex(int index){
-        this.index = index;
+    public void setID(int index){
+        this.id = index;
     }
     public void setCorrespondingWriteIndex(int index){this.correspondingWriteIndex = index;}
     public int getCorrespondingWriteIndex(){return this.correspondingWriteIndex;}
-    public int getIndex(){
-        return this.index;
+    public int getID(){
+        return this.id;
     }
     public void setVisList(BitSet bitSet){this.visList = bitSet;}
 

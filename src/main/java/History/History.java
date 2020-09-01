@@ -18,8 +18,9 @@ public class History {
     LinkedList<Integer> writeHistory;
     LinkedList<Integer> readHistory;
     HashMap<String, LinkedList<Integer>> keyOpList; //作用于每个key上的操作(下标)列表
-    HashMap<Integer, LinkedList<Integer>> processOpList; //每个线程维护自己的操作(下标)列表
+    HashMap<Integer, LinkedList<Integer>> processOpList; //每个线程维护自己的操作(下标)列表 [用于：后续计算program order]
     HashSet<String> keySet;
+    int opNum;
 
     public History(LinkedList<Operation> operations) {
         this.originalHistory = operations;
@@ -46,10 +47,10 @@ public class History {
         readHistory = new LinkedList<Integer>();
         for (Operation op : this.operationList) {
             if (op.isWrite()) {
-                writeHistory.add(op.getIndex());
+                writeHistory.add(op.getID());
             }
             if (op.isRead()) {
-                readHistory.add(op.getIndex());
+                readHistory.add(op.getID());
             }
         }
     }
@@ -83,7 +84,7 @@ public class History {
             if (!this.keyOpList.containsKey(curKey)) {
                 this.keyOpList.put(curKey, new LinkedList<Integer>());
             }
-            this.keyOpList.get(curKey).add(op.getIndex());
+            this.keyOpList.get(curKey).add(op.getID());
         }
     }
 
@@ -113,7 +114,7 @@ public class History {
             if(!this.processOpList.containsKey(curProcess)){
                 this.processOpList.put(curProcess, new LinkedList<>());
             }
-            this.processOpList.get(curProcess).add(op.getIndex());
+            this.processOpList.get(curProcess).add(op.getID());
         }
     }
 
@@ -185,7 +186,33 @@ public class History {
         return this.processOpList;
     }
 
+    public void testProtection(){
+
+        this.operationList.remove(5);
+
+        System.out.println("The original history is:");
+        for(int i = 0; i < this.originalHistory.size(); i++){
+            System.out.print(this.originalHistory.get(i).easyPrint());
+        }
+        System.out.println();
+
+        System.out.println("The operation list is:");
+        for(int i = 0; i < this.operationList.size(); i++){
+            System.out.print(this.operationList.get(i).easyPrint());
+        }
+
+    }
+
     public HashSet<String> getKeySet() {
         return this.keySet;
     }
+
+    public void setOpNum(int n){
+        this.opNum = n;
+    }
+
+    public int getOpNum(){
+        return this.opNum;
+    }
+
 }
