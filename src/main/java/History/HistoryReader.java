@@ -12,6 +12,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
+import Relations.ConflictRelation;
+import Relations.IncrementalCausalOrder;
 import Relations.ProgramOrder;
 import Relations.ReadFrom;
 import org.apache.commons.lang3.StringUtils;
@@ -96,7 +98,11 @@ public class HistoryReader {
 //        po.printMatrx();
         ReadFrom rf = new ReadFrom(history.getOpNum());
         rf.caculateReadFrom(history);
-        rf.printMatrx();
+//        rf.printMatrx();
+        IncrementalCausalOrder ico = new IncrementalCausalOrder(history.getOpNum());
+        ico.incrementalCO(history, po, rf);
+        ConflictRelation cf = new ConflictRelation(history.getOpNum());
+        cf.caculateConflictRelation(history, ico);
     }
 
 }
