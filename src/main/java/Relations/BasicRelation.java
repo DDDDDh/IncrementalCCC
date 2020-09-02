@@ -1,5 +1,10 @@
 package Relations;
 
+import History.Operation;
+
+import java.util.BitSet;
+import java.util.LinkedList;
+
 public class BasicRelation implements BasicRelationInterface{
 
     private boolean[][] relationMatrix;
@@ -19,7 +24,7 @@ public class BasicRelation implements BasicRelationInterface{
         return this.relationMatrix[fromIndex][toIndex];
     }
 
-    public void printMatrx(){
+    public void printMatrix(){
         String curLine = "";
         for(int i = 0; i < this.matrixSize; i++){
             curLine = "";
@@ -33,6 +38,55 @@ public class BasicRelation implements BasicRelationInterface{
             }
             System.out.println(curLine);
         }
+    }
+
+    public boolean[][] getRelationMatrix() {
+        return this.relationMatrix;
+    }
+
+    public int getMatrixSize(){
+        return this.matrixSize;
+    }
+
+    //将关系r1与关系r2取并集，再存入当前关系中
+    public void union(BasicRelation r1, BasicRelation r2){
+        assert(r1.getMatrixSize() == r2.getMatrixSize());
+        assert(this.getMatrixSize() == r1.getMatrixSize());
+
+        boolean[][] r1Matrix = r1.getRelationMatrix();
+        boolean[][] r2Matrix = r2.getRelationMatrix();
+
+        int size = this.getMatrixSize();
+
+        for(int i = 0; i < size; i++){
+            for(int j = 0; j < size; j++){
+                if(r1Matrix[i][j] || r2Matrix[i][j]){
+                    this.setTrue(i, j);
+                }
+            }
+        }
+    }
+
+    public void unionAndSetVis(BasicRelation r1, BasicRelation r2, LinkedList<Operation> opList){
+        assert(r1.getMatrixSize() == r2.getMatrixSize());
+        assert(this.getMatrixSize() == r1.getMatrixSize());
+        assert (r1.getMatrixSize() == opList.size());
+
+        boolean[][] r1Matrix = r1.getRelationMatrix();
+        boolean[][] r2Matrix = r2.getRelationMatrix();
+
+        int size = this.getMatrixSize();
+
+        for(int i = 0; i < size; i++){
+            for(int j = 0; j < size; j++){
+                if(r1Matrix[i][j] || r2Matrix[i][j]){
+                    this.setTrue(i, j);
+                    opList.get(j).getCoList().set(i, true);
+                }
+            }
+        }
+
+
     }
 
 }

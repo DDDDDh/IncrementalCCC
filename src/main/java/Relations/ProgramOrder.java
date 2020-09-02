@@ -25,11 +25,13 @@ public class ProgramOrder extends BasicRelation{
                 BitSet tempList;
                 if(j == 0){ //为每个线程的第一个操作初始化po
                     tempList = new BitSet(history.getOpNum());
+                    curOp.setLastOpID(-1);
                 }
                 else{
                     int lastID = tempOpList.get(j-1);
                     tempList = (BitSet)opList.get(lastID).getVisList().clone(); //继承前一操作的program order
                     tempList.set(lastID, true); //设置前一操作可见
+                    curOp.setLastOpID(lastID);
                 }
                 curOp.setVisList(tempList);
 //                System.out.println("List:" + tempList);
@@ -46,6 +48,4 @@ public class ProgramOrder extends BasicRelation{
             }
         }
     }
-
-
 }

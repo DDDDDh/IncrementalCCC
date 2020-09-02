@@ -15,8 +15,11 @@ public class Operation {
     private long time;
     private long position;
     private int id; //index等价于每个操作的全局标识符，很重要
-    private BitSet visList;
-    private int correspondingWriteIndex; //只有该操作是读操作时，对应的写操作下标才有意义，初值为-1；
+    private BitSet visList; //暂时等价于poList
+    private int correspondingWriteID; //只有该操作是读操作时，对应的写操作下标才有意义，初值为-1(读入初值为-2); ->在ReadFrom里初始化
+    private int topoID; //拓扑序号，从0开始; ->在IncrementalCausalOrder里初始化
+    private int lastOpID; //同一线程位于前一位的操作ID，如果该操作为某线程第一个操作，该值为-1; ->在ProgramOrder里初始化
+    private BitSet coList;
 
 
     Operation(){
@@ -28,7 +31,10 @@ public class Operation {
         this.setPosition(-1);
         this.setID(-1);
         this.setVisList(null);
-        this.setCorrespondingWriteIndex(-1);
+        this.setCorrespondingWriteID(-1);
+        this.setTopoID(-1);
+        this.setLastOpID(-1);
+        this.setCoList(null);
     }
 
     Operation(String type, String key, int value, int process, long time, long position, int index){
@@ -38,10 +44,10 @@ public class Operation {
         else if(type.equals(":read")){
             this.setType(OpType.read);
             if(value == -1){ //读入初值的读操作，对应写操作下标初始化为-2；
-                this.setCorrespondingWriteIndex(-2);
+                this.setCorrespondingWriteID(-2);
             }
             else {
-                this.setCorrespondingWriteIndex(-1); //否则，将读操作的对应写操作下标初始化为-1；
+                this.setCorrespondingWriteID(-1); //否则，将读操作的对应写操作下标初始化为-1；
             }
         }
         else{
@@ -53,6 +59,11 @@ public class Operation {
         this.setTime(time);
         this.setPosition(position);
         this.setID(index);
+        this.setVisList(null);
+        this.setCorrespondingWriteID(-1);
+        this.setTopoID(-1);
+        this.setLastOpID(-1);
+        this.setCoList(null);
     }
 
     public void copyOperation(Operation otherOp){
@@ -64,7 +75,10 @@ public class Operation {
         this.setPosition(otherOp.getPosition());
         this.setID(otherOp.getID());
         this.setVisList(otherOp.getVisList());
-        this.setCorrespondingWriteIndex(otherOp.getCorrespondingWriteIndex());
+        this.setCorrespondingWriteID(otherOp.getCorrespondingWriteID());
+        this.setTopoID(otherOp.getTopoID());
+        this.setLastOpID(otherOp.getLastOpID());
+        this.setCoList(otherOp.getVisList());
     }
 
     public void setKey(String key) {
@@ -106,12 +120,22 @@ public class Operation {
     public void setID(int index){
         this.id = index;
     }
-    public void setCorrespondingWriteIndex(int index){this.correspondingWriteIndex = index;}
-    public int getCorrespondingWriteIndex(){return this.correspondingWriteIndex;}
+    public void setCorrespondingWriteID(int index){this.correspondingWriteID = index;}
+    public int getCorrespondingWriteID(){return this.correspondingWriteID;}
     public int getID(){
         return this.id;
     }
     public void setVisList(BitSet bitSet){this.visList = bitSet;}
+    public void setTopoID(int topoID){
+        this.topoID = topoID;
+    }
+    public int getTopoID(){return this.topoID;}
+    public void setLastOpID(int lastOpID){
+        this.lastOpID = lastOpID;
+    }
+    public int getLastOpID(){return this.lastOpID;}
+    public void setCoList(BitSet bitSet){this.coList = bitSet;}
+
 
     //此函数需要在知道一共有多少个操作后再调用
     public void initialVisList(int size){
@@ -121,6 +145,8 @@ public class Operation {
     public BitSet getVisList(){
         return this.visList;
     }
+
+    public BitSet getCoList(){ return this.coList;}
 
     public boolean isWrite(){
         if(this.type == OpType.write){
@@ -138,6 +164,20 @@ public class Operation {
 
     public boolean isRead(){
         if(this.type == OpType.read){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isInitRead(){
+        if(this.isRead() && (this.getValue() == -1 || this.getValue() == 0)){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean onSameKey(Operation otherOp){
+        if(this.getKey().equals(otherOp.getKey())){
             return true;
         }
         return false;

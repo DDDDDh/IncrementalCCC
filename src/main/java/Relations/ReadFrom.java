@@ -25,7 +25,7 @@ public class ReadFrom extends BasicRelation{
         int curValue;
         int correspondingWriteID;
         for(String key: keyOpList.keySet()){
-            System.out.println("Working on key["+key+"]...");
+//            System.out.println("Working on key["+key+"]...");
             curOpList = keyOpList.get(key);
             listSize = curOpList.size();
             for(int i = 0; i < listSize; i++){ //遍历一次该key上面的所有写操作，将写入每个值的写操作标记
@@ -48,15 +48,16 @@ public class ReadFrom extends BasicRelation{
                     }
                     else {
                         this.setTrue(correspondingWriteID, curOp.getID());
+                        curOp.setCorrespondingWriteID(correspondingWriteID);
 //                        System.out.println("Adding read from relation:" + opList.get(correspondingWriteID).easyPrint() + "to " + curOp.easyPrint());
 //                        System.out.println("That is, " + correspondingWriteID + " to " + curOp.getID());
                     }
                 }
             }
         }
-
     }
 
-
-
+    public boolean checkThinAirRead(){
+        return this.isThinAirRead;
+    }
 }
