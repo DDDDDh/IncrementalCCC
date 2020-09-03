@@ -183,6 +183,13 @@ public class Operation {
         return false;
     }
 
+    public boolean notEqual(Operation otherOp){
+        if(this.getID() != otherOp.getID()){
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public String toString(){
         return "Type:"+ this.getType()+ " Key:" + this.getKey() +" Value:" + this.getValue();

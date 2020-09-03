@@ -5,7 +5,7 @@ import History.*;
 import java.util.BitSet;
 import java.util.LinkedList;
 
-public class IncrementalCausalOrder extends BasicRelation{
+public class IncrementalCausalOrder extends CausalOrder{
 
 
     private boolean isCyclicCO;
