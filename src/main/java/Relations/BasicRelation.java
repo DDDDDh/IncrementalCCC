@@ -85,8 +85,24 @@ public class BasicRelation implements BasicRelationInterface{
                 }
             }
         }
+    }
+
+    public boolean checkEqual(BasicRelation otherMatrix){
 
 
+        boolean[][] r1Matrix = this.getRelationMatrix();
+        boolean[][] r2Matrix = otherMatrix.getRelationMatrix();
+
+        int size = this.getMatrixSize();
+        for(int i = 0; i < size; i++){
+            for(int j = 0; j < size; j++){
+                if(r1Matrix[i][j] != r2Matrix[i][j]){
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 
 }

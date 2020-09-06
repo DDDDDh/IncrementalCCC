@@ -12,10 +12,10 @@ public class ConflictRelation extends BasicRelation{
     }
 
     //注意，需要在CO计算完成之后才能调用此函数
-    public void caculateConflictRelation(History history, IncrementalCausalOrder ico){
+    public void caculateConflictRelation(History history, CausalOrder co){
 
-        assert (ico.checkCalculated());
-        if(!ico.checkCalculated()){
+        assert (co.checkCalculated());
+        if(!co.checkCalculated()){
             System.out.println("The input causal order has not been calculated!");
             return;
         }
@@ -42,7 +42,7 @@ public class ConflictRelation extends BasicRelation{
                 }
             }
         }
-        System.out.println("Conflict Relation Matrix:");
-        this.printMatrix();
+//        System.out.println("Conflict Relation Matrix:");
+//        this.printMatrix();
     }
 }

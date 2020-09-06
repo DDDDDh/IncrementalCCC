@@ -41,7 +41,13 @@ public class ReadFrom extends BasicRelation{
                     if(curValue == -1){ //读到初值的操作，不设置对应写操作
                         break;
                     }
-                    correspondingWriteID = valueToWriteID.get(curValue);
+                    if(valueToWriteID.containsKey(curValue)) {
+                        correspondingWriteID = valueToWriteID.get(curValue);
+                    }
+                    else{
+                        System.out.println("do not contain value:" + curValue);
+                        correspondingWriteID = -1;
+                    }
                     if(correspondingWriteID == -1){ //没有找到对应写操作
 //                        System.out.println("Error! ");
                         this.isThinAirRead = true;

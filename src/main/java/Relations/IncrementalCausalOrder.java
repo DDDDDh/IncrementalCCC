@@ -1,5 +1,7 @@
 package Relations;
 
+//注意，这个类的调用会对每个操作的coList带来不可逆的变化...
+
 import History.*;
 
 import java.util.BitSet;
@@ -7,27 +9,9 @@ import java.util.LinkedList;
 
 public class IncrementalCausalOrder extends CausalOrder{
 
-
-    private boolean isCyclicCO;
-    private boolean isCalculated;
-
-
     public IncrementalCausalOrder(int size){
         super(size);
-        this.isCyclicCO = false;
     }
-
-    public void initialCOMatrix(ProgramOrder po, ReadFrom rf){
-        this.union(po, rf);
-    }
-    public void initialCOMatrixWithList(ProgramOrder po, ReadFrom rf, LinkedList<Operation> opList){
-        //初始化每个操作的coList
-        for(int i = 0; i < opList.size(); i++){
-            opList.get(i).setCoList(new BitSet(opList.size()));
-        }
-        this.unionAndSetVis(po, rf, opList);
-    }
-
 
     public LinkedList<Integer> topoSort(History history){
         LinkedList<Operation> opList = history.getOperationList();
@@ -89,13 +73,13 @@ public class IncrementalCausalOrder extends CausalOrder{
         }
 
         LinkedList<Operation> opList = history.getOperationList();
-        System.out.println("PO Matrix:");
-        po.printMatrix();
-        System.out.println("RF Matrix:");
-        rf.printMatrix();
+//        System.out.println("PO Matrix:");
+//        po.printMatrix();
+//        System.out.println("RF Matrix:");
+//        rf.printMatrix();
         this.initialCOMatrixWithList(po, rf, opList);
-        System.out.println("Initial CO Matrix:");
-        this.printMatrix();
+//        System.out.println("Initial CO Matrix:");
+//        this.printMatrix();
 //        this.initialCOMatrix(po, rf);
         LinkedList<Integer> topoList = this.topoSort(history);
 
@@ -138,12 +122,12 @@ public class IncrementalCausalOrder extends CausalOrder{
                 this.setTrue(j, curID);
             }
         }
-        System.out.println("Full CO Matrix:");
-        this.printMatrix();
+//        System.out.println("Full CO Matrix after incremental computing:");
+//        this.printMatrix();
         this.isCalculated = true;
     }
 
-    public boolean checkCalculated(){
-        return this.isCalculated;
-    }
+//    public boolean checkCalculated(){
+//        return this.isCalculated;
+//    }
 }
