@@ -67,10 +67,10 @@ public class IncrementalCausalOrder extends CausalOrder{
     public void incrementalCO(History history, ProgramOrder po, ReadFrom rf){
 
         assert (!rf.checkThinAirRead());
-        if(rf.checkThinAirRead()){
-            System.out.println("Contain ThinAirRead!");
-            return;
-        }
+//        if(rf.checkThinAirRead()){
+//            System.out.println("Contain ThinAirRead!");
+//            return;
+//        }
 
         LinkedList<Operation> opList = history.getOperationList();
 //        System.out.println("PO Matrix:");

@@ -7,21 +7,36 @@ import java.util.LinkedList;
 
 public class BasicRelation implements BasicRelationInterface{
 
-    private boolean[][] relationMatrix;
+//    private boolean[][] relationMatrix;
+    private BitSet[] relationMatrix; //用每个操作的后继节点链表伪装的邻接矩阵
     private int matrixSize;
 
     public BasicRelation(int size){
-        this.relationMatrix = new boolean[size][size];
+//        this.relationMatrix = new boolean[size][size];
+        this.relationMatrix = new BitSet[size];
+        for(int i = 0; i < size; i++){
+            this.relationMatrix[i] = new BitSet(size);
+        }
         this.matrixSize = size;
     }
 
 
+//    public void setTrue(int fromIndex, int toIndex){
+//        this.relationMatrix[fromIndex][toIndex] = true;
+//    }
+
     public void setTrue(int fromIndex, int toIndex){
-        this.relationMatrix[fromIndex][toIndex] = true;
+        BitSet tempSet = this.relationMatrix[fromIndex];
+        tempSet.set(toIndex, true);
     }
 
+
+//    public boolean existEdge(int fromIndex, int toIndex){
+//        return this.relationMatrix[fromIndex][toIndex];
+//    }
+
     public boolean existEdge(int fromIndex, int toIndex){
-        return this.relationMatrix[fromIndex][toIndex];
+        return this.relationMatrix[fromIndex].get(toIndex);
     }
 
     public void printMatrix(){
@@ -29,7 +44,8 @@ public class BasicRelation implements BasicRelationInterface{
         for(int i = 0; i < this.matrixSize; i++){
             curLine = "";
             for(int j = 0; j < this.matrixSize; j++){
-                if(this.relationMatrix[i][j]){
+//                if(this.relationMatrix[i][j]){
+                if(this.relationMatrix[i].get(j)){
                     curLine += "1 ";
                 }
                 else{
@@ -40,7 +56,11 @@ public class BasicRelation implements BasicRelationInterface{
         }
     }
 
-    public boolean[][] getRelationMatrix() {
+//    public boolean[][] getRelationMatrix() {
+//        return this.relationMatrix;
+//    }
+
+    public BitSet[] getRelationMatrix(){
         return this.relationMatrix;
     }
 
@@ -53,14 +73,17 @@ public class BasicRelation implements BasicRelationInterface{
         assert(r1.getMatrixSize() == r2.getMatrixSize());
         assert(this.getMatrixSize() == r1.getMatrixSize());
 
-        boolean[][] r1Matrix = r1.getRelationMatrix();
-        boolean[][] r2Matrix = r2.getRelationMatrix();
+//        boolean[][] r1Matrix = r1.getRelationMatrix();
+//        boolean[][] r2Matrix = r2.getRelationMatrix();
+//        BitSet[] r1Matrix = r1.getRelationMatrix();
+//        BitSet[] r2Matrix = r2.getRelationMatrix();
 
         int size = this.getMatrixSize();
 
         for(int i = 0; i < size; i++){
             for(int j = 0; j < size; j++){
-                if(r1Matrix[i][j] || r2Matrix[i][j]){
+//                if(r1Matrix[i][j] || r2Matrix[i][j]){
+                if(r1.existEdge(i, j)|| r2.existEdge(i, j)){
                     this.setTrue(i, j);
                 }
             }
@@ -72,14 +95,15 @@ public class BasicRelation implements BasicRelationInterface{
         assert(this.getMatrixSize() == r1.getMatrixSize());
         assert (r1.getMatrixSize() == opList.size());
 
-        boolean[][] r1Matrix = r1.getRelationMatrix();
-        boolean[][] r2Matrix = r2.getRelationMatrix();
+//        boolean[][] r1Matrix = r1.getRelationMatrix();
+//        boolean[][] r2Matrix = r2.getRelationMatrix();
 
         int size = this.getMatrixSize();
 
         for(int i = 0; i < size; i++){
             for(int j = 0; j < size; j++){
-                if(r1Matrix[i][j] || r2Matrix[i][j]){
+//                if(r1Matrix[i][j] || r2Matrix[i][j]){
+                if(r1.existEdge(i, j) || r2.existEdge(i, j)){
                     this.setTrue(i, j);
                     opList.get(j).getCoList().set(i, true);
                 }
@@ -90,13 +114,18 @@ public class BasicRelation implements BasicRelationInterface{
     public boolean checkEqual(BasicRelation otherMatrix){
 
 
-        boolean[][] r1Matrix = this.getRelationMatrix();
-        boolean[][] r2Matrix = otherMatrix.getRelationMatrix();
+//        boolean[][] r1Matrix = this.getRelationMatrix();
+//        boolean[][] r2Matrix = otherMatrix.getRelationMatrix();
+
+        if(this.getMatrixSize() != otherMatrix.getMatrixSize()){
+            return false;
+        }
 
         int size = this.getMatrixSize();
+
         for(int i = 0; i < size; i++){
             for(int j = 0; j < size; j++){
-                if(r1Matrix[i][j] != r2Matrix[i][j]){
+                if(this.existEdge(i, j) ^ otherMatrix.existEdge(i,j)){ //如果两个矩阵中有一个点不同
                     return false;
                 }
             }

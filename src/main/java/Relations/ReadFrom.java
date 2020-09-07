@@ -45,7 +45,7 @@ public class ReadFrom extends BasicRelation{
                         correspondingWriteID = valueToWriteID.get(curValue);
                     }
                     else{
-                        System.out.println("do not contain value:" + curValue);
+//                        System.out.println("do not contain value:" + curValue);
                         correspondingWriteID = -1;
                     }
                     if(correspondingWriteID == -1){ //没有找到对应写操作

@@ -29,10 +29,10 @@ public class BasicCausalOrder extends CausalOrder {
     public void computeCO(History history, ProgramOrder po, ReadFrom rf){
 
         assert (!rf.checkThinAirRead());
-        if(rf.checkThinAirRead()){
-            System.out.println("Contain ThinAirRead!");
-            return;
-        }
+//        if(rf.checkThinAirRead()){
+//            System.out.println("Contain ThinAirRead!");
+//            return;
+//        }
 
         LinkedList<Operation> opList = history.getOperationList();
 

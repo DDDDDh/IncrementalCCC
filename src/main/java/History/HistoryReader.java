@@ -75,7 +75,7 @@ public class HistoryReader {
     }
 
     public static void main(String args[]) throws IOException{
-        String url = "src/main/resources/small_history.edn";
+        String url = "src/main/resources/history.edn";
         HistoryReader reader = new HistoryReader(url);
 //        LinkedList<Operation> opList = reader.readHistory();
 //        for(int i = 0; i < opList.size(); i++){
@@ -116,8 +116,5 @@ public class HistoryReader {
 
         ConflictRelation cf = new ConflictRelation(history.getOpNum());
         cf.caculateConflictRelation(history, bco);
-
-
     }
-
 }
