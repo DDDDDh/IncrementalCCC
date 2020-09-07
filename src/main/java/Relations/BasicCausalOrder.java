@@ -11,21 +11,6 @@ public class BasicCausalOrder extends CausalOrder {
         super(size);
     }
 
-    public void computeTransitiveClosure(){
-        int size = this.getMatrixSize();
-        for(int i = 0; i < size; i++){
-            for(int j = 0; j < size; j++){
-                for( int k = 0; k < size; k++){
-                    if(!existEdge(i,j)) { //如果i->j本身就有边，不需要更新
-                        if (existEdge(i, k) && existEdge(k, j)) {
-                            this.setTrue(i,j);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
     public void computeCO(History history, ProgramOrder po, ReadFrom rf){
 
         assert (!rf.checkThinAirRead());
@@ -47,21 +32,7 @@ public class BasicCausalOrder extends CausalOrder {
         this.isCalculated = true;
     }
 
-    public void updateCoList(LinkedList<Operation> opList){
 
-        int size = this.getMatrixSize();
-        Operation curOp;
-        BitSet curList;
-        for(int i = 0; i < size; i++){
-            for(int j = 0; j < size; j++){
-                if(existEdge(i, j)){
-                    curOp = opList.get(j);
-                    curList = curOp.getCoList();
-                    curList.set(i, true);
-                }
-            }
-        }
-    }
 
 
 //    public boolean checkCalculated(){

@@ -190,6 +190,11 @@ public class Operation {
         return false;
     }
 
+    public void flushCoList(){
+        BitSet tempList = new BitSet(this.getCoList().size());
+        this.setCoList(tempList);
+    }
+
     @Override
     public String toString(){
         return "Type:"+ this.getType()+ " Key:" + this.getKey() +" Value:" + this.getValue();

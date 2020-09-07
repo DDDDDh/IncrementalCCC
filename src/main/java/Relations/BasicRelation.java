@@ -20,20 +20,10 @@ public class BasicRelation implements BasicRelationInterface{
         this.matrixSize = size;
     }
 
-
-//    public void setTrue(int fromIndex, int toIndex){
-//        this.relationMatrix[fromIndex][toIndex] = true;
-//    }
-
     public void setTrue(int fromIndex, int toIndex){
         BitSet tempSet = this.relationMatrix[fromIndex];
         tempSet.set(toIndex, true);
     }
-
-
-//    public boolean existEdge(int fromIndex, int toIndex){
-//        return this.relationMatrix[fromIndex][toIndex];
-//    }
 
     public boolean existEdge(int fromIndex, int toIndex){
         return this.relationMatrix[fromIndex].get(toIndex);
@@ -56,10 +46,6 @@ public class BasicRelation implements BasicRelationInterface{
         }
     }
 
-//    public boolean[][] getRelationMatrix() {
-//        return this.relationMatrix;
-//    }
-
     public BitSet[] getRelationMatrix(){
         return this.relationMatrix;
     }
@@ -72,11 +58,6 @@ public class BasicRelation implements BasicRelationInterface{
     public void union(BasicRelation r1, BasicRelation r2){
         assert(r1.getMatrixSize() == r2.getMatrixSize());
         assert(this.getMatrixSize() == r1.getMatrixSize());
-
-//        boolean[][] r1Matrix = r1.getRelationMatrix();
-//        boolean[][] r2Matrix = r2.getRelationMatrix();
-//        BitSet[] r1Matrix = r1.getRelationMatrix();
-//        BitSet[] r2Matrix = r2.getRelationMatrix();
 
         int size = this.getMatrixSize();
 
@@ -95,9 +76,6 @@ public class BasicRelation implements BasicRelationInterface{
         assert(this.getMatrixSize() == r1.getMatrixSize());
         assert (r1.getMatrixSize() == opList.size());
 
-//        boolean[][] r1Matrix = r1.getRelationMatrix();
-//        boolean[][] r2Matrix = r2.getRelationMatrix();
-
         int size = this.getMatrixSize();
 
         for(int i = 0; i < size; i++){
@@ -112,10 +90,6 @@ public class BasicRelation implements BasicRelationInterface{
     }
 
     public boolean checkEqual(BasicRelation otherMatrix){
-
-
-//        boolean[][] r1Matrix = this.getRelationMatrix();
-//        boolean[][] r2Matrix = otherMatrix.getRelationMatrix();
 
         if(this.getMatrixSize() != otherMatrix.getMatrixSize()){
             return false;
@@ -177,6 +151,54 @@ public class BasicRelation implements BasicRelationInterface{
             return true;
         }
         return false;
+    }
+
+    public void computeTransitiveClosure(){
+        int size = this.getMatrixSize();
+        for(int i = 0; i < size; i++){
+            for(int j = 0; j < size; j++){
+                for( int k = 0; k < size; k++){
+                    if(!existEdge(i,j)) { //如果i->j本身就有边，不需要更新
+                        if (existEdge(i, k) && existEdge(k, j)) {
+                            this.setTrue(i,j);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    //利用当前关系矩阵更新list中操作的可达关系
+    public void updateListByMatrix(LinkedList<Operation> opList){
+
+        assert (opList.size() == this.getMatrixSize());
+
+        int size = this.getMatrixSize();
+
+        BitSet curList;
+
+        for(int i = 0; i < size; i++){
+            curList = this.getRelationMatrix()[i]; //得到点i的后继列表
+            //对于每条i->j的边，在j的前驱列表里设置可见
+            for(int j = curList.nextSetBit(0); j >= 0; j = curList.nextSetBit(j+1)){
+                opList.get(j).getCoList().set(i,true);
+            }
+        }
+    }
+
+    public void updateCoList(LinkedList<Operation> opList){
+        int size = this.getMatrixSize();
+        Operation curOp;
+        BitSet curList;
+        for(int i = 0; i < size; i++){
+            for(int j = 0; j < size; j++){
+                if(existEdge(i, j)){
+                    curOp = opList.get(j);
+                    curList = curOp.getCoList();
+                    curList.set(i, true);
+                }
+            }
+        }
     }
 
 }

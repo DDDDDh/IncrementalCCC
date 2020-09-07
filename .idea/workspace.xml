@@ -2,11 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0dc98262-2b33-485b-86e5-a2794ff4c6f0" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/Checker/CMChecker.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/Relations/HappenBeforeOrder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/Checker/CCChecker.class" afterPath="$PROJECT_DIR$/target/classes/Checker/CCChecker.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/History/Operation.class" afterPath="$PROJECT_DIR$/target/classes/History/Operation.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/Relations/BasicCausalOrder.class" afterPath="$PROJECT_DIR$/target/classes/Relations/BasicCausalOrder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/Relations/BasicRelation.class" afterPath="$PROJECT_DIR$/target/classes/Relations/BasicRelation.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Checker/CCChecker.java" afterPath="$PROJECT_DIR$/src/main/java/Checker/CCChecker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Checker/CCvChecker.java" afterPath="$PROJECT_DIR$/src/main/java/Checker/CCvChecker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/History/Operation.java" afterPath="$PROJECT_DIR$/src/main/java/History/Operation.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Relations/BasicCausalOrder.java" afterPath="$PROJECT_DIR$/src/main/java/Relations/BasicCausalOrder.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Relations/BasicRelation.java" afterPath="$PROJECT_DIR$/src/main/java/Relations/BasicRelation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Relations/CausalOrder.java" afterPath="$PROJECT_DIR$/src/main/java/Relations/CausalOrder.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -19,25 +24,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="CausalOrder.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Relations/CausalOrder.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="28" lean-forward="false" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="28" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#765#766#0" expanded="true" />
-                <element signature="e#805#806#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="BasicRelation.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Relations/BasicRelation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1244">
-              <caret line="177" column="9" lean-forward="false" selection-start-line="177" selection-start-column="9" selection-end-line="177" selection-end-column="9" />
+            <state relative-caret-position="820">
+              <caret line="188" column="59" lean-forward="false" selection-start-line="188" selection-start-column="59" selection-end-line="188" selection-end-column="59" />
               <folding />
             </state>
           </provider>
@@ -46,9 +37,23 @@
       <file leaf-file-name="CCChecker.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Checker/CCChecker.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1515">
-              <caret line="107" column="9" lean-forward="true" selection-start-line="107" selection-start-column="9" selection-end-line="107" selection-end-column="9" />
+            <state relative-caret-position="-890">
+              <caret line="21" column="17" lean-forward="true" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CMChecker.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Checker/CMChecker.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="55">
+              <caret line="48" column="9" lean-forward="true" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="9" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1492#1493#0" expanded="true" />
+                <element signature="e#1551#1552#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -56,18 +61,8 @@
       <file leaf-file-name="CCvChecker.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Checker/CCvChecker.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="32" column="25" lean-forward="true" selection-start-line="32" selection-start-column="25" selection-end-line="32" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ProgramOrder.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Relations/ProgramOrder.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="373">
-              <caret line="46" column="0" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+            <state relative-caret-position="205">
+              <caret line="40" column="0" lean-forward="true" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -76,8 +71,8 @@
       <file leaf-file-name="ConflictRelation.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Relations/ConflictRelation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="557">
-              <caret line="43" column="9" lean-forward="false" selection-start-line="43" selection-start-column="9" selection-end-line="43" selection-end-column="9" />
+            <state relative-caret-position="415">
+              <caret line="44" column="0" lean-forward="false" selection-start-line="44" selection-start-column="0" selection-end-line="45" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -88,7 +83,7 @@
       <file leaf-file-name="ReadFrom.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Relations/ReadFrom.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
+            <state relative-caret-position="-5">
               <caret line="35" column="13" lean-forward="true" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -98,24 +93,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BasicRelationInterface.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Relations/BasicRelationInterface.java">
+      <file leaf-file-name="ProgramOrder.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Relations/ProgramOrder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+            <state relative-caret-position="400">
+              <caret line="46" column="0" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BasicCausalOrder.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Relations/BasicCausalOrder.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="64" column="0" lean-forward="false" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -123,11 +106,33 @@
       <file leaf-file-name="IncrementalCausalOrder.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Relations/IncrementalCausalOrder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="61" column="9" lean-forward="true" selection-start-line="41" selection-start-column="8" selection-end-line="61" selection-end-column="9" />
+            <state relative-caret-position="332">
+              <caret line="122" column="13" lean-forward="true" selection-start-line="120" selection-start-column="12" selection-end-line="122" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HappenBeforeOrder.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Relations/HappenBeforeOrder.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="840">
+              <caret line="58" column="5" lean-forward="false" selection-start-line="58" selection-start-column="5" selection-end-line="58" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BasicCausalOrder.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Relations/BasicCausalOrder.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="325">
+              <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -168,17 +173,19 @@
         <option value="$PROJECT_DIR$/src/main/java/History/History.java" />
         <option value="$PROJECT_DIR$/src/main/java/Datastructure/BitMap.java" />
         <option value="$PROJECT_DIR$/src/main/java/Relations/ProgramOrder.java" />
-        <option value="$PROJECT_DIR$/src/main/java/History/Operation.java" />
         <option value="$PROJECT_DIR$/src/main/java/Relations/ConflictRelation.java" />
         <option value="$PROJECT_DIR$/src/main/java/Relations/BasicRelationInterface.java" />
         <option value="$PROJECT_DIR$/src/main/java/History/HistoryReader.java" />
         <option value="$PROJECT_DIR$/src/main/java/Relations/IncrementalCausalOrder.java" />
         <option value="$PROJECT_DIR$/src/main/java/Relations/ReadFrom.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Relations/BasicCausalOrder.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Relations/BasicRelation.java" />
         <option value="$PROJECT_DIR$/src/main/java/Checker/CCChecker.java" />
         <option value="$PROJECT_DIR$/src/main/java/Checker/CCvChecker.java" />
         <option value="$PROJECT_DIR$/src/main/java/Relations/CausalOrder.java" />
+        <option value="$PROJECT_DIR$/src/main/java/History/Operation.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Relations/BasicCausalOrder.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Relations/BasicRelation.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Relations/HappenBeforeOrder.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Checker/CMChecker.java" />
       </list>
     </option>
   </component>
@@ -244,6 +251,14 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="Checker" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="IncrementalCCC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="IncrementalCCC" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="Datastructure" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="IncrementalCCC" type="b2602c69:ProjectViewProjectNode" />
@@ -474,12 +489,12 @@
       <workItem from="1599046235592" duration="6327000" />
       <workItem from="1599100565024" duration="7680000" />
       <workItem from="1599272184864" duration="11301000" />
-      <workItem from="1599440819382" duration="15175000" />
+      <workItem from="1599440819382" duration="26728000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="96236000" />
+    <option name="totallyTimeSpent" value="107789000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -527,24 +542,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="0">
-            <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="41" column="21" lean-forward="false" selection-start-line="41" selection-start-column="21" selection-end-line="41" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/hy_history.edn">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -847,14 +844,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/History/Operation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2310">
-          <caret line="190" column="5" lean-forward="false" selection-start-line="190" selection-start-column="5" selection-end-line="190" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/history.edn">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="89972">
@@ -879,23 +868,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/History/HistoryReader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1624">
-          <caret line="117" column="50" lean-forward="true" selection-start-line="117" selection-start-column="50" selection-end-line="117" selection-end-column="50" />
-          <folding>
-            <element signature="e#0#4178#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/History/History.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1250">
           <caret line="54" column="9" lean-forward="false" selection-start-line="54" selection-start-column="9" selection-end-line="54" selection-end-column="9" />
           <folding>
-            <element signature="e#0#6855#0" expanded="false" />
-            <element signature="imports" expanded="false" />
             <element signature="method#History#0;class#History#0" expanded="false" />
             <element signature="method#initOperations#0;class#History#0" expanded="false" />
             <element signature="method#printWriteReadHistories#0;class#History#0" expanded="false" />
@@ -904,17 +881,67 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Relations/ProgramOrder.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/History/HistoryReader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="373">
-          <caret line="46" column="0" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+        <state relative-caret-position="517">
+          <caret line="85" column="38" lean-forward="true" selection-start-line="85" selection-start-column="38" selection-end-line="85" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/History/Operation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="383">
+          <caret line="196" column="0" lean-forward="true" selection-start-line="196" selection-start-column="0" selection-end-line="196" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Relations/BasicRelationInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="8" column="17" lean-forward="false" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Relations/CausalOrder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="27" column="5" lean-forward="true" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Relations/ConflictRelation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="415">
+          <caret line="44" column="0" lean-forward="false" selection-start-line="44" selection-start-column="0" selection-end-line="45" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Relations/BasicCausalOrder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Relations/BasicRelation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="820">
+          <caret line="188" column="59" lean-forward="false" selection-start-line="188" selection-start-column="59" selection-end-line="188" selection-end-column="59" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Relations/ReadFrom.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
+        <state relative-caret-position="-5">
           <caret line="35" column="13" lean-forward="true" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -923,76 +950,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Relations/BasicRelationInterface.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/Relations/ProgramOrder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+        <state relative-caret-position="400">
+          <caret line="46" column="0" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Relations/BasicCausalOrder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="64" column="0" lean-forward="false" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Relations/ConflictRelation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="557">
-          <caret line="43" column="9" lean-forward="false" selection-start-line="43" selection-start-column="9" selection-end-line="43" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Relations/IncrementalCausalOrder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="61" column="9" lean-forward="true" selection-start-line="41" selection-start-column="8" selection-end-line="61" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Checker/CCvChecker.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="32" column="25" lean-forward="true" selection-start-line="32" selection-start-column="25" selection-end-line="32" selection-end-column="25" />
+        <state relative-caret-position="205">
+          <caret line="40" column="0" lean-forward="true" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Checker/CCChecker.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1515">
-          <caret line="107" column="9" lean-forward="true" selection-start-line="107" selection-start-column="9" selection-end-line="107" selection-end-column="9" />
+        <state relative-caret-position="-890">
+          <caret line="21" column="17" lean-forward="true" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Relations/BasicRelation.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/Checker/CMChecker.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1244">
-          <caret line="177" column="9" lean-forward="false" selection-start-line="177" selection-start-column="9" selection-end-line="177" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Relations/CausalOrder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="28" lean-forward="false" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="28" />
+        <state relative-caret-position="55">
+          <caret line="48" column="9" lean-forward="true" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#765#766#0" expanded="true" />
-            <element signature="e#805#806#0" expanded="true" />
+            <element signature="e#1492#1493#0" expanded="true" />
+            <element signature="e#1551#1552#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Relations/IncrementalCausalOrder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="332">
+          <caret line="122" column="13" lean-forward="true" selection-start-line="120" selection-start-column="12" selection-end-line="122" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Relations/HappenBeforeOrder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="840">
+          <caret line="58" column="5" lean-forward="false" selection-start-line="58" selection-start-column="5" selection-end-line="58" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
