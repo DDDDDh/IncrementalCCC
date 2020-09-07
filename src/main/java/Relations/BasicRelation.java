@@ -134,4 +134,49 @@ public class BasicRelation implements BasicRelationInterface{
         return true;
     }
 
+    //利用拓扑排序判环
+    public boolean cycleDetection(){
+
+        LinkedList<Integer> stack = new LinkedList<>();
+        int size = this.getMatrixSize();
+        int[] inDegree = new int[size];
+        int tempDegree;
+
+        for(int j = 0; j < size; j++){
+            tempDegree = 0;
+            for(int i = 0; i < size; i++){
+                if(this.existEdge(i, j)){
+                    tempDegree++;
+                }
+            }
+            inDegree[j] = tempDegree;
+        }
+
+        int count = 0; //判环辅助变量
+        for(int i = 0; i < size; i++){
+            if(inDegree[i] == 0){ //找到入度为0的点，入栈
+                stack.addFirst(i);
+                inDegree[i] = -1;
+            }
+        }
+
+        int curID;
+        while(!stack.isEmpty()){
+            curID = stack.removeFirst();
+            for(int i = 0; i < size; i++){
+                if(this.existEdge(curID, i)){
+                    inDegree[i]--;
+                    if(inDegree[i] == 0){
+                        stack.addFirst(i);
+                        inDegree[i] = -1;
+                    }
+                }
+            }
+        }
+        if(count < size) {
+            return true;
+        }
+        return false;
+    }
+
 }

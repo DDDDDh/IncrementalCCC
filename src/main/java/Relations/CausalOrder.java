@@ -30,8 +30,4 @@ public class CausalOrder extends BasicRelation{
     public boolean checkCalculated(){
         return this.isCalculated;
     }
-
-
-
-
 }

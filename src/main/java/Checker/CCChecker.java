@@ -37,12 +37,8 @@ public class CCChecker {
     }
 
     public void checkCyclicCO(){
-        int size = this.co.getMatrixSize();
-        //如果一个操作可达它本身，说明存在环
-        for(int i = 0; i < size; i++){
-            if(this.co.existEdge(i,i)){
-                this.isCyclicCO = true;
-            }
+        if(this.co.cycleDetection()){
+            this.isCyclicCO = true;
         }
     }
 
