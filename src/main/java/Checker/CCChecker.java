@@ -37,7 +37,9 @@ public class CCChecker {
     }
 
     public void checkCyclicCO(){
-        if(this.co.cycleDetection()){
+        BasicRelation POUnionRF = new BasicRelation(history.getOpNum());
+        POUnionRF.union(this.po, this.rf);
+        if(POUnionRF.cycleDetection()){
             this.isCyclicCO = true;
         }
     }

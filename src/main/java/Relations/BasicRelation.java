@@ -8,7 +8,7 @@ import java.util.LinkedList;
 public class BasicRelation implements BasicRelationInterface{
 
 //    private boolean[][] relationMatrix;
-    private BitSet[] relationMatrix; //用每个操作的后继节点链表伪装的邻接矩阵
+    private BitSet[] relationMatrix; //用每个操作的后继节点数组伪装的邻接矩阵
     private int matrixSize;
 
     public BasicRelation(int size){
@@ -108,6 +108,29 @@ public class BasicRelation implements BasicRelationInterface{
         return true;
     }
 
+
+    public boolean checkEqualDebug(BasicRelation otherMatrix, LinkedList<Operation> opList){
+
+        if(this.getMatrixSize() != otherMatrix.getMatrixSize()){
+            return false;
+        }
+
+        int size = this.getMatrixSize();
+
+        for(int i = 0; i < size; i++){
+            for(int j = 0; j < size; j++){
+                if(this.existEdge(i, j) ^ otherMatrix.existEdge(i,j)){ //如果两个矩阵中有一个点不同
+                    System.out.print("This["+i+"]["+j+"]:" + this.existEdge(i,j));
+                    System.out.println(" OtherMatrix["+i+"]["+j+"]:" +otherMatrix.existEdge(i,j));
+                    System.out.println("Operation i:" + opList.get(i).easyPrint() +" on process " + opList.get(i).getProcess() + " Operation j:" + opList.get(j).easyPrint()+" on process " + opList.get(j).getProcess());
+//                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
     //利用拓扑排序判环
     public boolean cycleDetection(){
 
@@ -153,17 +176,43 @@ public class BasicRelation implements BasicRelationInterface{
         return false;
     }
 
+    //使用Washall算法计算传递闭包
     public void computeTransitiveClosure(){
         int size = this.getMatrixSize();
-        for(int i = 0; i < size; i++){
-            for(int j = 0; j < size; j++){
-                for( int k = 0; k < size; k++){
+        for(int k = 0; k < size; k++){
+            for(int i = 0; i < size; i++){
+                for( int j = 0; j < size; j++){
                     if(!existEdge(i,j)) { //如果i->j本身就有边，不需要更新
                         if (existEdge(i, k) && existEdge(k, j)) {
                             this.setTrue(i,j);
                         }
                     }
                 }
+            }
+        }
+    }
+
+    //使用BFS计算传递闭包
+    public void computeTransitiveClosureByBFS(){
+        int size = this.getMatrixSize();
+        for(int i = 0; i < size; i++){
+            BFSUtil(i);
+        }
+    }
+
+    public void BFSUtil(int src){
+        LinkedList<Integer> stack = new LinkedList<>();
+        stack.push(src);
+        int curID;
+        BitSet succeedList;
+        while(!stack.isEmpty()){
+            curID = stack.removeFirst();
+            succeedList = this.getRelationMatrix()[curID];
+            if(curID != src) {
+                this.setTrue(src, curID);
+            }
+            for(int j = succeedList.nextSetBit(0); j >= 0; j = succeedList.nextSetBit(j+1)){
+                stack.push(j);
             }
         }
     }

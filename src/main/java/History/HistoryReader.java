@@ -74,47 +74,9 @@ public class HistoryReader {
         return new Operation(f, key, value, process, time, position, index);
     }
 
-    public static void main(String args[]) throws IOException{
-        String url = "src/main/resources/history.edn";
-        HistoryReader reader = new HistoryReader(url);
-//        LinkedList<Operation> opList = reader.readHistory();
-//        for(int i = 0; i < opList.size(); i++){
-//            System.out.println(i+opList.get(i).toString());
-//        }
-        History history = new History(reader.readHistory());
-        history.setOpNum(reader.idx); //读取完一个历史记录之后，一定一定要记得设置总操作数...
-//        history.printOpGroupByKey();
-//        history.printWriteReadHistories();
-//        history.printOpGroupByProcess();
-        if(!history.isDifferentiated()){
-            System.out.println("Detected not differentiated.");
-        }
-//        history.testProtection();
-        ProgramOrder po = new ProgramOrder(history.getOpNum());
-        po.caculateProgramOrder(history);
-//        po.printMatrx();
-        ReadFrom rf = new ReadFrom(history.getOpNum());
-        rf.caculateReadFrom(history);
-//        rf.printMatrx();
-
-
-        long startTime1 = System.nanoTime();
-        IncrementalCausalOrder ico = new IncrementalCausalOrder(history.getOpNum());
-        ico.incrementalCO(history, po, rf);
-        long endTime1 = System.nanoTime();
-        System.out.println("Running time of incremental computation of co:" + (endTime1 - startTime1) + "ns");
-
-        long startTime2 = System.nanoTime();
-        BasicCausalOrder bco = new BasicCausalOrder(history.getOpNum());
-        bco.computeCO(history, po, rf);
-        long endTime2 = System.nanoTime();
-        System.out.println("Running time of brute-force computation of co:" + (endTime2 - startTime2) + "ns");
-
-        if(!ico.checkEqual(bco)){
-            System.out.println("Error! The causal orders are not equal!");
-        }
-
-        ConflictRelation cf = new ConflictRelation(history.getOpNum());
-        cf.caculateConflictRelation(history, bco);
+    public int getTotalNum(){
+        return this.idx;
     }
+
+
 }

@@ -2,6 +2,8 @@ package Relations;
 
 //注意，这个类的调用会对每个操作的coList带来不可逆的变化...
 
+//注意，当输入history不为DAG图，即包含CyclicCO时，增量计算得到的邻接矩阵与传递闭包计算得到的是肯定不同的
+
 import History.*;
 
 import java.util.BitSet;
