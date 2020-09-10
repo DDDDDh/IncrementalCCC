@@ -7,7 +7,7 @@ public class CausalChecker {
 
 
 
-    public static void main(String args[]) throws IOException {
+    public static void main(String args[]) throws Exception {
         String url = "src/main/resources/hy_history.edn";
         HistoryReader reader = new HistoryReader(url);
 //        LinkedList<Operation> opList = reader.readHistory();
@@ -52,7 +52,19 @@ public class CausalChecker {
             System.out.println("Error! The causal orders are not equal!");
         }
 
+
+        System.out.println("Begin to compute conflict relation");
         ConflictRelation cf = new ConflictRelation(history.getOpNum());
         cf.caculateConflictRelation(history, bco);
+        System.out.println("Finish computation of conflict relation");
+
+        System.out.println("Begin to compute happen-before relation");
+        BasicHappenBeforeOrder hbo = new BasicHappenBeforeOrder(history.getOpNum());
+        hbo.calculateHBo(history, po, rf);
+        System.out.println("Finish computation of happen-before relation");
+
+        IncrementalHappenBeforeOrder ihbo = new IncrementalHappenBeforeOrder(history.getOpNum());
+        ihbo.incrementalHBO(history, po, rf);
+
     }
 }
