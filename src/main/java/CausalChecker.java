@@ -24,10 +24,10 @@ public class CausalChecker {
         }
 //        history.testProtection();
         ProgramOrder po = new ProgramOrder(history.getOpNum());
-        po.caculateProgramOrder(history);
+        po.calculateProgramOrder(history);
 //        po.printMatrx();
         ReadFrom rf = new ReadFrom(history.getOpNum());
-        rf.caculateReadFrom(history);
+        rf.calculateReadFrom(history);
 //        rf.printMatrx();
 
         System.out.println("Total op num:" + reader.getTotalNum());

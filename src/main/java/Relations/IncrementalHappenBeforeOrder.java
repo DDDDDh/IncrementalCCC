@@ -13,6 +13,10 @@ public class IncrementalHappenBeforeOrder extends HappenBeforeOrder{
         super(size);
     }
 
+    /*
+    接收输入的历史记录，按照process的情况分发给子线程计算各自的HBO
+     */
+
     public void incrementalHBO(History history, ProgramOrder po, ReadFrom rf) throws Exception{
 
         LinkedList<Operation> opList = history.getOperationList();
@@ -22,6 +26,7 @@ public class IncrementalHappenBeforeOrder extends HappenBeforeOrder{
 
         int processNum = history.getProcessOpList().keySet().size();
 
+        //返回结果为每个线程按照read-centric方法计算得到的HBo邻接矩阵
         HashMap<Integer, BasicRelation> processMatrix = new HashMap<>();
 
         ExecutorService executorService = Executors.newCachedThreadPool();
@@ -33,16 +38,29 @@ public class IncrementalHappenBeforeOrder extends HappenBeforeOrder{
             processMatrix.put(processID, submit.get());
             processMatrix.get(processID).printMatrix();
             this.union(this, processMatrix.get(processID));
-
         }
 
         System.out.println("Finally we get a matrix:");
         this.printMatrix();
 
-
         executorService.shutdown();
 
 
+    }
+
+
+}
+
+class incrementalProcess implements Callable<BasicRelation>{
+
+    History history;
+    int processID;
+    LinkedList<CMOperation> opList;
+    boolean isCaculated;
+
+    public incrementalProcess(History history, int processID){
+        this.history = history;
+        this.processID = processID;
     }
 
     public void initReachability(Operation r, Operation rPrime){
@@ -72,19 +90,6 @@ public class IncrementalHappenBeforeOrder extends HappenBeforeOrder{
         return false;
     }
 
-}
-
-class incrementalProcess implements Callable<BasicRelation>{
-
-    History history;
-    int processID;
-    LinkedList<CMOperation> opList;
-    boolean isCaculated;
-
-    public incrementalProcess(History history, int processID){
-        this.history = history;
-        this.processID = processID;
-    }
 
     public BasicRelation call(){
         LinkedList<Integer> thisOpList = history.getProcessOpList().get(this.processID);

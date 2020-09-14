@@ -14,7 +14,7 @@ public class ReadFrom extends BasicRelation{
         this.isThinAirRead = false;
     }
 
-    public void caculateReadFrom(History history){
+    public void calculateReadFrom(History history){
         assert (history.isDifferentiated()); //一定要是differentiated history
         LinkedList<Operation> opList = history.getOperationList();
         HashMap<String, LinkedList<Integer>> keyOpList = history.getKeyOpList();
