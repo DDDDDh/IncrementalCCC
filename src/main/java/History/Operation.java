@@ -74,11 +74,11 @@ public class Operation {
         this.setTime(otherOp.getTime());
         this.setPosition(otherOp.getPosition());
         this.setID(otherOp.getID());
-        this.setVisList(otherOp.getVisList());
+        this.copyVisList(otherOp.getVisList());
         this.setCorrespondingWriteID(otherOp.getCorrespondingWriteID());
         this.setTopoID(otherOp.getTopoID());
         this.setLastOpID(otherOp.getLastOpID());
-        this.setCoList(otherOp.getVisList());
+        this.copyCoList(otherOp.getVisList());
     }
 
     public void setKey(String key) {
@@ -135,6 +135,20 @@ public class Operation {
     }
     public int getLastOpID(){return this.lastOpID;}
     public void setCoList(BitSet bitSet){this.coList = bitSet;}
+
+    //用于拷贝构造
+    public void copyVisList(BitSet bitSet){
+       this.visList = new BitSet(bitSet.size());
+        for(int j = bitSet.nextSetBit(0); j >= 0; j = bitSet.nextSetBit(j+1)){
+            this.visList.set(j);
+        }
+    }
+    public void copyCoList(BitSet bitSet){
+        this.coList = new BitSet(bitSet.size());
+        for(int j = bitSet.nextSetBit(0); j >= 0; j = bitSet.nextSetBit(j+1)){
+            this.coList.set(j);
+        }
+    }
 
 
     //此函数需要在知道一共有多少个操作后再调用

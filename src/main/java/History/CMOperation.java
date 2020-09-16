@@ -1,13 +1,14 @@
 package History;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import lombok.*;
 
 @Data
 public class CMOperation extends Operation{
 
-    int lastRead;
+    int lastRead; //即reachable read
     int processReadID; //当前线程读操作全序的编号;
     int earlistRead;
     int masterPid; //当前考虑的线程id
@@ -15,5 +16,38 @@ public class CMOperation extends Operation{
     HashMap<String, Integer> precedingWrite; //标示对当前操作的可见写操作集合而言，每个变量上最近一个写操作
     LinkedList<Integer> preList; //前驱列表
     LinkedList<Integer> sucList; //后继列表
+    boolean hasDictatedRead; //拥有对应读操作，也即对应读操作在主线程，也就表明该写操作存在于全序中
+
+    public void initCMOperation(Operation otherOp, int masterPid){
+        this.copyOperation(otherOp);
+        this.lastRead = -1;
+        this.processReadID = -1;
+        this.earlistRead = -1;
+        this.masterPid = masterPid;
+        this.rrList = new LinkedList<>();
+        this.precedingWrite = new HashMap<>();
+        this.preList = new LinkedList<>();
+        this.sucList = new LinkedList<>();
+        this.hasDictatedRead = false;
+    }
+
+    public void updatePrecedingWrite(CMOperation lastOp){
+        int preWriteID;
+        int curWriteID;
+        //根据前一个操作的preceding write更新自己的，总是保持最新的那个写
+        for(String key: lastOp.precedingWrite.keySet()){
+            preWriteID = lastOp.precedingWrite.get(key);
+            curWriteID = this.precedingWrite.get(key);
+            if(curWriteID < preWriteID){
+                this.precedingWrite.put(key, preWriteID);
+            }
+        }
+    }
+
+    public void initPrecedingWrite(HashSet<String> keySet){
+        for(String key: keySet){
+            this.precedingWrite.put(key, null);
+        }
+    }
 
 }
