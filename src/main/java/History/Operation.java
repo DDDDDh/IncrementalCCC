@@ -22,6 +22,7 @@ public class Operation {
     private BitSet coList;
 
 
+
     Operation(){
         this.setType(OpType.other);
         this.setKey("null");

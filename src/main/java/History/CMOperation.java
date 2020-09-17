@@ -17,6 +17,7 @@ public class CMOperation extends Operation{
     LinkedList<Integer> preList; //前驱列表
     LinkedList<Integer> sucList; //后继列表
     boolean hasDictatedRead; //拥有对应读操作，也即对应读操作在主线程，也就表明该写操作存在于全序中
+    int lastSameProcess; //同一线程上的前一个操作
 
     public void initCMOperation(Operation otherOp, int masterPid){
         this.copyOperation(otherOp);
@@ -29,6 +30,7 @@ public class CMOperation extends Operation{
         this.preList = new LinkedList<>();
         this.sucList = new LinkedList<>();
         this.hasDictatedRead = false;
+        this.lastSameProcess = -1;
     }
 
     public void updatePrecedingWrite(CMOperation lastOp){
@@ -47,6 +49,25 @@ public class CMOperation extends Operation{
     public void initPrecedingWrite(HashSet<String> keySet){
         for(String key: keySet){
             this.precedingWrite.put(key, null);
+        }
+    }
+
+    public void initLastSameProcess(LinkedList<Operation> opList, LinkedList<Integer> processList, int processID){
+        Operation curOp;
+        for(Integer i: processList){
+            if(processID == this.getProcess()) { //如果为主线程上的操作，正常设置前一操作
+                if (i < this.getID()) {
+                    this.setLastSameProcess(i);
+                }
+            }
+            else{ //如果不为主线程上的操作，只考虑写操作
+                if(i < this.getID()){
+                    curOp = opList.get(i);
+                    if(curOp.isWrite()){
+                        this.setLastSameProcess(i);
+                    }
+                }
+            }
         }
     }
 
