@@ -76,10 +76,12 @@ public class Operation {
         this.setPosition(otherOp.getPosition());
         this.setID(otherOp.getID());
         this.copyVisList(otherOp.getVisList());
+//        this.setVisList(otherOp.getVisList());
         this.setCorrespondingWriteID(otherOp.getCorrespondingWriteID());
         this.setTopoID(otherOp.getTopoID());
         this.setLastOpID(otherOp.getLastOpID());
         this.copyCoList(otherOp.getVisList());
+//        this.setCoList(otherOp.getVisList());
     }
 
     public void setKey(String key) {
@@ -139,15 +141,19 @@ public class Operation {
 
     //用于拷贝构造
     public void copyVisList(BitSet bitSet){
-       this.visList = new BitSet(bitSet.size());
-        for(int j = bitSet.nextSetBit(0); j >= 0; j = bitSet.nextSetBit(j+1)){
-            this.visList.set(j);
+        if(bitSet != null) {
+            this.visList = new BitSet(bitSet.size());
+            for (int j = bitSet.nextSetBit(0); j >= 0; j = bitSet.nextSetBit(j + 1)) {
+                this.visList.set(j);
+            }
         }
     }
     public void copyCoList(BitSet bitSet){
-        this.coList = new BitSet(bitSet.size());
-        for(int j = bitSet.nextSetBit(0); j >= 0; j = bitSet.nextSetBit(j+1)){
-            this.coList.set(j);
+        if(bitSet!= null) {
+            this.coList = new BitSet(bitSet.size());
+            for (int j = bitSet.nextSetBit(0); j >= 0; j = bitSet.nextSetBit(j + 1)) {
+                this.coList.set(j);
+            }
         }
     }
 

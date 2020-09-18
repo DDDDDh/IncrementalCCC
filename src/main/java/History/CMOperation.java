@@ -19,6 +19,13 @@ public class CMOperation extends Operation{
     boolean hasDictatedRead; //拥有对应读操作，也即对应读操作在主线程，也就表明该写操作存在于全序中
     int lastSameProcess; //同一线程上的前一个操作
 
+    //以下变量为topo-Schedule会用到的辅助变量
+    int iCount;
+    LinkedList<Integer> iSucList;
+    LinkedList<Integer> iPreList;
+    boolean iDone;
+    int lastRR;
+
     public void initCMOperation(Operation otherOp, int masterPid){
         this.copyOperation(otherOp);
         this.lastRead = -1;
@@ -31,6 +38,12 @@ public class CMOperation extends Operation{
         this.sucList = new LinkedList<>();
         this.hasDictatedRead = false;
         this.lastSameProcess = -1;
+
+        this.iCount = 0;
+        this.iSucList = new LinkedList<>();
+        this.iPreList = new LinkedList<>();
+        this.iDone = false;
+        this.lastRR = -1;
     }
 
     public void updatePrecedingWrite(CMOperation lastOp){

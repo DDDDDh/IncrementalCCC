@@ -47,7 +47,9 @@ public class HistoryReader {
             }
         }
         in.close();
+        System.out.println("Finish reading");
         return opList;
+
     }
 
     public Operation getOperation(String line) {
