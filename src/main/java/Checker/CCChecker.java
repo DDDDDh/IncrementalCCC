@@ -39,9 +39,13 @@ public class CCChecker {
     public void checkCyclicCO(){
         BasicRelation POUnionRF = new BasicRelation(history.getOpNum());
         POUnionRF.union(this.po, this.rf);
+//        System.out.println("Matrix of PO union RF:");
+//        POUnionRF.printMatrix();
+
         if(POUnionRF.cycleDetection()){
             this.isCyclicCO = true;
         }
+        System.out.println("Chekcing CyclicCO, result:" + this.isCyclicCO);
     }
 
     public void checkWriteCOInitRead(){
@@ -61,6 +65,7 @@ public class CCChecker {
                 }
             }
         }
+        System.out.println("Chekcing WriteCOInitRead, result:" + this.isWriteCOInitRead);
     }
 
     public void checkWriteCORead(){
@@ -85,10 +90,12 @@ public class CCChecker {
                 }
             }
         }
+        System.out.println("Chekcing WriteCORead, result:" + this.isWriteCORead);
     }
 
     public void checkThinAirRead(){
         this.isThinAirRead = this.rf.checkThinAirRead();
+        System.out.println("Chekcing ThinAirRead, result:" + this.isThinAirRead);
     }
 
 

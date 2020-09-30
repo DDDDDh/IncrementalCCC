@@ -50,6 +50,7 @@ public class ReadFrom extends BasicRelation{
                     }
                     if(correspondingWriteID == -1){ //没有找到对应写操作
 //                        System.out.println("Error! ");
+                        System.out.println("ThinAirRead:" + curOp.easyPrint());
                         this.isThinAirRead = true;
                     }
                     else {

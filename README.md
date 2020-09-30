@@ -21,6 +21,8 @@ Incremental Causal Consistency Checking Algorithm in Java Implementation
 
   表示操作的执行参数，value[b 1]表示对变量b执行了值为1的操作；
 
+  读入初始值的操作value为nil或-1
+
 - :process
 
   表示操作执行的线程id；

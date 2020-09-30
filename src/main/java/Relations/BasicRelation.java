@@ -1,6 +1,6 @@
 package Relations;
 
-import History.Operation;
+import History.*;
 
 import java.util.BitSet;
 import java.util.LinkedList;
@@ -160,6 +160,8 @@ public class BasicRelation implements BasicRelationInterface{
         int curID;
         while(!stack.isEmpty()){
             curID = stack.removeFirst();
+            count++;
+//            System.out.println("Out:" + curID);
             for(int i = 0; i < size; i++){
                 if(this.existEdge(curID, i)){
                     inDegree[i]--;
@@ -231,6 +233,22 @@ public class BasicRelation implements BasicRelationInterface{
             //对于每条i->j的边，在j的前驱列表里设置可见
             for(int j = curList.nextSetBit(0); j >= 0; j = curList.nextSetBit(j+1)){
                 opList.get(j).getCoList().set(i,true);
+            }
+        }
+    }
+
+    //根据opList中的coList更新当前关系矩阵
+    public void updateMatrixByList(LinkedList<CMOperation> opList){
+        assert (opList.size() == this.getMatrixSize());
+        int size = this.getMatrixSize();
+        Operation curOp;
+        BitSet curList;
+
+        for(int i = 0; i< size; i++){
+            curOp = opList.get(i);
+            curList = curOp.getCoList();
+            for(int j = curList.nextSetBit(0); j >= 0; j = curList.nextSetBit(j+1)){
+                this.getRelationMatrix()[j].set(i);
             }
         }
     }

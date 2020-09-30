@@ -51,10 +51,12 @@ public class CMOperation extends Operation{
         int curWriteID;
         //根据前一个操作的preceding write更新自己的，总是保持最新的那个写
         for(String key: lastOp.precedingWrite.keySet()){
-            preWriteID = lastOp.precedingWrite.get(key);
-            curWriteID = this.precedingWrite.get(key);
-            if(curWriteID < preWriteID){
-                this.precedingWrite.put(key, preWriteID);
+            if(lastOp.precedingWrite.get(key)!= null) { //只有前一个操作的precedingWrite不为空时才用来更新
+                preWriteID = lastOp.precedingWrite.get(key);
+                curWriteID = this.precedingWrite.get(key);
+                if (curWriteID < preWriteID) {
+                    this.precedingWrite.put(key, preWriteID);
+                }
             }
         }
     }

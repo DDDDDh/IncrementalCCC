@@ -110,12 +110,14 @@ class incrementalProcess implements Callable<BasicRelation>{
         for(int i = 0; i < readSize; i++){
             curID = this.curReadList.get(i);
             curOp = this.opList.get(curID);
-            cWrite = this.opList.get(curOp.getCorrespondingWriteID());
             curOp.setLastRead(lastReadID); //由此，每线程的第一个操作对应的lastRead为-2
             curOp.setProcessReadID(i);
-            cWrite.setProcessReadID(i);
-            cWrite.setHasDictatedRead(true);
-            cWrite.getPrecedingWrite().put(cWrite.getKey(), cWrite.getID()); //为每一有效力的写操作更新自身的PW
+            if(curOp.getCorrespondingWriteID() != -1) { //如果存在对应写操作，则一同更新
+                cWrite = this.opList.get(curOp.getCorrespondingWriteID());
+                cWrite.setProcessReadID(i);
+                cWrite.setHasDictatedRead(true);
+                cWrite.getPrecedingWrite().put(cWrite.getKey(), cWrite.getID()); //为每一有效力的写操作更新自身的PW
+            }
             lastReadID = curID;
         }
 
@@ -263,7 +265,7 @@ class incrementalProcess implements Callable<BasicRelation>{
 
     //对于每个读操作的downset，这里用该操作o的coList标示
     public void initReachability(int rPrime, int r){
-        System.out.println("R" + r + "R'" + rPrime);
+//        System.out.println("R" + r + "R'" + rPrime);
         CMOperation curOp = this.opList.get(r);
         CMOperation correspondingWrite = this.opList.get(curOp.getCorrespondingWriteID());
 
@@ -279,24 +281,26 @@ class incrementalProcess implements Callable<BasicRelation>{
             CMOperation visOp;
             for (int i = rCoList.nextSetBit(0); i >= 0; i = rCoList.nextSetBit(i + 1)) {
                 if (!rPrimeCoList.get(i)) { //找到在对r可见但是对rPrime不可见的操作
-                    visOp = this.opList.get(i);
-                    visOp.getRrList().add(r); // 将r加入r-delta的写操作的reachable read列表中
-                    rDelta.add(i);
-                    if(visOp.isWrite()){
-                        if(i > rPrime && i < r && visOp.getProcess() == this.processID){ //在r与r'中间的写操作
-                            rrGroup.add(i);
-                        }
+                    if(i != r && i != rPrime) {
+                        visOp = this.opList.get(i);
+                        visOp.getRrList().add(r); // 将r加入r-delta的写操作的reachable read列表中
+                        rDelta.add(i);
+                        if (visOp.isWrite()) {
+                            if (i > rPrime && i < r && visOp.getProcess() == this.processID) { //在r与r'中间的写操作
+                                rrGroup.add(i);
+                            }
 //                        else if(visOp.getProcess() == correspondingWrite.getProcess()){ //在D(r)同一线程上的写操作
-                        else if(correspondingWrite.getCoList().get(i)){ //更新：co在D(r)之前的写操作
-                            wwGroup.add(i);
-                        }
-                        else{
-                            System.out.println("Error!Impossible1");
+                            else if (correspondingWrite.getCoList().get(i)) { //更新：co在D(r)之前的写操作
+                                wwGroup.add(i);
+                            } else {
+                                System.out.println("Error!Impossible1");
+                            }
+                        } else {
+                            System.out.println("Error!Impossible2");
                         }
                     }
                     else{
-                        System.out.println("VisOp: " + visOp.easyPrint());
-                        System.out.println("Error!Impossible2");
+                        //在r-Delta中去除r和r'
                     }
                 }
             }
@@ -380,6 +384,7 @@ class incrementalProcess implements Callable<BasicRelation>{
     public boolean applyRuleC(CMOperation wPrime, CMOperation w, CMOperation r){
 
         //add edge w'->w
+        System.out.println("Adding edge " + wPrime.getID() + " to " + w.getID());
         w.getCoList().set(wPrime.getID());
         wPrime.getSucList().add(w.getID());
         wPrime.getISucList().add(w.getID());
@@ -482,6 +487,8 @@ class incrementalProcess implements Callable<BasicRelation>{
         if(this.readCentric(po)){
             System.out.println("no cycle in HBo of process" + this.processID);
         }
+        matrix.updateMatrixByList(this.opList);
+        matrix.computeTransitiveClosure(); //因为incremental算法省略了一些边，所以要得到完整的HBo矩阵，需要通过传递闭包计算
 //        System.out.println("Info of process" + this.processID + "??:" + this.curReadList.size());
 //        for(int i = 0; i < this.curReadList.size(); i++){
 //            System.out.println("Op" + i + ":" + this.opList.get(curReadList.get(i)).easyPrint());

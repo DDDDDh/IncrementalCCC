@@ -1,3 +1,4 @@
+import Checker.CCChecker;
 import History.*;
 import Relations.*;
 
@@ -8,7 +9,8 @@ public class CausalChecker {
 
 
     public static void main(String args[]) throws Exception {
-        String url = "src/main/resources/hy_history.edn";
+//        String url = "src/main/resources/hy_history.edn";
+        String url = "src/main/resources/BadPatternExamples/TransitiveHBo_history.edn";
         HistoryReader reader = new HistoryReader(url);
 //        LinkedList<Operation> opList = reader.readHistory();
 //        for(int i = 0; i < opList.size(); i++){
@@ -45,18 +47,23 @@ public class CausalChecker {
         endTime = System.nanoTime();
         System.out.println("Running time of brute-force computation of co:" + (endTime - startTime) + "ns");
 
-        BasicCausalOrder bco1 = new BasicCausalOrder(history.getOpNum());
-        bco1.computeCOBFS(history, po, rf);
+        System.out.println("Begin to check CC:");
+        CCChecker ccChecker = new CCChecker(history, po, rf, ico);
+        System.out.println("Chekcing CC, result:" + ccChecker.checkCC());
 
-        if(!bco1.checkEqualDebug(bco, history.getOperationList())){
-            System.out.println("Error! The causal orders are not equal!");
-        }
+//        BasicCausalOrder bco1 = new BasicCausalOrder(history.getOpNum());
+//        bco1.computeCOBFS(history, po, rf);
+//
+//        if(!bco1.checkEqualDebug(bco, history.getOperationList())){
+//            System.out.println("Error! The causal orders are not equal!");
+//        }
 
 
         System.out.println("Begin to compute conflict relation");
         ConflictRelation cf = new ConflictRelation(history.getOpNum());
         cf.caculateConflictRelation(history, bco);
         System.out.println("Finish computation of conflict relation");
+        cf.printMatrix();
 
         System.out.println("Begin to compute happen-before relation");
         BasicHappenBeforeOrder hbo = new BasicHappenBeforeOrder(history.getOpNum());
@@ -65,6 +72,8 @@ public class CausalChecker {
 
         IncrementalHappenBeforeOrder ihbo = new IncrementalHappenBeforeOrder(history.getOpNum());
         ihbo.incrementalHBO(history, po, rf);
+
+
 
     }
 }
