@@ -31,26 +31,11 @@ public class CMChecker extends CCChecker {
 
     public void checkWriteHBInitRead(){
         LinkedList<Operation> opList = history.getOperationList();
-        Operation curOp;
-        Operation hboOp;
-        int size = opList.size();
-        for(int i = 0; i < size; i++){
-            curOp = opList.get(i);
-            if(curOp.isInitRead()){
-                for(int j = 0; j < size; j++){
-                    if(this.hbo.existEdge(j, i)){
-                        hboOp = opList.get(j);
-                        if(hboOp.isWrite() && hboOp.onSameKey(curOp)){
-                            this.isWriteHBInitRead = true;
-                        }
-                    }
-                }
-            }
-        }
+        this.isWriteHBInitRead = this.hbo.checkWriteHBInitReadByProcess(opList);
     }
 
     public void checkCyclicHB(){
-        this.isCyclicHB = this.hbo.cycleDetection();
+        this.isCyclicHB = this.hbo.cycleDetectionByProcess();
     }
 
     public boolean checkCM(){

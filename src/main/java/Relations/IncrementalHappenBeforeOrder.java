@@ -40,8 +40,9 @@ public class IncrementalHappenBeforeOrder extends HappenBeforeOrder{
         ico.incrementalCO(history, po, rf);
         ico.updateListByMatrix(history.getOperationList());
 
-        //返回结果为每个线程按照read-centric方法计算得到的HBo邻接矩阵
-        HashMap<Integer, BasicRelation> processMatrix = new HashMap<>();
+//        此处初始化挪动到HappeneforeOrder本身去进行
+//        //返回结果为每个线程按照read-centric方法计算得到的HBo邻接矩阵
+//        HashMap<Integer, BasicRelation> processMatrix = new HashMap<>();
 
         ExecutorService executorService = Executors.newCachedThreadPool();
 
@@ -481,9 +482,9 @@ class incrementalProcess implements Callable<BasicRelation>{
 
 
     public BasicRelation call(){
-        LinkedList<Integer> thisOpList = history.getProcessOpList().get(this.processID);
-        LinkedList<Operation> opList = history.getOperationList();
-        BasicRelation matrix = new BasicRelation(opList.size());
+//        LinkedList<Integer> thisOpList = history.getProcessOpList().get(this.processID);
+//        LinkedList<Operation> opList = history.getOperationList();
+        BasicRelation matrix = new BasicRelation(this.size);
         if(this.readCentric(po)){
             System.out.println("no cycle in HBo of process" + this.processID);
         }
@@ -493,7 +494,6 @@ class incrementalProcess implements Callable<BasicRelation>{
 //        for(int i = 0; i < this.curReadList.size(); i++){
 //            System.out.println("Op" + i + ":" + this.opList.get(curReadList.get(i)).easyPrint());
 //        }
-
         isCaculated = true;
         return matrix;
     }
