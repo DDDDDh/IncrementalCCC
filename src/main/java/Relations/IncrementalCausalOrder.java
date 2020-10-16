@@ -69,10 +69,10 @@ public class IncrementalCausalOrder extends CausalOrder{
     public void incrementalCO(History history, ProgramOrder po, ReadFrom rf){
 
         assert (!rf.checkThinAirRead());
-//        if(rf.checkThinAirRead()){
-//            System.out.println("Contain ThinAirRead!");
-//            return;
-//        }
+        if(rf.checkThinAirRead()){
+            System.out.println("Contain ThinAirRead!");
+            return;
+        }
 
         LinkedList<Operation> opList = history.getOperationList();
 //        System.out.println("PO Matrix:");
@@ -85,6 +85,11 @@ public class IncrementalCausalOrder extends CausalOrder{
 //        this.initialCOMatrix(po, rf);
         LinkedList<Integer> topoList = this.topoSort(history);
 
+        if(topoList.size() != this.getMatrixSize()){
+            System.out.println("Not a DAG");
+            return;
+        }
+
 //        for(int i = 0; i < topoList.size(); i++){
 //            System.out.println("TopoID:" + i + " Op:" + opList.get(topoList.get(i)).easyPrint());
 //        }
@@ -96,13 +101,14 @@ public class IncrementalCausalOrder extends CausalOrder{
         BitSet curList;
         int curID;
         for(int i = 0; i < topoList.size(); i++){ //按拓扑序遍历
+
             curOp = opList.get(topoList.get(i));
             curList = curOp.getCoList();
             curID = curOp.getID();
             if(curOp.getLastOpID() == -1){ //curOp为某线程的第一个操作
                 if(curOp.isRead() && !curOp.isInitRead()){//如果为读操作，那么向对应写操作继承vis集合
                     correspondingWrite = opList.get(curOp.getCorrespondingWriteID());
-                    curList.and(correspondingWrite.getCoList());
+                    curList.or(correspondingWrite.getCoList());
                 }
                 else if(curOp.isWrite() || curOp.isInitRead()){ //如果为写操作或读初值，那么不会看到任何操作
                     continue;

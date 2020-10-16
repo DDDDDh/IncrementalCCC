@@ -80,7 +80,7 @@ public class Operation {
         this.setCorrespondingWriteID(otherOp.getCorrespondingWriteID());
         this.setTopoID(otherOp.getTopoID());
         this.setLastOpID(otherOp.getLastOpID());
-        this.copyCoList(otherOp.getVisList());
+        this.copyCoList(otherOp.getCoList());
 //        this.setCoList(otherOp.getVisList());
     }
 
@@ -148,6 +148,7 @@ public class Operation {
             }
         }
     }
+
     public void copyCoList(BitSet bitSet){
         if(bitSet!= null) {
             this.coList = new BitSet(bitSet.size());
@@ -212,8 +213,10 @@ public class Operation {
     }
 
     public void flushCoList(){
-        BitSet tempList = new BitSet(this.getCoList().size());
-        this.setCoList(tempList);
+        if(this.getCoList()!= null) {
+            BitSet tempList = new BitSet(this.getCoList().size());
+            this.setCoList(tempList);
+        }
     }
 
     @Override

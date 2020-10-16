@@ -28,17 +28,31 @@ public class IncrementalHappenBeforeOrder extends HappenBeforeOrder{
 
     public void incrementalHBO(History history, ProgramOrder po, ReadFrom rf) throws Exception{
 
+//        if(rf.checkThinAirRead()){
+//            return;
+//        }
+
         LinkedList<Operation> opList = history.getOperationList();
         this.unionAndSetVis(po, rf, opList);
-        System.out.println("Initial Matrix:");
-        this.printMatrix();
+//        System.out.println("Initial Matrix:");
+//        this.printMatrix();
 
         int processNum = history.getProcessOpList().keySet().size();
 
         //利用增量算法计算CO关系，并以此更新（初始化）每个操作的co列表
         IncrementalCausalOrder ico = new IncrementalCausalOrder(history.getOpNum());
         ico.incrementalCO(history, po, rf);
+//        System.out.println("CO Matrix after ico:");
+//        ico.printMatrix();
         ico.updateListByMatrix(history.getOperationList());
+
+        for(int i = 0; i < history.getOperationList().size(); i++){
+            System.out.println("No." + i + history.getOperationList().get(i).getCoList());
+        }
+
+        this.union(this, ico);
+
+//        this.printMatrix();
 
 //        此处初始化挪动到HappeneforeOrder本身去进行
 //        //返回结果为每个线程按照read-centric方法计算得到的HBo邻接矩阵
@@ -49,14 +63,14 @@ public class IncrementalHappenBeforeOrder extends HappenBeforeOrder{
         for(Integer processID: history.getProcessOpList().keySet()){
             Callable<BasicRelation> proc = new incrementalProcess(history, processID, po);
             Future<BasicRelation> submit = executorService.submit(proc);
-            System.out.println("Check no" + processID + " Result:");
             processMatrix.put(processID, submit.get());
-            processMatrix.get(processID).printMatrix();
-            this.union(this, processMatrix.get(processID));
+//            System.out.println("Check no" + processID + " Result:");
+//            processMatrix.get(processID).printMatrix();
+//            this.union(this, processMatrix.get(processID));
         }
 
-        System.out.println("Finally we get a matrix:");
-        this.printMatrix();
+//        System.out.println("Finally we get a matrix:");
+//        this.printMatrix();
 
         executorService.shutdown();
 
@@ -91,16 +105,33 @@ class incrementalProcess implements Callable<BasicRelation>{
 
         //根据history初始化操作信息
         LinkedList<Operation> originalList = history.getOperationList();
+        System.out.println("Located!!!!!!!!!!!!!!");
+        for(int i = 0; i < history.getOperationList().size(); i++){
+            System.out.println("No." + i + originalList.get(i).getCoList());
+        }
+
+
+
         for(int i = 0; i < this.size; i++){
             CMOperation op = new CMOperation();
+            System.out.println("CM operation coList:" + originalList.get(i).getCoList());
             op.initCMOperation(originalList.get(i), processID);
+            System.out.println("OP coList:" + op.getCoList());
             op.initPrecedingWrite(history.getKeySet());
             op.initLastSameProcess(history.getOperationList(), history.getProcessOpList().get(op.getProcess()), op.getProcess());
             this.opList.add(op);
+            System.out.println(op.easyPrint() + " process:" + op.getProcess() + " processID" + processID);
             if(op.isRead() && op.getProcess() == processID){ //是当前进程上的读操作
                 this.curReadList.add(op.getID());
             }
         }
+
+        CMOperation op;
+        for(int i = 0; i < this.size; i++){
+            op = this.opList.get(i);
+            System.out.println(op.easyPrint() + " index:" + op.getID() + " colist:" + op.getCoList());
+        }
+
 
         //更新lastRead，同时更新读全序编号
         int lastReadID = -2; // 设为-2是为了与初值-1区分开
@@ -221,10 +252,16 @@ class incrementalProcess implements Callable<BasicRelation>{
         int curID;
         int correspondingWriteID;
         int readSize = this.curReadList.size();
+        Operation curOp;
+        System.out.println("Read size:" + readSize);
         for(int i = 0; i < readSize; i++){
             curID = this.curReadList.get(i);
-            correspondingWriteID = this.opList.get(curID).getCorrespondingWriteID();
-            if(correspondingWriteID == -1 || po.existEdge(curID, correspondingWriteID)){
+            curOp = this.opList.get(curID);
+            if(curOp.isInitRead()){ //跳过读初值的操作
+                continue;
+            }
+            correspondingWriteID = curOp.getCorrespondingWriteID();
+            if( correspondingWriteID == -1 || po.existEdge(curID, correspondingWriteID)){
                 return false;
             }
         }
@@ -234,16 +271,21 @@ class incrementalProcess implements Callable<BasicRelation>{
         CMOperation wPrime;
         CMOperation wOp;
         BitSet curCoList;
+
         for(int i = 0; i < readSize; i++){
             r = this.curReadList.get(i);
             rOp = this.opList.get(r);
+            if(rOp.isInitRead()){//跳过读初值的操作
+                continue;
+            }
             rPrime = rOp.getLastRead();
             wOp = this.opList.get(rOp.getCorrespondingWriteID());
             initReachability(rPrime, r);
-
+            System.out.println("r:" + rOp.easyPrint());
             curCoList = rOp.getCoList();
             for(int j = curCoList.nextSetBit(0); j >= 0; j = curCoList.nextSetBit(j+1)){
                 wPrime = this.opList.get(j);
+                System.out.println("wPrime:" + wPrime.easyPrint() + "index:" + j);
                 if(wPrime.isWrite() && wPrime.getKey() == rOp.getKey()){
                     applyRuleC(wPrime, wOp, rOp);
                 }
@@ -293,7 +335,13 @@ class incrementalProcess implements Callable<BasicRelation>{
 //                        else if(visOp.getProcess() == correspondingWrite.getProcess()){ //在D(r)同一线程上的写操作
                             else if (correspondingWrite.getCoList().get(i)) { //更新：co在D(r)之前的写操作
                                 wwGroup.add(i);
-                            } else {
+                            }
+                            else if(correspondingWrite.getID() == visOp.getID()){
+                                //wwGroup.add(i);
+                                System.out.println("Ignore corresponding write.");
+                            }
+                            else {
+//                                System.out.println("r:" + curOp.easyPrint() + "r'" + this.opList.get(rPrime).easyPrint() + "visOp:" + visOp.easyPrint());
                                 System.out.println("Error!Impossible1");
                             }
                         } else {
@@ -385,7 +433,7 @@ class incrementalProcess implements Callable<BasicRelation>{
     public boolean applyRuleC(CMOperation wPrime, CMOperation w, CMOperation r){
 
         //add edge w'->w
-        System.out.println("Adding edge " + wPrime.getID() + " to " + w.getID());
+        System.out.println("Adding edge " + wPrime.getID() + " to " + w.getID() + "!!!!!!!!!!!!!!!!!!!!!!");
         w.getCoList().set(wPrime.getID());
         wPrime.getSucList().add(w.getID());
         wPrime.getISucList().add(w.getID());
@@ -488,8 +536,13 @@ class incrementalProcess implements Callable<BasicRelation>{
         if(this.readCentric(po)){
             System.out.println("no cycle in HBo of process" + this.processID);
         }
+        else{
+            System.out.println("Cycle detected! process " + this.processID);
+        }
         matrix.updateMatrixByList(this.opList);
         matrix.computeTransitiveClosure(); //因为incremental算法省略了一些边，所以要得到完整的HBo矩阵，需要通过传递闭包计算
+        System.out.println("HBo Matrix for process" + this.processID +":");
+        matrix.printMatrix();
 //        System.out.println("Info of process" + this.processID + "??:" + this.curReadList.size());
 //        for(int i = 0; i < this.curReadList.size(); i++){
 //            System.out.println("Op" + i + ":" + this.opList.get(curReadList.get(i)).easyPrint());

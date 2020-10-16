@@ -31,22 +31,29 @@ public class CMChecker extends CCChecker {
 
     public void checkWriteHBInitRead(){
         LinkedList<Operation> opList = history.getOperationList();
+        System.out.println("???");
         this.isWriteHBInitRead = this.hbo.checkWriteHBInitReadByProcess(opList);
+        System.out.println("Checking WriteHBInitRead, result:"+this.isCyclicHB);
     }
 
     public void checkCyclicHB(){
         this.isCyclicHB = this.hbo.cycleDetectionByProcess();
+        System.out.println("Checking CyclicHB, result:"+this.isCyclicHB);
     }
 
     public boolean checkCM(){
 
         this.isCC = checkCC();
 
+        if(!this.isCC){
+            return false;
+        }
+
         this.checkWriteHBInitRead();
         this.checkCyclicHB();
         this.isChecked = true;
 
-        if((!this.isCC) || (!this.isChecked)){
+        if(!this.isChecked){
             return false;
         }
         else if((!this.isWriteHBInitRead) && (!this.isCyclicHB)){

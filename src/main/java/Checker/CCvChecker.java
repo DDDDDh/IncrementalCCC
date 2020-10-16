@@ -26,11 +26,13 @@ public class CCvChecker extends CCChecker{
     public void checkCyclicCF(){
         BasicRelation COUnionCF = new BasicRelation(history.getOpNum());
         COUnionCF.union(co, cf);
+//        COUnionCF.printMatrix();
         if(COUnionCF.cycleDetection()){
             this.isCyclicCF = true;
         }
         this.isCCv = false;
         this.isChecked = true;
+        System.out.println("Chekcing CyclicCF, result:" + this.isCyclicCF);
     }
 
     public boolean checkCCv(){
@@ -44,6 +46,7 @@ public class CCvChecker extends CCChecker{
         }
 
         if(this.isCC && !this.isCyclicCF){
+            this.isCCv = true;
             return true;
         }
 

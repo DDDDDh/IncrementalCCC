@@ -60,6 +60,7 @@ public class CCChecker {
                 for(int j = curCoList.nextSetBit(0); j >= 0; j = curCoList.nextSetBit(j+1)){
                     visOp = opList.get(j);
                     if(visOp.isWrite() && visOp.onSameKey(curOp)){
+//                        System.out.println("Debug...visOp:" + visOp.easyPrint() + " curOp:" + curOp.easyPrint());
                         this.isWriteCOInitRead = true;
                     }
                 }
@@ -76,17 +77,23 @@ public class CCChecker {
         Operation visOp;
         for(int i = 0; i < opList.size(); i++) {
             curOp = opList.get(i);
+//            System.out.println("Checking " + curOp.easyPrint() + " now...");
             if (curOp.isRead() && (!curOp.isInitRead())) {      //只针对没有读入初值的读操作
-                curCoList = curOp.getCoList();
-                correspondingWrite = opList.get(curOp.getCorrespondingWriteID());
-                for (int j = curCoList.nextSetBit(0); j >= 0; j = curCoList.nextSetBit(j + 1)) {
-                    visOp = opList.get(j);
-                    //co位于当前读操作之前的其他写入同一变量的操作
-                    if (visOp.isWrite() && visOp.notEqual(correspondingWrite) && visOp.onSameKey(curOp)) {
-                        if(visOp.getCoList().get(correspondingWrite.getID())) {     //corresponding write对其可见
-                            this.isWriteCORead = true;
+                int correspondingWriteID = curOp.getCorrespondingWriteID();
+                if(correspondingWriteID != -1) { //筛去没有对应写操作的读操作
+                    curCoList = curOp.getCoList();
+                    correspondingWrite = opList.get(curOp.getCorrespondingWriteID());
+                    for (int j = curCoList.nextSetBit(0); j >= 0; j = curCoList.nextSetBit(j + 1)) {
+                        visOp = opList.get(j);
+//                        System.out.print("Visible op:" + visOp.easyPrint() + " ");
+                        //co位于当前读操作之前的其他写入同一变量的操作
+                        if (visOp.isWrite() && visOp.notEqual(correspondingWrite) && visOp.onSameKey(curOp)) {
+                            if (visOp.getCoList().get(correspondingWrite.getID())) {     //corresponding write对其可见
+                                this.isWriteCORead = true;
+                            }
                         }
                     }
+//                    System.out.println();
                 }
             }
         }
@@ -102,6 +109,10 @@ public class CCChecker {
     public boolean checkCC(){
 
         this.checkThinAirRead();
+//        if(this.isThinAirRead){
+//            return false;
+//        }
+
         this.checkCyclicCO();
         this.checkWriteCOInitRead();
         this.checkWriteCORead();

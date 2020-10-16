@@ -31,13 +31,18 @@ public class ConflictRelation extends BasicRelation{
                 continue;
             }
             else if(curOp.isRead()){
-                correspondingWrite = opList.get(curOp.getCorrespondingWriteID());
-                curList = curOp.getCoList();
-                for(int j = curList.nextSetBit(0); j >= 0; j = curList.nextSetBit(j+1)){
-                    visOp = opList.get(j);
-                    //取CO位于当前读操作之前，与其对应写操作写入同一变量，并且值不同的写操作
-                    if(visOp.isWrite() && correspondingWrite.onSameKey(visOp) && (visOp.getValue()!= correspondingWrite.getValue())){
-                        this.setTrue(visOp.getID(), correspondingWrite.getID());
+
+                int correspondingWriteID = curOp.getCorrespondingWriteID();
+                if(correspondingWriteID != -1) { //只取存在对应写操作的读添加cf关系
+                    correspondingWrite = opList.get(curOp.getCorrespondingWriteID());
+                    curList = curOp.getCoList();
+                    for (int j = curList.nextSetBit(0); j >= 0; j = curList.nextSetBit(j + 1)) {
+                        visOp = opList.get(j);
+                        //取CO位于当前读操作之前，与其对应写操作写入同一变量，并且值不同的写操作
+                        if (visOp.isWrite() && correspondingWrite.onSameKey(visOp) && (visOp.getValue() != correspondingWrite.getValue())) {
+                            this.setTrue(visOp.getID(), correspondingWrite.getID());
+//                            System.out.println("Adding edge:" + visOp.easyPrint() + " to " + correspondingWrite.easyPrint());
+                        }
                     }
                 }
             }

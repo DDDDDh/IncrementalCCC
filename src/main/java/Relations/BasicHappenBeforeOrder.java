@@ -12,6 +12,11 @@ public class BasicHappenBeforeOrder extends HappenBeforeOrder{
     }
 
     public void calculateHBo(History history, ProgramOrder po, ReadFrom rf){
+
+//        if(rf.checkThinAirRead()){
+//            return;
+//        }
+
         LinkedList<Operation> opList = history.getOperationList();
         int size = history.getOpNum();
         Operation curOp;
@@ -22,19 +27,19 @@ public class BasicHappenBeforeOrder extends HappenBeforeOrder{
             curOp.flushCoList();
         }
 
-        System.out.println("Original Matrix:");
-        this.printMatrix();
+//        System.out.println("Original Matrix:");
+//        this.printMatrix();
         this.union(po, rf);
         this.updateListByMatrix(opList);
-        System.out.println("Matrix after union PO and RF:");
-        this.printMatrix();
+//        System.out.println("Matrix after union PO and RF:");
+//        this.printMatrix();
         boolean forward = true;
         Operation correspondingWrite;
         Operation wPrime;
         BitSet curList;
         int loop = 0;
         while(forward) {
-            System.out.println("Loop " + loop);
+//            System.out.println("Loop " + loop);
             forward = false;
             //Step 3 of PRAM
             this.computeTransitiveClosure();
@@ -45,24 +50,27 @@ public class BasicHappenBeforeOrder extends HappenBeforeOrder{
                     continue;
                 }
                 else if(o.isRead()){
-                    correspondingWrite = opList.get(o.getCorrespondingWriteID());
-                    curList = o.getCoList();
-                    for(int j = curList.nextSetBit(0); j >= 0; j = curList.nextSetBit(j+1)){
-                        wPrime = opList.get(j);
-                        if(wPrime.isWrite() && wPrime.onSameKey(o) && wPrime.notEqual(correspondingWrite)){
-                            if(!existEdge(j, o.getCorrespondingWriteID())){
-                                forward = true;
+                    int correspodingWriteID = o.getCorrespondingWriteID();
+                    if(correspodingWriteID!= -1) { //略去没有对应写操作的读
+                        correspondingWrite = opList.get(o.getCorrespondingWriteID());
+                        curList = o.getCoList();
+                        for (int j = curList.nextSetBit(0); j >= 0; j = curList.nextSetBit(j + 1)) {
+                            wPrime = opList.get(j);
+                            if (wPrime.isWrite() && wPrime.onSameKey(o) && wPrime.notEqual(correspondingWrite)) {
+                                if (!existEdge(j, o.getCorrespondingWriteID())) {
+                                    forward = true;
+                                }
+                                correspondingWrite.getCoList().set(j, true);
+                                this.setTrue(j, o.getCorrespondingWriteID());
                             }
-                            correspondingWrite.getCoList().set(j, true);
-                            this.setTrue(j, o.getCorrespondingWriteID());
                         }
                     }
                 }
             }
             loop++;
         }
-        System.out.println("HBo Matrix:");
-        this.printMatrix();
+//        System.out.println("HBo Matrix:");
+//        this.printMatrix();
     }
 
 

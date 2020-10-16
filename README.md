@@ -57,3 +57,10 @@ IncrementalCausalOrder中的函数只支持输入为DAG图的情况，否则，�
 
 
 
+
+
+
+
+## 更新日志
+
+2020.10.15 修复了如果存在ThinAirRead时无法正确计算其他CO相关的关系的bug；

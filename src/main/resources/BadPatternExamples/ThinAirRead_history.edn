@@ -1,0 +1,5 @@
+{:type :ok, :f :write, :value [a 1], :process 0, :time 1, :position 1, :link nil, :index 0}
+{:type :ok, :f :write, :value [b 1], :process 0, :time 2, :position 2, :link nil, :index 1}
+{:type :ok, :f :read, :value [b 1], :process 1, :time 3, :position 3, :link nil, :index 2}
+{:type :ok, :f :read, :value [a 1], :process 1, :time 4, :position 4, :link nil, :index 3}
+{:type :ok, :f :read, :value [a 2], :process 1, :time 5, :position 5, :link nil, :index 4}

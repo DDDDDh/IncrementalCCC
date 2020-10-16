@@ -1,4 +1,6 @@
 import Checker.CCChecker;
+import Checker.CCvChecker;
+import Checker.CMChecker;
 import History.*;
 import Relations.*;
 
@@ -10,7 +12,8 @@ public class CausalChecker {
 
     public static void main(String args[]) throws Exception {
 //        String url = "src/main/resources/hy_history.edn";
-        String url = "src/main/resources/BadPatternExamples/TransitiveHBo_history.edn";
+        String url = "src/main/resources/SpecialCases/CCvNotCM_history.edn";
+//        String url = "src/main/resources/BadPatternExamples/WriteHBInitRead_history.edn";
         HistoryReader reader = new HistoryReader(url);
 //        LinkedList<Operation> opList = reader.readHistory();
 //        for(int i = 0; i < opList.size(); i++){
@@ -39,6 +42,8 @@ public class CausalChecker {
         ico.incrementalCO(history, po, rf);
         long endTime = System.nanoTime();
         System.out.println("Running time of incremental computation of co:" + (endTime - startTime) + "ns");
+//        System.out.println("ico Matrix:");
+//        ico.printMatrix();
 
         startTime = System.nanoTime();
         BasicCausalOrder bco = new BasicCausalOrder(history.getOpNum());
@@ -46,8 +51,10 @@ public class CausalChecker {
         bco.computeCO(history, po, rf);
         endTime = System.nanoTime();
         System.out.println("Running time of brute-force computation of co:" + (endTime - startTime) + "ns");
+//        System.out.println("bco Matrix:");
+//        bco.printMatrix();
 
-        System.out.println("Begin to check CC:");
+        System.out.println("---Begin to check CC---");
         CCChecker ccChecker = new CCChecker(history, po, rf, ico);
         System.out.println("Chekcing CC, result:" + ccChecker.checkCC());
 
@@ -62,17 +69,23 @@ public class CausalChecker {
         System.out.println("Begin to compute conflict relation");
         ConflictRelation cf = new ConflictRelation(history.getOpNum());
         cf.caculateConflictRelation(history, bco);
-        System.out.println("Finish computation of conflict relation");
-        cf.printMatrix();
+//        System.out.println("Finish computation of conflict relation");
+//        cf.printMatrix();
+        System.out.println("---Begin to check CCv---");
+        CCvChecker ccvChecker = new CCvChecker(history, po, rf, ico, cf);
+        System.out.println("Chekcing CCv, result:" + ccvChecker.checkCCv());
 
         System.out.println("Begin to compute happen-before relation");
         BasicHappenBeforeOrder hbo = new BasicHappenBeforeOrder(history.getOpNum());
         hbo.calculateHBo(history, po, rf);
         System.out.println("Finish computation of happen-before relation");
+        hbo.printMatrix();
 
         IncrementalHappenBeforeOrder ihbo = new IncrementalHappenBeforeOrder(history.getOpNum());
         ihbo.incrementalHBO(history, po, rf);
-
+        System.out.println("---Begin to check CM---");
+        CMChecker cmChecker = new CMChecker(history, po, rf, ico, ihbo);
+        System.out.println("Checking CM, result:" + cmChecker.checkCM());
 
 
     }
