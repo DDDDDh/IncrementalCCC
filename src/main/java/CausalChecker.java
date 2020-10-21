@@ -12,8 +12,8 @@ public class CausalChecker {
 
     public static void main(String args[]) throws Exception {
 //        String url = "src/main/resources/hy_history.edn";
-        String url = "src/main/resources/SpecialCases/CCvNotCM_history.edn";
-//        String url = "src/main/resources/BadPatternExamples/WriteHBInitRead_history.edn";
+//        String url = "src/main/resources/SpecialCases/CCvNotCM_history.edn";
+        String url = "src/main/resources/BadPatternExamples/CyclicCF_history.edn";
         HistoryReader reader = new HistoryReader(url);
 //        LinkedList<Operation> opList = reader.readHistory();
 //        for(int i = 0; i < opList.size(); i++){
@@ -77,14 +77,14 @@ public class CausalChecker {
 
         System.out.println("Begin to compute happen-before relation");
         BasicHappenBeforeOrder hbo = new BasicHappenBeforeOrder(history.getOpNum());
-        hbo.calculateHBo(history, po, rf);
+        hbo.calculateHBo(history, po, rf, ico);
         System.out.println("Finish computation of happen-before relation");
-        hbo.printMatrix();
 
-        IncrementalHappenBeforeOrder ihbo = new IncrementalHappenBeforeOrder(history.getOpNum());
-        ihbo.incrementalHBO(history, po, rf);
+
+//        IncrementalHappenBeforeOrder ihbo = new IncrementalHappenBeforeOrder(history.getOpNum());
+//        ihbo.incrementalHBO(history, po, rf);
         System.out.println("---Begin to check CM---");
-        CMChecker cmChecker = new CMChecker(history, po, rf, ico, ihbo);
+        CMChecker cmChecker = new CMChecker(history, po, rf, ico, hbo);
         System.out.println("Checking CM, result:" + cmChecker.checkCM());
 
 

@@ -26,6 +26,37 @@ public class CMOperation extends Operation{
     boolean iDone;
     int lastRR;
 
+    public CMOperation(){
+        this.setType(OpType.other);
+        this.setKey("null");
+        this.setValue(-1);
+        this.setProcess(-1);
+        this.setTime(-1);
+        this.setPosition(-1);
+        this.setID(-1);
+        this.setVisList(null);
+        this.setCorrespondingWriteID(-1);
+        this.setTopoID(-1);
+        this.setLastOpID(-1);
+        this.setCoList(null);
+        this.lastRead = -1;
+        this.processReadID = -1;
+        this.earlistRead = -1;
+        this.masterPid = masterPid;
+        this.rrList = new LinkedList<>();
+        this.precedingWrite = new HashMap<>();
+        this.preList = new LinkedList<>();
+        this.sucList = new LinkedList<>();
+        this.hasDictatedRead = false;
+        this.lastSameProcess = -1;
+
+        this.iCount = 0;
+        this.iSucList = new LinkedList<>();
+        this.iPreList = new LinkedList<>();
+        this.iDone = false;
+        this.lastRR = -1;
+    }
+
     public void initCMOperation(Operation otherOp, int masterPid){
         this.copyOperation(otherOp);
         this.lastRead = -1;
@@ -50,12 +81,14 @@ public class CMOperation extends Operation{
         int preWriteID;
         int curWriteID;
         //根据前一个操作的preceding write更新自己的，总是保持最新的那个写
-        for(String key: lastOp.precedingWrite.keySet()){
-            if(lastOp.precedingWrite.get(key)!= null) { //只有前一个操作的precedingWrite不为空时才用来更新
-                preWriteID = lastOp.precedingWrite.get(key);
-                curWriteID = this.precedingWrite.get(key);
-                if (curWriteID < preWriteID) {
-                    this.precedingWrite.put(key, preWriteID);
+        if(!lastOp.precedingWrite.isEmpty()) {
+            for (String key : lastOp.precedingWrite.keySet()) {
+                if (lastOp.precedingWrite.get(key) != null) { //只有前一个操作的precedingWrite不为空时才用来更新
+                    preWriteID = lastOp.precedingWrite.get(key);
+                    curWriteID = this.precedingWrite.get(key);
+                    if (curWriteID < preWriteID) {
+                        this.precedingWrite.put(key, preWriteID);
+                    }
                 }
             }
         }

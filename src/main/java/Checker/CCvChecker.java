@@ -3,6 +3,8 @@ package Checker;
 import History.History;
 import Relations.*;
 
+import java.util.LinkedList;
+
 public class CCvChecker extends CCChecker{
 
     ConflictRelation cf;
@@ -26,20 +28,30 @@ public class CCvChecker extends CCChecker{
     public void checkCyclicCF(){
         BasicRelation COUnionCF = new BasicRelation(history.getOpNum());
         COUnionCF.union(co, cf);
-//        COUnionCF.printMatrix();
+        COUnionCF.printMatrix();
         if(COUnionCF.cycleDetection()){
             this.isCyclicCF = true;
         }
         this.isCCv = false;
         this.isChecked = true;
         System.out.println("Chekcing CyclicCF, result:" + this.isCyclicCF);
+        if(!this.isCyclicCF) {
+            LinkedList<Integer> topoList = COUnionCF.topoSort(history);
+            System.out.print("Arb relation:");
+            for(int i = 0; i < history.getOpNum(); i++){
+                System.out.print(history.getOperationList().get(topoList.get(i)).easyPrint());
+            }
+            System.out.println();
+        }
     }
 
     public boolean checkCCv(){
 
         this.isCC = checkCC();
 
-        checkCyclicCF();
+        if(this.isCC) { //只有符合WCC的约束，才会检查CyclicCF
+            checkCyclicCF();
+        }
 
         if((!this.isCC) || (!this.isChecked) ){
             return false;

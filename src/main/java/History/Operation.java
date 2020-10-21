@@ -23,7 +23,7 @@ public class Operation {
 
 
 
-    Operation(){
+    public Operation(){
         this.setType(OpType.other);
         this.setKey("null");
         this.setValue(-1);

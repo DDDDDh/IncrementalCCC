@@ -15,56 +15,7 @@ public class IncrementalCausalOrder extends CausalOrder{
         super(size);
     }
 
-    public LinkedList<Integer> topoSort(History history){
-        LinkedList<Operation> opList = history.getOperationList();
-        LinkedList<Integer> topoList = new LinkedList<>();
-        LinkedList<Integer> stack = new LinkedList<>();
-        int size = this.getMatrixSize();
-        int[] inDegree = new int[size];
-        int tempDegree = 0;
 
-        //根据邻接矩阵为每个点初始化入度
-        for(int j = 0; j < size; j++){
-            tempDegree = 0;
-            for(int i = 0; i < size; i++){
-                if(this.existEdge(i,j)){
-                    tempDegree++;
-                }
-            }
-            inDegree[j] = tempDegree;
-        }
-
-        int count = 0; //判环辅助变量
-        for(int i = 0; i < size; i++){
-            if(inDegree[i] == 0){ //找到入度为0的点，入栈
-                stack.addFirst(i);
-                inDegree[i] = -1;
-            }
-        }
-        int curID;
-        Operation curOp;
-        while(!stack.isEmpty()){
-            curID = stack.removeFirst();
-            curOp = opList.get(curID);
-            topoList.add(curID);
-            curOp.setTopoID(count++);
-            for(int i = 0; i < size; i++){
-                if(this.existEdge(curID, i)){
-                    inDegree[i]--;
-                    if(inDegree[i] == 0){
-                        stack.addFirst(i);
-                        inDegree[i] = -1;
-                    }
-                }
-            }
-        }
-        if(count < size){
-            this.isCyclicCO = true;
-            System.out.println("Detected CyclicCO!");
-        }
-//        System.out.println("Count: " + count + " Size:" + size);
-        return topoList;
-    }
 
     public void incrementalCO(History history, ProgramOrder po, ReadFrom rf){
 

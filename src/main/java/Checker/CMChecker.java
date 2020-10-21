@@ -31,9 +31,9 @@ public class CMChecker extends CCChecker {
 
     public void checkWriteHBInitRead(){
         LinkedList<Operation> opList = history.getOperationList();
-        System.out.println("???");
+//        System.out.println("???");
         this.isWriteHBInitRead = this.hbo.checkWriteHBInitReadByProcess(opList);
-        System.out.println("Checking WriteHBInitRead, result:"+this.isCyclicHB);
+        System.out.println("Checking WriteHBInitRead, result:"+this.isWriteHBInitRead);
     }
 
     public void checkCyclicHB(){

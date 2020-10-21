@@ -25,6 +25,11 @@ public class BasicRelation implements BasicRelationInterface{
         tempSet.set(toIndex, true);
     }
 
+    public void setFalse(int fromIndex, int toIndex){
+        BitSet tempSet = this.relationMatrix[fromIndex];
+        tempSet.set(toIndex, false);
+    }
+
     public boolean existEdge(int fromIndex, int toIndex){
         return this.relationMatrix[fromIndex].get(toIndex);
     }
@@ -131,8 +136,61 @@ public class BasicRelation implements BasicRelationInterface{
         return true;
     }
 
+    public LinkedList<Integer> topoSort(History history){
+        LinkedList<Operation> opList = history.getOperationList();
+        LinkedList<Integer> topoList = new LinkedList<>();
+        LinkedList<Integer> stack = new LinkedList<>();
+        int size = this.getMatrixSize();
+        int[] inDegree = new int[size];
+        int tempDegree = 0;
+
+        //根据邻接矩阵为每个点初始化入度
+        for(int j = 0; j < size; j++){
+            tempDegree = 0;
+            for(int i = 0; i < size; i++){
+                if(this.existEdge(i,j)){
+                    tempDegree++;
+                }
+            }
+            inDegree[j] = tempDegree;
+        }
+
+        int count = 0; //判环辅助变量
+        for(int i = 0; i < size; i++){
+            if(inDegree[i] == 0){ //找到入度为0的点，入栈
+                stack.addFirst(i);
+                inDegree[i] = -1;
+            }
+        }
+        int curID;
+        Operation curOp;
+        while(!stack.isEmpty()){
+            curID = stack.removeFirst();
+            curOp = opList.get(curID);
+            topoList.add(curID);
+            curOp.setTopoID(count++);
+            for(int i = 0; i < size; i++){
+                if(this.existEdge(curID, i)){
+                    inDegree[i]--;
+                    if(inDegree[i] == 0){
+                        stack.addFirst(i);
+                        inDegree[i] = -1;
+                    }
+                }
+            }
+        }
+//        if(count < size){
+//            this.isCyclicCO = true;
+//            System.out.println("Detected CyclicCO!");
+//        }
+//        System.out.println("Count: " + count + " Size:" + size);
+        return topoList;
+    }
+
     //利用拓扑排序判环
     public boolean cycleDetection(){
+
+//        System.out.println("Hello cycle detection");
 
         LinkedList<Integer> stack = new LinkedList<>();
         int size = this.getMatrixSize();
@@ -173,8 +231,10 @@ public class BasicRelation implements BasicRelationInterface{
             }
         }
         if(count < size) {
+            System.out.println("Detected a cycle in matrix.");
             return true;
         }
+        System.out.println("No cycle in matrix.");
         return false;
     }
 
@@ -231,14 +291,37 @@ public class BasicRelation implements BasicRelationInterface{
         for(int i = 0; i < size; i++){
             curList = this.getRelationMatrix()[i]; //得到点i的后继列表
             //对于每条i->j的边，在j的前驱列表里设置可见
-            for(int j = curList.nextSetBit(0); j >= 0; j = curList.nextSetBit(j+1)){
-                opList.get(j).getCoList().set(i,true);
+//            for(int j = curList.nextSetBit(0); j >= 0; j = curList.nextSetBit(j+1)){
+//                opList.get(j).getCoList().set(i,true);
+//            }
+            for(int j = 0; j < size; j++){
+                if(curList.get(j)){
+                    opList.get(j).getCoList().set(i,true);
+                }
+                else{
+                    opList.get(j).getCoList().set(i,false);
+                }
             }
         }
     }
 
     //根据opList中的coList更新当前关系矩阵
-    public void updateMatrixByList(LinkedList<CMOperation> opList){
+    public void updateMatrixByCMList(LinkedList<CMOperation> opList){
+        assert (opList.size() == this.getMatrixSize());
+        int size = this.getMatrixSize();
+        Operation curOp;
+        BitSet curList;
+
+        for(int i = 0; i< size; i++){
+            curOp = opList.get(i);
+            curList = curOp.getCoList();
+            for(int j = curList.nextSetBit(0); j >= 0; j = curList.nextSetBit(j+1)){
+                this.getRelationMatrix()[j].set(i);
+            }
+        }
+    }
+
+    public void updateMatrixByList(LinkedList<Operation> opList){
         assert (opList.size() == this.getMatrixSize());
         int size = this.getMatrixSize();
         Operation curOp;

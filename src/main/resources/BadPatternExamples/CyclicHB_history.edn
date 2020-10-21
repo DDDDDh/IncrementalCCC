@@ -1,4 +1,11 @@
-{:type :ok, :f :write, :value [a 1], :process 0, :time 1, :position 1, :link nil, :index 0}
-{:type :ok, :f :write, :value [a 2], :process 1, :time 2, :position 2, :link nil, :index 1}
-{:type :ok, :f :read, :value [a 1], :process 1, :time 3, :position 3, :link nil, :index 2}
-{:type :ok, :f :read, :value [a 2], :process 1, :time 4, :position 4, :link nil, :index 3}
+{:type :ok, :f :read, :value [d 1], :process 0, :time 1, :position 1, :link nil, :index 0}
+{:type :ok, :f :write, :value [c 2], :process 0, :time 2, :position 2, :link nil, :index 1}
+{:type :ok, :f :write, :value [a 2], :process 0, :time 3, :position 3, :link nil, :index 2}
+{:type :ok, :f :write, :value [b 1], :process 0, :time 4, :position 4, :link nil, :index 3}
+{:type :ok, :f :write, :value [c 1], :process 1, :time 5, :position 5, :link nil, :index 4}
+{:type :ok, :f :write, :value [d 1], :process 1, :time 6, :position 6, :link nil, :index 5}
+{:type :ok, :f :write, :value [a 1], :process 1, :time 7, :position 7, :link nil, :index 6}
+{:type :ok, :f :read, :value [c 1], :process 1, :time 8, :position 8, :link nil, :index 7}
+{:type :ok, :f :read, :value [b 1], :process 1, :time 9, :position 9, :link nil, :index 8}
+{:type :ok, :f :read, :value [a 1], :process 1, :time 10, :position 10, :link nil, :index 9}
+{:type :ok, :f :read, :value [c 2], :process 0, :time 11, :position 11, :link nil, :index 10}
