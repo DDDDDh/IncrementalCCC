@@ -13,7 +13,7 @@ public class CausalChecker {
     public static void main(String args[]) throws Exception {
 //        String url = "src/main/resources/hy_history.edn";
 //        String url = "src/main/resources/SpecialCases/CCvNotCM_history.edn";
-        String url = "src/main/resources/BadPatternExamples/CyclicCF_history.edn";
+        String url = "src/main/resources/BadPatternExamples/CyclicHB2_history.edn";
         HistoryReader reader = new HistoryReader(url);
 //        LinkedList<Operation> opList = reader.readHistory();
 //        for(int i = 0; i < opList.size(); i++){
