@@ -178,7 +178,7 @@ public class Operation {
     }
 
     public boolean isInitWrite(){
-        if(this.type == OpType.write && this.value == 0){
+        if(this.type == OpType.write && this.value == -1){
             return true;
         }
         return false;
@@ -192,7 +192,7 @@ public class Operation {
     }
 
     public boolean isInitRead(){
-        if(this.isRead() && (this.getValue() == -1 || this.getValue() == 0)){
+        if(this.isRead() && (this.getValue() == -1)){
             return true;
         }
         return false;

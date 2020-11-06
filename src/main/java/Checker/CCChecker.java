@@ -1,10 +1,12 @@
 package Checker;
 import Relations.*;
 import History.*;
+import lombok.*;
 
 import java.util.BitSet;
 import java.util.LinkedList;
 
+@Data
 public class CCChecker {
 
     History history;
@@ -46,6 +48,7 @@ public class CCChecker {
             this.isCyclicCO = true;
         }
         System.out.println("Chekcing CyclicCO, result:" + this.isCyclicCO);
+
     }
 
     public void checkWriteCOInitRead(){
@@ -60,7 +63,7 @@ public class CCChecker {
                 for(int j = curCoList.nextSetBit(0); j >= 0; j = curCoList.nextSetBit(j+1)){
                     visOp = opList.get(j);
                     if(visOp.isWrite() && visOp.onSameKey(curOp)){
-//                        System.out.println("Debug...visOp:" + visOp.easyPrint() + " curOp:" + curOp.easyPrint());
+                        System.out.println("Debug...visOp:" + visOp.easyPrint() + " curOp:" + curOp.easyPrint());
                         this.isWriteCOInitRead = true;
                     }
                 }
@@ -89,6 +92,7 @@ public class CCChecker {
                         //co位于当前读操作之前的其他写入同一变量的操作
                         if (visOp.isWrite() && visOp.notEqual(correspondingWrite) && visOp.onSameKey(curOp)) {
                             if (visOp.getCoList().get(correspondingWrite.getID())) {     //corresponding write对其可见
+                                System.out.println("CorrespondingWrite:" + correspondingWrite.easyPrint() + " visOp:" + visOp.easyPrint() +"[id:" +visOp.getID() +"]"+ " curOp:" + curOp.easyPrint() + "[id:"+ curOp.getID()+"]");
                                 this.isWriteCORead = true;
                             }
                         }
@@ -130,5 +134,6 @@ public class CCChecker {
     }
 
     public boolean getIsCC(){return this.isCC;}
+
     
 }

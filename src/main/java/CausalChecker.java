@@ -13,7 +13,9 @@ public class CausalChecker {
     public static void main(String args[]) throws Exception {
 //        String url = "src/main/resources/hy_history.edn";
 //        String url = "src/main/resources/SpecialCases/CCvNotCM_history.edn";
-        String url = "src/main/resources/BadPatternExamples/CyclicHB2_history.edn";
+//        String url = "src/main/resources/BadPatternExamples/CyclicHB2_history.edn";
+        String url = "src/main/resources/RandomHistories/Running_202011518_opNum100_processNum5_rRate3_wRate1.edn";
+
         HistoryReader reader = new HistoryReader(url);
 //        LinkedList<Operation> opList = reader.readHistory();
 //        for(int i = 0; i < opList.size(); i++){
@@ -26,6 +28,7 @@ public class CausalChecker {
 //        history.printOpGroupByProcess();
         if(!history.isDifferentiated()){
             System.out.println("Detected not differentiated.");
+            System.exit(-1);
         }
 //        history.testProtection();
         ProgramOrder po = new ProgramOrder(history.getOpNum());

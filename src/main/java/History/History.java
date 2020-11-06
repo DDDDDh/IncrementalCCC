@@ -27,6 +27,7 @@ public class History {
         this.initOperations();
         this.initWriteReadHistories();
         this.initOpGroupByKey();
+//        this.printOpGroupByKey();
         this.initOpGroupByProcess();
 //        this.lastIndex = histories.get(histories.size() - 1).getIndex(); // the max index in the  histories
 
@@ -149,10 +150,12 @@ public class History {
                 tempOp = this.operationList.get(tempOpList.get(i));
                 if(tempOp.isWrite()){ //只需考虑写操作
                     if(tempOp.isInitWrite()){
+                        System.out.println("Init Write Detected!");
                         return false;
                     }
 
                     if(valueSet.contains(tempOp.getValue())){ //写入了重复值
+                        System.out.println("Duplicated Date Detected!");
                         return false;
                     }
                     valueSet.add(tempOp.getValue());

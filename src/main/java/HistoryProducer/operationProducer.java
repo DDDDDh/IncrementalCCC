@@ -32,10 +32,18 @@ public class operationProducer {
     HashMap<String, Integer> varValueMap;
     int valueRange; //生成值的范围
     HashMap<String, Set<Integer>> usedValue; //标记每个变量上已经写入的值
+    int processRange;
+    int globalTime;
+    int globalPosition;
 
     //默认的读写比例是1：1
     operationProducer(){
+
+        //globalIndex从0开始计数，globalTime和globalPosition从1开始计数
         this.setGlobalIndex(0);
+        this.setGlobalTime(1);
+        this.setGlobalPosition(1);
+
         this.setWriteRate(1);
         this.setReadRate(1);
         this.weightList = new LinkedList<Integer>();
@@ -47,12 +55,17 @@ public class operationProducer {
         this.varRange = 5; //默认生成5个变量
         this.updateWeightList();
         this.varValueMap = new HashMap<>();
-        this.valueRange = 10; //默认生成0-100的值
+        this.valueRange = 100; //默认生成0-100的值
         this.usedValue = new HashMap<>();
+        this.processRange = 5; //默认有5个线程
+
     }
 
     operationProducer(int rRate, int wRate){
         this.setGlobalIndex(0);
+        this.setGlobalTime(1);
+        this.setGlobalPosition(1);
+
         this.setWriteRate(wRate);
         this.setReadRate(rRate);
         this.weightList = new LinkedList<Integer>();
@@ -64,8 +77,9 @@ public class operationProducer {
         this.varRange = 5; //默认生成5个变量
         this.updateWeightList();
         this.varValueMap = new HashMap<>();
-        this.valueRange = 10; //默认生成0-100的值
+        this.valueRange = 100; //默认生成0-100的值
         this.usedValue = new HashMap<>();
+        this.processRange = 5; //默认有5个线程
     }
 
     void updateWeightList(){
@@ -162,14 +176,26 @@ public class operationProducer {
         return temp;
     }
 
+    int randomProcess(){ //讲该操作随机分配到一个线程上
+        int temp = 0;
+        Random random = new Random();
+        temp = random.nextInt(this.processRange);
+        return temp;
+    }
+
 
     public generatedOperation nextOperation(){
 
         generatedOperation op = new generatedOperation();
+        op.setType(this.randomType());
         op.setIndex(this.globalIndex++);
         op.setMethod(this.randomMethod());
         op.setVariable(this.randomVar(op.getMethod()));
         op.setValue(this.randomValue(op));
+        op.setProcess(this.randomProcess());
+        op.setPosition(this.globalPosition++);
+        op.setTime(this.globalTime++);
+
         return op;
     }
 

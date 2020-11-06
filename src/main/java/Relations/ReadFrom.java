@@ -25,27 +25,31 @@ public class ReadFrom extends BasicRelation{
         int curValue;
         int correspondingWriteID;
         for(String key: keyOpList.keySet()){
-//            System.out.println("Working on key["+key+"]...");
+
             curOpList = keyOpList.get(key);
             listSize = curOpList.size();
+//            System.out.println("Working on key["+key+"]...List size:" + listSize);
             for(int i = 0; i < listSize; i++){ //遍历一次该key上面的所有写操作，将写入每个值的写操作标记
                 curOp = opList.get(curOpList.get(i));
                 if(curOp.isWrite()){
                     valueToWriteID.put(curOp.getValue(), curOp.getID());
                 }
             }
+
             for(int i = 0; i < listSize; i++){ //再次遍历，为读操作找到对应写操作，并标记
+                correspondingWriteID = -1;
                 curOp = opList.get(curOpList.get(i));
                 if(curOp.isRead()){
                     curValue = curOp.getValue();
+
                     if(curValue == -1){ //读到初值的操作，不设置对应写操作
-                        break;
+                        continue;
                     }
                     if(valueToWriteID.containsKey(curValue)) {
                         correspondingWriteID = valueToWriteID.get(curValue);
                     }
                     else{
-//                        System.out.println("do not contain value:" + curValue);
+                        System.out.println("do not contain value:" + curValue);
                         correspondingWriteID = -1;
                     }
                     if(correspondingWriteID == -1){ //没有找到对应写操作

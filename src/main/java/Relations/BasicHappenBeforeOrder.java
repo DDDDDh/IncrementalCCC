@@ -171,8 +171,8 @@ class basicProcess implements Callable<BasicRelation> {
 
         caculateHBoProcess();
         BasicRelation matrix = this.getMatrix();
-        System.out.println("Basic HBo Matrix for process" + this.processID + ":               ********************" );
-        matrix.printMatrix();
+//        System.out.println("Basic HBo Matrix for process" + this.processID + ":               ********************" );
+//        matrix.printMatrix();
 //        System.out.println("Info of process" + this.processID + "??:" + this.curReadList.size());
 //        for(int i = 0; i < this.curReadList.size(); i++){
 //            System.out.println("Op" + i + ":" + this.opList.get(curReadList.get(i)).easyPrint());

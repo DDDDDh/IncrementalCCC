@@ -4,6 +4,8 @@ package HistoryProducer;
 
 import lombok.*;
 
+import java.util.HashSet;
+
 enum methods{
     Write, Read
 }
@@ -20,6 +22,7 @@ public class generatedOperation {
     int position;
     String link;
     int index;
+    HashSet<Integer> causalPast;
 
 
     //默认操作：R(a)0;
@@ -33,6 +36,7 @@ public class generatedOperation {
         this.setPosition(0);
         this.setLink("nil");
         this.setIndex(0);
+        this.causalPast = new HashSet<>();
     }
 
     public String easyPrint(){
@@ -71,6 +75,24 @@ public class generatedOperation {
         }
     }
 
+    public void updateCausalPast(generatedOperation otherOp){
+
+        for(Integer i: otherOp.getCausalPast()){ //把另一操作的causalPast里的操作都加入本身
+            this.causalPast.add(i);
+        }
+
+        //再加上自身的下标
+        this.causalPast.add(this.getIndex());
+    }
+
+    public boolean causallyLaterThan(generatedOperation otherOp){
+        if(this.getCausalPast().contains(otherOp.getIndex())){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 
 
 }

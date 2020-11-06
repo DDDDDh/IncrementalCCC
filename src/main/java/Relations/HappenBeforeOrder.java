@@ -24,7 +24,7 @@ public class HappenBeforeOrder extends BasicRelation{
         for(Integer curProcess: processMatrix.keySet()){
             System.out.println("Cycle detecting for process:" + curProcess);
             curMatrix = processMatrix.get(curProcess);
-            curMatrix.printMatrix();
+//            curMatrix.printMatrix();
             boolean temp = curMatrix.cycleDetection();
             isCycle  = isCycle || temp;
         }
