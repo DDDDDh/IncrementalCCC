@@ -71,7 +71,7 @@ public class IncrementalCausalOrder extends CausalOrder{
                     curList.or(lastOp.getCoList());
                 }
                 else if(curOp.isRead() && !curOp.isInitRead()){ //否则向前和向对应写继承
-                    System.out.println("CurOp:" + curOp.easyPrint() + "CWID:" + curOp.getCorrespondingWriteID());
+//                    System.out.println("CurOp:" + curOp.easyPrint() + "CWID:" + curOp.getCorrespondingWriteID());
                     correspondingWrite = opList.get(curOp.getCorrespondingWriteID());
                     curList.or(correspondingWrite.getCoList());
                     curList.or(lastOp.getCoList());

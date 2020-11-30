@@ -96,7 +96,7 @@ public class CMOperation extends Operation{
 
     public void initPrecedingWrite(HashSet<String> keySet){
         for(String key: keySet){
-            this.precedingWrite.put(key, null);
+            this.precedingWrite.put(key, -3);
         }
     }
 

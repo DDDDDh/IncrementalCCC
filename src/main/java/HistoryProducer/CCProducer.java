@@ -26,6 +26,7 @@ public class CCProducer extends randomProducer{
 //        this.globalActiveVar = new HashMap<>();
         this.processVarValue = new HashMap<>();
         this.processOpList = new HashMap<>();
+        this.setProcessNum(processNum);
         HashMap<String, Integer> tempMap;
         LinkedList<Integer> tempList;
         for(int i = 0; i < this.getProcessNum(); i++){
@@ -34,6 +35,7 @@ public class CCProducer extends randomProducer{
             this.getProcessVarValue().put(i, tempMap);
             this.getProcessOpList().put(i, tempList);
         }
+
     }
 
     public void printToFileDebug()throws FileNotFoundException {
@@ -102,6 +104,7 @@ public class CCProducer extends randomProducer{
 
         //根据当前生成器的配置生成操作
         operationProducer oProducer = new operationProducer(this.getRRate(), this.getWRate());
+        oProducer.setProcessRange(this.getProcessNum());
 
         generatedOperation curOp;
         int processID;

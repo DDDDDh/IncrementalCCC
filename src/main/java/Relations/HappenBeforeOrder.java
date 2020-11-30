@@ -22,7 +22,7 @@ public class HappenBeforeOrder extends BasicRelation{
         BasicRelation curMatrix;
         boolean isCycle = false;
         for(Integer curProcess: processMatrix.keySet()){
-            System.out.println("Cycle detecting for process:" + curProcess);
+//            System.out.println("Cycle detecting for process:" + curProcess);
             curMatrix = processMatrix.get(curProcess);
 //            curMatrix.printMatrix();
             boolean temp = curMatrix.cycleDetection();
@@ -54,7 +54,7 @@ public class HappenBeforeOrder extends BasicRelation{
                             hboOp = opList.get(j);
 //                            System.out.print(" HBo op " + hboOp.easyPrint() + " ");
                             if(hboOp.isWrite() && hboOp.onSameKey(curOp)){
-                                System.out.println("WriteHBInitRead Detected!!!");
+//                                System.out.println("WriteHBInitRead Detected!!!");
                                 isWriteHBInitRead = true;
                             }
                         }

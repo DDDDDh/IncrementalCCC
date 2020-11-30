@@ -47,7 +47,7 @@ public class CCChecker {
         if(POUnionRF.cycleDetection()){
             this.isCyclicCO = true;
         }
-        System.out.println("Chekcing CyclicCO, result:" + this.isCyclicCO);
+//        System.out.println("Chekcing CyclicCO, result:" + this.isCyclicCO);
 
     }
 
@@ -69,7 +69,7 @@ public class CCChecker {
                 }
             }
         }
-        System.out.println("Chekcing WriteCOInitRead, result:" + this.isWriteCOInitRead);
+//        System.out.println("Chekcing WriteCOInitRead, result:" + this.isWriteCOInitRead);
     }
 
     public void checkWriteCORead(){
@@ -101,12 +101,12 @@ public class CCChecker {
                 }
             }
         }
-        System.out.println("Chekcing WriteCORead, result:" + this.isWriteCORead);
+//        System.out.println("Chekcing WriteCORead, result:" + this.isWriteCORead);
     }
 
     public void checkThinAirRead(){
         this.isThinAirRead = this.rf.checkThinAirRead();
-        System.out.println("Chekcing ThinAirRead, result:" + this.isThinAirRead);
+//        System.out.println("Chekcing ThinAirRead, result:" + this.isThinAirRead);
     }
 
 

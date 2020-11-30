@@ -34,9 +34,9 @@ public class BasicCausalOrder extends CausalOrder {
 
         this.initialCOMatrixWithList(po, rf, opList);
 
-        System.out.println("Begin to compute Transitive Closure");
+//        System.out.println("Begin to compute Transitive Closure");
         this.computeTransitiveClosure();
-        System.out.println("Finish computing of Transitive Closure");
+//        System.out.println("Finish computing of Transitive Closure");
         //传递闭包计算完成后更新每个操作的coList
         this.updateCoList(opList);
 
@@ -68,9 +68,9 @@ public class BasicCausalOrder extends CausalOrder {
 
         this.initialCOMatrixWithList(po, rf, opList);
 
-        System.out.println("Begin to compute Transitive Closure");
+//        System.out.println("Begin to compute Transitive Closure");
         this.computeTransitiveClosureByBFS();
-        System.out.println("Finish computing of Transitive Closure");
+//        System.out.println("Finish computing of Transitive Closure");
         //传递闭包计算完成后更新每个操作的coList
         this.updateCoList(opList);
 

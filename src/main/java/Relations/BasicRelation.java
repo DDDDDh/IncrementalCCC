@@ -231,10 +231,10 @@ public class BasicRelation implements BasicRelationInterface{
             }
         }
         if(count < size) {
-            System.out.println("Detected a cycle in matrix.");
+//            System.out.println("Detected a cycle in matrix.");
             return true;
         }
-        System.out.println("No cycle in matrix.");
+//        System.out.println("No cycle in matrix.");
         return false;
     }
 

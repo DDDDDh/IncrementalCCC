@@ -52,10 +52,10 @@ public class operationProducer {
         this.ops.add(methods.Read);
         this.ops.add(methods.Write);
         this.weightTemp = new LinkedList<>();
-        this.varRange = 5; //默认生成5个变量
+        this.varRange = 10; //默认生成5个变量
         this.updateWeightList();
         this.varValueMap = new HashMap<>();
-        this.valueRange = 100; //默认生成0-100的值
+        this.valueRange = 1000; //默认生成0-100的值
         this.usedValue = new HashMap<>();
         this.processRange = 5; //默认有5个线程
 
@@ -74,10 +74,10 @@ public class operationProducer {
         this.ops.add(methods.Read);
         this.ops.add(methods.Write);
         this.weightTemp = new LinkedList<>();
-        this.varRange = 5; //默认生成5个变量
+        this.varRange = 10; //默认生成5个变量
         this.updateWeightList();
         this.varValueMap = new HashMap<>();
-        this.valueRange = 100; //默认生成0-100的值
+        this.valueRange = 1000; //默认生成0-100的值
         this.usedValue = new HashMap<>();
         this.processRange = 5; //默认有5个线程
     }
@@ -176,7 +176,7 @@ public class operationProducer {
         return temp;
     }
 
-    int randomProcess(){ //讲该操作随机分配到一个线程上
+    int randomProcess(){ //将该操作随机分配到一个线程上
         int temp = 0;
         Random random = new Random();
         temp = random.nextInt(this.processRange);
@@ -198,9 +198,4 @@ public class operationProducer {
 
         return op;
     }
-
-
-
-
-
 }

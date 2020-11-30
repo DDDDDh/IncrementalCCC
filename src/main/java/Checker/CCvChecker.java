@@ -34,13 +34,13 @@ public class CCvChecker extends CCChecker{
         }
         this.isCCv = false;
         this.isChecked = true;
-        System.out.println("Chekcing CyclicCF, result:" + this.isCyclicCF);
+//        System.out.println("Chekcing CyclicCF, result:" + this.isCyclicCF);
         if(!this.isCyclicCF) {
             LinkedList<Integer> topoList = COUnionCF.topoSort(history);
-            System.out.print("Arb relation:");
-            for(int i = 0; i < history.getOpNum(); i++){
-                System.out.print(history.getOperationList().get(topoList.get(i)).easyPrint());
-            }
+//            System.out.print("Arb relation:");
+//            for(int i = 0; i < history.getOpNum(); i++){
+//                System.out.print(history.getOperationList().get(topoList.get(i)).easyPrint());
+//            }
             System.out.println();
         }
     }

@@ -37,7 +37,7 @@ public class randomProducer {
     }
 
     public void generatePath(){
-        String url = "src/main/resources/RandomHistories/";
+        String url = "target/RandomHistories/";
         Calendar cTime = Calendar.getInstance();
         String timeStamp = "" + cTime.get(Calendar.YEAR)  + (cTime.get(Calendar.MONTH)+1)  + cTime.get(Calendar.DAY_OF_MONTH) + cTime.get(Calendar.HOUR_OF_DAY);
         url += "Running_"+timeStamp+"_opNum"+this.getOpNum()+"_processNum" +this.getProcessNum() +"_rRate"+this.getRRate()+"_wRate" + this.getWRate()+".edn";

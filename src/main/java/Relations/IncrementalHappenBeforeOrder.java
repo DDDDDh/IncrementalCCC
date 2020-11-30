@@ -288,7 +288,7 @@ class incrementalProcess implements Callable<BasicRelation>{
                 wPrime = this.opList.get(j);
 //                System.out.println("wPrime:" + wPrime.easyPrint() + "index:" + j);
                 if(wPrime.isWrite() && wPrime.getKey() == rOp.getKey() && wPrime.getID() != wOp.getID()){
-                    System.out.println("Applying rule C to add edge:" + wPrime.easyPrint() + " to " + wOp.easyPrint());
+//                    System.out.println("Applying rule C to add edge:" + wPrime.easyPrint() + " to " + wOp.easyPrint());
                     applyRuleC(wPrime, wOp, rOp);
                 }
             }
@@ -315,7 +315,17 @@ class incrementalProcess implements Callable<BasicRelation>{
         CMOperation correspondingWrite = this.opList.get(rOp.getCorrespondingWriteID());
 
         if(rPrime == -2){ //r'为-2，标示r为当前线程第一个读操作
+            //当r为当前线程的第一个读操作时，只需要从它的对应写操作更新
+            rOp.updatePrecedingWrite(correspondingWrite);
+            CMOperation curOp = rOp;
+            CMOperation lastOp;
+            while(curOp.getLastSameProcess()!= -1){ //把同线程之前所有写操作的lastRead值设置为r的下标
+               lastOp = this.opList.get(curOp.getLastSameProcess());
+               lastOp.setLastRead(rOp.getID());
+               curOp = lastOp;
 
+            }
+            correspondingWrite.setLastRead(rOp.getID()); //把对应写操作的lastRead值设置为r的下标
         }
         else {
             HashSet<Integer> rDelta = new HashSet();
@@ -331,6 +341,7 @@ class incrementalProcess implements Callable<BasicRelation>{
                         visOp.getRrList().add(r); // 将r加入r-delta的写操作的reachable read列表中
                         rDelta.add(i);
                         if (visOp.isWrite()) {
+                            visOp.setLastRead(rOp.getID()); //将r-delta中每个写操作的rr值初始化为r
                             if (i > rPrime && i < r && visOp.getProcess() == this.processID) { //在r与r'中间的写操作
                                 rrGroup.add(i);
                             }
@@ -394,6 +405,10 @@ class incrementalProcess implements Callable<BasicRelation>{
 
         int rOld = wPrime.getLastRR();
         int rNew = wPrime.getLastRead();
+//        System.out.println("rOld:" + rOld + " rNew:" + rNew);
+        if(rNew == -1 || rOld == -1){
+            return null;
+        }
         LinkedList<Integer> newToOld = new LinkedList<>(); //存储位于[rNew...rOld)之间的所有读操作
         CMOperation curOp;
         for(int i = rNew; i < rOld; i++){
@@ -448,7 +463,7 @@ class incrementalProcess implements Callable<BasicRelation>{
     public boolean applyRuleC(CMOperation wPrime, CMOperation w, CMOperation r){
 
         //add edge w'->w
-        System.out.println("Adding edge " + wPrime.getID() + " to " + w.getID() + "!!!!!!!!!!!!!!!!!!!!!!");
+//        System.out.println("Adding edge " + wPrime.getID() + " to " + w.getID() + "!!!!!!!!!!!!!!!!!!!!!!");
         w.getCoList().set(wPrime.getID());
         wPrime.getSucList().add(w.getID());
         wPrime.getISucList().add(w.getID());
@@ -511,7 +526,7 @@ class incrementalProcess implements Callable<BasicRelation>{
                 wPrime.setLastRR(wPrime.getLastRead()); //将w'的旧rr值保存，随后根据其后继节点更新
                 for(Integer i: wPrime.getISucList()){
                     o = this.opList.get(i);
-                    if(o.getLastRead() < wPrime.getLastRead()){
+                    if(o.getLastRead() < wPrime.getLastRead() && o.getLastRead() > 0){
                         wPrime.setLastRead(o.getLastRead());
                     }
                 }
@@ -549,15 +564,15 @@ class incrementalProcess implements Callable<BasicRelation>{
 //        LinkedList<Operation> opList = history.getOperationList();
         BasicRelation matrix = new BasicRelation(this.size);
         if(this.readCentric(po)){
-            System.out.println("no cycle in HBo of process" + this.processID);
+//            System.out.println("no cycle in HBo of process" + this.processID);
         }
         else{
             System.out.println("Cycle detected! process " + this.processID);
         }
         matrix.updateMatrixByCMList(this.opList);
         matrix.computeTransitiveClosure(); //因为incremental算法省略了一些边，所以要得到完整的HBo矩阵，需要通过传递闭包计算
-        System.out.println("HBo Matrix for process" + this.processID +":");
-        matrix.printMatrix();
+//        System.out.println("HBo Matrix for process" + this.processID +":");
+//        matrix.printMatrix();
 //        System.out.println("Info of process" + this.processID + "??:" + this.curReadList.size());
 //        for(int i = 0; i < this.curReadList.size(); i++){
 //            System.out.println("Op" + i + ":" + this.opList.get(curReadList.get(i)).easyPrint());

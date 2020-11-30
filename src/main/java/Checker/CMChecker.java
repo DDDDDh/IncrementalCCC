@@ -33,12 +33,12 @@ public class CMChecker extends CCChecker {
         LinkedList<Operation> opList = history.getOperationList();
 //        System.out.println("???");
         this.isWriteHBInitRead = this.hbo.checkWriteHBInitReadByProcess(opList);
-        System.out.println("Checking WriteHBInitRead, result:"+this.isWriteHBInitRead);
+//        System.out.println("Checking WriteHBInitRead, result:"+this.isWriteHBInitRead);
     }
 
     public void checkCyclicHB(){
         this.isCyclicHB = this.hbo.cycleDetectionByProcess();
-        System.out.println("Checking CyclicHB, result:"+this.isCyclicHB);
+//        System.out.println("Checking CyclicHB, result:"+this.isCyclicHB);
     }
 
     public boolean checkCM(){
