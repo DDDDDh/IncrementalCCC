@@ -420,7 +420,10 @@ class incrementalProcess implements Callable<BasicRelation>{
         for(int i = 0; i < newToOld.size(); i++){
             curOp = this.opList.get(newToOld.get(i));
             if(curOp.getKey().equals(wPrime.getKey())){
-                return curOp;
+                if(curOp.getCorrespondingWriteID() != -1) { //*********
+
+                    return curOp;
+                }
             }
         }
         return null;
@@ -430,7 +433,7 @@ class incrementalProcess implements Callable<BasicRelation>{
     public boolean cycleDetection(CMOperation wPrime, CMOperation w){
 
         if(wPrime.getKey() != w.getKey()){ //wPrime与w必须作用于同一变量
-            System.out.println("Error! Not in same variable!");
+//            System.out.println("Error! Not in same variable!");  //*****************
             return false;
         }
         String v = w.getKey();
@@ -444,20 +447,21 @@ class incrementalProcess implements Callable<BasicRelation>{
     }
 
     public void updateReachability(CMOperation wPrime, CMOperation w, CMOperation r){
-        CMOperation rrW = this.opList.get(w.getLastRead());
-        CMOperation rrWPrime = this.opList.get(wPrime.getLastRead());
-        if(rrW.getProcessReadID() < rrWPrime.getProcessReadID()){
-            wPrime.setLastRead(w.getLastRead());
-            wPrime.getRrList().add(w.getLastRead());
+        if(w.getLastRead()!= -1 && wPrime.getLastRead()!= -1) { //*******************
+            CMOperation rrW = this.opList.get(w.getLastRead());
+            CMOperation rrWPrime = this.opList.get(wPrime.getLastRead());
+            if (rrW.getProcessReadID() < rrWPrime.getProcessReadID()) {
+                wPrime.setLastRead(w.getLastRead());
+                wPrime.getRrList().add(w.getLastRead());
+            }
+
+            CMOperation curOp;
+            for (Integer i : w.getSucList()) {
+                curOp = this.opList.get(i);
+                curOp.updatePrecedingWrite(wPrime);
+            }
+
         }
-
-        CMOperation curOp;
-        for(Integer i: w.getSucList()){
-            curOp = this.opList.get(i);
-            curOp.updatePrecedingWrite(wPrime);
-        }
-
-
     }
 
     public boolean applyRuleC(CMOperation wPrime, CMOperation w, CMOperation r){

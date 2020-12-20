@@ -11,7 +11,6 @@ public class CMChecker extends CCChecker {
     HappenBeforeOrder hbo;
     private boolean isWriteHBInitRead;
     private boolean isCyclicHB;
-
     private boolean isCM;
 
     public CMChecker(History history, ProgramOrder po, ReadFrom rf, CausalOrder co){
@@ -64,5 +63,15 @@ public class CMChecker extends CCChecker {
     }
 
     public boolean getIsCM(){return this.isCM;}
+
+    public String failReason(){
+        String reason = "";
+        if(!this.isCC){
+            reason = "isCC:false";
+        } else {
+            reason = "isWriteHBInitRead:" + this.isWriteHBInitRead + " isCyclicHB:" + this.isCyclicHB;
+        }
+        return reason;
+    }
 
 }

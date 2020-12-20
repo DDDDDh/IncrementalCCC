@@ -43,7 +43,7 @@ public class Main {
 
         int opNum = 1;
 
-        for (int k = 1; k < 6; k++) {
+        for (int k = 1; k < 11; k++) {
 
             opNum = k*100;
             System.out.println("Round: " + k);

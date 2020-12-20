@@ -63,7 +63,7 @@ public class HistoryReader {
         String[] kv = StringUtils.strip(val, "[]").split(" ");
         String key = kv[0];
         int value;
-        if(kv[1].equals("nil")){
+        if(kv[1].equals("nil") || kv[1].equals("0")){ //读到0或者-1都是初值
             value = -1;
         }
         else{

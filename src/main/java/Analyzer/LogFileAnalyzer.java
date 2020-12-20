@@ -60,6 +60,8 @@ public class LogFileAnalyzer {
                         long cur_cf = Long.valueOf(tempLine.substring(tempLine.indexOf("time:")+6));
                         tempLine = lineData.get(line+8);
                         long cur_bhbo = Long.valueOf(tempLine.substring(tempLine.indexOf("time:")+6));
+                        tempLine = lineData.get(line+9);
+                        long cur_ihbo = Long.valueOf(tempLine.substring(tempLine.indexOf("time:")+6));
 
                         if(!globalInfo.containsKey(key)){
                             tempInfo = new Info();
@@ -68,6 +70,7 @@ public class LogFileAnalyzer {
                             tempInfo.ico_avg = cur_ico;
                             tempInfo.cf_avg = cur_cf;
                             tempInfo.bhbo_avg = cur_bhbo;
+                            tempInfo.ihbo_avg = cur_ihbo;
                             globalInfo.put(key, tempInfo);
                         }
                         else{
@@ -76,6 +79,7 @@ public class LogFileAnalyzer {
                             tempInfo.ico_avg = iterAvg(tempInfo.ico_avg, cur_ico, tempInfo.count);
                             tempInfo.cf_avg = iterAvg(tempInfo.cf_avg, cur_cf, tempInfo.count);
                             tempInfo.bhbo_avg = iterAvg(tempInfo.bhbo_avg, cur_bhbo, tempInfo.count);
+                            tempInfo.ihbo_avg = iterAvg(tempInfo.ihbo_avg, cur_ihbo, tempInfo.count);
                             tempInfo.count = tempInfo.count+1;
                             globalInfo.put(key, tempInfo);
                         }
@@ -102,7 +106,7 @@ public class LogFileAnalyzer {
 
     public static void main(String args[]) throws Exception{
         LogFileAnalyzer analyzer = new LogFileAnalyzer();
-        analyzer.logFileAnalyzer("target/RandomHistories/CheckingLogfile.txt", 9);
+        analyzer.logFileAnalyzer("target/RandomHistories/CheckingLogfile.txt", 10);
     }
 
 

@@ -57,6 +57,12 @@ public class CausalChecker {
 //        System.out.println("bco Matrix:");
 //        bco.printMatrix();
 
+        boolean coEquality = bco.checkEqual(ico);
+        if(coEquality){
+            System.out.println();
+        }
+
+
         System.out.println("---Begin to check CC---");
         CCChecker ccChecker = new CCChecker(history, po, rf, ico);
         System.out.println("Chekcing CC, result:" + ccChecker.checkCC());

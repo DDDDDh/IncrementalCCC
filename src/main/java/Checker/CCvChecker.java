@@ -41,7 +41,7 @@ public class CCvChecker extends CCChecker{
 //            for(int i = 0; i < history.getOpNum(); i++){
 //                System.out.print(history.getOperationList().get(topoList.get(i)).easyPrint());
 //            }
-            System.out.println();
+//            System.out.println();
         }
     }
 
@@ -68,6 +68,15 @@ public class CCvChecker extends CCChecker{
 
     public boolean getIsCCv(){return this.isCCv;}
 
-
+    public String failReason(){
+        String reason = "";
+        if(!this.isCC){
+            reason = "isCC:false";
+        }
+        else if(this.isCyclicCF) {
+            reason = "isWriteHBInitRead:true";
+        }
+        return reason;
+    }
 
 }

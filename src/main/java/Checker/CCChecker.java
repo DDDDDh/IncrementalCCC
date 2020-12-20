@@ -135,5 +135,9 @@ public class CCChecker {
 
     public boolean getIsCC(){return this.isCC;}
 
-    
+    public String failReason(){
+        String reason = "";
+        reason = "isThinAirRead:" + this.isThinAirRead + " isCyclicCO:" + this.isCyclicCO + " isWriteCORead:" + this.isWriteCORead + " isWriteCOInitRead:" + this.isWriteCOInitRead;
+        return reason;
+    }
 }

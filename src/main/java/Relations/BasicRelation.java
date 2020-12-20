@@ -280,6 +280,7 @@ public class BasicRelation implements BasicRelationInterface{
     }
 
     //利用当前关系矩阵更新list中操作的可达关系
+    //注意，该函数会改变opList中操作的可见范围
     public void updateListByMatrix(LinkedList<Operation> opList){
 
         assert (opList.size() == this.getMatrixSize());
