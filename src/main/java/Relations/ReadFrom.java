@@ -55,6 +55,7 @@ public class ReadFrom extends BasicRelation{
                     if(correspondingWriteID == -1){ //没有找到对应写操作
 //                        System.out.println("Error! ");
                         System.out.println("ThinAirRead:" + curOp.easyPrint());
+                        curOp.setCorrespondingWriteID(-2); //把thin air read的对应写操作下标标注为-2
                         this.isThinAirRead = true;
                     }
                     else {

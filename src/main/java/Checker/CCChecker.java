@@ -47,7 +47,7 @@ public class CCChecker {
         if(POUnionRF.cycleDetection()){
             this.isCyclicCO = true;
         }
-//        System.out.println("Chekcing CyclicCO, result:" + this.isCyclicCO);
+        System.out.println("Chekcing CyclicCO, result:" + this.isCyclicCO);
 
     }
 
@@ -73,6 +73,8 @@ public class CCChecker {
     }
 
     public void checkWriteCORead(){
+
+
         LinkedList<Operation> opList = history.getOperationList();
         Operation curOp;
         Operation correspondingWrite;
@@ -83,7 +85,7 @@ public class CCChecker {
 //            System.out.println("Checking " + curOp.easyPrint() + " now...");
             if (curOp.isRead() && (!curOp.isInitRead())) {      //只针对没有读入初值的读操作
                 int correspondingWriteID = curOp.getCorrespondingWriteID();
-                if(correspondingWriteID != -1) { //筛去没有对应写操作的读操作
+                if(correspondingWriteID != -1 && correspondingWriteID != -2) { //筛去没有对应写操作的读操作及ThinAirRead
                     curCoList = curOp.getCoList();
                     correspondingWrite = opList.get(curOp.getCorrespondingWriteID());
                     for (int j = curCoList.nextSetBit(0); j >= 0; j = curCoList.nextSetBit(j + 1)) {

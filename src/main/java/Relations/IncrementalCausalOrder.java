@@ -19,13 +19,22 @@ public class IncrementalCausalOrder extends CausalOrder{
 
     public void incrementalCO(History history, ProgramOrder po, ReadFrom rf){
 
-        assert (!rf.checkThinAirRead());
-        if(rf.checkThinAirRead()){
-            System.out.println("Contain ThinAirRead!");
-            return;
-        }
+//        assert (!rf.checkThinAirRead());
+//        if(rf.checkThinAirRead()){
+//            System.out.println("Contain ThinAirRead!");
+//            return;
+//        }
 
         LinkedList<Operation> opList = history.getOperationList();
+        int size = opList.size();
+        Operation curOp;
+
+        //重置每个操作的coList，用于随后计算
+        for(int i = 0; i < size; i++){
+            curOp = opList.get(i);
+            curOp.flushCoList();
+        }
+
 //        System.out.println("PO Matrix:");
 //        po.printMatrix();
 //        System.out.println("RF Matrix:");
@@ -46,7 +55,7 @@ public class IncrementalCausalOrder extends CausalOrder{
 //        }
 
         //Begin incremental part
-        Operation curOp;
+//        Operation curOp;
         Operation lastOp;
         Operation correspondingWrite;
         BitSet curList;
@@ -58,8 +67,14 @@ public class IncrementalCausalOrder extends CausalOrder{
             curID = curOp.getID();
             if(curOp.getLastOpID() == -1){ //curOp为某线程的第一个操作
                 if(curOp.isRead() && !curOp.isInitRead()){//如果为读操作，那么向对应写操作继承vis集合
-                    correspondingWrite = opList.get(curOp.getCorrespondingWriteID());
-                    curList.or(correspondingWrite.getCoList());
+
+                    if(curOp.getCorrespondingWriteID() == -2){ //ThinAirRead
+                        continue;
+                    }
+                    else {
+                        correspondingWrite = opList.get(curOp.getCorrespondingWriteID());
+                        curList.or(correspondingWrite.getCoList());
+                    }
                 }
                 else if(curOp.isWrite() || curOp.isInitRead()){ //如果为写操作或读初值，那么不会看到任何操作
                     continue;
@@ -72,9 +87,15 @@ public class IncrementalCausalOrder extends CausalOrder{
                 }
                 else if(curOp.isRead() && !curOp.isInitRead()){ //否则向前和向对应写继承
 //                    System.out.println("CurOp:" + curOp.easyPrint() + "CWID:" + curOp.getCorrespondingWriteID());
-                    correspondingWrite = opList.get(curOp.getCorrespondingWriteID());
-                    curList.or(correspondingWrite.getCoList());
-                    curList.or(lastOp.getCoList());
+
+                    if(curOp.getCorrespondingWriteID() == -2){ //ThinAirRead也只向前一个操作继承
+                        curList.or(lastOp.getCoList());
+                    }
+                    else {
+                        correspondingWrite = opList.get(curOp.getCorrespondingWriteID());
+                        curList.or(correspondingWrite.getCoList());
+                        curList.or(lastOp.getCoList());
+                    }
                 }
             }
 //            System.out.println("curList:" + curList);

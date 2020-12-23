@@ -26,31 +26,33 @@ public class IncrementalHappenBeforeOrder extends HappenBeforeOrder{
     接收输入的历史记录，按照process的情况分发给子线程计算各自的HBO
      */
 
-    public void incrementalHBO(History history, ProgramOrder po, ReadFrom rf) throws Exception{
+    public void incrementalHBO(History history, ProgramOrder po, ReadFrom rf, CausalOrder co) throws Exception{
 
 //        if(rf.checkThinAirRead()){
 //            return;
 //        }
 
-        LinkedList<Operation> opList = history.getOperationList();
-        this.unionAndSetVis(po, rf, opList);
+//        LinkedList<Operation> opList = history.getOperationList();
+//        this.unionAndSetVis(po, rf, opList);
 //        System.out.println("Initial Matrix:");
 //        this.printMatrix();
 
         int processNum = history.getProcessOpList().keySet().size();
 
         //利用增量算法计算CO关系，并以此更新（初始化）每个操作的co列表
-        IncrementalCausalOrder ico = new IncrementalCausalOrder(history.getOpNum());
-        ico.incrementalCO(history, po, rf);
+//        IncrementalCausalOrder ico = new IncrementalCausalOrder(history.getOpNum());
+//        ico.incrementalCO(history, po, rf);
 //        System.out.println("CO Matrix after ico:");
 //        ico.printMatrix();
-        ico.updateListByMatrix(history.getOperationList());
+//        ico.updateListByMatrix(history.getOperationList());
 
 //        for(int i = 0; i < history.getOperationList().size(); i++){
 //            System.out.println("No." + i + history.getOperationList().get(i).getCoList());
 //        }
+        //把history中操作的可见集合更新为co
+        co.updateListByMatrix(history.getOperationList());
 
-        this.union(this, ico);
+//        this.union(this, ico);
 
 //        this.printMatrix();
 

@@ -91,7 +91,7 @@ public class CausalChecker {
 
 
 //        IncrementalHappenBeforeOrder ihbo = new IncrementalHappenBeforeOrder(history.getOpNum());
-//        ihbo.incrementalHBO(history, po, rf);
+//        ihbo.incrementalHBO(history, po, rf, ico);
         System.out.println("---Begin to check CM---");
         CMChecker cmChecker = new CMChecker(history, po, rf, ico, hbo);
         System.out.println("Checking CM, result:" + cmChecker.checkCM());

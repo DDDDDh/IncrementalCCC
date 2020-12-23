@@ -122,6 +122,8 @@ public class BasicRelation implements BasicRelationInterface{
 
         int size = this.getMatrixSize();
 
+        boolean isTrue = true;
+
         for(int i = 0; i < size; i++){
             for(int j = 0; j < size; j++){
                 if(this.existEdge(i, j) ^ otherMatrix.existEdge(i,j)){ //如果两个矩阵中有一个点不同
@@ -129,11 +131,12 @@ public class BasicRelation implements BasicRelationInterface{
                     System.out.println(" OtherMatrix["+i+"]["+j+"]:" +otherMatrix.existEdge(i,j));
                     System.out.println("Operation i:" + opList.get(i).easyPrint() +" on process " + opList.get(i).getProcess() + " Operation j:" + opList.get(j).easyPrint()+" on process " + opList.get(j).getProcess());
 //                    return false;
+                    isTrue = false;
                 }
             }
         }
 
-        return true;
+        return isTrue;
     }
 
     public LinkedList<Integer> topoSort(History history){

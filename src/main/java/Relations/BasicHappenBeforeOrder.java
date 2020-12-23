@@ -19,6 +19,7 @@ public class BasicHappenBeforeOrder extends HappenBeforeOrder{
 
         LinkedList<Operation> opList = history.getOperationList();
 
+        //把history中操作的可见集合更新为co
         co.updateListByMatrix(history.getOperationList());
 
 //        for(int i = 0; i < history.getOperationList().size(); i++){
@@ -129,9 +130,9 @@ class basicProcess implements Callable<BasicRelation> {
             forward = false;
             //Step 3 of PRAM
             this.matrix.computeTransitiveClosure();
-            this.matrix.updateListByMatrix(opList);
+            this.matrix.updateListByMatrix(this.opList);
             //Step 4 of PRAM
-            for(Operation o: opList){
+            for(Operation o: this.opList){
                 if (o.isWrite() || o.isInitRead()){
                     continue;
                 }
@@ -142,10 +143,10 @@ class basicProcess implements Callable<BasicRelation> {
 
                     int correspodingWriteID = o.getCorrespondingWriteID();
                     if(correspodingWriteID!= -1) { //略去没有对应写操作的读
-                        correspondingWrite = opList.get(o.getCorrespondingWriteID());
+                        correspondingWrite = this.opList.get(o.getCorrespondingWriteID());
                         curList = o.getCoList();
                         for (int j = curList.nextSetBit(0); j >= 0; j = curList.nextSetBit(j + 1)) {
-                            wPrime = opList.get(j);
+                            wPrime = this.opList.get(j);
                             if (wPrime.isWrite() && wPrime.onSameKey(o) && wPrime.notEqual(correspondingWrite)) {
                                 if (!this.matrix.existEdge(j, o.getCorrespondingWriteID())) {
                                     forward = true;

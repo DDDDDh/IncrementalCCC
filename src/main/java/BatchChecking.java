@@ -13,7 +13,7 @@ public class BatchChecking {
 
     public static void main(String args[]) throws Exception{
 
-        String path = "/Users/yi-huang/Project/MongoTrace/store/test2_majority_majority_no_nemesis_2000-5000/Part1/";
+        String path = "/Users/yi-huang/Project/MongoTrace/store/test2_majority_majority_no-nemesis_2000-5000/Part1/";
         String logPath = "/Users/yi-huang/Project/MongoTrace/store/test2Part1CheckingLogfile.txt";
         File outfile = new File(logPath);
         PrintWriter output = new PrintWriter(outfile);
@@ -74,6 +74,15 @@ public class BatchChecking {
 //                System.out.println();
 //            }
 
+            boolean coEquality = bco.checkEqualDebug(ico, history.getOperationList());
+            if(!coEquality){
+                System.out.println("ico is not equal to bco???");
+                output.println("ico is not equal to bco???");
+            }
+            else{
+                System.out.println("ico is equal to bco ^.^");
+            }
+
 
             CCChecker ccChecker = new CCChecker(history, po, rf, ico);
 
@@ -91,21 +100,29 @@ public class BatchChecking {
 //            System.out.println("Begin to compute happen-before relation");
 
             startTime = System.nanoTime();
-            IncrementalHappenBeforeOrder ihbo = new IncrementalHappenBeforeOrder(history.getOpNum());
-            ihbo.incrementalHBO(history,po, rf);
-            endTime = System.nanoTime();
-            System.out.println("ihbo Time:" + (endTime - startTime) + "ns");
-            output.println("ihbo Time:" + (endTime - startTime) + "ns");
-
-
-            startTime = System.nanoTime();
             BasicHappenBeforeOrder hbo = new BasicHappenBeforeOrder(history.getOpNum());
             hbo.calculateHBo(history, po, rf, ico);
             endTime = System.nanoTime();
             System.out.println("bhbo Time:" + (endTime - startTime) + "ns");
             output.println("bhbo Time:" + (endTime - startTime) + "ns");
+
+            startTime = System.nanoTime();
+            IncrementalHappenBeforeOrder ihbo = new IncrementalHappenBeforeOrder(history.getOpNum());
+            ihbo.incrementalHBO(history,po, rf, ico);
+            endTime = System.nanoTime();
+            System.out.println("ihbo Time:" + (endTime - startTime) + "ns");
+            output.println("ihbo Time:" + (endTime - startTime) + "ns");
+
 //            System.out.println("Finish computation of happen-before relation");
 
+            boolean hboEquality = bco.checkEqual(ihbo);
+            if(!hboEquality){
+                System.out.println("ihbo is not equal to bhbo???");
+                output.println("ihbo is not equal to bhbo???");
+            }
+            else{
+                System.out.println("ihbo is equal to bhbo ^.^");
+            }
 
 
             CMChecker cmChecker = new CMChecker(history, po, rf, ico, hbo);

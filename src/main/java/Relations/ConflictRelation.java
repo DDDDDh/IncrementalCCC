@@ -27,7 +27,7 @@ public class ConflictRelation extends BasicRelation{
         Operation visOp;
         for(int i = 0; i < opList.size(); i++){
             curOp = opList.get(i);
-            if(curOp.isWrite() || curOp.isInitRead()){
+            if(curOp.isWrite() || curOp.isInitRead() || curOp.getCorrespondingWriteID() == -2){ //过滤掉写操作、读初值的操作与ThinAirRead
                 continue;
             }
             else if(curOp.isRead()){
