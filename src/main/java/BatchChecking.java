@@ -13,8 +13,10 @@ public class BatchChecking {
 
     public static void main(String args[]) throws Exception{
 
-        String path = "/Users/yi-huang/Project/MongoTrace/store/test2_majority_majority_no-nemesis_2000-5000/Part1/";
-        String logPath = "/Users/yi-huang/Project/MongoTrace/store/test2Part1CheckingLogfile.txt";
+//        String path = "/Users/yi-huang/Project/MongoTrace/store/test2_majority_majority_no-nemesis_2000-5000/Part1/";
+        String path = "/Users/yi-huang/Project/MongoTrace/1227/no-memesis/majority-linearizable/100-3000/";
+//        String logPath = "/Users/yi-huang/Project/MongoTrace/store/test2Part1CheckingLogfile.txt";
+        String logPath = "/Users/yi-huang/Project/MongoTrace/1227/no-memesis/majority-linearizable/100-3000/CheckingLogFile.txt";
         File outfile = new File(logPath);
         PrintWriter output = new PrintWriter(outfile);
 
@@ -29,7 +31,6 @@ public class BatchChecking {
                 //String fileName = tempList[i].getName();
             }
         }
-
 
         for (String filename: files) {
 
@@ -81,6 +82,7 @@ public class BatchChecking {
             }
             else{
                 System.out.println("ico is equal to bco ^.^");
+                output.println("ico is equal to bco ^.^");
             }
 
 
@@ -115,13 +117,14 @@ public class BatchChecking {
 
 //            System.out.println("Finish computation of happen-before relation");
 
-            boolean hboEquality = bco.checkEqual(ihbo);
+            boolean hboEquality = hbo.checkEqual(ihbo);
             if(!hboEquality){
                 System.out.println("ihbo is not equal to bhbo???");
                 output.println("ihbo is not equal to bhbo???");
             }
             else{
                 System.out.println("ihbo is equal to bhbo ^.^");
+                output.println("ihbo is equal to bhbo -.-");
             }
 
 

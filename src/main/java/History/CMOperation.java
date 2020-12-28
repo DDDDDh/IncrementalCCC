@@ -100,6 +100,7 @@ public class CMOperation extends Operation{
         }
     }
 
+    //潜在要求：每个线程上的操作按id从小到大排列，并且processList中的操作有序
     public void initLastSameProcess(LinkedList<Operation> opList, LinkedList<Integer> processList, int processID){
         Operation curOp;
         for(Integer i: processList){

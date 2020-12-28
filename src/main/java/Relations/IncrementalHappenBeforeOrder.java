@@ -146,7 +146,7 @@ class incrementalProcess implements Callable<BasicRelation>{
             curOp = this.opList.get(curID);
             curOp.setLastRead(lastReadID); //由此，每线程的第一个操作对应的lastRead为-2
             curOp.setProcessReadID(i);
-            if(curOp.getCorrespondingWriteID() != -1) { //如果存在对应写操作，则一同更新
+            if(curOp.getCorrespondingWriteID() != -1 && curOp.getCorrespondingWriteID()!= -2) { //如果存在对应写操作，则一同更新
                 cWrite = this.opList.get(curOp.getCorrespondingWriteID());
                 cWrite.setProcessReadID(i);
                 cWrite.setHasDictatedRead(true);
@@ -263,7 +263,7 @@ class incrementalProcess implements Callable<BasicRelation>{
                 continue;
             }
             correspondingWriteID = curOp.getCorrespondingWriteID();
-            if( correspondingWriteID == -1 || po.existEdge(curID, correspondingWriteID)){
+            if( correspondingWriteID < 0 || po.existEdge(curID, correspondingWriteID)){
                 return false;
             }
         }
@@ -298,7 +298,8 @@ class incrementalProcess implements Callable<BasicRelation>{
             if(rPrime == -2){ //当r为第一个操作的情况
                 continue;
             }
-            else if(this.opList.get(rPrime).getCoList().get(wOp.getID())){
+            //如果w对r'不可见的话，直接跳过
+            else if(this.opList.get(rPrime).getCoList().get(wOp.getID())){ //2020.12.23 modifited here...
                 continue;
             }
             else{
@@ -351,7 +352,7 @@ class incrementalProcess implements Callable<BasicRelation>{
                             else if (correspondingWrite.getCoList().get(i)) { //更新：co在D(r)之前的写操作
                                 wwGroup.add(i);
                             }
-                            else if(correspondingWrite.getID() == visOp.getID()){
+                            else if(correspondingWrite.getID() == visOp.getID()){ //就是D(r)本身
                                 //wwGroup.add(i);
 //                                System.out.println("Ignore corresponding write.");
                             }
@@ -359,7 +360,7 @@ class incrementalProcess implements Callable<BasicRelation>{
 //                                System.out.println("r:" + curOp.easyPrint() + "r'" + this.opList.get(rPrime).easyPrint() + "visOp:" + visOp.easyPrint());
                                 System.out.println("Error!Impossible1");
                             }
-                        } else {
+                        } else { //在r与r'之间不可能有其他写操作
                             System.out.println("Error!Impossible2");
                         }
                     }
@@ -369,7 +370,7 @@ class incrementalProcess implements Callable<BasicRelation>{
                 }
             }
 
-            //在每组内的操作都是在同一线程，因此按照顺序更新即可
+            //在rr组内的操作都是在同一线程，因此按照顺序更新即可
             CMOperation curOp = new CMOperation();
             CMOperation lastOp;
             for(int i = 0; i < rrGroup.size(); i++){
@@ -419,10 +420,12 @@ class incrementalProcess implements Callable<BasicRelation>{
                 newToOld.add(i);
             }
         }
+
+        //返回new to old中第一个有对应写操作的读 （用于后续apply-rule-c)
         for(int i = 0; i < newToOld.size(); i++){
             curOp = this.opList.get(newToOld.get(i));
             if(curOp.getKey().equals(wPrime.getKey())){
-                if(curOp.getCorrespondingWriteID() != -1) { //*********
+                if(curOp.getCorrespondingWriteID() != -1 && curOp.getCorrespondingWriteID() != -2) { //*********
 
                     return curOp;
                 }
@@ -462,7 +465,6 @@ class incrementalProcess implements Callable<BasicRelation>{
                 curOp = this.opList.get(i);
                 curOp.updatePrecedingWrite(wPrime);
             }
-
         }
     }
 

@@ -2,24 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0dc98262-2b33-485b-86e5-a2794ff4c6f0" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/Debugger.java" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/BadPatternExamples/CCvNotCM_history.edn" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/BadPatternExamples/CyclicHB_perProcess_history.edn" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/BadPatternExamples/TransitiveHBo_history.edn" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/BadPatternExamples/WriteReadWrite_history.edn" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/Relations/BasicRelation.class" afterPath="$PROJECT_DIR$/target/classes/Relations/BasicRelation.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/Relations/IncrementalCausalOrder.class" afterPath="$PROJECT_DIR$/target/classes/Relations/IncrementalCausalOrder.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/Relations/ReadFrom.class" afterPath="$PROJECT_DIR$/target/classes/Relations/ReadFrom.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/History/CMOperation.class" afterPath="$PROJECT_DIR$/target/classes/History/CMOperation.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/Relations/IncrementalHappenBeforeOrder.class" afterPath="$PROJECT_DIR$/target/classes/Relations/IncrementalHappenBeforeOrder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/Relations/incrementalProcess.class" afterPath="$PROJECT_DIR$/target/classes/Relations/incrementalProcess.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/BatchChecking.java" afterPath="$PROJECT_DIR$/src/main/java/BatchChecking.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/CausalChecker.java" afterPath="$PROJECT_DIR$/src/main/java/CausalChecker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Checker/CCChecker.java" afterPath="$PROJECT_DIR$/src/main/java/Checker/CCChecker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Debugger.java" afterPath="$PROJECT_DIR$/src/main/java/Debugger.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/History/CMOperation.java" afterPath="$PROJECT_DIR$/src/main/java/History/CMOperation.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Main.java" afterPath="$PROJECT_DIR$/src/main/java/Main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Relations/BasicHappenBeforeOrder.java" afterPath="$PROJECT_DIR$/src/main/java/Relations/BasicHappenBeforeOrder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Relations/BasicRelation.java" afterPath="$PROJECT_DIR$/src/main/java/Relations/BasicRelation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Relations/ConflictRelation.java" afterPath="$PROJECT_DIR$/src/main/java/Relations/ConflictRelation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Relations/IncrementalCausalOrder.java" afterPath="$PROJECT_DIR$/src/main/java/Relations/IncrementalCausalOrder.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Relations/IncrementalHappenBeforeOrder.java" afterPath="$PROJECT_DIR$/src/main/java/Relations/IncrementalHappenBeforeOrder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Relations/ReadFrom.java" afterPath="$PROJECT_DIR$/src/main/java/Relations/ReadFrom.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -32,23 +28,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="BasicCausalOrder.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Relations/BasicCausalOrder.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BasicHappenBeforeOrder.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BasicHappenBeforeOrder.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Relations/BasicHappenBeforeOrder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="284">
-              <caret line="84" column="0" lean-forward="true" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
+            <state relative-caret-position="214">
+              <caret line="144" column="45" lean-forward="false" selection-start-line="144" selection-start-column="45" selection-end-line="144" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -57,18 +41,20 @@
       <file leaf-file-name="BasicRelation.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Relations/BasicRelation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="286" column="16" lean-forward="false" selection-start-line="286" selection-start-column="16" selection-end-line="286" selection-end-column="16" />
-              <folding />
+            <state relative-caret-position="232">
+              <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+              <folding>
+                <element signature="e#1001#1002#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BatchChecking.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="BatchChecking.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/BatchChecking.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-269">
-              <caret line="114" column="0" lean-forward="true" selection-start-line="114" selection-start-column="0" selection-end-line="114" selection-end-column="0" />
+            <state relative-caret-position="435">
+              <caret line="29" column="27" lean-forward="true" selection-start-line="29" selection-start-column="27" selection-end-line="29" selection-end-column="27" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -76,25 +62,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CausalChecker.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/CausalChecker.java">
+      <file leaf-file-name="BitSet.java" pinned="false" current-in-tab="false">
+        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home/lib/src.zip!/java.base/java/util/BitSet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="508">
-              <caret line="93" column="50" lean-forward="false" selection-start-line="93" selection-start-column="50" selection-end-line="93" selection-end-column="50" />
+            <state relative-caret-position="232">
+              <caret line="623" column="0" lean-forward="false" selection-start-line="623" selection-start-column="0" selection-end-line="623" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ConflictRelation.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Relations/ConflictRelation.java">
+      <file leaf-file-name="CMOperation.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/History/CMOperation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="73">
-              <caret line="14" column="16" lean-forward="false" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
-              <folding>
-                <element signature="e#185#186#0" expanded="true" />
-                <element signature="e#212#213#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="220">
+              <caret line="22" column="13" lean-forward="false" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -102,8 +85,8 @@
       <file leaf-file-name="Debugger.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Debugger.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="466">
-              <caret line="91" column="47" lean-forward="true" selection-start-line="91" selection-start-column="47" selection-end-line="91" selection-end-column="47" />
+            <state relative-caret-position="465">
+              <caret line="31" column="26" lean-forward="false" selection-start-line="31" selection-start-column="26" selection-end-line="31" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -111,15 +94,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IncrementalCausalOrder.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Relations/IncrementalCausalOrder.java">
+      <file leaf-file-name="History.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/History/History.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-21">
-              <caret line="75" column="67" lean-forward="true" selection-start-line="75" selection-start-column="67" selection-end-line="75" selection-end-column="67" />
+            <state relative-caret-position="1457">
+              <caret line="187" column="49" lean-forward="false" selection-start-line="187" selection-start-column="49" selection-end-line="187" selection-end-column="49" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#296#297#0" expanded="true" />
-                <element signature="e#323#324#0" expanded="true" />
+                <element signature="e#6280#6281#0" expanded="true" />
+                <element signature="e#6321#6322#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -128,18 +110,28 @@
       <file leaf-file-name="IncrementalHappenBeforeOrder.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Relations/IncrementalHappenBeforeOrder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="91" column="0" lean-forward="true" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
+            <state relative-caret-position="268">
+              <caret line="301" column="20" lean-forward="false" selection-start-line="301" selection-start-column="20" selection-end-line="301" selection-end-column="20" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Operation.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/History/Operation.java">
+      <file leaf-file-name="LinkedList.java" pinned="false" current-in-tab="false">
+        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home/lib/src.zip!/java.base/java/util/LinkedList.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-62">
-              <caret line="82" column="13" lean-forward="false" selection-start-line="82" selection-start-column="13" selection-end-line="82" selection-end-column="13" />
+            <state relative-caret-position="225">
+              <caret line="558" column="0" lean-forward="false" selection-start-line="558" selection-start-column="0" selection-end-line="558" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="432">
+              <caret line="199" column="42" lean-forward="true" selection-start-line="199" selection-start-column="42" selection-end-line="199" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -226,9 +218,7 @@
         <option value="$PROJECT_DIR$/src/main/java/HistoryProducer/randomProducer.java" />
         <option value="$PROJECT_DIR$/src/main/java/Relations/BasicCausalOrder.java" />
         <option value="$PROJECT_DIR$/src/main/java/Relations/HappenBeforeOrder.java" />
-        <option value="$PROJECT_DIR$/src/main/java/History/CMOperation.java" />
         <option value="$PROJECT_DIR$/src/main/java/Analyzer/LogFileAnalyzer.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/History/HistoryReader.java" />
         <option value="$PROJECT_DIR$/src/main/java/Checker/CCvChecker.java" />
         <option value="$PROJECT_DIR$/src/main/java/Checker/CMChecker.java" />
@@ -238,11 +228,13 @@
         <option value="$PROJECT_DIR$/src/main/java/Checker/CCChecker.java" />
         <option value="$PROJECT_DIR$/src/main/java/Relations/IncrementalCausalOrder.java" />
         <option value="$PROJECT_DIR$/src/main/java/Relations/ConflictRelation.java" />
+        <option value="$PROJECT_DIR$/src/main/java/CausalChecker.java" />
+        <option value="$PROJECT_DIR$/src/main/java/History/CMOperation.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/Relations/BasicHappenBeforeOrder.java" />
         <option value="$PROJECT_DIR$/src/main/java/Relations/IncrementalHappenBeforeOrder.java" />
-        <option value="$PROJECT_DIR$/src/main/java/BatchChecking.java" />
         <option value="$PROJECT_DIR$/src/main/java/Debugger.java" />
-        <option value="$PROJECT_DIR$/src/main/java/CausalChecker.java" />
+        <option value="$PROJECT_DIR$/src/main/java/BatchChecking.java" />
       </list>
     </option>
   </component>
@@ -253,9 +245,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="555" />
+    <option name="x" value="347" />
     <option name="y" value="23" />
-    <option name="width" value="1346" />
+    <option name="width" value="1504" />
     <option name="height" value="1039" />
   </component>
   <component name="ProjectView">
@@ -713,12 +705,12 @@
       <workItem from="1605836089650" duration="788000" />
       <workItem from="1606293568076" duration="48626000" />
       <workItem from="1608088481153" duration="30205000" />
-      <workItem from="1608534975714" duration="26502000" />
+      <workItem from="1608534975714" duration="61483000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="568338000" />
+    <option name="totallyTimeSpent" value="603319000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -730,7 +722,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="555" y="23" width="1346" height="1039" extended-state="0" />
+    <frame x="347" y="23" width="1504" height="1039" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -743,11 +735,11 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="REPL" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32944915" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23411018" sideWeight="0.48865068" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19809322" sideWeight="0.48865068" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32944915" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21932516" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19562243" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -872,14 +864,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/History/CMOperation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
-          <caret line="50" column="23" lean-forward="false" selection-start-line="50" selection-start-column="23" selection-end-line="50" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/HistoryProducer/operationProducer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1035">
@@ -922,48 +906,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="36" column="25" lean-forward="false" selection-start-line="36" selection-start-column="25" selection-end-line="36" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Relations/CausalOrder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="26" column="24" lean-forward="false" selection-start-line="26" selection-start-column="24" selection-end-line="26" selection-end-column="24" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home/lib/src.zip!/java.base/java/util/BitSet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="936" column="17" lean-forward="true" selection-start-line="936" selection-start-column="17" selection-end-line="936" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/History/HistoryReader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="622">
-          <caret line="66" column="23" lean-forward="true" selection-start-line="66" selection-start-column="23" selection-end-line="66" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/History/History.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-16">
-          <caret line="187" column="49" lean-forward="false" selection-start-line="187" selection-start-column="49" selection-end-line="187" selection-end-column="49" />
-          <folding>
-            <element signature="e#6280#6281#0" expanded="false" />
-            <element signature="e#6321#6322#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -975,14 +922,6 @@
             <element signature="e#2883#2884#0" expanded="false" />
             <element signature="e#2924#2925#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home/lib/src.zip!/java.base/java/util/LinkedList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="479" column="0" lean-forward="false" selection-start-line="479" selection-start-column="0" selection-end-line="479" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -999,7 +938,7 @@
         <state relative-caret-position="30">
           <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1009,9 +948,9 @@
         <state relative-caret-position="-21">
           <caret line="75" column="67" lean-forward="true" selection-start-line="75" selection-start-column="67" selection-end-line="75" selection-end-column="67" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#296#297#0" expanded="true" />
-            <element signature="e#323#324#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#296#297#0" expanded="false" />
+            <element signature="e#323#324#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1021,8 +960,8 @@
         <state relative-caret-position="73">
           <caret line="14" column="16" lean-forward="false" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
           <folding>
-            <element signature="e#185#186#0" expanded="true" />
-            <element signature="e#212#213#0" expanded="true" />
+            <element signature="e#185#186#0" expanded="false" />
+            <element signature="e#212#213#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1035,26 +974,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/BatchChecking.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-269">
-          <caret line="114" column="0" lean-forward="true" selection-start-line="114" selection-start-column="0" selection-end-line="114" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Debugger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="466">
-          <caret line="91" column="47" lean-forward="true" selection-start-line="91" selection-start-column="47" selection-end-line="91" selection-end-column="47" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/CausalChecker.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="508">
@@ -1063,27 +982,100 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Relations/BasicRelation.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/History/HistoryReader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="286" column="16" lean-forward="false" selection-start-line="286" selection-start-column="16" selection-end-line="286" selection-end-column="16" />
+        <state relative-caret-position="346">
+          <caret line="66" column="23" lean-forward="true" selection-start-line="66" selection-start-column="23" selection-end-line="66" selection-end-column="23" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Relations/IncrementalHappenBeforeOrder.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/History/History.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="91" column="0" lean-forward="true" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
+        <state relative-caret-position="1457">
+          <caret line="187" column="49" lean-forward="false" selection-start-line="187" selection-start-column="49" selection-end-line="187" selection-end-column="49" />
+          <folding>
+            <element signature="e#6280#6281#0" expanded="true" />
+            <element signature="e#6321#6322#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="199" column="42" lean-forward="true" selection-start-line="199" selection-start-column="42" selection-end-line="199" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/History/CMOperation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="22" column="13" lean-forward="false" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home/lib/src.zip!/java.base/java/util/BitSet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="623" column="0" lean-forward="false" selection-start-line="623" selection-start-column="0" selection-end-line="623" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Relations/BasicRelation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+          <folding>
+            <element signature="e#1001#1002#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home/lib/src.zip!/java.base/java/util/LinkedList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="558" column="0" lean-forward="false" selection-start-line="558" selection-start-column="0" selection-end-line="558" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Relations/BasicHappenBeforeOrder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="84" column="0" lean-forward="true" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
+        <state relative-caret-position="214">
+          <caret line="144" column="45" lean-forward="false" selection-start-line="144" selection-start-column="45" selection-end-line="144" selection-end-column="45" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Relations/IncrementalHappenBeforeOrder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="301" column="20" lean-forward="false" selection-start-line="301" selection-start-column="20" selection-end-line="301" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Debugger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="31" column="26" lean-forward="false" selection-start-line="31" selection-start-column="26" selection-end-line="31" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/BatchChecking.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="29" column="27" lean-forward="true" selection-start-line="29" selection-start-column="27" selection-end-line="29" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

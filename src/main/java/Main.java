@@ -133,7 +133,7 @@ public class Main {
 
                 startTime = System.nanoTime();
                 IncrementalHappenBeforeOrder ihbo = new IncrementalHappenBeforeOrder(history.getOpNum());
-                ihbo.incrementalHBO(history,po, rf);
+                ihbo.incrementalHBO(history,po, rf, bco);
                 endTime = System.nanoTime();
                 long ihboTime = endTime - startTime;
 

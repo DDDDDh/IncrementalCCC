@@ -10,9 +10,9 @@ public class Debugger {
 
     public static void main (String args[]) throws Exception{
 
-        String curFile = "/Users/yi-huang/Project/MongoTrace/store/test2_majority_majority_no-nemesis_2000-5000/Part1/history2000.edn";
+       String curFile = "/Users/yi-huang/Project/MongoTrace/store/test2_majority_majority_no-nemesis_2000-5000/Part1/history2000.edn";
 //        String curFile = "/Users/yi-huang/Project/MongoTrace/store/test3_majority_majority_node-failure_2000-5000/history2000.edn";
-//        String curFile = "/Users/yi-huang/Project/IncrementalCCC/src/main/resources/BadPatternExamples/ThinAirRead_history.edn";
+//        String curFile = "/Users/yi-huang/Project/IncrementalCCC/src/main/resources/BadPatternExamples/WriteCORead_history.edn";
         String logPath = "/Users/yi-huang/Project/MongoTrace/store/DebuggerLogfile.txt";
         File outfile = new File(logPath);
         PrintWriter output = new PrintWriter(outfile);
@@ -58,6 +58,10 @@ public class Debugger {
         if(!coEquality){
             System.out.println("ico is not equal to bco???");
             output.println("ico is not equal to bco???");
+            System.out.println("ico matrix:");
+            ico.printMatrix();
+            System.out.println("bco matrix:");
+            bco.printMatrix();
         }
         else{
             System.out.println("ico is equal to bco ^.^");
@@ -96,10 +100,14 @@ public class Debugger {
         System.out.println("Finish computation of happen-before relation");
 
 
-        boolean hboEquality = bco.checkEqual(ihbo);
+        boolean hboEquality = hbo.checkEqual(ihbo);
         if(!hboEquality){
             System.out.println("ihbo is not equal to bhbo???");
             output.println("ihbo is not equal to bhbo???");
+            System.out.println("ihbo matrix:");
+            ihbo.printMatrix();
+            System.out.println("bhbo matrix:");
+            hbo.printMatrix();
         }
         else{
             System.out.println("ihbo is equal to bhbo ^.^");

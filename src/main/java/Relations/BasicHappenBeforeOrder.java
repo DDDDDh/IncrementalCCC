@@ -142,7 +142,7 @@ class basicProcess implements Callable<BasicRelation> {
                     }
 
                     int correspodingWriteID = o.getCorrespondingWriteID();
-                    if(correspodingWriteID!= -1) { //略去没有对应写操作的读
+                    if(correspodingWriteID > 0) { //略去没有对应写操作的读
                         correspondingWrite = this.opList.get(o.getCorrespondingWriteID());
                         curList = o.getCoList();
                         for (int j = curList.nextSetBit(0); j >= 0; j = curList.nextSetBit(j + 1)) {
