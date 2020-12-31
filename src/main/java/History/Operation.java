@@ -38,6 +38,7 @@ public class Operation {
         this.setCoList(null);
     }
 
+
     Operation(String type, String key, int value, int process, long time, long position, int index){
         if(type.equals(":write")){
             this.setType(OpType.write);
@@ -239,6 +240,9 @@ public class Operation {
         return tempString;
     }
 
+    public String printOpInfo(){
+        return ":type " + this.getType() +", :key " + this.getKey() + ", :value " + this.getValue() + ", :process " + this.getProcess() + ", :time " + this.getTime() + ", :position " + this.getPosition() +", :index " + this.getID();
+    }
 
     public static void main(String args[]){
 

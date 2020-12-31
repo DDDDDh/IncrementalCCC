@@ -139,6 +139,8 @@ public class BasicRelation implements BasicRelationInterface{
         return isTrue;
     }
 
+
+    //注意，这里是会需要用this.existEdge判断是否存在边的，因此需要先初始化关系矩阵
     public LinkedList<Integer> topoSort(History history){
         LinkedList<Operation> opList = history.getOperationList();
         LinkedList<Integer> topoList = new LinkedList<>();

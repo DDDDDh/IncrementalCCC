@@ -11,8 +11,37 @@ import java.util.LinkedList;
 
 public class IncrementalCausalOrder extends CausalOrder{
 
+    LinkedList<Operation> opList;
+    LinkedList<Integer> topoList;
+    boolean isDAG;
+
     public IncrementalCausalOrder(int size){
         super(size);
+    }
+
+    public boolean DAGDetection(History history, ProgramOrder po, ReadFrom rf){
+
+        opList = history.getOperationList();
+        int size = opList.size();
+        Operation curOp;
+
+        //重置每个操作的coList，用于随后计算
+        for(int i = 0; i < size; i++){
+            curOp = opList.get(i);
+            curOp.flushCoList();
+        }
+
+        this.initialCOMatrixWithList(po, rf, opList);
+//        System.out.println("Initial CO Matrix:");
+//        this.printMatrix();
+//        this.initialCOMatrix(po, rf);
+        topoList = this.topoSort(history);
+
+        if(topoList.size() != this.getMatrixSize()){
+            System.out.println("Not a DAG");
+            return false;
+        }
+        return true;
     }
 
 
@@ -25,37 +54,23 @@ public class IncrementalCausalOrder extends CausalOrder{
 //            return;
 //        }
 
-        LinkedList<Operation> opList = history.getOperationList();
-        int size = opList.size();
-        Operation curOp;
+        isDAG = DAGDetection(history, po, rf);
 
-        //重置每个操作的coList，用于随后计算
-        for(int i = 0; i < size; i++){
-            curOp = opList.get(i);
-            curOp.flushCoList();
+        if(!isDAG){ //如果不是DAG图，不能用增量算法计算
+            return;
         }
 
 //        System.out.println("PO Matrix:");
 //        po.printMatrix();
 //        System.out.println("RF Matrix:");
 //        rf.printMatrix();
-        this.initialCOMatrixWithList(po, rf, opList);
-//        System.out.println("Initial CO Matrix:");
-//        this.printMatrix();
-//        this.initialCOMatrix(po, rf);
-        LinkedList<Integer> topoList = this.topoSort(history);
-
-        if(topoList.size() != this.getMatrixSize()){
-            System.out.println("Not a DAG");
-            return;
-        }
 
 //        for(int i = 0; i < topoList.size(); i++){
 //            System.out.println("TopoID:" + i + " Op:" + opList.get(topoList.get(i)).easyPrint());
 //        }
 
         //Begin incremental part
-//        Operation curOp;
+        Operation curOp;
         Operation lastOp;
         Operation correspondingWrite;
         BitSet curList;

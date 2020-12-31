@@ -9,6 +9,22 @@ import java.io.*;
 
 public class BatchChecking {
 
+    String parseFiles(String path){
+
+        String filePath = "";
+        File file = new File(path);
+        if(file.exists() && file.isDirectory()){
+            parseFiles(file.getAbsolutePath());
+        }
+        else if (file.isFile()){
+            String filename = file.getName();
+            System.out.println();
+        }
+
+        return filePath;
+
+    }
+
 
 
     public static void main(String args[]) throws Exception{

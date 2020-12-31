@@ -68,6 +68,8 @@ public class CCvChecker extends CCChecker{
 
     public boolean getIsCCv(){return this.isCCv;}
 
+    public boolean isCyclicCF(){return this.isCyclicCF;}
+
     public String failReason(){
         String reason = "";
         if(!this.isCC){

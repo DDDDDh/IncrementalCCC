@@ -5,6 +5,7 @@ import Relations.*;
 
 import java.util.LinkedList;
 import History.*;
+import lombok.Data;
 
 public class CMChecker extends CCChecker {
 
@@ -63,6 +64,14 @@ public class CMChecker extends CCChecker {
     }
 
     public boolean getIsCM(){return this.isCM;}
+
+    public boolean isWriteHBInitRead(){
+        return this.isWriteHBInitRead;
+    }
+
+    public boolean isCyclicHB(){
+        return this.isCyclicHB;
+    }
 
     public String failReason(){
         String reason = "";

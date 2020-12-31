@@ -30,7 +30,6 @@ public class History {
 //        this.printOpGroupByKey();
         this.initOpGroupByProcess();
 //        this.lastIndex = histories.get(histories.size() - 1).getIndex(); // the max index in the  histories
-
     }
 
     public void initOperations(){
