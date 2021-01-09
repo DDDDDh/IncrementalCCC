@@ -311,6 +311,30 @@ public class BasicRelation implements BasicRelationInterface{
         }
     }
 
+    public void updateCMListByMatrix(LinkedList<CMOperation> opList){
+        assert (opList.size() == this.getMatrixSize());
+
+        int size = this.getMatrixSize();
+
+        BitSet curList;
+
+        for(int i = 0; i < size; i++){
+            curList = this.getRelationMatrix()[i]; //得到点i的后继列表
+            //对于每条i->j的边，在j的前驱列表里设置可见
+//            for(int j = curList.nextSetBit(0); j >= 0; j = curList.nextSetBit(j+1)){
+//                opList.get(j).getCoList().set(i,true);
+//            }
+            for(int j = 0; j < size; j++){
+                if(curList.get(j)){
+                    opList.get(j).getCoList().set(i,true);
+                }
+                else{
+                    opList.get(j).getCoList().set(i,false);
+                }
+            }
+        }
+    }
+
     //根据opList中的coList更新当前关系矩阵
     public void updateMatrixByCMList(LinkedList<CMOperation> opList){
         assert (opList.size() == this.getMatrixSize());

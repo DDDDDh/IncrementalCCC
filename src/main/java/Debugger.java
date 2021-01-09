@@ -10,9 +10,11 @@ public class Debugger {
 
     public static void main (String args[]) throws Exception{
 
-       String curFile = "/Users/yi-huang/Project/MongoTrace/store/test2_majority_majority_no-nemesis_2000-5000/Part1/history2000.edn";
+//      String curFile = "/Users/yi-huang/Project/MongoTrace/store/test2_majority_majority_no-nemesis_2000-5000/Part1/history2000.edn";
 //        String curFile = "/Users/yi-huang/Project/MongoTrace/store/test3_majority_majority_node-failure_2000-5000/history2000.edn";
-//        String curFile = "/Users/yi-huang/Project/IncrementalCCC/src/main/resources/BadPatternExamples/WriteCORead_history.edn";
+//        String curFile = "/Users/yi-huang/Project/IncrementalCCC/src/main/resources/BadPatternExamples/CyclicHB_history.edn";
+        String curFile = "/Users/yi-huang/Project/MongoTrace/1227/no-memesis/majority-linearizable/100-3000/history200.edn";
+//        String curFile = "/Users/yi-huang/Project/MongoTrace/mongo-causal-register-wc-:majority-rc-:majority-ti-180-sd-2-cry-10-wp-0.25-rp-0.75-ops-600-no-nemesis_202012225/history600_0.edn";
         String logPath = "/Users/yi-huang/Project/MongoTrace/store/DebuggerLogfile.txt";
         File outfile = new File(logPath);
         PrintWriter output = new PrintWriter(outfile);
@@ -97,24 +99,20 @@ public class Debugger {
         endTime = System.nanoTime();
         System.out.println("bhbo Time:" + (endTime - startTime) + "ns");
         output.println("bhbo Time:" + (endTime - startTime) + "ns");
-        System.out.println("Finish computation of happen-before relation");
+//        System.out.println("Finish computation of happen-before relation");
 
 
         boolean hboEquality = hbo.checkEqual(ihbo);
         if(!hboEquality){
             System.out.println("ihbo is not equal to bhbo???");
             output.println("ihbo is not equal to bhbo???");
-            System.out.println("ihbo matrix:");
-            ihbo.printMatrix();
-            System.out.println("bhbo matrix:");
-            hbo.printMatrix();
         }
         else{
             System.out.println("ihbo is equal to bhbo ^.^");
         }
 //
 //
-//        CMChecker cmChecker = new CMChecker(history, po, rf, ico, hbo);
+        CMChecker cmChecker = new CMChecker(history, po, rf, ico, ihbo);
 
         if (ccChecker.checkCC()) {
             System.out.println("Chekcing CC, result:true");
@@ -125,26 +123,26 @@ public class Debugger {
             output.println("Chekcing CC, result:false");
             output.println("Fail Reason:" + ccChecker.failReason());
         }
-//
-//        if (ccvChecker.checkCCv()) {
-//            System.out.println("Chekcing CCv, result:true");
-//            output.println("Chekcing CCv, result:true");
-//        } else {
-//            System.out.println("Chekcing CCv, result:false");
-//            System.out.println("Fail Reason:" + ccvChecker.failReason());
-//            output.println("Chekcing CCv, result:false");
-//            output.println("Fail Reason:" + ccvChecker.failReason());
-//        }
-//
-//        if (cmChecker.checkCM()) {
-//            System.out.println("Checking CM, result:true");
-//            output.println("Checking CM, result:true");
-//        } else {
-//            System.out.println("Chekcing CM, result:false");
-//            System.out.println("Fail Reason:" + cmChecker.failReason());
-//            output.println("Chekcing CM, result:false");
-//            output.println("Fail Reason:" + cmChecker.failReason());
-//        }
+
+        if (ccvChecker.checkCCv()) {
+            System.out.println("Chekcing CCv, result:true");
+            output.println("Chekcing CCv, result:true");
+        } else {
+            System.out.println("Chekcing CCv, result:false");
+            System.out.println("Fail Reason:" + ccvChecker.failReason());
+            output.println("Chekcing CCv, result:false");
+            output.println("Fail Reason:" + ccvChecker.failReason());
+        }
+
+        if (cmChecker.checkCM()) {
+            System.out.println("Checking CM, result:true");
+            output.println("Checking CM, result:true");
+        } else {
+            System.out.println("Chekcing CM, result:false");
+            System.out.println("Fail Reason:" + cmChecker.failReason());
+            output.println("Chekcing CM, result:false");
+            output.println("Fail Reason:" + cmChecker.failReason());
+        }
 
         System.out.println("---------------------------------------------------------");
         output.println("---------------------------------------------------------");

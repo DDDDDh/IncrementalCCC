@@ -4,10 +4,7 @@ import History.*;
 
 import java.util.BitSet;
 import java.util.LinkedList;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
 
 public class BasicHappenBeforeOrder extends HappenBeforeOrder{
 
@@ -22,27 +19,22 @@ public class BasicHappenBeforeOrder extends HappenBeforeOrder{
         //把history中操作的可见集合更新为co
         co.updateListByMatrix(history.getOperationList());
 
-//        for(int i = 0; i < history.getOperationList().size(); i++){
-//            System.out.println("No." + i + history.getOperationList().get(i).getCoList());
-//        }
-
-//        this.union(this, co);
-
-//        this.printMatrix();
-
-//        此处初始化挪动到HappeneforeOrder本身去进行
-//        //返回结果为每个线程按照read-centric方法计算得到的HBo邻接矩阵
-//        HashMap<Integer, BasicRelation> processMatrix = new HashMap<>();
+//        //返回结果为每个线程计算得到的HBo邻接矩阵
 
         ExecutorService executorService = Executors.newCachedThreadPool();
+        CompletionService<BasicRelation> completionService = new ExecutorCompletionService<BasicRelation>(executorService);
+        for(Integer processID: history.getProcessOpList().keySet()){
+//            Callable<BasicRelation> proc = new basicProcess(history, processID, po, co);
+//            Future<BasicRelation> submit = executorService.submit(proc);
+//            processMatrix.put(processID, submit.get());
+            Callable<BasicRelation> proc = new basicProcess(history, processID, po, co);
+            completionService.submit(proc);
+
+        }
 
         for(Integer processID: history.getProcessOpList().keySet()){
-            Callable<BasicRelation> proc = new basicProcess(history, processID, po, co);
-            Future<BasicRelation> submit = executorService.submit(proc);
+            Future<BasicRelation> submit = completionService.take();
             processMatrix.put(processID, submit.get());
-//            System.out.println("Check no" + processID + " Result:");
-//            processMatrix.get(processID).printMatrix();
-//            this.union(this, processMatrix.get(processID));
         }
 
 //        System.out.println("Finally we get a matrix:");
@@ -96,7 +88,7 @@ class basicProcess implements Callable<BasicRelation> {
     public void init(){
         this.initOpList();
         this.matrix = new BasicRelation(this.size);
-        //利用causao order初始化可达性矩阵
+        //利用causal order初始化可达性矩阵
         this.matrix.union(this.matrix, this.co);
         this.matrix.updateListByMatrix(this.opList);
         this.ignoreOhterRead();
@@ -120,6 +112,7 @@ class basicProcess implements Callable<BasicRelation> {
     }
 
     public void caculateHBoProcess(){
+//       System.out.println("Basic happen before for process " + this.processID);
         boolean forward = true;
         Operation correspondingWrite;
         Operation wPrime;
@@ -133,26 +126,30 @@ class basicProcess implements Callable<BasicRelation> {
             this.matrix.updateListByMatrix(this.opList);
             //Step 4 of PRAM
             for(Operation o: this.opList){
+//                System.out.println("Dealing with " + o.easyPrint() +" for basic happen before.");
                 if (o.isWrite() || o.isInitRead()){
                     continue;
                 }
                 else if(o.isRead()){
+//                    System.out.println("Get " + o.easyPrint() +"process:" + o.getProcess() + "corresponding write id:" + o.getCorrespondingWriteID());
                     if(o.getProcess() != this.processID){ //略去不在本线程的读
                         continue;
                     }
 
                     int correspodingWriteID = o.getCorrespondingWriteID();
-                    if(correspodingWriteID > 0) { //略去没有对应写操作的读
+                    if(correspodingWriteID >= 0) { //略去没有对应写操作的读
+//                        System.out.println("Dealing with " + o.easyPrint() +" for basic happen before....");
                         correspondingWrite = this.opList.get(o.getCorrespondingWriteID());
                         curList = o.getCoList();
                         for (int j = curList.nextSetBit(0); j >= 0; j = curList.nextSetBit(j + 1)) {
                             wPrime = this.opList.get(j);
                             if (wPrime.isWrite() && wPrime.onSameKey(o) && wPrime.notEqual(correspondingWrite)) {
-                                if (!this.matrix.existEdge(j, o.getCorrespondingWriteID())) {
+                                if (!this.matrix.existEdge(j, correspodingWriteID)) { //因为已经计算过传递闭包，所以M[i][j]为1即为存在i->j的路径
+                                    correspondingWrite.getCoList().set(j, true);
+                                    this.matrix.setTrue(j, correspodingWriteID);
                                     forward = true;
                                 }
-                                correspondingWrite.getCoList().set(j, true);
-                                this.matrix.setTrue(j, o.getCorrespondingWriteID());
+//                                System.out.println("Add an edge from " + j + " to " + o.getCorrespondingWriteID());
                             }
                         }
                     }
@@ -160,6 +157,24 @@ class basicProcess implements Callable<BasicRelation> {
             }
             loop++;
         }
+
+//        System.out.println("basic hbo Matrix for process" + this.processID);
+//        this.matrix.printMatrix();
+
+        //返回之前将不在本线程的读操作相关矩阵元素全部置零
+        for(Operation o: this.opList){
+            int oID = o.getID();
+            if(o.getProcess() != this.processID && o.isRead()){
+                for(int i = 0; i < this.size; i++){
+                    this.matrix.setFalse(i, oID);
+                    this.matrix.setFalse(oID, i);
+                }
+            }
+        }
+
+//        System.out.println("basic hbo Matrix for process" + this.processID);
+//        this.matrix.printMatrix();
+
     }
 
     public BasicRelation getMatrix() {
