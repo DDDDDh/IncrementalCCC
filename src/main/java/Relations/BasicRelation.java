@@ -1,15 +1,23 @@
 package Relations;
 
 import History.*;
+import lombok.Data;
 
 import java.util.BitSet;
 import java.util.LinkedList;
 
+@Data
 public class BasicRelation implements BasicRelationInterface{
 
 //    private boolean[][] relationMatrix;
     private BitSet[] relationMatrix; //用每个操作的后继节点数组伪装的邻接矩阵
     private int matrixSize;
+
+    //标识变量，用于HBo计算时返回标志
+    private int processID;
+    private boolean isCyclicCO;
+    private boolean isThinAirRead;
+    private boolean isCyclicHB;
 
     public BasicRelation(int size){
 //        this.relationMatrix = new boolean[size][size];
@@ -18,6 +26,10 @@ public class BasicRelation implements BasicRelationInterface{
             this.relationMatrix[i] = new BitSet(size);
         }
         this.matrixSize = size;
+        this.processID = -1;
+        this.isCyclicCO = false;
+        this.isThinAirRead = false;
+        this.isCyclicHB = false;
     }
 
     public void setTrue(int fromIndex, int toIndex){

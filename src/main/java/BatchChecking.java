@@ -25,8 +25,6 @@ public class BatchChecking {
 
     }
 
-
-
     public static void main(String args[]) throws Exception{
 
 //        String path = "/Users/yi-huang/Project/MongoTrace/store/test2_majority_majority_no-nemesis_2000-5000/Part1/";

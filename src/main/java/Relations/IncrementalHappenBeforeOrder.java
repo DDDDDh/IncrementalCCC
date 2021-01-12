@@ -28,9 +28,15 @@ public class IncrementalHappenBeforeOrder extends HappenBeforeOrder{
 
     public void incrementalHBO(History history, ProgramOrder po, ReadFrom rf, CausalOrder co) throws Exception{
 
-//        if(rf.checkThinAirRead()){
-//            return;
-//        }
+        //当包含ThinAirRead与CyclicCO的时候均不能用增量算法计算Happen-before关系
+        if(rf.checkThinAirRead()){
+            this.setThinAirRead(true);
+            return;
+        }
+        if(co.isCyclicCO()){
+            this.setCyclicCO(true);
+            return;
+        }
 
 //        LinkedList<Operation> opList = history.getOperationList();
 //        this.unionAndSetVis(po, rf, opList);
@@ -58,9 +64,20 @@ public class IncrementalHappenBeforeOrder extends HappenBeforeOrder{
 //            this.union(this, processMatrix.get(processID));
         }
 
-        for(Integer processID: history.getProcessOpList().keySet()){
+        for(int i = 0; i <  history.getProcessOpList().keySet().size(); i++){
             Future<BasicRelation> submit = completionService.take();
-            processMatrix.put(processID, submit.get());
+            BasicRelation tempMatrix = submit.get();
+            //如果某个线程上的标志位为1，则总体的标志位也为1
+            if(tempMatrix.isCyclicCO()){
+               this.setCyclicCO(true);
+            }
+            else if(tempMatrix.isThinAirRead()){
+                this.setThinAirRead(true);
+            }
+            else if(tempMatrix.isCyclicHB()){
+                this.setCyclicHB(true);
+            }
+            processMatrix.put(tempMatrix.getProcessID(), tempMatrix);
         }
 
 //        System.out.println("Finally we get a matrix:");
@@ -94,7 +111,7 @@ class incrementalProcess implements Callable<BasicRelation>{
         this.po = po;
         this.matrix = new BasicRelation(this.size);
         this.matrix.updateMatrixByList(history.getOperationList()); //用history中的操作列表更新当前可达性矩阵（默认包含了co信息)
-
+        this.matrix.setProcessID(processID);
 
     }
 
@@ -131,7 +148,7 @@ class incrementalProcess implements Callable<BasicRelation>{
 
 
         //为当前线程上的读操作更新lastRead，同时更新读全序编号
-        int lastReadID = -2; // 设为-2是为了与初值-1区分开
+//        int lastReadID = -2; // 设为-2是为了与初值-1区分开
         int curID;
         CMOperation curOp;
         CMOperation cWrite;
@@ -139,15 +156,16 @@ class incrementalProcess implements Callable<BasicRelation>{
         for(int i = 0; i < readSize; i++){
             curID = this.curReadList.get(i);
             curOp = this.opList.get(curID);
-            curOp.setLastRead(lastReadID); //由此，每线程的第一个操作对应的lastRead为-2
-            curOp.setProcessReadID(i);
+//            curOp.setLastRead(lastReadID); //由此，每线程的第一个操作对应的lastRead为-2
+            curOp.setLastRead(curID); //更正：每个读操作的lastRead值应为它本身
+            curOp.setProcessReadID(i); //读全序编号
             if(curOp.getCorrespondingWriteID() != -1 && curOp.getCorrespondingWriteID()!= -2) { //如果存在对应写操作，则一同更新
                 cWrite = this.opList.get(curOp.getCorrespondingWriteID());
-                cWrite.setProcessReadID(i);
+                cWrite.setProcessReadID(i); //写全序编号
                 cWrite.setHasDictatedRead(true);
                 cWrite.getPrecedingWrite().put(cWrite.getKey(), cWrite.getID()); //为每一有效力的写操作更新自身的PW
             }
-            lastReadID = curID;
+//            lastReadID = curID;
         }
 
         this.ignoreOtherRead();
@@ -230,6 +248,29 @@ class incrementalProcess implements Callable<BasicRelation>{
         //为每个操作更新前驱和后继链表
         this.initPreAndSucList();
 
+        //为每个写操作更新自己的RR值
+        int firstRead;
+        LinkedList<Integer> sucList;
+        CMOperation sucOp;
+        for(int i = 0 ; i < this.size; i++){
+            firstRead = this.size+1;
+            curOp = this.opList.get(i);
+//            System.out.println("CurOp: " + curOp.easyPrint() + "process:" + this.processID);
+            if(curOp.isWrite()) { //只更新写操作：因为读操作的之前已经更新了
+                sucList = curOp.getSucList();
+                for (int j = 0; j < sucList.size(); j++) {
+                    sucOp = this.opList.get(sucList.get(j));
+//                    System.out.println("Suc Op:" + sucOp.easyPrint() + " process" + this.processID);
+                    if (sucOp.isRead() && sucOp.getID() < firstRead) {
+                        firstRead = sucOp.getID();
+                        curOp.setLastRead(firstRead);
+//                        System.out.println("Set LastRead of " + curOp.easyPrint() + "to" + firstRead + " process" + this.processID);
+                    }
+                }
+            }
+//            System.out.println("Operation:" + curOp.easyPrint() + " lastread:" + curOp.getLastRead() + " process" + this.processID);
+        }
+
     }
 
     //尽量在ignoreOtherRead之后执行
@@ -298,8 +339,15 @@ class incrementalProcess implements Callable<BasicRelation>{
                 continue;
             }
             correspondingWriteID = curOp.getCorrespondingWriteID();
-            if( correspondingWriteID < 0 || po.existEdge(curID, correspondingWriteID)){
-                System.out.println("There is a read: " + curOp.easyPrint() +"precede its correspnding write:" + this.opList.get(correspondingWriteID).easyPrint());
+            if(correspondingWriteID < 0){
+//                System.out.println("Contain ThinAirRead!");
+                this.matrix.setThinAirRead(true);
+                return false;
+            }
+
+            if(po.existEdge(curID, correspondingWriteID)){
+//                System.out.println("There is a read: " + curOp.easyPrint() +"precede its correspnding write:" + this.opList.get(correspondingWriteID).easyPrint());
+                this.matrix.setCyclicCO(true);
                 return false;
             }
         }
@@ -318,7 +366,7 @@ class incrementalProcess implements Callable<BasicRelation>{
             }
             rPrime = rOp.getLastRead();
             wOp = this.opList.get(rOp.getCorrespondingWriteID());
-//            System.out.println("Dealing with read:" + rOp.easyPrint() +" at process " + this.processID + " corresponding write:" + wOp.easyPrint());
+//            System.out.println("Dealing with read:" + rOp.easyPrint() +"position:" + rOp.getPosition() +" at process " + this.processID + " corresponding write:" + wOp.easyPrint() +"position:" + wOp.getPosition() + "process:" + this.processID);
             initReachability(rPrime, r);
             //此处应该添加：读操作按照
 //            System.out.println("r:" + rOp.easyPrint());
@@ -343,7 +391,8 @@ class incrementalProcess implements Callable<BasicRelation>{
             }
             else{
                 if(topoSchedule(rOp)){
-                    System.out.println("Cycle detected when topo scheduling...");
+//                    System.out.println("Cycle detected when topo scheduling..."); //在逆拓扑排序中成环，意味着包含CyclicHB
+                    this.matrix.setCyclicHB(true);
                     return false;
                 }
             }
@@ -507,7 +556,13 @@ class incrementalProcess implements Callable<BasicRelation>{
         if(wPrime.getPrecedingWrite().get(v) != -3) {
             CMOperation wPrimePWv = this.opList.get(wPrime.getPrecedingWrite().get(v));
             if (w.getProcessReadID() <= wPrimePWv.getProcessReadID()) {
-                System.out.println("Detected a cycle between w:" + w.easyPrint() +"and wPrime:" + wPrime.easyPrint());
+//                System.out.println("Detected a cycle between w:" + w.easyPrint() +"and wPrime:" + wPrime.easyPrint());
+//                System.out.println("w processReadID:" + w.getProcessReadID() + " w' PMv:" + wPrimePWv.getProcessReadID());
+                CMOperation wprocessRead = this.opList.get(this.curReadList.get(w.getProcessReadID()));
+                CMOperation wPrimeProcessRead = this.opList.get(this.curReadList.get(wPrimePWv.getProcessReadID()));
+//                System.out.println("w processRead:" + wprocessRead.easyPrint() +"at position" + wprocessRead.getPosition() + "wPrime processRead:" + wPrimeProcessRead.easyPrint() + "at position " + wPrimeProcessRead.getPosition());
+
+
                 return true;
             }
         }
@@ -518,33 +573,45 @@ class incrementalProcess implements Callable<BasicRelation>{
     }
 
     public void updateReachability(CMOperation wPrime, CMOperation w, CMOperation r){
-        System.out.println("===module: updateReachability===");
-        if(w.getLastRead()!= -1 && wPrime.getLastRead()!= -1) { //******************* //如果都不为-1才考虑更新？需要fix
-            CMOperation rrW = this.opList.get(w.getLastRead());
-            CMOperation rrWPrime = this.opList.get(wPrime.getLastRead());
-            if (rrW.getProcessReadID() < rrWPrime.getProcessReadID()) {
-                System.out.println("Update Reachability: RR of " + wPrime.easyPrint() + "from " + rrWPrime.easyPrint() + "to " +rrW.easyPrint() );
-                wPrime.setLastRead(w.getLastRead());
-                wPrime.getRrList().add(w.getLastRead());
-            }
+//        System.out.println("===module: updateReachability===");
 
-            //更新w的PW
-            w.updatePrecedingWrite(wPrime);
-            System.out.println("Update Reachability: PW of " +w.easyPrint() +  "by " + wPrime.easyPrint());
+        //******************* //如果都不为-1才考虑更新？需要fix
+//        if(w.getLastRead()!= -1 && wPrime.getLastRead()!= -1) {  //lastRead = -1表明在其之前没有read操作
+//            CMOperation rrW = this.opList.get(w.getLastRead());
+//            CMOperation rrWPrime = this.opList.get(wPrime.getLastRead());
+//            if (rrW.getProcessReadID() < rrWPrime.getProcessReadID()) {
+//                System.out.println("Update Reachability: RR of " + wPrime.easyPrint() + "from " + rrWPrime.easyPrint() + "to " +rrW.easyPrint() );
+//                wPrime.setLastRead(w.getLastRead());
+//                wPrime.getRrList().add(w.getLastRead());
+//            }
+//        }
+//        else{
+//
+//        }
+//        System.out.println("w lastRead:" + w.getLastRead() + "wPrime lastRead:" + wPrime.getLastRead());
+        if(w.getLastRead() < wPrime.getLastRead()){
+//            System.out.println("Update Reachability: RR of " + wPrime.easyPrint() + "from " + wPrime.getLastRead() + "to " + w.getLastRead() );
+            wPrime.setLastRead(w.getLastRead());
+            wPrime.getRrList().add(w.getLastRead());
+        }
 
-            CMOperation curOp;
-            for (Integer i : w.getSucList()) {
-                curOp = this.opList.get(i);
-                curOp.updatePrecedingWrite(wPrime);
-                System.out.println("Update Reachability: PW of " +curOp.easyPrint() +  "by " + wPrime.easyPrint());
-            }
+        //更新w的PW
+        w.updatePrecedingWrite(wPrime);
+//        System.out.println("Update Reachability: PW of " +w.easyPrint() +  "by " + wPrime.easyPrint());
+
+        CMOperation curOp;
+        for (Integer i : w.getSucList()) {
+            curOp = this.opList.get(i);
+            curOp.updatePrecedingWrite(wPrime);
+//            System.out.println("Update Reachability: PW of " +curOp.easyPrint() +  "by " + wPrime.easyPrint());
         }
     }
 
     public boolean applyRuleC(CMOperation wPrime, CMOperation w, CMOperation r){
-        System.out.println("===module: applyRuleC===");
+//        System.out.println("===module: applyRuleC===");
         //add edge w'->w
-        System.out.println("Adding edge " + wPrime.getID() + " to " + w.getID() + "!!!!!!!!!!!!!!!!!!!!!!");
+//        System.out.println("Adding edge " + wPrime.getID() + " to " + w.getID() + "!!!!!!!!!!!!!!!!!!!!!!？");
+//        System.out.println("That is: " + wPrime.easyPrint() + " to " + w.easyPrint() + " by " +r.easyPrint() + "at position " + r.getPosition());
         BitSet wCoList = w.getCoList();
 
         wCoList.set(wPrime.getID());
@@ -579,7 +646,7 @@ class incrementalProcess implements Callable<BasicRelation>{
         w.getIPreList().add(wPrime.getID());
 
         if(cycleDetection(wPrime, w)){
-            System.out.println("Exit computation by a cycle between " + wPrime.easyPrint() +"and " + w.easyPrint());
+//            System.out.println("Exit computation by a cycle between " + wPrime.easyPrint() +"and " + w.easyPrint());
             return true;
         }
         //如果没有检测到环，接着更新可达关系
@@ -589,10 +656,10 @@ class incrementalProcess implements Callable<BasicRelation>{
 
     public boolean topoSchedule(CMOperation r){
 
-        System.out.println("===module: topoSchedule===");
+//        System.out.println("===module: topoSchedule===");
 
         if(!r.isRead() || r.getCorrespondingWriteID() == -1) {
-            System.out.println("Error when calling topo-schedule");
+//            System.out.println("Error when calling topo-schedule");
             return false;
         }
         CMOperation curOp;
@@ -643,13 +710,14 @@ class incrementalProcess implements Callable<BasicRelation>{
         while(!QZERO.isEmpty()){
 
             wPrime = this.opList.get(QZERO.poll());
-            System.out.println("Dealing with wprime:" + wPrime.easyPrint());
+//            System.out.println("Dealing with wprime:" + wPrime.easyPrint());
             if(wPrime.isWrite() && !wPrime.isIDone()){
                 wPrime.setLastRR(wPrime.getLastRead()); //将w'的旧rr值保存，随后根据其后继节点更新
                 for(Integer i: wPrime.getISucList()){
                     o = this.opList.get(i);
                     if(o.getLastRead() < wPrime.getLastRead() && o.getLastRead() > 0){
                         wPrime.setLastRead(o.getLastRead());
+//                        System.out.println("Set LastRead of " + wPrime.easyPrint() + " by " + o.easyPrint() + " to" + o.getLastRead());
                     }
                 }
                 rReturn = this.identifyRuleC(wPrime);
@@ -670,7 +738,7 @@ class incrementalProcess implements Callable<BasicRelation>{
             }
 
             if(wPrime.getICount() == 0){
-                System.out.println("pull " + wPrime.easyPrint());
+//                System.out.println("pull " + wPrime.easyPrint());
                 wPrime.setIDone(true);
 //                System.out.println(wPrime.getIPreList());
                 for(Integer i: wPrime.getIPreList()){
@@ -684,7 +752,7 @@ class incrementalProcess implements Callable<BasicRelation>{
             }
 //            System.out.println("Stack size:" + QZERO.size());
         }
-        System.out.println("print before exit");
+//        System.out.println("print before exit");
         return false;
     }
 
@@ -711,7 +779,7 @@ class incrementalProcess implements Callable<BasicRelation>{
 //            System.out.println("no cycle in HBo of process" + this.processID);
         }
         else{
-            System.out.println("Cycle detected! process " + this.processID);
+//            System.out.println("Cycle detected! process " + this.processID);
         }
 
         BasicRelation matrix = this.getMatrix();

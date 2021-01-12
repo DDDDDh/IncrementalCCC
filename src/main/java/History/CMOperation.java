@@ -87,6 +87,7 @@ public class CMOperation extends Operation{
                     preWriteID = lastOp.precedingWrite.get(key);
                     curWriteID = this.precedingWrite.get(key);
                     if (curWriteID < preWriteID) {
+//                        System.out.println("PW of " + this.easyPrint() + " is change from " + curWriteID + " to " + preWriteID);
                         this.precedingWrite.put(key, preWriteID);
                     }
                 }

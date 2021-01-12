@@ -107,8 +107,8 @@ public class testFileAnalysis {
             IncrementalHappenBeforeOrder ihbo = new IncrementalHappenBeforeOrder(history.getOpNum());
             ihbo.incrementalHBO(history,po, rf, co);
             long endTime = System.nanoTime();
-            System.out.println("ihbo Time:" + (endTime - startTime) + "ns");
-            output.println("ihbo Time:" + (endTime - startTime) + "ns");
+            System.out.println("ihbo Time:" + (endTime - startTime) + "ns~");
+            output.println("ihbo Time:" + (endTime - startTime) + "ns~");
             System.out.println("Basic Computation of HBo");
             output.println("Basic Computation of HBo");
             startTime = System.nanoTime();
@@ -118,16 +118,21 @@ public class testFileAnalysis {
             System.out.println("bhbo Time:" + (endTime - startTime) + "ns");
             output.println("bhbo Time:" + (endTime - startTime) + "ns");
 
-            //当两种结果都存在的时候 自动比较
-            boolean hboEquality = hbo.checkEqual(ihbo);
-            if(!hboEquality){
-                System.out.println("ihbo is not equal to bhbo???");
-                output.println("ihbo is not equal to bhbo???");
+            //如果包含这三种非法模式，ihbo不能完整计算得到每个线程hbo的关系矩阵
+            if(ihbo.isCyclicCO() || ihbo.isThinAirRead() || ihbo.isCyclicHB()){
+                System.out.println("Cannot compare matrix! Reason: isCyclicCO:" + ihbo.isCyclicCO() + " isThinAirRead:" + ihbo.isThinAirRead() + " isCyclicHB:" + ihbo.isCyclicHB());
             }
-            else{
-                System.out.println("ihbo is equal to bhbo ^.^");
-                output.println("ihbo is equal to bhbo -.-");
+            else {
+                boolean hboEquality = hbo.checkEqual(ihbo);
+                if (!hboEquality) {
+                    System.out.println("ihbo is not equal to bhbo???");
+                    output.println("ihbo is not equal to bhbo???");
+                } else {
+                    System.out.println("ihbo is equal to bhbo ^.^");
+                    output.println("ihbo is equal to bhbo -.-");
+                }
             }
+
 
             cmChecker = new CMChecker(history, po, rf, co, ihbo); //都存在的情况下，保守起见用basic hbo计算
 
@@ -190,6 +195,7 @@ public class testFileAnalysis {
         }
         System.out.println("Begin to print valid files:");
         for(File f: validFiles){
+            initialTime = System.nanoTime();
             String fileName = f.getAbsolutePath();
 
 //            System.out.println(fileName);

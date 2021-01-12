@@ -1,18 +1,17 @@
 package Relations;
 
 import History.Operation;
+import lombok.Data;
 
 import java.util.BitSet;
 import java.util.LinkedList;
 
 public class CausalOrder extends BasicRelation{
 
-    boolean isCyclicCO;
     boolean isCalculated;
 
     public CausalOrder(int size){
         super(size);
-        this.isCyclicCO = false;
         this.isCalculated = false;
     }
 

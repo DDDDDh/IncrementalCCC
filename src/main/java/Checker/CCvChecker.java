@@ -76,7 +76,7 @@ public class CCvChecker extends CCChecker{
             reason = "isCC:false";
         }
         else if(this.isCyclicCF) {
-            reason = "isWriteHBInitRead:true";
+            reason = "isCyclicCF:true";
         }
         return reason;
     }

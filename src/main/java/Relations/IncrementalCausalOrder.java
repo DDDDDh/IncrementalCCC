@@ -39,6 +39,7 @@ public class IncrementalCausalOrder extends CausalOrder{
 
         if(topoList.size() != this.getMatrixSize()){
             System.out.println("Not a DAG");
+            this.setCyclicCO(true);
             return false;
         }
         return true;
@@ -51,6 +52,7 @@ public class IncrementalCausalOrder extends CausalOrder{
 //        assert (!rf.checkThinAirRead());
 //        if(rf.checkThinAirRead()){
 //            System.out.println("Contain ThinAirRead!");
+//            this.setThinAirRead(true);
 //            return;
 //        }
 

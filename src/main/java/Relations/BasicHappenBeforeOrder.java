@@ -14,6 +14,15 @@ public class BasicHappenBeforeOrder extends HappenBeforeOrder{
 
     public void calculateHBo(History history, ProgramOrder po, ReadFrom rf, CausalOrder co) throws Exception{
 
+        if(rf.checkThinAirRead()){
+            this.setThinAirRead(true);
+            return;
+        }
+        if(co.isCyclicCO()) {
+            this.setCyclicCO(true);
+            return;
+        }
+
         LinkedList<Operation> opList = history.getOperationList();
 
         //把history中操作的可见集合更新为co
@@ -32,20 +41,18 @@ public class BasicHappenBeforeOrder extends HappenBeforeOrder{
 
         }
 
-        for(Integer processID: history.getProcessOpList().keySet()){
+        for(int i = 0; i < history.getProcessOpList().keySet().size(); i++){
             Future<BasicRelation> submit = completionService.take();
-            processMatrix.put(processID, submit.get());
+            BasicRelation processResult = submit.get();
+            processMatrix.put(processResult.getProcessID(), processResult);
+//            System.out.println("process " + processResult.getProcessID() + " is completed~");
         }
 
 //        System.out.println("Finally we get a matrix:");
 //        this.printMatrix();
 
         executorService.shutdown();
-
-
     }
-
-
 
 
 }
@@ -88,6 +95,7 @@ class basicProcess implements Callable<BasicRelation> {
     public void init(){
         this.initOpList();
         this.matrix = new BasicRelation(this.size);
+        this.matrix.setProcessID(this.processID);
         //利用causal order初始化可达性矩阵
         this.matrix.union(this.matrix, this.co);
         this.matrix.updateListByMatrix(this.opList);
@@ -181,12 +189,15 @@ class basicProcess implements Callable<BasicRelation> {
         return this.matrix;
     }
 
-    public BasicRelation call() {
+    public BasicRelation call() throws Exception{
 //        LinkedList<Integer> thisOpList = history.getProcessOpList().get(this.processID);
 //        LinkedList<Operation> opList = history.getOperationList();
 
         caculateHBoProcess();
         BasicRelation matrix = this.getMatrix();
+//        if(this.processID == 1){
+//           Thread.sleep(1000);
+//        }
 //        System.out.println("Basic HBo Matrix for process" + this.processID + ":               ********************" );
 //        matrix.printMatrix();
 //        System.out.println("Info of process" + this.processID + "??:" + this.curReadList.size());
