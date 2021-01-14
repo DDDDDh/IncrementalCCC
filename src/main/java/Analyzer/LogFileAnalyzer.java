@@ -93,14 +93,15 @@ public class LogFileAnalyzer {
         }
 
         for(int key: globalInfo.keySet()){
-            System.out.println("-----------------------------------------------------");
-            System.out.println("Average time usage for " + key + " operations:");
-            System.out.println("Total number of histories: " + globalInfo.get(key).count);
-            System.out.println("BCO : " + globalInfo.get(key).bco_avg);
-            System.out.println("ICO : " + globalInfo.get(key).ico_avg);
-            System.out.println("CF  : " + globalInfo.get(key).cf_avg);
-            System.out.println("BHBO: " + globalInfo.get(key).bhbo_avg);
-            System.out.println("IHBO: " + globalInfo.get(key).ihbo_avg);
+//            System.out.println("-----------------------------------------------------");
+//            System.out.println("Average time usage for " + key + " operations:");
+//            System.out.println("Total number of histories: " + globalInfo.get(key).count);
+//            System.out.println("BCO : " + globalInfo.get(key).bco_avg);
+//            System.out.println("ICO : " + globalInfo.get(key).ico_avg);
+//            System.out.println("CF  : " + globalInfo.get(key).cf_avg);
+//            System.out.println("BHBO: " + globalInfo.get(key).bhbo_avg);
+//            System.out.println("IHBO: " + globalInfo.get(key).ihbo_avg);
+            System.out.println(key + "  " + globalInfo.get(key).ico_avg + "  " + globalInfo.get(key).bco_avg + " " + globalInfo.get(key).cf_avg + " " + globalInfo.get(key).ihbo_avg+ " " + globalInfo.get(key).bhbo_avg);
         }
     }
 

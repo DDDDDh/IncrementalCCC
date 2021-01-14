@@ -51,7 +51,7 @@ public class Main {
             for (int i = 0; i < 100; i++) {
                 System.out.println("No." + i);
                 output.println("No. " + i);
-                CCProducer ccProducer = new CCProducer(opNum, 5, 3, 1);
+                CCProducer ccProducer = new CCProducer(opNum, 10, 3, 1);
                 ccProducer.generatePath();
                 ccProducer.generateCCHistory();
                 ccProducer.printToFile();
@@ -88,11 +88,24 @@ public class Main {
                 endTime = System.nanoTime();
                 long icoTime = endTime - startTime;
 
+                boolean coEquality = bco.checkEqualDebug(ico, history.getOperationList());
+                if(!coEquality){
+                    System.out.println("ico is not equal to bco???");
+                    output.println("ico is not equal to bco???");
+                }
+                else{
+                    System.out.println("ico is equal to bco ^.^ ");
+                    output.println("ico is equal to bco ^.^ ");
+                }
+                output.println();
+
 
                 CCChecker ccChecker = new CCChecker(history, po, rf, bco);
                 ccResult = ccChecker.checkCC();
                 output.println("Chekcing CC, result:" + ccResult);
                 System.out.println("Chekcing CC, result:" + ccResult);
+
+
                 if (ccResult) {
                     countCC++;
                 } else {
@@ -136,6 +149,21 @@ public class Main {
                 ihbo.incrementalHBO(history,po, rf, bco);
                 endTime = System.nanoTime();
                 long ihboTime = endTime - startTime;
+
+                if(ihbo.isCyclicCO() || ihbo.isThinAirRead() || ihbo.isCyclicHB()){
+                    System.out.println("Cannot compare matrix! Reason: isCyclicCO:" + ihbo.isCyclicCO() + " isThinAirRead:" + ihbo.isThinAirRead() + " isCyclicHB:" + ihbo.isCyclicHB());
+                    output.println("Cannot compare matrix! Reason: isCyclicCO:" + ihbo.isCyclicCO() + " isThinAirRead:" + ihbo.isThinAirRead() + " isCyclicHB:" + ihbo.isCyclicHB());
+                }
+                else {
+                    boolean hboEquality = hbo.checkEqual(ihbo);
+                    if (!hboEquality) {
+                        System.out.println("ihbo is not equal to bhbo???");
+                        output.println("ihbo is not equal to bhbo???");
+                    } else {
+                        System.out.println("ihbo is equal to bhbo ^.^");
+                        output.println("ihbo is equal to bhbo -.-");
+                    }
+                }
 
                 CMChecker cmChecker = new CMChecker(history, po, rf, bco, hbo);
                 cmResult = cmChecker.checkCM();

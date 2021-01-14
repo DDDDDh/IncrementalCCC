@@ -52,7 +52,7 @@ public class operationProducer {
         this.ops.add(methods.Read);
         this.ops.add(methods.Write);
         this.weightTemp = new LinkedList<>();
-        this.varRange = 10; //默认生成5个变量
+        this.varRange = 100; //默认生成5个变量
         this.updateWeightList();
         this.varValueMap = new HashMap<>();
         this.valueRange = 1000; //默认生成0-100的值
