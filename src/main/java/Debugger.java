@@ -12,8 +12,12 @@ public class Debugger {
 
 //      String curFile = "/Users/yi-huang/Project/MongoTrace/store/test2_majority_majority_no-nemesis_2000-5000/Part1/history2000.edn";
 //        String curFile = "/Users/yi-huang/Project/MongoTrace/store/test3_majority_majority_node-failure_2000-5000/history2000.edn";
-//        String curFile = "/Users/yi-huang/Project/IncrementalCCC/src/main/resources/BadPatternExamples/WriteHBInitRead_history.edn";
-        String curFile = "/Users/yi-huang/Project/MongoTrace/1227/no-memesis/majority-linearizable/100-3000/history700.edn";
+//        String curFile = "/Users/yi-huang/Project/IncrementalCCC/src/main/resources/BadPatternExamples/CyclicHB_history.edn";
+//        String curFile = "/Users/yi-huang/Project/IncrementalCCC/target/RandomHistories/CC/100/Running_202111310_opNum100_processNum5_rRate3_wRate1_7.edn";
+//        String curFile = "/Users/yi-huang/Project/IncrementalCCC/target/RandomHistories/CC/400/Running_202111722_opNum400_processNum10_rRate3_wRate1_76.edn";
+        String curFile = "/Users/yi-huang/Project/IncrementalCCC/target/RandomHistories/CMNotCCv/200/Running_202111822_opNum200_processNum10_rRate3_wRate1_32.edn";
+//        String curFile = "/Users/yi-huang/Project/MongoTrace/Debug/Running_202111722_opNum300_processNum10_rRate3_wRate1_27.edn";
+//        String curFile = "/Users/yi-huang/Project/IncrementalCCC/target/RandomHistories/CC/600/Running_202012210_opNum600_processNum5_rRate3_wRate1_59.edn";
 //        String curFile = "/Users/yi-huang/Project/MongoTrace/mongo-causal-register-wc-:majority-rc-:majority-ti-180-sd-2-cry-10-wp-0.25-rp-0.75-ops-600-no-nemesis_202012225/history600_0.edn";
 //        String curFile = "/Users/yi-huang/Project/IncrementalCCC/target/RandomHistories/Running_202111122_opNum100_processNum5_rRate3_wRate1.edn";
         String logPath = "/Users/yi-huang/Project/MongoTrace/store/DebuggerLogfile.txt";
@@ -104,8 +108,11 @@ public class Debugger {
 //        System.out.println("Finish computation of happen-before relation");
 
         //如果包含这三种非法模式，ihbo不能完整计算得到每个线程hbo的关系矩阵
+        CMChecker cmChecker;
+
         if(ihbo.isCyclicCO() || ihbo.isThinAirRead() || ihbo.isCyclicHB()){
             System.out.println("Cannot compare matrix! Reason: isCyclicCO:" + ihbo.isCyclicCO() + " isThinAirRead:" + ihbo.isThinAirRead() + " isCyclicHB:" + ihbo.isCyclicHB());
+            cmChecker = new CMChecker(history, po, rf, ico, hbo);
         }
         else {
             boolean hboEquality = hbo.checkEqual(ihbo);
@@ -116,10 +123,11 @@ public class Debugger {
                 System.out.println("ihbo is equal to bhbo ^.^");
                 output.println("ihbo is equal to bhbo -.-");
             }
+            cmChecker = new CMChecker(history, po, rf, ico, ihbo); //只有当不包含这三种非法模式，才能完全计算得到ihbo矩阵，并以此参加判定
         }
 //
 //
-        CMChecker cmChecker = new CMChecker(history, po, rf, ico, ihbo);
+//        CMChecker cmChecker = new CMChecker(history, po, rf, ico, ihbo);
 
         if (ccChecker.checkCC()) {
             System.out.println("Chekcing CC, result:true");

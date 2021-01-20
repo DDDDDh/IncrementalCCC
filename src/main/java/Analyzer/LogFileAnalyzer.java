@@ -107,7 +107,7 @@ public class LogFileAnalyzer {
 
     public static void main(String args[]) throws Exception{
         LogFileAnalyzer analyzer = new LogFileAnalyzer();
-        analyzer.logFileAnalyzer("target/RandomHistories/CheckingLogfile.txt", 10);
+        analyzer.logFileAnalyzer("target/RandomHistories/CheckingLogfile_0120.txt", 10);
     }
 
 

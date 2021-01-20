@@ -75,6 +75,7 @@ public class CMOperation extends Operation{
         this.iPreList = new LinkedList<>();
         this.iDone = false;
         this.lastRR = -1;
+
     }
 
     public void updatePrecedingWrite(CMOperation lastOp){
@@ -119,6 +120,13 @@ public class CMOperation extends Operation{
                 }
             }
         }
+    }
+
+    public void initInducedSubGraph(){
+        this.setICount(0);
+        this.getISucList().clear();
+        this.getIPreList().clear();
+        this.setIDone(false);
     }
 
 }

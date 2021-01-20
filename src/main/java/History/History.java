@@ -150,6 +150,8 @@ public class History {
                 if(tempOp.isWrite()){ //只需考虑写操作
                     if(tempOp.isInitWrite()){
                         System.out.println("Init Write Detected!");
+                        System.out.println(tempOp.easyPrint());
+                        System.out.println(tempOp.printOpInfo());
                         return false;
                     }
 

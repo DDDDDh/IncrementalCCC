@@ -107,8 +107,8 @@ public class testFileAnalysis {
             IncrementalHappenBeforeOrder ihbo = new IncrementalHappenBeforeOrder(history.getOpNum());
             ihbo.incrementalHBO(history,po, rf, co);
             long endTime = System.nanoTime();
-            System.out.println("ihbo Time:" + (endTime - startTime) + "ns~");
-            output.println("ihbo Time:" + (endTime - startTime) + "ns~");
+            System.out.println("ihbo Time:" + (endTime - startTime) + "ns");
+            output.println("ihbo Time:" + (endTime - startTime) + "ns");
             System.out.println("Basic Computation of HBo");
             output.println("Basic Computation of HBo");
             startTime = System.nanoTime();
@@ -134,7 +134,7 @@ public class testFileAnalysis {
             }
 
 
-            cmChecker = new CMChecker(history, po, rf, co, ihbo); //都存在的情况下，保守起见用basic hbo计算
+            cmChecker = new CMChecker(history, po, rf, co, hbo); //都存在的情况下，保守起见用basic hbo计算
 
         }
 

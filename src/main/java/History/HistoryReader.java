@@ -64,6 +64,7 @@ public class HistoryReader {
         String key = kv[0];
         int value;
         if(kv[1].equals("nil") || kv[1].equals("0")){ //读到0或者-1都是初值
+//            if(kv[1].equals("nil")){
             value = -1;
         }
         else{

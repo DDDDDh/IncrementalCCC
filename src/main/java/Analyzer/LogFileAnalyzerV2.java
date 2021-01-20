@@ -59,7 +59,9 @@ public class LogFileAnalyzerV2 {
     public void analyze() throws Exception{
 
         HashMap<String, LinkedList<String>> classifier = new HashMap<>();
-
+        File outfile = new File(this.outPath);
+        PrintWriter output = new PrintWriter(outfile);
+        boolean toPrint = false;
         File logFile = new File(this.logPath);
         if(logFile.exists() && logFile.isFile()){
             InputStreamReader read = new InputStreamReader(new FileInputStream(logFile), FILE_ENCODING);
@@ -71,7 +73,7 @@ public class LogFileAnalyzerV2 {
 
             while((tempLine = bufferedReader.readLine()) != null){
                 if(tempLine.startsWith("Checking")){
-//                    System.out.println("last info:" + info);
+                    System.out.println("last info:" + info);
                     String key = info.type + "-" + info.wc + "-" + info.rc;
                     if(!classifier.containsKey(key)){
                         tempList = new LinkedList<>();
@@ -84,7 +86,12 @@ public class LogFileAnalyzerV2 {
                     }
                     info = new fileInfo();
                     analyzeFileName(info, tempLine);
-
+                    if(info.type.equals("local_stable")){
+                        toPrint = true;
+                    }
+                    else{
+                        toPrint = false;
+                    }
                 }
                 else if(tempLine.contains("ico Time")){
                     info.setIcoTime(Long.valueOf(tempLine.substring(tempLine.indexOf(":")+1, tempLine.indexOf("ns"))));
@@ -103,6 +110,10 @@ public class LogFileAnalyzerV2 {
                 else if(tempLine.contains("ihbo Time")){
                     info.setIhboTime(Long.valueOf(tempLine.substring(tempLine.indexOf(":")+1, tempLine.indexOf("ns"))));
                 }
+
+                if(toPrint){
+                    output.println(tempLine);
+                }
             }
 //            System.out.println("final info:" + info);
             read.close();
@@ -116,13 +127,15 @@ public class LogFileAnalyzerV2 {
                 }
                 System.out.println("-----------------------------------------------------");
             }
+
+            output.close();
         }
 
     }
 
 
     public static void main(String args[]) throws Exception{
-        LogFileAnalyzerV2 analyzer = new LogFileAnalyzerV2("/Users/yi-huang/Project/MongoTrace/selected-data_ALL_out_0112.txt","/Users/yi-huang/Project/MongoTrace/selected-data_ALL_out_0112_split.txt");
+        LogFileAnalyzerV2 analyzer = new LogFileAnalyzerV2("/Users/yi-huang/Project/MongoTrace/Debug/selected-data_ALL_out_0120.txt","/Users/yi-huang/Project/MongoTrace/selected-data_ALL_out_0120.txt");
         analyzer.analyze();
     }
 

@@ -232,11 +232,18 @@ public class BasicRelation implements BasicRelationInterface{
             }
         }
 
+        BitSet outNodes = new BitSet(size);
+        for(int i = 0; i < size; i++){
+            outNodes.set(i, true);
+        }
+
         int curID;
         while(!stack.isEmpty()){
             curID = stack.removeFirst();
             count++;
 //            System.out.println("Out:" + curID);
+            outNodes.set(curID, false);
+
             for(int i = 0; i < size; i++){
                 if(this.existEdge(curID, i)){
                     inDegree[i]--;
@@ -248,7 +255,11 @@ public class BasicRelation implements BasicRelationInterface{
             }
         }
         if(count < size) {
-//            System.out.println("Detected a cycle in matrix.");
+//            System.out.println("Detected a cycle in matrix between nodes:");
+//            for (int i = outNodes.nextSetBit(0); i >= 0; i = outNodes.nextSetBit(i + 1)) {
+//                System.out.print(i + " ");
+//            }
+//            System.out.println();
             return true;
         }
 //        System.out.println("No cycle in matrix.");

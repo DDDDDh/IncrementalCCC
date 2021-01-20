@@ -157,7 +157,7 @@ public class operationProducer {
         Random random = new Random();
         if(op.getMethod() == methods.Write){ //如果是写操作，随机写入一个范围内的值
             temp = random.nextInt(this.valueRange);
-            while(this.usedValue.get(op.getVariable()).contains(temp)){ //如果对同一变量写入了重复的值，则重新生成
+            while(this.usedValue.get(op.getVariable()).contains(temp) || temp == 0){ //如果对同一变量写入了重复的值，则重新生成 //不能写0
                 temp = random.nextInt(this.valueRange);
             }
             this.varValueMap.put(op.getVariable(), temp);

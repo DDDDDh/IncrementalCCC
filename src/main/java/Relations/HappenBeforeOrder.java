@@ -26,11 +26,11 @@ public class HappenBeforeOrder extends BasicRelation{
             curMatrix = this.processMatrix.get(curProcess);
             targetMatrix = hbo.processMatrix.get(curProcess);
             if(!curMatrix.checkEqual(targetMatrix)){
-//                System.out.println("Detected not equal at process " + curProcess);
-//                System.out.println("Matrix 1:");
-//                curMatrix.printMatrix();
-//                System.out.println("Matrix 2:");
-//                targetMatrix.printMatrix();
+                System.out.println("Detected not equal at process " + curProcess);
+                System.out.println("Matrix 1:");
+                curMatrix.printMatrix();
+                System.out.println("Matrix 2:");
+                targetMatrix.printMatrix();
                 isEqual = false;
             }
         }
