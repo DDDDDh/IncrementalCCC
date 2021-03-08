@@ -26,6 +26,45 @@ public class LogFileAnalyzer {
         }
     }
 
+    public void mergeLogs(String folderPath) throws Exception{
+
+        List<String> files = new ArrayList<String>();
+        File file = new File(folderPath);
+        File[] tempList = file.listFiles();
+
+        String logPath = folderPath + "/total.txt";
+        File outfile = new File(logPath);
+        PrintWriter output = new PrintWriter(outfile);
+
+        for (int i = 0; i < tempList.length; i++) {
+            if (tempList[i].isFile()) {
+                files.add(tempList[i].toString());
+                //文件名，不包含路径
+                //String fileName = tempList[i].getName();
+            }
+        }
+
+        for (String filename: files) {
+            String curFileName = filename;
+            File curFile = new File(curFileName);
+            System.out.println("Dealing with " + curFileName);
+            if(curFile.isFile() && curFile.exists()) {
+                InputStreamReader read = new InputStreamReader(new FileInputStream(curFile), FILE_ENCODING);
+                BufferedReader bufferedReader = new BufferedReader(read);
+                String lineContent = null;
+                while ((lineContent = bufferedReader.readLine()) != null) {
+                    output.println(lineContent);
+                }
+                read.close();
+                bufferedReader.close();
+            }
+        }
+
+        System.out.println("Totally dealing with " + files.size() + " files");
+        output.close();
+
+    }
+
     public long iterAvg(long lastAvg, long cur, int count){
         return lastAvg + ((cur - lastAvg) / (count+1));
     }
@@ -107,7 +146,8 @@ public class LogFileAnalyzer {
 
     public static void main(String args[]) throws Exception{
         LogFileAnalyzer analyzer = new LogFileAnalyzer();
-        analyzer.logFileAnalyzer("target/RandomHistories/CheckingLogfile_0120.txt", 10);
+        analyzer.logFileAnalyzer("target/RandomHistories/StressTestOriginalOut_0306/total.txt", 10);
+//        analyzer.mergeLogs("target/RandomHistories/StressTestMongoOut_0306");
     }
 
 

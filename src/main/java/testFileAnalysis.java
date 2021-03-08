@@ -312,7 +312,7 @@ public class testFileAnalysis {
             }
             else if(args[1].equals("ALL")){
                 checkCC(output, initialTime, history, po, rf, bco);
-                if(reader.getTotalNum() < 1000) { //暂时只为操作数小于1000的运行记录检查CM
+                if(reader.getTotalNum() <= 1000) { //暂时只为操作数小于1000的运行记录检查CM
                     checkCM(output, initialTime, history, po, rf, bco, "A");
                 }
                 checkCCv(output, initialTime, history, po, rf, bco);

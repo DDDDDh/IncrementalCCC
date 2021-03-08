@@ -28,8 +28,8 @@ public class Main {
 
     public static void main(String args[]) throws Exception{
 
-        String stressTestOut = "target/RandomHistories/StressTestLogfile_0120.txt";
-        String logPath = "target/RandomHistories/CheckingLogfile_0120.txt";
+        String stressTestOut = "target/RandomHistories/StressTestLogfile_0304.txt";
+        String logPath = "target/RandomHistories/CheckingLogfile_0304.txt";
         File outfile = new File(stressTestOut);
         PrintWriter output = new PrintWriter(outfile);
         output.println("-----Begin Stress Test-----");
@@ -43,12 +43,12 @@ public class Main {
 
         int opNum = 1;
 
-        for (int k = 1; k < 6; k++) {
+        for (int k = 1; k < 11; k++) {
 
             opNum = k*100;
             System.out.println("Round: " + k);
 
-            for (int i = 0; i < 500; i++) {
+            for (int i = 0; i < 100; i++) {
                 System.out.println("No." + i);
                 output.println("No. " + i);
                 CCProducer ccProducer = new CCProducer(opNum, 10, 3, 1);
