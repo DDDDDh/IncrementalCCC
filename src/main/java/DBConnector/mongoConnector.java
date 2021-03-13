@@ -34,7 +34,7 @@ public class mongoConnector {
 
 //        mongoClient = MongoClients.create(mongoSRV);
         List<ServerAddress> addresses = new ArrayList<>();
-        ServerAddress serverAddress = new ServerAddress("localhost", 27011);
+        ServerAddress serverAddress = new ServerAddress("127.0.0.1", 27011);
         addresses.add(serverAddress);
 
         MongoCredential mongoCredential = MongoCredential.createScramSha1Credential("java","test_mongo","jpass".toCharArray());

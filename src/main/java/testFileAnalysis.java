@@ -10,6 +10,19 @@ import java.io.*;
 
 public class testFileAnalysis {
 
+    String globalLog;
+
+    public static void appendLog(String fileName, String content) throws IOException {
+        try {
+            FileWriter writer = new FileWriter(fileName, true);
+            writer.write(content);
+            writer.write("\n");
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     static LinkedList<File> parseFiles(File file){
         File[] files = file.listFiles();
         LinkedList<File> validFiles = new LinkedList<File>();
@@ -37,7 +50,7 @@ public class testFileAnalysis {
         }
         return validFiles;
     }
-    public static void checkCC(PrintWriter output, long initialTime, History history, ProgramOrder po, ReadFrom rf, CausalOrder co){
+    public void checkCC(PrintWriter output, long initialTime, History history, ProgramOrder po, ReadFrom rf, CausalOrder co){
         System.out.println("Begin to check CC:");
         output.println("Begin to check CC:");
         CCChecker ccChecker = new CCChecker(history, po, rf, co);
@@ -59,7 +72,7 @@ public class testFileAnalysis {
     }
 
     //此处传入的是basic causal order
-    public static void checkCM(PrintWriter output, long initialTime, History history, ProgramOrder po, ReadFrom rf, CausalOrder co, String arg) throws Exception{
+    public void checkCM(PrintWriter output, long initialTime, History history, ProgramOrder po, ReadFrom rf, CausalOrder co, String arg) throws Exception{
 
         System.out.println("Begin to check CM:");
         output.println("Begin to check CM:");
@@ -109,6 +122,9 @@ public class testFileAnalysis {
             long endTime = System.nanoTime();
             System.out.println("ihbo Time:" + (endTime - startTime) + "ns");
             output.println("ihbo Time:" + (endTime - startTime) + "ns");
+            long ihboTime = endTime - startTime;
+
+
             System.out.println("Basic Computation of HBo");
             output.println("Basic Computation of HBo");
             startTime = System.nanoTime();
@@ -117,6 +133,11 @@ public class testFileAnalysis {
             endTime = System.nanoTime();
             System.out.println("bhbo Time:" + (endTime - startTime) + "ns");
             output.println("bhbo Time:" + (endTime - startTime) + "ns");
+            long bhboTime = endTime - startTime;
+
+
+            this.appendLog(this.globalLog, "Basic HBo time: " + bhboTime);
+            this.appendLog(this.globalLog, "Incremental HBo time: " + ihboTime);
 
             //如果包含这三种非法模式，ihbo不能完整计算得到每个线程hbo的关系矩阵
             if(ihbo.isCyclicCO() || ihbo.isThinAirRead() || ihbo.isCyclicHB()){
@@ -155,7 +176,7 @@ public class testFileAnalysis {
     }
 
 
-    public static void checkCCv(PrintWriter output, long initialTime, History history, ProgramOrder po, ReadFrom rf, CausalOrder co){
+    public void checkCCv(PrintWriter output, long initialTime, History history, ProgramOrder po, ReadFrom rf, CausalOrder co) throws Exception{
         System.out.println("Begin to check CCv:");
         output.println("Begin to check CCv:");
 
@@ -170,6 +191,8 @@ public class testFileAnalysis {
         output.println("cf Time:" + (endTime - startTime) + "ns");
         System.out.println("Finish calculation of cf.");
         output.println("Finish calculation of cf.");
+
+        this.appendLog(this.globalLog, "CF time: " + (endTime-startTime));
 
         CCvChecker ccvChecker = new CCvChecker(history, po, rf, co, cf);
         boolean ccvResult = ccvChecker.checkCCv();
@@ -187,6 +210,8 @@ public class testFileAnalysis {
 
 //        File file = new File("/Users/yi-huang/Project/MongoTrace/1227/no-memesis/majority-linearizable/100-3000_test/");
         File file = new File(args[0]);
+        testFileAnalysis tfa = new testFileAnalysis();
+        tfa.globalLog = "target/CheckingSeletedLog.txt";
         long initialTime = System.nanoTime();
 
         LinkedList<File> validFiles = new LinkedList<>();
@@ -207,7 +232,12 @@ public class testFileAnalysis {
             String curFile = fileName;
 
             System.out.println("Checking file:" + curFile);
+            tfa.appendLog(tfa.globalLog, "----------------------------------------------------------");
             output.println("Checking file:" + curFile);
+            tfa.appendLog(tfa.globalLog, "Checking " + curFile);
+            tfa.appendLog(tfa.globalLog, "CC Result: true");
+            tfa.appendLog(tfa.globalLog, "CCv Result: true");
+            tfa.appendLog(tfa.globalLog, "CM Result: true");
             HistoryReader reader = new HistoryReader(curFile);
             History history = new History(reader.readHistory());
             history.setOpNum(reader.getTotalNum()); //读取完一个历史记录之后设置总操作数
@@ -251,6 +281,7 @@ public class testFileAnalysis {
             output.println("Begin to calculate co.");
             long startTime = 0;
             long endTime = 0;
+            long icoTime = 0;
             IncrementalCausalOrder ico = new IncrementalCausalOrder(history.getOpNum());
             if(!ico.DAGDetection(history,po,rf)){
                 System.out.println("Not a DAG, cannot use incremental CO computation.");
@@ -262,6 +293,7 @@ public class testFileAnalysis {
                 endTime = System.nanoTime();
                 System.out.println("ico Time:" + (endTime - startTime) + "ns");
                 output.println("ico Time:" + (endTime - startTime) + "ns");
+                icoTime = endTime -startTime;
             }
 
             //bco
@@ -270,12 +302,17 @@ public class testFileAnalysis {
 //            System.out.println("Finish initialization of bco");
             bco.computeCO(history, po, rf);
             endTime = System.nanoTime();
+            long bcoTime = endTime - startTime;
             System.out.println("bco Time:" + (endTime - startTime) + "ns");
             output.println("bco Time:" + (endTime - startTime) + "ns");
 
             System.out.println("Finish calculation of co.");
             output.println("Finish calculation of co.");
 
+
+            tfa.appendLog(tfa.globalLog, "BCO time: " + bcoTime);
+            tfa.appendLog(tfa.globalLog, "ICO time: " + icoTime);
+//            appendLog(tfa.globalLog, "CF time: 0");
 
 //            boolean coEquality = bco.checkEqual(ico);
 //            if(coEquality){
@@ -294,28 +331,29 @@ public class testFileAnalysis {
             output.println();
 
             if(args[1].equals("CC")){
-                checkCC(output, initialTime, history, po, rf, bco);
+                tfa.checkCC(output, initialTime, history, po, rf, bco);
             }
             else if(args[1].equals("CM")){
-                checkCC(output, initialTime, history, po, rf, bco);
+                tfa.checkCC(output, initialTime, history, po, rf, bco);
                 if(args.length < 3) {
-                    checkCM(output, initialTime, history, po, rf, bco, "A");
+                    tfa.checkCM(output, initialTime, history, po, rf, bco, "A");
                 }
                 else{
-                    checkCM(output, initialTime, history, po, rf, bco, args[2]);
+                    tfa.checkCM(output, initialTime, history, po, rf, bco, args[2]);
                 }
 
             }
             else if(args[1].equals("CCv")){
-                checkCC(output, initialTime, history, po, rf, bco);
-                checkCCv(output, initialTime, history, po, rf, bco);
+                tfa.checkCC(output, initialTime, history, po, rf, bco);
+                tfa.checkCCv(output, initialTime, history, po, rf, bco);
             }
             else if(args[1].equals("ALL")){
-                checkCC(output, initialTime, history, po, rf, bco);
+                tfa.checkCC(output, initialTime, history, po, rf, bco);
+                tfa.checkCCv(output, initialTime, history, po, rf, bco);
                 if(reader.getTotalNum() <= 1000) { //暂时只为操作数小于1000的运行记录检查CM
-                    checkCM(output, initialTime, history, po, rf, bco, "A");
+                    tfa.checkCM(output, initialTime, history, po, rf, bco, "A");
                 }
-                checkCCv(output, initialTime, history, po, rf, bco);
+
             }
 
             output.close();

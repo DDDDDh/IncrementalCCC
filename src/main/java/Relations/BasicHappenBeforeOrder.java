@@ -126,6 +126,7 @@ class basicProcess implements Callable<BasicRelation> {
         Operation wPrime;
         BitSet curList;
         int loop = 0;
+//        cont:
         while(forward) {
 //            System.out.println("Loop " + loop);
             forward = false;
@@ -144,18 +145,19 @@ class basicProcess implements Callable<BasicRelation> {
                         continue;
                     }
 
-                    int correspodingWriteID = o.getCorrespondingWriteID();
-                    if(correspodingWriteID >= 0) { //略去没有对应写操作的读
+                    int correspondingWriteID = o.getCorrespondingWriteID();
+                    if(correspondingWriteID >= 0) { //略去没有对应写操作的读
 //                        System.out.println("Dealing with " + o.easyPrint() +" for basic happen before....");
                         correspondingWrite = this.opList.get(o.getCorrespondingWriteID());
                         curList = o.getCoList();
                         for (int j = curList.nextSetBit(0); j >= 0; j = curList.nextSetBit(j + 1)) {
                             wPrime = this.opList.get(j);
                             if (wPrime.isWrite() && wPrime.onSameKey(o) && wPrime.notEqual(correspondingWrite)) {
-                                if (!this.matrix.existEdge(j, correspodingWriteID)) { //因为已经计算过传递闭包，所以M[i][j]为1即为存在i->j的路径
+                                if (!this.matrix.existEdge(j, correspondingWriteID)) { //因为已经计算过传递闭包，所以M[i][j]为1即为存在i->j的路径
                                     correspondingWrite.getCoList().set(j, true);
-                                    this.matrix.setTrue(j, correspodingWriteID);
+                                    this.matrix.setTrue(j, correspondingWriteID);
                                     forward = true;
+//                                    break cont;
                                 }
 //                                System.out.println("Add an edge from " + j + " to " + o.getCorrespondingWriteID());
                             }
@@ -192,6 +194,7 @@ class basicProcess implements Callable<BasicRelation> {
     public BasicRelation call() throws Exception{
 //        LinkedList<Integer> thisOpList = history.getProcessOpList().get(this.processID);
 //        LinkedList<Operation> opList = history.getOperationList();
+        System.out.println("Here we are running process:" + this.processID);
 
         caculateHBoProcess();
         BasicRelation matrix = this.getMatrix();

@@ -1,5 +1,7 @@
 package Analyzer;
 
+import Relations.IncrementalHappenBeforeOrder;
+
 import java.io.*;
 import java.util.*;
 
@@ -90,6 +92,7 @@ public class LogFileAnalyzer {
                         }
                         tempLine = lineData.get(line+1);
                         int key = Integer.valueOf(tempLine.substring(tempLine.indexOf("_opNum")+6, tempLine.indexOf("_processNum")));
+//                        int key = Integer.valueOf(tempLine.substring(tempLine.indexOf("ops-")+4, tempLine.indexOf("-no-")));
                         Info tempInfo;
                         tempLine = lineData.get(line+5);
                         long cur_bco = Long.valueOf(tempLine.substring(tempLine.indexOf("time:")+6));
@@ -146,8 +149,9 @@ public class LogFileAnalyzer {
 
     public static void main(String args[]) throws Exception{
         LogFileAnalyzer analyzer = new LogFileAnalyzer();
-        analyzer.logFileAnalyzer("target/RandomHistories/StressTestOriginalOut_0306/total.txt", 10);
-//        analyzer.mergeLogs("target/RandomHistories/StressTestMongoOut_0306");
+        analyzer.logFileAnalyzer("target/RandomHistories/StressTestMongoOut_0312/total.txt", 10);
+//        analyzer.logFileAnalyzer("target/CheckingSeletedLog.txt",10);
+//        analyzer.mergeLogs("target/RandomHistories/StressTestMongoOut_0312");
     }
 
 
