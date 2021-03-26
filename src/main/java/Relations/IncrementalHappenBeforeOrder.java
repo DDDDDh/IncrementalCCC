@@ -2,6 +2,8 @@ package Relations;
 
 import History.*;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -17,6 +19,8 @@ import java.util.concurrent.CompletionService;
  */
 
 public class IncrementalHappenBeforeOrder extends HappenBeforeOrder{
+
+
 
     public IncrementalHappenBeforeOrder(int size){
         super(size);
@@ -80,7 +84,11 @@ public class IncrementalHappenBeforeOrder extends HappenBeforeOrder{
                 this.setCyclicHB(true);
             }
             processMatrix.put(tempMatrix.getProcessID(), tempMatrix);
+            if(tempMatrix.getLoopTime() > this.maxLoop){
+                this.maxLoop = tempMatrix.getLoopTime();
+            }
         }
+        this.setLoopTime(this.maxLoop);
 
 //        System.out.println("Finally we get a matrix:");
 //        this.printMatrix();
@@ -101,19 +109,41 @@ class incrementalProcess implements Callable<BasicRelation>{
     int size;
     ProgramOrder po;
     BasicRelation matrix; //用来存储最后的关系矩阵
+    int loopTime;
+
+    //debug
+    String processLog = "target/RandomHistories/StressTestOriginalCheckLog0319_processLog.txt";
+    long lastTime;
+    long curTime;
+    public static void appendLog(String fileName, String content) throws IOException {
+        try {
+            FileWriter writer = new FileWriter(fileName, true);
+            writer.write(content);
+            writer.write("\n");
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
-    public incrementalProcess(History history, int processID, ProgramOrder po){
+
+    public incrementalProcess (History history, int processID, ProgramOrder po) throws Exception{
         this.history = history;
         this.processID = processID;
         this.size = history.getOpNum();
         this.opList = new LinkedList<CMOperation>();
         this.curReadList = new LinkedList<Integer>();
+        this.lastTime = System.nanoTime();
         this.initProcessInfo();
+        this.curTime = System.nanoTime();
+//        appendLog(this.processLog, "Init Time for process " + this.processID + ":" + (curTime - lastTime));
+        this.lastTime = this.curTime;
         this.po = po;
         this.matrix = new BasicRelation(this.size);
         this.matrix.updateMatrixByList(history.getOperationList()); //用history中的操作列表更新当前可达性矩阵（默认包含了co信息)
         this.matrix.setProcessID(processID);
+        this.loopTime = 0;
 
     }
 
@@ -330,13 +360,16 @@ class incrementalProcess implements Callable<BasicRelation>{
 
     }
 
-    public boolean readCentric(ProgramOrder po){
+    public boolean readCentric(ProgramOrder po) throws Exception{
 
         int curID;
         int correspondingWriteID;
         int readSize = this.curReadList.size();
         Operation curOp;
 //        System.out.println("Read size:" + readSize);
+
+        this.lastTime = System.nanoTime();
+
         for(int i = 0; i < readSize; i++){
             curID = this.curReadList.get(i);
             curOp = this.opList.get(curID);
@@ -356,6 +389,9 @@ class incrementalProcess implements Callable<BasicRelation>{
                 return false;
             }
         }
+
+        this.curTime = System.nanoTime();
+//        appendLog(this.processLog, "Detected time for process " + this.processID + ":" + (curTime - lastTime));
 
         int r, rPrime;
         CMOperation rOp;
@@ -414,6 +450,7 @@ class incrementalProcess implements Callable<BasicRelation>{
                 continue;
             }
             else{
+                this.loopTime++;
 //                System.out.println("wOp:" + wOp.easyPrint() + "is visible to rPrime:" + this.opList.get(rPrime).easyPrint() +", begin to topoSchedule...");
                 if(topoSchedule(rOp)){
 //                    System.out.println("Cycle detected when topo scheduling..."); //在逆拓扑排序中成环，意味着包含CyclicHB
@@ -426,6 +463,7 @@ class incrementalProcess implements Callable<BasicRelation>{
         //完成关系计算之后，把操作的可见集合整合到邻接矩阵中
         this.matrix.updateMatrixByCMList(this.opList);
         this.matrix.computeTransitiveClosure();  //因为incremental算法省略了一些边，所以要得到完整的HBo矩阵，需要通过传递闭包计算
+        this.matrix.setLoopTime(this.loopTime);
 
         //将不在本线程的读操作相关矩阵元素全部置零
         for(Operation o: this.opList){
@@ -815,7 +853,7 @@ class incrementalProcess implements Callable<BasicRelation>{
     public BasicRelation getMatrix(){return this.matrix;}
 
 
-    public BasicRelation call(){
+    public BasicRelation call() throws Exception{
 //        LinkedList<Integer> thisOpList = history.getProcessOpList().get(this.processID);
 //        LinkedList<Operation> opList = history.getOperationList();
 

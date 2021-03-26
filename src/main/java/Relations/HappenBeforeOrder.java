@@ -11,10 +11,12 @@ public class HappenBeforeOrder extends BasicRelation{
 
     //HBo关系的集合为每个线程计算得到的HBo邻接矩阵
     HashMap<Integer, BasicRelation> processMatrix;
+    int maxLoop;
 
     public HappenBeforeOrder(int size){
         super(size);
         processMatrix = new HashMap<>();
+        maxLoop = 0;
     }
 
     public boolean checkEqual(HappenBeforeOrder hbo) {

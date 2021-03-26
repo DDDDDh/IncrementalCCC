@@ -32,30 +32,30 @@ public class mongoConnector {
 
     public void startConnection(String mongoSRV, String dbName, String collectionName){
 
-//        mongoClient = MongoClients.create(mongoSRV);
-        List<ServerAddress> addresses = new ArrayList<>();
-        ServerAddress serverAddress = new ServerAddress("127.0.0.1", 27011);
-        addresses.add(serverAddress);
-
-        MongoCredential mongoCredential = MongoCredential.createScramSha1Credential("java","test_mongo","jpass".toCharArray());
-
-
-//        ConnectionString connectionString = new ConnectionString("mongodb://host1:27107,host2:27017/?ssl=true");
-//        CommandListener myCommandListener = ...;
-//        MongoClientSettings settings = MongoClientSettings.builder()
-//                .addCommandListener(myCommandListener)
-//                .applyConnectionString(connectionString)
-//                .build();
+        mongoClient = MongoClients.create(mongoSRV);
+//        List<ServerAddress> addresses = new ArrayList<>();
+//        ServerAddress serverAddress = new ServerAddress("114.212.82.99", 26000);
+//        addresses.add(serverAddress);
 //
-//        MongoClient mongoClient = MongoClients.create(settings);
-//        MongoClient mongoClient = MongoClients.create("mongodb://user1:pwd1@host1/?authSource=db1&authMechanism=SCRAM-SHA-1");
+////        MongoCredential mongoCredential = MongoCredential.createScramSha1Credential("dh","test_mongo","dh".toCharArray());
+//        MongoCredential mongoCredential = MongoCredential.createScramSha256Credential("dh","test_mongo","dh".toCharArray());
 //
-        mongoClient = MongoClients.create(
-          MongoClientSettings.builder()
-                  .applyToClusterSettings(builder ->
-                    builder.hosts(addresses))
-                  .credential(mongoCredential)
-                  .build());
+////        ConnectionString connectionString = new ConnectionString("mongodb://host1:27107,host2:27017/?ssl=true");
+////        CommandListener myCommandListener = ...;
+////        MongoClientSettings settings = MongoClientSettings.builder()
+////                .addCommandListener(myCommandListener)
+////                .applyConnectionString(connectionString)
+////                .build();
+////
+////        MongoClient mongoClient = MongoClients.create(settings);
+////        MongoClient mongoClient = MongoClients.create("mongodb://user1:pwd1@host1/?authSource=db1&authMechanism=SCRAM-SHA-1");
+////
+//        mongoClient = MongoClients.create(
+//          MongoClientSettings.builder()
+//                  .applyToClusterSettings(builder ->
+//                    builder.hosts(addresses))
+//                  .credential(mongoCredential)
+//                  .build());
 
         mongoDatabase = mongoClient.getDatabase(dbName);
 

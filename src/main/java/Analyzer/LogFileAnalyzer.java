@@ -149,9 +149,9 @@ public class LogFileAnalyzer {
 
     public static void main(String args[]) throws Exception{
         LogFileAnalyzer analyzer = new LogFileAnalyzer();
-        analyzer.logFileAnalyzer("target/RandomHistories/StressTestMongoOut_0312/total.txt", 10);
+        analyzer.logFileAnalyzer("target/RandomHistories/StressTestMongoOut_0322/total.txt", 10);
 //        analyzer.logFileAnalyzer("target/CheckingSeletedLog.txt",10);
-//        analyzer.mergeLogs("target/RandomHistories/StressTestMongoOut_0312");
+//        analyzer.mergeLogs("target/RandomHistories/StressTestOriginalOut_0322");
     }
 
 

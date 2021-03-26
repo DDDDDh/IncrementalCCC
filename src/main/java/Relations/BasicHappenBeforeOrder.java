@@ -45,8 +45,12 @@ public class BasicHappenBeforeOrder extends HappenBeforeOrder{
             Future<BasicRelation> submit = completionService.take();
             BasicRelation processResult = submit.get();
             processMatrix.put(processResult.getProcessID(), processResult);
+            if(processResult.getLoopTime() > this.maxLoop){
+                this.maxLoop = processResult.getLoopTime();
+            }
 //            System.out.println("process " + processResult.getProcessID() + " is completed~");
         }
+        this.setLoopTime(this.maxLoop);
 
 //        System.out.println("Finally we get a matrix:");
 //        this.printMatrix();
@@ -69,6 +73,7 @@ class basicProcess implements Callable<BasicRelation> {
     ProgramOrder po;
     CausalOrder co;
     BasicRelation matrix;
+    int loopTime;
 
 
     public basicProcess(History history, int processID, ProgramOrder po, CausalOrder co){
@@ -79,6 +84,7 @@ class basicProcess implements Callable<BasicRelation> {
         this.curReadList = new LinkedList<Integer>();
         this.po = po;
         this.co = co;
+        this.loopTime = 0;
         this.init();
     }
 
@@ -125,7 +131,6 @@ class basicProcess implements Callable<BasicRelation> {
         Operation correspondingWrite;
         Operation wPrime;
         BitSet curList;
-        int loop = 0;
 //        cont:
         while(forward) {
 //            System.out.println("Loop " + loop);
@@ -165,8 +170,10 @@ class basicProcess implements Callable<BasicRelation> {
                     }
                 }
             }
-            loop++;
+            this.loopTime++;
         }
+
+        this.matrix.setLoopTime(this.loopTime);
 
 //        System.out.println("basic hbo Matrix for process" + this.processID);
 //        this.matrix.printMatrix();
@@ -194,7 +201,7 @@ class basicProcess implements Callable<BasicRelation> {
     public BasicRelation call() throws Exception{
 //        LinkedList<Integer> thisOpList = history.getProcessOpList().get(this.processID);
 //        LinkedList<Operation> opList = history.getOperationList();
-        System.out.println("Here we are running process:" + this.processID);
+//        System.out.println("Here we are running process:" + this.processID);
 
         caculateHBoProcess();
         BasicRelation matrix = this.getMatrix();
@@ -208,6 +215,7 @@ class basicProcess implements Callable<BasicRelation> {
 //            System.out.println("Op" + i + ":" + this.opList.get(curReadList.get(i)).easyPrint());
 //        }
         isCaculated = true;
+//        System.out.println("End of process" + this.processID);
         return matrix;
     }
 

@@ -18,6 +18,7 @@ public class BasicRelation implements BasicRelationInterface{
     private boolean isCyclicCO;
     private boolean isThinAirRead;
     private boolean isCyclicHB;
+    private int loopTime;
 
     public BasicRelation(int size){
 //        this.relationMatrix = new boolean[size][size];
