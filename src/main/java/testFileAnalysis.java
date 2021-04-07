@@ -11,6 +11,8 @@ import java.io.*;
 public class testFileAnalysis {
 
     String globalLog;
+    long ihboTime;
+    long bhboTime;
 
     public static void appendLog(String fileName, String content) throws IOException {
         try {
@@ -50,7 +52,7 @@ public class testFileAnalysis {
         }
         return validFiles;
     }
-    public void checkCC(PrintWriter output, long initialTime, History history, ProgramOrder po, ReadFrom rf, CausalOrder co){
+    public boolean checkCC(PrintWriter output, long initialTime, History history, ProgramOrder po, ReadFrom rf, CausalOrder co){
         System.out.println("Begin to check CC:");
         output.println("Begin to check CC:");
         CCChecker ccChecker = new CCChecker(history, po, rf, co);
@@ -69,10 +71,11 @@ public class testFileAnalysis {
         System.out.println("Finish checking of CC. Total time: " + (currentTime - initialTime) + "ns");
         output.println("Finish checking of CC. Total time: " + (currentTime - initialTime) + "ns");
         output.println();
+        return ccResult;
     }
 
     //此处传入的是basic causal order
-    public void checkCM(PrintWriter output, long initialTime, History history, ProgramOrder po, ReadFrom rf, CausalOrder co, String arg) throws Exception{
+    public boolean checkCM(PrintWriter output, long initialTime, History history, ProgramOrder po, ReadFrom rf, CausalOrder co, String arg) throws Exception{
 
         System.out.println("Begin to check CM:");
         output.println("Begin to check CM:");
@@ -137,7 +140,11 @@ public class testFileAnalysis {
 
 
             this.appendLog(this.globalLog, "Basic HBo time: " + bhboTime);
+            this.bhboTime = bhboTime;
             this.appendLog(this.globalLog, "Incremental HBo time: " + ihboTime);
+            this.ihboTime = ihboTime;
+            this.appendLog(this.globalLog, "Basic HBo max loop: " + hbo.getLoopTime());
+            this.appendLog(this.globalLog, "Incremental HBo max loop: " + ihbo.getLoopTime());
 
             //如果包含这三种非法模式，ihbo不能完整计算得到每个线程hbo的关系矩阵
             if(ihbo.isCyclicCO() || ihbo.isThinAirRead() || ihbo.isCyclicHB()){
@@ -173,10 +180,11 @@ public class testFileAnalysis {
         System.out.println("Finish checking of CM. Total time: " + (currentTime - initialTime) + "ns");
         output.println("Finish checking of CM. Total time: " + (currentTime - initialTime) + "ns");
         output.println();
+        return cmResult;
     }
 
 
-    public void checkCCv(PrintWriter output, long initialTime, History history, ProgramOrder po, ReadFrom rf, CausalOrder co) throws Exception{
+    public boolean checkCCv(PrintWriter output, long initialTime, History history, ProgramOrder po, ReadFrom rf, CausalOrder co) throws Exception{
         System.out.println("Begin to check CCv:");
         output.println("Begin to check CCv:");
 
@@ -204,6 +212,7 @@ public class testFileAnalysis {
         System.out.println("Finish checking of CCv. Total time: " + (currentTime - initialTime) + "ns");
         output.println("Finish checking of CCv. Total time: " + (currentTime - initialTime) + "ns");
         output.println();
+        return ccvResult;
     }
 
     public static void main(String args[]) throws Exception{
@@ -211,7 +220,7 @@ public class testFileAnalysis {
 //        File file = new File("/Users/yi-huang/Project/MongoTrace/1227/no-memesis/majority-linearizable/100-3000_test/");
         File file = new File(args[0]);
         testFileAnalysis tfa = new testFileAnalysis();
-        tfa.globalLog = "target/CheckingSeletedLog.txt";
+        tfa.globalLog = "/home/oy/DH/CheckingSelectedLog0402.txt";
         long initialTime = System.nanoTime();
 
         LinkedList<File> validFiles = new LinkedList<>();
@@ -235,9 +244,7 @@ public class testFileAnalysis {
             tfa.appendLog(tfa.globalLog, "----------------------------------------------------------");
             output.println("Checking file:" + curFile);
             tfa.appendLog(tfa.globalLog, "Checking " + curFile);
-            tfa.appendLog(tfa.globalLog, "CC Result: true");
-            tfa.appendLog(tfa.globalLog, "CCv Result: true");
-            tfa.appendLog(tfa.globalLog, "CM Result: true");
+
             HistoryReader reader = new HistoryReader(curFile);
             History history = new History(reader.readHistory());
             history.setOpNum(reader.getTotalNum()); //读取完一个历史记录之后设置总操作数
@@ -252,6 +259,7 @@ public class testFileAnalysis {
             System.out.println("Process num:" + history.getProcessOpList().keySet().size());
             output.println("Total op num:" + reader.getTotalNum());
             output.println("Process num:" + history.getProcessOpList().keySet().size());
+            tfa.appendLog(tfa.globalLog, "Total op num:" + reader.getTotalNum());
 
 
 
@@ -330,30 +338,44 @@ public class testFileAnalysis {
             }
             output.println();
 
+            boolean ccResult = false;
+            boolean ccvResult = false;
+            boolean cmResult = false;
+
             if(args[1].equals("CC")){
-                tfa.checkCC(output, initialTime, history, po, rf, bco);
+                ccResult = tfa.checkCC(output, initialTime, history, po, rf, bco);
+                tfa.appendLog(tfa.globalLog, "CC Result: " + ccResult);
             }
             else if(args[1].equals("CM")){
-                tfa.checkCC(output, initialTime, history, po, rf, bco);
+                ccResult = tfa.checkCC(output, initialTime, history, po, rf, bco);
                 if(args.length < 3) {
-                    tfa.checkCM(output, initialTime, history, po, rf, bco, "A");
+                    cmResult = tfa.checkCM(output, initialTime, history, po, rf, bco, "A");
                 }
                 else{
-                    tfa.checkCM(output, initialTime, history, po, rf, bco, args[2]);
+                    cmResult = tfa.checkCM(output, initialTime, history, po, rf, bco, args[2]);
                 }
+                tfa.appendLog(tfa.globalLog, "CM Result: " + cmResult);
 
             }
             else if(args[1].equals("CCv")){
-                tfa.checkCC(output, initialTime, history, po, rf, bco);
-                tfa.checkCCv(output, initialTime, history, po, rf, bco);
+                ccResult = tfa.checkCC(output, initialTime, history, po, rf, bco);
+                ccvResult = tfa.checkCCv(output, initialTime, history, po, rf, bco);
+
+                tfa.appendLog(tfa.globalLog, "CC Result: " + ccResult);
+                tfa.appendLog(tfa.globalLog, "CCv Result: " + ccvResult);
             }
             else if(args[1].equals("ALL")){
-                tfa.checkCC(output, initialTime, history, po, rf, bco);
-                tfa.checkCCv(output, initialTime, history, po, rf, bco);
-                if(reader.getTotalNum() <= 1000) { //暂时只为操作数小于1000的运行记录检查CM
-                    tfa.checkCM(output, initialTime, history, po, rf, bco, "A");
-                }
+                ccResult = tfa.checkCC(output, initialTime, history, po, rf, bco);
+                ccvResult = tfa.checkCCv(output, initialTime, history, po, rf, bco);
+//                if(reader.getTotalNum() <= 1010) { //暂时只为操作数小于1000的运行记录检查CM
+                if(reader.getTotalNum()<=5050){
 
+                    cmResult = tfa.checkCM(output, initialTime, history, po, rf, bco, "A");
+                }
+                tfa.appendLog(tfa.globalLog, "CC Result: " + ccResult);
+                tfa.appendLog(tfa.globalLog, "CCv Result: " + ccvResult);
+                tfa.appendLog(tfa.globalLog, "CM Result: " + cmResult);
+                tfa.appendLog(tfa.globalLog, icoTime + "    " + bcoTime + " " + tfa.ihboTime + "   " + tfa.bhboTime + " " );
             }
 
             output.close();
