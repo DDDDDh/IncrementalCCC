@@ -21,12 +21,14 @@ public class CCProducer extends randomProducer{
         this.processOpList = new HashMap<>();
     }
 
-    public CCProducer(int opNum, int processNum, int rRate, int wRate){
-        super(opNum, processNum, rRate, wRate);
+    public CCProducer(int opNum, int processNum, int rRate, int wRate, int varRange, int valRange){
+        super(opNum, processNum, rRate, wRate, varRange, valRange);
 //        this.globalActiveVar = new HashMap<>();
         this.processVarValue = new HashMap<>();
         this.processOpList = new HashMap<>();
         this.setProcessNum(processNum);
+        this.setVarRange(varRange);
+        this.setValRange(valRange);
         HashMap<String, Integer> tempMap;
         LinkedList<Integer> tempList;
         for(int i = 0; i < this.getProcessNum(); i++){
@@ -35,7 +37,6 @@ public class CCProducer extends randomProducer{
             this.getProcessVarValue().put(i, tempMap);
             this.getProcessOpList().put(i, tempList);
         }
-
     }
 
     public void printToFileDebug()throws FileNotFoundException {
@@ -103,8 +104,8 @@ public class CCProducer extends randomProducer{
     public void generateCCHistory(){
 
         //根据当前生成器的配置生成操作
-        operationProducer oProducer = new operationProducer(this.getRRate(), this.getWRate());
-        oProducer.setProcessRange(this.getProcessNum());
+        operationProducer oProducer = new operationProducer(this.getRRate(), this.getWRate(), this.getVarRange(), this.getValRange(), this.getProcessNum());
+//        oProducer.setProcessRange(this.getProcessNum());
 
         generatedOperation curOp;
         int processID;
@@ -114,10 +115,11 @@ public class CCProducer extends randomProducer{
         generatedOperation latestWrite;
         generatedOperation tempOp;
 
+
         for(int i = 0; i < this.getOpNum(); i++){
+
             curOp = oProducer.nextOperation(); //先随机生成一个操作，再根据其具体情况调整
             this.opList.add(curOp);
-//            System.out.println("CurOp:" + curOp.easyPrint());
             processID = curOp.getProcess();
             if(curOp.isWrite()){ //如果生成的是一个写操作，则根据其同线程前一操作更新因果历史，并放入
 //                if(!this.globalActiveVar.containsKey(curOp.getVariable())) {

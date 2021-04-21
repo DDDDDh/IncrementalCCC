@@ -51,7 +51,7 @@ public class Main {
             for (int i = 0; i < 100; i++) {
                 System.out.println("No." + i);
                 output.println("No. " + i);
-                CCProducer ccProducer = new CCProducer(opNum, 10, 3, 1);
+                CCProducer ccProducer = new CCProducer(opNum, 10, 3, 1, 10, 100);
                 ccProducer.generatePath();
                 ccProducer.generateCCHistory();
                 ccProducer.printToFile();

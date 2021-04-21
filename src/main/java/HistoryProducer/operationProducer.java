@@ -55,7 +55,7 @@ public class operationProducer {
         this.varRange = 100; //默认生成5个变量
         this.updateWeightList();
         this.varValueMap = new HashMap<>();
-        this.valueRange = 1000; //默认生成0-100的值
+        this.valueRange = 100; //默认生成0-100的值
         this.usedValue = new HashMap<>();
         this.processRange = 5; //默认有5个线程
 
@@ -77,9 +77,30 @@ public class operationProducer {
         this.varRange = 20; //默认生成5个变量 //0312->观察变量数对验证效率的影响
         this.updateWeightList();
         this.varValueMap = new HashMap<>();
-        this.valueRange = 1000; //默认生成0-100的值
+        this.valueRange = 100; //默认生成0-100的值
         this.usedValue = new HashMap<>();
         this.processRange = 5; //默认有5个线程
+    }
+
+    operationProducer(int rRate, int wRate, int varRange, int valueRange, int processRange){
+        this.setGlobalIndex(0);
+        this.setGlobalTime(1);
+        this.setGlobalPosition(1);
+
+        this.setWriteRate(wRate);
+        this.setReadRate(rRate);
+        this.weightList = new LinkedList<Integer>();
+        this.setWeightSum(0);
+        this.ops = new LinkedList<>();
+        this.ops.add(methods.Read);
+        this.ops.add(methods.Write);
+        this.weightTemp = new LinkedList<>();
+        this.varRange = varRange;
+        this.updateWeightList();
+        this.varValueMap = new HashMap<>();
+        this.valueRange = valueRange;
+        this.usedValue = new HashMap<>();
+        this.processRange = processRange;
     }
 
     void updateWeightList(){

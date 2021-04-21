@@ -18,6 +18,8 @@ public class randomProducer {
     String outputPath;
     int wRate;
     int rRate;
+    int valRange;   //值域
+    int varRange; //变量数
 //    String url = "src/main/resources/BadPatternExamples/CyclicHB2_history.edn";
 
     randomProducer(){
@@ -25,6 +27,8 @@ public class randomProducer {
         this.setProcessNum(5); //默认分配在5个线程
         this.setRRate(3);  //默认读写比例为3：1
         this.setWRate(1);
+        this.setVarRange(20);
+        this.setValRange(100);
         this.opList = new LinkedList<>();
     }
 
@@ -34,13 +38,26 @@ public class randomProducer {
         this.setRRate(rRate);
         this.setWRate(wRate);
         this.opList = new LinkedList<>();
+        this.setValRange(100);
+        this.setVarRange(20);
+    }
+
+    randomProducer(int opNum, int processNum, int rRate, int wRate, int varRange, int valRange){
+        this.setOpNum(opNum);
+        this.setProcessNum(processNum);
+        this.setRRate(rRate);
+        this.setWRate(wRate);
+        this.opList = new LinkedList<>();
+        this.setVarRange(varRange);
+        this.setValRange(valRange);
     }
 
     public void generatePath(){
-        String url = "target/RandomHistories/";
+        String url = "target/ParameterChoosing/";
         Calendar cTime = Calendar.getInstance();
         String timeStamp = "" + cTime.get(Calendar.YEAR)  + (cTime.get(Calendar.MONTH)+1)  + cTime.get(Calendar.DAY_OF_MONTH) + cTime.get(Calendar.HOUR_OF_DAY);
-        url += "Running_"+timeStamp+"_opNum"+this.getOpNum()+"_processNum" +this.getProcessNum() +"_rRate"+this.getRRate()+"_wRate" + this.getWRate()+".edn";
+        url += "Running_"+timeStamp+"_opNum"+this.getOpNum()+"_processNum" +this.getProcessNum()
+                +"_varRange" + this.getVarRange() + "_valRange" + this.getValRange() +"_rRate"+this.getRRate()+"_wRate" + this.getWRate()+".edn";
         this.setOutputPath(url);
     }
 
@@ -131,7 +148,7 @@ public class randomProducer {
 //        rProducer.generatePath();
 //        rProducer.printToFile();
 
-        CCProducer ccProducer = new CCProducer(100, 5, 3, 1);
+        CCProducer ccProducer = new CCProducer(100, 5, 3, 1, 10, 100);
         ccProducer.generatePath();
         ccProducer.generateCCHistory();
         ccProducer.printToFile();

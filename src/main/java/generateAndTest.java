@@ -26,7 +26,7 @@ public class generateAndTest {
         boolean cmResult;
 
         int opNum = 100;
-        CCProducer ccProducer = new CCProducer(opNum, 5, 3, 1);
+        CCProducer ccProducer = new CCProducer(opNum, 5, 3, 1, 10, 100);
         ccProducer.generatePath();
         ccProducer.generateCCHistory();
         ccProducer.printToFile();
