@@ -118,6 +118,8 @@ public class BasicRelation implements BasicRelationInterface{
         for(int i = 0; i < size; i++){
             for(int j = 0; j < size; j++){
                 if(this.existEdge(i, j) ^ otherMatrix.existEdge(i,j)){ //如果两个矩阵中有一个点不同
+                    System.out.println("First Matrix:" + i + " to " + j +":" + this.existEdge(i,j));
+                    System.out.println("Second Matrix:" + i + " to " + j +":" + otherMatrix.existEdge(i,j));
                     return false;
                 }
             }

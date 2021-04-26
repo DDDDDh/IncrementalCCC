@@ -105,13 +105,13 @@ class basicProcess implements Callable<BasicRelation> {
         //利用causal order初始化可达性矩阵
         this.matrix.union(this.matrix, this.co);
         this.matrix.updateListByMatrix(this.opList);
-        this.ignoreOhterRead();
+        this.ignoreOtherRead();
 
     }
 
     //把其他线程上的读操作隐去
     //注意，但是由其传递的co关系得以保留，如：若有w1->r1->w2，将r1隐去后，w1现在仍然可达w2
-    public void ignoreOhterRead(){
+    public void ignoreOtherRead(){
         Operation tempOp;
         for(int i = 0; i < this.size; i++){
             tempOp = this.opList.get(i);
@@ -152,7 +152,7 @@ class basicProcess implements Callable<BasicRelation> {
 
                     int correspondingWriteID = o.getCorrespondingWriteID();
                     if(correspondingWriteID >= 0) { //略去没有对应写操作的读
-//                        System.out.println("Dealing with " + o.easyPrint() +" for basic happen before....");
+//                        System.out.println("Dealing with " + o.easyPrint() +" for basic happen before....process" + this.processID);
                         correspondingWrite = this.opList.get(o.getCorrespondingWriteID());
                         curList = o.getCoList();
                         for (int j = curList.nextSetBit(0); j >= 0; j = curList.nextSetBit(j + 1)) {
@@ -164,7 +164,7 @@ class basicProcess implements Callable<BasicRelation> {
                                     forward = true;
 //                                    break cont;
                                 }
-//                                System.out.println("Add an edge from " + j + " to " + o.getCorrespondingWriteID());
+//                                System.out.println("Add an edge from " + j + " to " + o.getCorrespondingWriteID() + "process" + this.processID);
                             }
                         }
                     }

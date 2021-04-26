@@ -31,8 +31,8 @@ public class runWithMongo {
         for(int k = 1; k <= 5; k++) {
 
 //        int k = 1;
-            int processNum = 20;
-            int opNum = k*10;
+            int processNum = 5;
+            int opNum = k*100;
 //
 
 //            for (int j = 5; j >= 1; j--) {
@@ -41,13 +41,13 @@ public class runWithMongo {
 //                if(k == 3 && varRange > 10){
 //                    continue;
 //                }
-            int varRange = 10;
+            int varRange = 5;
 
 
 //                for (int i = 10; i >= 1; i--) {
 
 //                    int valRange = i*50;
-            int valRange = 100;
+            int valRange = 50;
 
                     if(varRange*valRange <= opNum/4){
                         continue;
@@ -56,11 +56,11 @@ public class runWithMongo {
 
 
 
-                    String stressTestOut = "target/ParameterChoosing/StressTestLogfile0421_process"+ processNum + "_var"+ varRange + "_val" + valRange  +"_opNum"+ opNum +".txt";
+                    String stressTestOut = "target/ParameterChoosing/debug/StressTestLogfile0422_process"+ processNum + "_var"+ varRange + "_val" + valRange  +"_opNum"+ opNum +".txt";
                     File outfile = new File(stressTestOut);
                     PrintWriter logout = new PrintWriter(outfile);
 //                    String originalCheckLog = "target/RandomHistories/StressTestOriginalCheckLog0409_process"+ processNum + "_var"+ varRange + "_val" + valRange  +".txt";
-                    String mongoCheckLog = "target/ParameterChoosing/StressTestMongoCheckLog0421_process"+ processNum + "_var"+ varRange + "_val" + valRange  +"_opNum"+ opNum +".txt";
+                    String mongoCheckLog = "target/ParameterChoosing//debug/StressTestMongoCheckLog0422_process"+ processNum + "_var"+ varRange + "_val" + valRange  +"_opNum"+ opNum +".txt";
 
 
 
@@ -88,7 +88,7 @@ public class runWithMongo {
 
                     ccProducer.printToFile();
 
-//                    ccProducer.printToFileDebug();
+                    ccProducer.printToFileDebug();
 
 //                    LinProducer linProducer = new LinProducer(opNum, 5,3,1);
 //                    linProducer.generatePath();
@@ -294,7 +294,7 @@ public class runWithMongo {
 //                    //end
 
                     mongoConnector connector = new mongoConnector();
-                    String mongoLog = "target/ParameterChoosing/mongoLogfile_0421_" + "_opNum" + opNum + "_processNum" + ccProducer.getProcessNum() + ".edn";
+                    String mongoLog = "target/ParameterChoosing/debug/mongoLogfile_0422" + "_opNum" + opNum + "_processNum" + ccProducer.getProcessNum() + ".edn";
 //                    connector.mongoRun("mongodb+srv://m220student:m220password@mflix.9pm5g.mongodb.net/test?maxIdleTimeMS=3000&connectTimeoutMS=5000&socketTimeoutMS=5000", "test_mongo", "original_data", newPath, mongoLog);
 //                    connector.mongoRun("mongodb://127.0.0.1:27013", "test_mongo", "original_data", url, mongoLog);
                     connector.mongoRun("mongodb://dh:dh@n3.disalg.cn:26011/?maxIdleTimeMS=60000", "test_mongo", "original_data", url, mongoLog);
@@ -384,14 +384,14 @@ public class runWithMongo {
 
                     startTime = System.nanoTime();
                     IncrementalHappenBeforeOrderV2 ihbo = new IncrementalHappenBeforeOrderV2(history.getOpNum());
-                    ihbo.incrementalHBO(history, po, rf, bco);
+                    ihbo.incrementalHBO(history, po, rf, ico);
                     endTime = System.nanoTime();
                     long ihboTime = endTime - startTime;
                     logout.println("ihbo max loop: " + ihbo.getLoopTime());
 
                     startTime = System.nanoTime();
                     BasicHappenBeforeOrder hbo = new BasicHappenBeforeOrder(history.getOpNum());
-                    hbo.calculateHBo(history, po, rf, bco);
+                    hbo.calculateHBo(history, po, rf, ico);
                     endTime = System.nanoTime();
                     long bhboTime = endTime - startTime;
                     logout.println("bhbo max loop: " + hbo.getLoopTime() );
@@ -406,6 +406,7 @@ public class runWithMongo {
                         if (!hboEquality) {
                             System.out.println("ihbo is not equal to bhbo???");
                             logout.println("ihbo is not equal to bhbo???");
+                            System.exit(-1);
                         } else {
                             System.out.println("ihbo is equal to bhbo ^.^");
                             logout.println("ihbo is equal to bhbo ^.^");
