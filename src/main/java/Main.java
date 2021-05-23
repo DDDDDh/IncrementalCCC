@@ -55,7 +55,7 @@ public class Main {
                 ccProducer.generatePath();
                 ccProducer.generateCCHistory();
                 ccProducer.printToFile();
-                ccProducer.printToFileDebug();
+                ccProducer.printToFileDebug(1);
 
                 String url = ccProducer.getOutputPath();
                 HistoryReader reader = new HistoryReader(url);

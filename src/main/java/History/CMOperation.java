@@ -18,6 +18,7 @@ public class CMOperation extends Operation{
     LinkedList<Integer> sucList; //后继列表
     boolean hasDictatedRead; //拥有对应读操作，也即对应读操作在主线程，也就表明该写操作存在于全序中
     int lastSameProcess; //同一线程上的前一个操作
+    boolean inWWGroup; //标记当前操作是否位于某个读操作的wwGroup中，用以初始化可达性
 
     //以下变量为topo-Schedule会用到的辅助变量
     int iCount;
@@ -49,6 +50,7 @@ public class CMOperation extends Operation{
         this.sucList = new LinkedList<>();
         this.hasDictatedRead = false;
         this.lastSameProcess = -1;
+        this.inWWGroup = false;
 
         this.iCount = 0;
         this.iSucList = new LinkedList<>();
@@ -69,6 +71,7 @@ public class CMOperation extends Operation{
         this.sucList = new LinkedList<>();
         this.hasDictatedRead = false;
         this.lastSameProcess = -1;
+        this.inWWGroup = false;
 
         this.iCount = 0;
         this.iSucList = new LinkedList<>();
@@ -78,16 +81,21 @@ public class CMOperation extends Operation{
 
     }
 
-    public void updatePrecedingWrite(CMOperation lastOp){
+    public void updatePrecedingWrite(CMOperation lastOp, LinkedList<CMOperation> opList){
         int preWriteID;
         int curWriteID;
+        CMOperation preWrite;
+        CMOperation curWrite;
+
         //根据前一个操作的preceding write更新自己的，总是保持最新的那个写
         if(!lastOp.precedingWrite.isEmpty()) {
             for (String key : lastOp.precedingWrite.keySet()) {
                 if (lastOp.precedingWrite.get(key) != null) { //只有前一个操作的precedingWrite不为空时才用来更新
                     preWriteID = lastOp.precedingWrite.get(key);
+                    preWrite = opList.get(preWriteID);
                     curWriteID = this.precedingWrite.get(key);
-                    if (curWriteID < preWriteID) {
+                    curWrite = opList.get(curWriteID);
+                    if (curWrite.compareTotalOrderLessThan(preWrite)) {
 //                        System.out.println("PW of " + this.easyPrint() + " is change from " + curWriteID + " to " + preWriteID);
                         this.precedingWrite.put(key, preWriteID);
                     }
@@ -120,6 +128,13 @@ public class CMOperation extends Operation{
                 }
             }
         }
+    }
+
+    /*
+    如果另一操作的全序值大于当前操作，返回true
+     */
+    public boolean compareTotalOrderLessThan(CMOperation otherOp){
+        return this.getProcessReadID() < otherOp.getProcessReadID();
     }
 
     public void initInducedSubGraph(){

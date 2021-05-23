@@ -4,6 +4,7 @@ import Checker.CMChecker;
 import History.History;
 import History.HistoryReader;
 import HistoryProducer.CCProducer;
+import HistoryProducer.LinProducer;
 import Relations.*;
 
 import java.io.*;
@@ -25,15 +26,23 @@ public class generateAndTest {
         boolean ccvResult;
         boolean cmResult;
 
-        int opNum = 100;
-        CCProducer ccProducer = new CCProducer(opNum, 5, 3, 1, 10, 100);
-        ccProducer.generatePath();
-        ccProducer.generateCCHistory();
-        ccProducer.printToFile();
-        ccProducer.printToFileDebug();
+//        int opNum = 100;
+//        CCProducer ccProducer = new CCProducer(opNum, 5, 3, 1, 10, 100);
+//        ccProducer.generatePath();
+//        ccProducer.generateCCHistory();
+//        ccProducer.printToFile();
+//        ccProducer.printToFileDebug(1);
+
+        int opNum = 1000;
+        LinProducer linProducer = new LinProducer(opNum, 10, 3,1);
+        linProducer.generatePath();
+        linProducer.generateLinHistory();
+        linProducer.printToFile();
+        linProducer.printToFileDebug(2);
+        String url = linProducer.getOutputPath();
 
 //        String url = "/Users/yi-huang/Project/IncrementalCCC/target/RandomHistories/Running_202111020_opNum20_processNum5_rRate3_wRate1.edn";
-        String url = ccProducer.getOutputPath();
+//        String url = ccProducer.getOutputPath();
         HistoryReader reader = new HistoryReader(url);
 //
         History history = new History(reader.readHistory());
@@ -140,6 +149,8 @@ public class generateAndTest {
         cmResult = cmChecker.checkCM();
         output.println("Checking CM, result:" + cmResult);
         System.out.println("Checking CM, result:" + cmResult);
+        System.out.println("ihboTime:" + ihboTime);
+        System.out.println("bhboTime:" + bhboTime);
         output.close();
     }
 }

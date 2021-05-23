@@ -45,6 +45,7 @@ public class BasicHappenBeforeOrder extends HappenBeforeOrder{
             Future<BasicRelation> submit = completionService.take();
             BasicRelation processResult = submit.get();
             processMatrix.put(processResult.getProcessID(), processResult);
+            System.out.println("Loop time for closure alg: " + processResult.getLoopTime() + " process:" + processResult.getProcessID() );
             if(processResult.getLoopTime() > this.maxLoop){
                 this.maxLoop = processResult.getLoopTime();
             }
@@ -134,6 +135,7 @@ class basicProcess implements Callable<BasicRelation> {
 //        cont:
         while(forward) {
 //            System.out.println("Loop " + loop);
+            this.loopTime++;
             forward = false;
             //Step 3 of PRAM
             this.matrix.computeTransitiveClosure();
@@ -170,7 +172,6 @@ class basicProcess implements Callable<BasicRelation> {
                     }
                 }
             }
-            this.loopTime++;
         }
 
         this.matrix.setLoopTime(this.loopTime);

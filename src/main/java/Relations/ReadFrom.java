@@ -4,6 +4,7 @@ import History.*;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+import static org.junit.Assert.assertTrue;
 
 public class ReadFrom extends BasicRelation{
 
@@ -15,7 +16,7 @@ public class ReadFrom extends BasicRelation{
     }
 
     public void calculateReadFrom(History history){
-        assert (history.isDifferentiated()); //一定要是differentiated history
+        assertTrue ("The history must be differentiated for read-from computation",history.isDifferentiated()); //一定要是differentiated history
         LinkedList<Operation> opList = history.getOperationList();
         HashMap<String, LinkedList<Integer>> keyOpList = history.getKeyOpList();
         HashMap<Integer, Integer> valueToWriteID = new HashMap<Integer, Integer>();

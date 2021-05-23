@@ -57,6 +57,23 @@ public class generatedOperation {
         return temp;
     }
 
+    public String printBare(){
+        String temp = "";
+        if(this.getMethod() == methods.Read){
+            temp += "r";
+        }
+        else if(this.getMethod() == methods.Write){
+            temp += "w";
+        }
+        if(this.getValue()!= -1) {
+            temp = temp + this.getVariable() + this.getValue();
+        }
+        else{
+            temp = "";
+        }
+        return temp;
+    }
+
     public boolean isWrite(){
         if(this.getMethod() == methods.Write){
             return true;

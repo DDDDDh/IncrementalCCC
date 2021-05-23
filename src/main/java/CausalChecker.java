@@ -14,8 +14,8 @@ public class CausalChecker {
 //        String url = "src/main/resources/hy_history.edn";
 //        String url = "src/main/resources/SpecialCases/CCvNotCM_history.edn";
 //        String url = "src/main/resources/BadPatternExamples/CyclicHB2_history.edn";
-        String url = "src/main/resources/RandomHistories/Running_202011518_opNum100_processNum5_rRate3_wRate1.edn";
-
+        String url = "target/ParameterChoosing/Running_202151410_opNum1000_processNum10_varRange20_valRange100_rRate3_wRate1.edn";
+//        String url = "/Users/yi-huang/Project/IncrementalCCC/target/ParameterChoosing/debug/special_01.edn";
         HistoryReader reader = new HistoryReader(url);
 //        LinkedList<Operation> opList = reader.readHistory();
 //        for(int i = 0; i < opList.size(); i++){
@@ -85,17 +85,27 @@ public class CausalChecker {
         System.out.println("Chekcing CCv, result:" + ccvChecker.checkCCv());
 
         System.out.println("Begin to compute happen-before relation");
+        startTime = System.nanoTime();
         BasicHappenBeforeOrder hbo = new BasicHappenBeforeOrder(history.getOpNum());
         hbo.calculateHBo(history, po, rf, ico);
+        endTime = System.nanoTime();
+        long bhboTime = endTime - startTime;
         System.out.println("Finish computation of happen-before relation");
 
+        startTime = System.nanoTime();
+        IncrementalHappenBeforeOrder ihbo = new IncrementalHappenBeforeOrder(history.getOpNum());
+        ihbo.incrementalHBO(history,po, rf, bco);
+        endTime = System.nanoTime();
+        long ihboTime = endTime - startTime;
 
 //        IncrementalHappenBeforeOrder ihbo = new IncrementalHappenBeforeOrder(history.getOpNum());
 //        ihbo.incrementalHBO(history, po, rf, ico);
         System.out.println("---Begin to check CM---");
         CMChecker cmChecker = new CMChecker(history, po, rf, ico, hbo);
         System.out.println("Checking CM, result:" + cmChecker.checkCM());
-
+        System.out.println("Fail reason:" + cmChecker.failReason());
+        System.out.println("ihboTime:" + ihboTime);
+        System.out.println("bhboTime:" + bhboTime);
 
     }
 }

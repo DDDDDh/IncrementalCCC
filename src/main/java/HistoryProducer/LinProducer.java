@@ -16,6 +16,9 @@ public class LinProducer extends randomProducer{
         super(opNum, processNum, rRate, wRate);
 //        this.globalActiveVar = new HashMap<>();
         this.kvMap = new HashMap<>();
+
+
+
     }
 
     public void generateLinHistory(){
@@ -38,6 +41,7 @@ public class LinProducer extends randomProducer{
                     curOp.setValue(-1);
                 }
             }
+            this.processOpList.get(curOp.getProcess()).add(curOp.getIndex());
         }
 
     }

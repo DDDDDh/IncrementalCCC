@@ -11,21 +11,18 @@ public class CCProducer extends randomProducer{
 
 //    HashMap<String, LinkedList> globalActiveVar;
     HashMap<Integer, HashMap<String, Integer>> processVarValue; //存储每个线程上为某个变量最新写入的写操作index
-    HashMap<Integer, LinkedList> processOpList;
 
 
     public CCProducer(){
         super();
 //        this.globalActiveVar = new HashMap<>();
         this.processVarValue = new HashMap<>();
-        this.processOpList = new HashMap<>();
     }
 
     public CCProducer(int opNum, int processNum, int rRate, int wRate, int varRange, int valRange){
         super(opNum, processNum, rRate, wRate, varRange, valRange);
 //        this.globalActiveVar = new HashMap<>();
         this.processVarValue = new HashMap<>();
-        this.processOpList = new HashMap<>();
         this.setProcessNum(processNum);
         this.setVarRange(varRange);
         this.setValRange(valRange);
@@ -37,26 +34,6 @@ public class CCProducer extends randomProducer{
             this.getProcessVarValue().put(i, tempMap);
             this.getProcessOpList().put(i, tempList);
         }
-    }
-
-    public void printToFileDebug()throws FileNotFoundException {
-        String debugPath = this.getOutputPath().replace(".edn", "_debug.edn");
-        File outfile = new File(debugPath);
-        PrintWriter output = new PrintWriter(outfile);
-        generatedOperation tempOp;
-        LinkedList<Integer> tempOpList;
-        String tempStr = "";
-        for(Integer i: this.processOpList.keySet()){
-            tempStr = "Process " + i +": ";
-            tempOpList = this.processOpList.get(i);
-            for(int j = 0; j < tempOpList.size(); j++){
-                tempOp = this.opList.get(tempOpList.get(j));
-                tempStr += tempOp.easyPrint() + "; ";
-            }
-            output.println(tempStr);
-        }
-        output.close();
-
     }
 
     public int maxWriteIndexOfCausalPast(HashSet<Integer> causalPast, String var){
@@ -100,6 +77,42 @@ public class CCProducer extends randomProducer{
         }
         return false;
     }
+
+//    public void printToFileDebug(int mode)throws FileNotFoundException {
+//        String debugPath = this.getOutputPath().replace(".edn", "_debug.edn");
+//        File outfile = new File(debugPath);
+//        PrintWriter output = new PrintWriter(outfile);
+//        generatedOperation tempOp;
+//        LinkedList<Integer> tempOpList;
+//        String tempStr = "";
+//        if(mode == 1) {
+//            for (Integer i : this.processOpList.keySet()) {
+//                tempStr = "Process " + i + ": ";
+//                tempOpList = this.processOpList.get(i);
+//                for (int j = 0; j < tempOpList.size(); j++) {
+//                    tempOp = this.opList.get(tempOpList.get(j));
+//                    tempStr += tempOp.easyPrint() + "; ";
+//                }
+//                output.println(tempStr);
+//            }
+//        }
+//        else if(mode == 2){ //用于输出PRAM算法能够处理的trace
+//            for(Integer i : this.processOpList.keySet()){
+//                tempStr = "";
+//                tempOpList = this.processOpList.get(i);
+//                for(int j = 0; j < tempOpList.size(); j++){
+//                    tempOp = this.opList.get(tempOpList.get(j));
+//                    if(tempOp.getValue()!=-1){ //忽略读初值
+//                        tempStr += tempOp.printBare() + " ";
+//                    }
+//                }
+//                output.println(tempStr);
+//            }
+//
+//        }
+//        output.close();
+//
+//    }
 
     public void generateCCHistory(){
 

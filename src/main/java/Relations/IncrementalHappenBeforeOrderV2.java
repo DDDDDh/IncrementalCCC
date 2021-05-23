@@ -253,13 +253,14 @@ class incrementalProcessV2 implements Callable<BasicRelation>{
             }
             if(updateRech(wPreSet, curWrite)){
                 System.out.println("Hello?" + this.processID);
+                this.matrix.setCyclicHB(true); //如果成环，设置标志位
                 return false;
             }
 //            System.out.println("finish " + curRead.easyPrint()+ "process" + this.processID);
             wPreSet.clear();//用完wPreSet要清空！！！以备后续使用
         }
 
-        System.out.println("COlist of R(d)46:" + this.opList.get(37).getCoList() + " process:" + this.processID);
+//        System.out.println("COlist of R(d)46:" + this.opList.get(37).getCoList() + " process:" + this.processID);
         return true;
     }
 
@@ -268,7 +269,7 @@ class incrementalProcessV2 implements Callable<BasicRelation>{
 //        System.out.println("Update Rech by curWrite:" + curWrite.easyPrint() + " process:" + this.processID);
 //        System.out.println("Update with wPreSet:" + wPreSet + " process" + this.processID);
 
-        if(this.matrix.cycleDetection()){
+        if(this.matrix.cycleDetectionByMatrix()){
             return true;
         }
         this.topoList = this.matrix.topoSort(this.history);
@@ -359,7 +360,7 @@ class incrementalProcessV2 implements Callable<BasicRelation>{
 //            System.out.println("Now " + curOp.easyPrint() + "colist:" + curOp.getCoList() + " process:" + this.processID);
         }
 
-        if(this.matrix.cycleDetection()){
+        if(this.matrix.cycleDetectionByMatrix()){
             return true;
         }
 //        System.out.println("Finish Rech of curWrite:" + curWrite.easyPrint() + " process:" + this.processID);

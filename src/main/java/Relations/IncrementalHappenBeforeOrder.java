@@ -84,6 +84,7 @@ public class IncrementalHappenBeforeOrder extends HappenBeforeOrder{
                 this.setCyclicHB(true);
             }
             processMatrix.put(tempMatrix.getProcessID(), tempMatrix);
+            System.out.println("Loop time for readinc alg: " + tempMatrix.getLoopTime() + " process:" + tempMatrix.getProcessID() );
             if(tempMatrix.getLoopTime() > this.maxLoop){
                 this.maxLoop = tempMatrix.getLoopTime();
             }
@@ -210,6 +211,7 @@ class incrementalProcess implements Callable<BasicRelation>{
         CMOperation visOp;
         String visKey;
         HashMap<String, Integer> tempPW;
+        CMOperation tempPWOp;
 
         //第一轮，先将每个有效写操作的对应PW值设置为自身
         for(int i = 0; i < this.size; i++){
@@ -261,8 +263,12 @@ class incrementalProcess implements Callable<BasicRelation>{
                                 System.out.println("Is this case possible???");
                                 tempPW.put(visKey, j);
                             }
-                            else if(j > tempPW.get(visKey)){
-                                tempPW.put(visKey, j);
+//                            else if(j > tempPW.get(visKey)){ //to fix:更新的时候比较的应该是写全序编号
+                            else{
+                                tempPWOp = this.opList.get(tempPW.get(visKey)); //找到提供PW的操作
+                                if(tempPWOp.compareTotalOrderLessThan(visOp)) {
+                                    tempPW.put(visKey, j);
+                                }
                             }
                         }
                         else{  //否则直接更新
@@ -273,7 +279,11 @@ class incrementalProcess implements Callable<BasicRelation>{
                         tempPW.put(visKey, curOp.getID());
                     }
                     else{ //否则还是按照可见操作更新
-                        tempPW.put(visKey, j);
+                        tempPWOp = this.opList.get(tempPW.get(visKey));
+//                        if(j > tempPW.get(visKey)) {
+                        if(tempPWOp.compareTotalOrderLessThan(visOp)){
+                            tempPW.put(visKey, j);
+                        }
                     }
                 }
             }
@@ -333,22 +343,9 @@ class incrementalProcess implements Callable<BasicRelation>{
         BitSet curCoList;
         CMOperation visOp;
 
-        //针对本线程上的读操作忽略其他线程上的可见读操作
-        for(int i = 0; i < this.curReadList.size(); i++){
-            curOp = this.opList.get(curReadList.get(i));
-            curCoList = curOp.getCoList();
-            for(int j = curCoList.nextSetBit(0); j >= 0; j = curCoList.nextSetBit(j+1)){
-                visOp = this.opList.get(j);
-                if(visOp.isRead() && visOp.getProcess() != this.processID){ //找到位于其他process上的读操作
-                    curCoList.set(j, false);
-                }
-            }
-        }
-
-
-//        //针对所有操作忽略其他线程上的读操作
-//        for(int i = 0; i < size; i++){
-//            curOp = this.opList.get(i);
+//        //针对本线程上的读操作忽略其他线程上的可见读操作
+//        for(int i = 0; i < this.curReadList.size(); i++){
+//            curOp = this.opList.get(curReadList.get(i));
 //            curCoList = curOp.getCoList();
 //            for(int j = curCoList.nextSetBit(0); j >= 0; j = curCoList.nextSetBit(j+1)){
 //                visOp = this.opList.get(j);
@@ -357,6 +354,21 @@ class incrementalProcess implements Callable<BasicRelation>{
 //                }
 //            }
 //        }
+
+
+        //0523fix: 要针对所有操作把其他线程上的读忽略，否则在后面更新wwGroup信息时会出错
+        //由这些读操作传递而来的可达性信息已经由co保存在每个写操作的colist中了
+        //针对所有操作忽略其他线程上的读操作
+        for(int i = 0; i < size; i++){
+            curOp = this.opList.get(i);
+            curCoList = curOp.getCoList();
+            for(int j = curCoList.nextSetBit(0); j >= 0; j = curCoList.nextSetBit(j+1)){
+                visOp = this.opList.get(j);
+                if(visOp.isRead() && visOp.getProcess() != this.processID){ //找到位于其他process上的读操作
+                    curCoList.set(j, false);
+                }
+            }
+        }
 
     }
 
@@ -417,14 +429,14 @@ class incrementalProcess implements Callable<BasicRelation>{
 //            rPrime = rOp.getLastRead();
             wOp = this.opList.get(rOp.getCorrespondingWriteID());
 //            if(rPrime != -2) {
-////                System.out.println("Dealing with read:" + rOp.easyPrint() + "position:" + rOp.getPosition() + " at process " + this.processID + " corresponding write:" + wOp.easyPrint() + "rPrime:" + this.opList.get(rPrime).easyPrint() + "position:" + wOp.getPosition() + "process:" + this.processID);
+//                System.out.println("Dealing with read:" + rOp.easyPrint() + "position:" + rOp.getPosition() + " at process " + this.processID + " corresponding write:" + wOp.easyPrint() + "rPrime:" + this.opList.get(rPrime).easyPrint() + "position:" + wOp.getPosition() + "process:" + this.processID);
 //            }
 //            else{
 ////                System.out.println("Dealing with read:" + rOp.easyPrint() + "position:" + rOp.getPosition() + " at process " + this.processID + " corresponding write:" + wOp.easyPrint() + "rPrime:null " + "position:" + wOp.getPosition() + "process:" + this.processID);
 //            }
             initReachability(rPrime, r);
             //此处应该添加：读操作按照
-//            System.out.println("r:" + rOp.easyPrint());
+//            System.out.println("r:" + rOp.easyPrint() + "process" + this.processID);
             curCoList = rOp.getCoList();
             for(int j = curCoList.nextSetBit(0); j >= 0; j = curCoList.nextSetBit(j+1)){
                 wPrime = this.opList.get(j);
@@ -441,25 +453,30 @@ class incrementalProcess implements Callable<BasicRelation>{
 
             if(i == 0){ //跳过当r为第一个操作的情况
 //                System.out.println(rOp.easyPrint() + "is the First read at process " + this.processID +", continue...");
+                System.out.println("do not need to reschedule by cur_rriop:" + rOp.easyPrint() + " dw:" + wOp.easyPrint() + " process" + this.processID);
                 continue;
             }
 
             //如果w对r'不可见的话，直接跳过
             if(!this.opList.get(rPrime).getCoList().get(wOp.getID())){ //2020.12.23 modified here...//2021.01.05 remodify
 //                System.out.println(wOp.easyPrint() + "is not visible to r':" + this.opList.get(rPrime).easyPrint() + " continue...");
+                System.out.println("do not need to reschedule by cur_rriop:" + rOp.easyPrint() + " dw:" + wOp.easyPrint() + " process" + this.processID);
                 continue;
             }
             else{
                 this.loopTime++;
-//                System.out.println("wOp:" + wOp.easyPrint() + "is visible to rPrime:" + this.opList.get(rPrime).easyPrint() +", begin to topoSchedule...");
+                System.out.println("loop inc for r':" + this.opList.get(rPrime).easyPrint() + " r:" + rOp.easyPrint());
+//                System.out.println("wOp:" + wOp.easyPrint() + "is visible to rPrime:" + this.opList.get(rPrime).easyPrint() +", begin to topoSchedule...looptime:" + this.loopTime);
                 if(topoSchedule(rOp)){
 //                    System.out.println("Cycle detected when topo scheduling..."); //在逆拓扑排序中成环，意味着包含CyclicHB
+                    this.matrix.setLoopTime(this.loopTime);
                     this.matrix.setCyclicHB(true);
                     return false;
                 }
             }
         }
 
+//        System.out.println("Now looptime:" +loopTime);
         //完成关系计算之后，把操作的可见集合整合到邻接矩阵中
         this.matrix.updateMatrixByCMList(this.opList);
         this.matrix.computeTransitiveClosure();  //因为incremental算法省略了一些边，所以要得到完整的HBo矩阵，需要通过传递闭包计算
@@ -489,7 +506,7 @@ class incrementalProcess implements Callable<BasicRelation>{
             //当r为当前线程的第一个读操作时，只需要从它的对应写操作更新
             //->原因：由于co=(po u rf)+, 因此该操作的可见操作只有1、其对应写操作；2、po位于它之前的其他写操作；而2这一部分在initProcessInfo里已经更新完成了
 //            System.out.println("First read at process " + this.processID + " is " + rOp.easyPrint());
-            rOp.updatePrecedingWrite(correspondingWrite);
+            rOp.updatePrecedingWrite(correspondingWrite, this.opList);
             CMOperation curOp = rOp;
             CMOperation lastOp;
             while(curOp.getLastSameProcess()!= -1){ //把同线程之前所有写操作的lastRead值设置为r的下标
@@ -519,23 +536,25 @@ class incrementalProcess implements Callable<BasicRelation>{
                                 rrGroup.add(i);
                             }
                             else if(correspondingWrite.getID() == visOp.getID()){ //就是D(r)本身
+                                visOp.setLastRead(rOp.getID());
                                 //wwGroup.add(i);
 //                                System.out.println("Ignore corresponding write.");
                             }
 //                        else if(visOp.getProcess() == correspondingWrite.getProcess()){ //在D(r)同一线程上的写操作
                             else if (correspondingWrite.getCoList().get(i)) { //更新：co在D(r)之前的写操作
+                                visOp.setInWWGroup(true);
                                 wwGroup.add(i);
                             }
                             else {
 //                                System.out.println("r:" + curOp.easyPrint() + "r'" + this.opList.get(rPrime).easyPrint() + "visOp:" + visOp.easyPrint());
                                 System.out.println("Error!Impossible1");
                             }
-                        } else { //在r与r'之间不可能有其他写操作
+                        } else { //在r与r'之间不可能有其他读操作(因为其他线程上的读操作现在已经被剔除
                             System.out.println("Error!Impossible2");
                         }
                     }
                     else{
-                        //在r-Delta中去除r和r'
+                        //在r-Delta中去除r和r' //不存在此种情况
                     }
                 }
             }
@@ -547,29 +566,106 @@ class incrementalProcess implements Callable<BasicRelation>{
                 curOp = this.opList.get(rrGroup.get(i));
                 if(curOp.getLastSameProcess() != -1) { //若前一操作下标为-1，则为该线程第一个操作，无需更新
                     lastOp = this.opList.get(curOp.getLastSameProcess());
-                    curOp.updatePrecedingWrite(lastOp);
+                    curOp.updatePrecedingWrite(lastOp, this.opList);
                 }
             }
             //先根据rr组的最后一个操作更新r操作的PW
-            rOp.updatePrecedingWrite(curOp);
+            rOp.updatePrecedingWrite(curOp,this.opList);
 
-            //此处有问题 在wwGroup中，所有操作不一定是在同一个线程。
-            //暂时策略：r操作的PW跟着每个操作更新
-            for(int i = 1; i < wwGroup.size(); i++){
-                curOp = this.opList.get(wwGroup.get(i));
-                if(curOp.getLastSameProcess() != -1) {
-                    lastOp = this.opList.get(curOp.getLastSameProcess());
-                    curOp.updatePrecedingWrite(lastOp);
-                    rOp.updatePrecedingWrite(lastOp);
+            //0523fix：采用新策略更新
+//            //此处有问题 在wwGroup中，所有操作不一定是在同一个线程。
+//            //暂时策略：r操作的PW跟着每个操作更新
+//            for(int i = 1; i < wwGroup.size(); i++){
+//                curOp = this.opList.get(wwGroup.get(i));
+//                if(curOp.getLastSameProcess() != -1) {
+//                    lastOp = this.opList.get(curOp.getLastSameProcess());
+//                    curOp.updatePrecedingWrite(lastOp, this.opList);
+//                    rOp.updatePrecedingWrite(lastOp, this.opList);
+//                }
+//            }
+//            //添加：更新完之后读操作要根据最后一个操作更新自身的PW
+//            rOp.updatePrecedingWrite(curOp,this.opList);
+
+
+            //备选策略：对wwGroup中的操作进行拓扑排序，然后按照拓扑序更新
+            BitSet curCoList;
+            CMOperation curCoOp;
+            LinkedList<Integer> wwList = topoSortCoDr(correspondingWrite, this.opList);
+            for(int i = 0; i < wwList.size(); i++){
+                curOp = this.opList.get(wwList.get(i));
+                if(curOp.isInWWGroup()) { //只为wwGroup中的操作更新，因为其余操作的信息在之前已经更新过了
+                    curCoList = curOp.getCoList();
+                    for(int j = curCoList.nextSetBit(0); j >= 0; j = curCoList.nextSetBit(j + 1)){
+                        curCoOp = this.opList.get(j);
+                        curCoOp.updatePrecedingWrite(curCoOp, this.opList);
+                        correspondingWrite.updatePrecedingWrite(curCoOp, this.opList);
+                    }
                 }
             }
 
             //添加：更新完之后读操作要根据最后一个操作更新自身的PW
-            rOp.updatePrecedingWrite(curOp);
+            rOp.updatePrecedingWrite(correspondingWrite,this.opList);
 
 
         }
 
+    }
+
+    //对dR的coList中的操作进行拓扑排序
+    public LinkedList<Integer> topoSortCoDr(CMOperation dR, LinkedList<CMOperation> opList){
+
+        BitSet dRcoList = dR.getCoList();
+        int totalSize = opList.size();
+        int[] inDegree = new int[totalSize];
+        CMOperation visOp;
+        BitSet visCoList;
+        LinkedList<CMOperation> coOpSet = new LinkedList<CMOperation>();
+        int tempDegree;
+        LinkedList<Integer> stack = new LinkedList<Integer>();
+        BasicRelation adjMatrix = new BasicRelation(totalSize);
+
+        //初始化入度
+        for (int i = dRcoList.nextSetBit(0); i >= 0; i = dRcoList.nextSetBit(i + 1)) {
+            visOp = opList.get(i);
+            coOpSet.add(visOp);
+            visCoList = visOp.getCoList();
+            tempDegree = 0;
+            for(int j = visCoList.nextSetBit(0); j >= 0; j = visCoList.nextSetBit(j+1)){
+                adjMatrix.setTrue(j,i);
+                tempDegree++;
+            }
+            inDegree[i] = tempDegree;
+        }
+
+        //找到入度为0的点，入栈
+        CMOperation coOp;
+        int coOpID;
+        for(int i = 0; i < coOpSet.size(); i++){
+            coOp = coOpSet.get(i);
+            coOpID = coOp.getID();
+            if(inDegree[coOpID] == 0){
+                stack.addFirst(coOpID);
+                inDegree[coOpID] = -1;
+            }
+        }
+
+        LinkedList<Integer> topoList = new LinkedList<Integer>();
+        int curID;
+        while(!stack.isEmpty()){
+            curID = stack.removeFirst();
+            topoList.add(curID);
+            for(int i = 0; i < totalSize; i++){
+                if(adjMatrix.existEdge(curID, i)){
+                    inDegree[i]--;
+                    if(inDegree[i] == 0){
+                        stack.addFirst(i);
+                        inDegree[i] = -1;
+                    }
+                }
+            }
+        }
+
+        return topoList;
     }
 
 
@@ -660,13 +756,13 @@ class incrementalProcess implements Callable<BasicRelation>{
         }
 
         //更新w的PW
-        w.updatePrecedingWrite(wPrime);
+        w.updatePrecedingWrite(wPrime, this.opList);
 //        System.out.println("Update Reachability: PW of " +w.easyPrint() +  "by " + wPrime.easyPrint());
 
         CMOperation curOp;
         for (Integer i : w.getSucList()) {
             curOp = this.opList.get(i);
-            curOp.updatePrecedingWrite(wPrime);
+            curOp.updatePrecedingWrite(wPrime, this.opList);
 //            System.out.println("Update Reachability: PW of " +curOp.easyPrint() +  "by " + wPrime.easyPrint());
         }
     }

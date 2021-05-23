@@ -269,6 +269,20 @@ public class BasicRelation implements BasicRelationInterface{
         return false;
     }
 
+    //利用邻接矩阵本身判环
+    public boolean cycleDetectionByMatrix(){
+        int size = this.getMatrixSize();
+        for(int i = 0; i < size; i++){
+            for(int j = 0; j < size; j++){
+                if(this.existEdge(i,j) && this.existEdge(j, i)){
+                    System.out.println("There is a cycle between " + i + " and " + j);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     //使用Washall算法计算传递闭包
     public void computeTransitiveClosure(){
         int size = this.getMatrixSize();

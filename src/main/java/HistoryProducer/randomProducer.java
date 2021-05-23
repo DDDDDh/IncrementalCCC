@@ -3,6 +3,7 @@ package HistoryProducer;
 //主要负责把生成的随机操作排列成合理的顺序，并输出到文件中
 
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.LinkedList;
 import lombok.*;
 import java.io.File;
@@ -20,6 +21,7 @@ public class randomProducer {
     int rRate;
     int valRange;   //值域
     int varRange; //变量数
+    HashMap<Integer, LinkedList> processOpList;
 //    String url = "src/main/resources/BadPatternExamples/CyclicHB2_history.edn";
 
     randomProducer(){
@@ -30,6 +32,7 @@ public class randomProducer {
         this.setVarRange(20);
         this.setValRange(100);
         this.opList = new LinkedList<>();
+        this.processOpList = new HashMap<>();
     }
 
     randomProducer(int opNum, int processNum, int rRate, int wRate){
@@ -40,6 +43,12 @@ public class randomProducer {
         this.opList = new LinkedList<>();
         this.setValRange(100);
         this.setVarRange(20);
+        this.processOpList = new HashMap<>();
+        LinkedList<Integer> tempList;
+        for(int i = 0; i < this.getProcessNum(); i++){
+            tempList = new LinkedList<Integer>();
+            this.getProcessOpList().put(i, tempList);
+        }
     }
 
     randomProducer(int opNum, int processNum, int rRate, int wRate, int varRange, int valRange){
@@ -50,6 +59,12 @@ public class randomProducer {
         this.opList = new LinkedList<>();
         this.setVarRange(varRange);
         this.setValRange(valRange);
+        this.processOpList = new HashMap<>();
+        LinkedList<Integer> tempList;
+        for(int i = 0; i < this.getProcessNum(); i++){
+            tempList = new LinkedList<Integer>();
+            this.getProcessOpList().put(i, tempList);
+        }
     }
 
     public void generatePath(){
@@ -117,6 +132,42 @@ public class randomProducer {
         output.close();
     }
 
+    public void printToFileDebug(int mode)throws FileNotFoundException {
+        String debugPath = this.getOutputPath().replace(".edn", "_debug.edn");
+        File outfile = new File(debugPath);
+        PrintWriter output = new PrintWriter(outfile);
+        generatedOperation tempOp;
+        LinkedList<Integer> tempOpList;
+        String tempStr = "";
+        if(mode == 1) {
+            for (Integer i : this.processOpList.keySet()) {
+                tempStr = "Process " + i + ": ";
+                tempOpList = this.processOpList.get(i);
+                for (int j = 0; j < tempOpList.size(); j++) {
+                    tempOp = this.opList.get(tempOpList.get(j));
+                    tempStr += tempOp.easyPrint() + "; ";
+                }
+                output.println(tempStr);
+            }
+        }
+        else if(mode == 2){ //用于输出PRAM算法能够处理的trace
+            for(Integer i : this.processOpList.keySet()){
+                tempStr = "";
+                tempOpList = this.processOpList.get(i);
+                for(int j = 0; j < tempOpList.size(); j++){
+                    tempOp = this.opList.get(tempOpList.get(j));
+                    if(tempOp.getValue()!=-1){ //忽略读初值
+                        tempStr += tempOp.printBare() + " ";
+                    }
+                }
+                output.println(tempStr);
+            }
+
+        }
+        output.close();
+
+    }
+
 //    {:type :ok, :f :write, :value [b 1], :process 3, :time 19, :position 19, :link nil, :index 18}
 
     public static void main(String args[]) throws Exception{
@@ -152,7 +203,7 @@ public class randomProducer {
         ccProducer.generatePath();
         ccProducer.generateCCHistory();
         ccProducer.printToFile();
-        ccProducer.printToFileDebug();
+        ccProducer.printToFileDebug(1);
 
     }
 
