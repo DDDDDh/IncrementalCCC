@@ -264,6 +264,9 @@ class incrementalProcess implements Callable<BasicRelation>{
                                 tempPW.put(visKey, j);
                             }
 //                            else if(j > tempPW.get(visKey)){ //to fix:更新的时候比较的应该是写全序编号
+                            else if(tempPW.get(visKey) == -3){
+                                tempPW.put(visKey, j);
+                            }
                             else{
                                 tempPWOp = this.opList.get(tempPW.get(visKey)); //找到提供PW的操作
                                 if(tempPWOp.compareTotalOrderLessThan(visOp)) {
@@ -279,10 +282,15 @@ class incrementalProcess implements Callable<BasicRelation>{
                         tempPW.put(visKey, curOp.getID());
                     }
                     else{ //否则还是按照可见操作更新
-                        tempPWOp = this.opList.get(tempPW.get(visKey));
-//                        if(j > tempPW.get(visKey)) {
-                        if(tempPWOp.compareTotalOrderLessThan(visOp)){
+                        if(tempPW.get(visKey) == -3){
                             tempPW.put(visKey, j);
+                        }
+                        else {
+                            tempPWOp = this.opList.get(tempPW.get(visKey));
+//                        if(j > tempPW.get(visKey)) {
+                            if (tempPWOp.compareTotalOrderLessThan(visOp)) {
+                                tempPW.put(visKey, j);
+                            }
                         }
                     }
                 }
@@ -453,19 +461,19 @@ class incrementalProcess implements Callable<BasicRelation>{
 
             if(i == 0){ //跳过当r为第一个操作的情况
 //                System.out.println(rOp.easyPrint() + "is the First read at process " + this.processID +", continue...");
-                System.out.println("do not need to reschedule by cur_rriop:" + rOp.easyPrint() + " dw:" + wOp.easyPrint() + " process" + this.processID);
+//                System.out.println("do not need to reschedule by cur_rriop:" + rOp.easyPrint() + " dw:" + wOp.easyPrint() + " process" + this.processID);
                 continue;
             }
 
             //如果w对r'不可见的话，直接跳过
             if(!this.opList.get(rPrime).getCoList().get(wOp.getID())){ //2020.12.23 modified here...//2021.01.05 remodify
 //                System.out.println(wOp.easyPrint() + "is not visible to r':" + this.opList.get(rPrime).easyPrint() + " continue...");
-                System.out.println("do not need to reschedule by cur_rriop:" + rOp.easyPrint() + " dw:" + wOp.easyPrint() + " process" + this.processID);
+//                System.out.println("do not need to reschedule by cur_rriop:" + rOp.easyPrint() + " dw:" + wOp.easyPrint() + " process" + this.processID);
                 continue;
             }
             else{
                 this.loopTime++;
-                System.out.println("loop inc for r':" + this.opList.get(rPrime).easyPrint() + " r:" + rOp.easyPrint());
+//                System.out.println("loop inc for r':" + this.opList.get(rPrime).easyPrint() + " r:" + rOp.easyPrint());
 //                System.out.println("wOp:" + wOp.easyPrint() + "is visible to rPrime:" + this.opList.get(rPrime).easyPrint() +", begin to topoSchedule...looptime:" + this.loopTime);
                 if(topoSchedule(rOp)){
 //                    System.out.println("Cycle detected when topo scheduling..."); //在逆拓扑排序中成环，意味着包含CyclicHB

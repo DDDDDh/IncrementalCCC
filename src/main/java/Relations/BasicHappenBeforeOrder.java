@@ -68,13 +68,14 @@ class basicProcess implements Callable<BasicRelation> {
     History history;
     int processID;
     LinkedList<Operation> opList;
-    LinkedList<Integer> curReadList;
+    LinkedList<Operation> curReadList;
     boolean isCaculated;
     int size;
     ProgramOrder po;
     CausalOrder co;
     BasicRelation matrix;
     int loopTime;
+    Operation lastOp; //当前处理线程的最后一个操作
 
 
     public basicProcess(History history, int processID, ProgramOrder po, CausalOrder co){
@@ -82,7 +83,7 @@ class basicProcess implements Callable<BasicRelation> {
         this.processID = processID;
         this.size = history.getOpNum();
         this.opList = new LinkedList<Operation>();
-        this.curReadList = new LinkedList<Integer>();
+        this.curReadList = new LinkedList<Operation>();
         this.po = po;
         this.co = co;
         this.loopTime = 0;
@@ -90,12 +91,30 @@ class basicProcess implements Callable<BasicRelation> {
     }
 
     //复制history中的操作，并初始化自身操作列表
+    //0524 fix:同时把需要处理的读操作加入curReadList
     public void initOpList(){
         for(int i = 0; i < this.size; i++){
             Operation tempOp = new Operation();
             tempOp.copyOperation(history.getOperationList().get(i));
             tempOp.flushCoList(); //归零后将由下一步用matrix再初始化
             this.opList.add(tempOp);
+            if(tempOp.getProcess() == this.processID){
+                lastOp = tempOp;
+                if(tempOp.isRead() && !tempOp.isInitRead()) {
+                    this.curReadList.add(tempOp);
+                }
+            }
+        }
+    }
+
+    //根据当前线程最后一个操作的coList，把对本线程不可见的操作忽略
+    public void ignoreInvisibleOps(){
+        BitSet lastCoList = this.lastOp.getCoList();
+        Operation tempOp;
+        for (int i = lastCoList.nextClearBit(0); i >= 0; i = lastCoList.nextSetBit(i + 1)) { //注意这里用的是next clear bit
+            tempOp = this.opList.get(i); //tempOp为对该线程不可见的操作
+            tempOp.flushCoList();
+            this.matrix.ignoreOp(i); //随后在邻接矩阵中把该操作忽略
         }
     }
 
@@ -105,6 +124,7 @@ class basicProcess implements Callable<BasicRelation> {
         this.matrix.setProcessID(this.processID);
         //利用causal order初始化可达性矩阵
         this.matrix.union(this.matrix, this.co);
+        this.ignoreInvisibleOps(); //在利用co初始化完成后，需要将对此线程不可见的操作忽略
         this.matrix.updateListByMatrix(this.opList);
         this.ignoreOtherRead();
 
@@ -141,33 +161,24 @@ class basicProcess implements Callable<BasicRelation> {
             this.matrix.computeTransitiveClosure();
             this.matrix.updateListByMatrix(this.opList);
             //Step 4 of PRAM
-            for(Operation o: this.opList){
-//                System.out.println("Dealing with " + o.easyPrint() +" for basic happen before.");
-                if (o.isWrite() || o.isInitRead()){
-                    continue;
-                }
-                else if(o.isRead()){
-//                    System.out.println("Get " + o.easyPrint() +"process:" + o.getProcess() + "corresponding write id:" + o.getCorrespondingWriteID());
-                    if(o.getProcess() != this.processID){ //略去不在本线程的读
-                        continue;
-                    }
-
-                    int correspondingWriteID = o.getCorrespondingWriteID();
-                    if(correspondingWriteID >= 0) { //略去没有对应写操作的读
+            for(Operation o: this.curReadList){
+//              System.out.println("Dealing with " + o.easyPrint() +" for basic happen before.");
+//              System.out.println("Get " + o.easyPrint() +"process:" + o.getProcess() + "corresponding write id:" + o.getCorrespondingWriteID());
+                int correspondingWriteID = o.getCorrespondingWriteID();
+                if(correspondingWriteID >= 0) { //略去没有对应写操作的读
 //                        System.out.println("Dealing with " + o.easyPrint() +" for basic happen before....process" + this.processID);
-                        correspondingWrite = this.opList.get(o.getCorrespondingWriteID());
-                        curList = o.getCoList();
-                        for (int j = curList.nextSetBit(0); j >= 0; j = curList.nextSetBit(j + 1)) {
-                            wPrime = this.opList.get(j);
-                            if (wPrime.isWrite() && wPrime.onSameKey(o) && wPrime.notEqual(correspondingWrite)) {
-                                if (!this.matrix.existEdge(j, correspondingWriteID)) { //因为已经计算过传递闭包，所以M[i][j]为1即为存在i->j的路径
-                                    correspondingWrite.getCoList().set(j, true);
-                                    this.matrix.setTrue(j, correspondingWriteID);
-                                    forward = true;
+                    correspondingWrite = this.opList.get(o.getCorrespondingWriteID());
+                    curList = o.getCoList();
+                    for (int j = curList.nextSetBit(0); j >= 0; j = curList.nextSetBit(j + 1)) {
+                        wPrime = this.opList.get(j);
+                        if (wPrime.isWrite() && wPrime.onSameKey(o) && wPrime.notEqual(correspondingWrite)) {
+                            if (!this.matrix.existEdge(j, correspondingWriteID)) { //因为已经计算过传递闭包，所以M[i][j]为1即为存在i->j的路径
+                                correspondingWrite.getCoList().set(j, true);
+                                this.matrix.setTrue(j, correspondingWriteID);
+                                forward = true;
 //                                    break cont;
-                                }
-//                                System.out.println("Add an edge from " + j + " to " + o.getCorrespondingWriteID() + "process" + this.processID);
                             }
+//                                System.out.println("Add an edge from " + j + " to " + o.getCorrespondingWriteID() + "process" + this.processID);
                         }
                     }
                 }

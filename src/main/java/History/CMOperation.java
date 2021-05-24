@@ -90,14 +90,19 @@ public class CMOperation extends Operation{
         //根据前一个操作的preceding write更新自己的，总是保持最新的那个写
         if(!lastOp.precedingWrite.isEmpty()) {
             for (String key : lastOp.precedingWrite.keySet()) {
-                if (lastOp.precedingWrite.get(key) != null) { //只有前一个操作的precedingWrite不为空时才用来更新
+                if (lastOp.precedingWrite.get(key) != null && lastOp.precedingWrite.get(key) != -3) { //只有前一个操作的precedingWrite不为空时才用来更新
                     preWriteID = lastOp.precedingWrite.get(key);
                     preWrite = opList.get(preWriteID);
-                    curWriteID = this.precedingWrite.get(key);
-                    curWrite = opList.get(curWriteID);
-                    if (curWrite.compareTotalOrderLessThan(preWrite)) {
-//                        System.out.println("PW of " + this.easyPrint() + " is change from " + curWriteID + " to " + preWriteID);
+                    if(this.precedingWrite.get(key) == -3){
                         this.precedingWrite.put(key, preWriteID);
+                    }
+                    else {
+                        curWriteID = this.precedingWrite.get(key);
+                        curWrite = opList.get(curWriteID);
+                        if (curWrite.compareTotalOrderLessThan(preWrite)) {
+//                        System.out.println("PW of " + this.easyPrint() + " is change from " + curWriteID + " to " + preWriteID);
+                            this.precedingWrite.put(key, preWriteID);
+                        }
                     }
                 }
             }

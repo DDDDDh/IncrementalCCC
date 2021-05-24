@@ -33,6 +33,15 @@ public class BasicRelation implements BasicRelationInterface{
         this.isCyclicHB = false;
     }
 
+    //在当前关系中把下标为index的操作的可见、可达集合清零
+    public void ignoreOp(int index){
+        BitSet emptyList = new BitSet(this.getMatrixSize());
+        this.relationMatrix[index] = emptyList; //将其后继列表清零
+        for(int i = 0; i < this.matrixSize; i++){ //随后将所有指向它的操作op可达性在矩阵中更新
+            this.relationMatrix[i].set(index, false);
+        }
+    }
+
     public void setTrue(int fromIndex, int toIndex){
         BitSet tempSet = this.relationMatrix[fromIndex];
         tempSet.set(toIndex, true);
