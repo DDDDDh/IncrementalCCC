@@ -9,73 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0dc98262-2b33-485b-86e5-a2794ff4c6f0" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/HappenBeforeGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_projectlombok_lombok_1_18_18.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_projectlombok_lombok_1_18_20.xml" afterDir="false" />
+    <list default="true" id="0dc98262-2b33-485b-86e5-a2794ff4c6f0" name="Default" comment="Update structure">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IncrementalCCC.iml" beforeDir="false" afterPath="$PROJECT_DIR$/IncrementalCCC.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Analyzer/LogFileAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Analyzer/LogFileAnalyzer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Analyzer/LogFileAnalyzerV2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Analyzer/LogFileAnalyzerV2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Analyzer/LogFileAnalyzerV3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Analyzer/LogFileAnalyzerV3.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BatchChecking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/BatchChecking.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CausalChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/CausalChecker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Checker/CCChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Checker/CCChecker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Checker/CCvChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Checker/CCvChecker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Checker/CMChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Checker/CMChecker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DBConnector/mongoConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/DBConnector/mongoConnector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Datastructure/BitMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Datastructure/BitMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Debugger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Debugger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/History/CMOperation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/History/CMOperation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/History/History.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/History/History.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/History/HistoryReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/History/HistoryReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/History/Operation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/History/Operation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/HistoryProducer/CCProducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/HistoryProducer/CCProducer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/HistoryProducer/LinProducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/HistoryProducer/LinProducer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/HistoryProducer/generatedOperation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/HistoryProducer/generatedOperation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/HistoryProducer/operationProducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/HistoryProducer/operationProducer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/HistoryProducer/randomProducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/HistoryProducer/randomProducer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Relations/BasicCausalOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Relations/BasicCausalOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Relations/BasicHappenBeforeOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Relations/BasicHappenBeforeOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Relations/BasicRelation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Relations/BasicRelation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Relations/BasicRelationInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Relations/BasicRelationInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Relations/CausalOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Relations/CausalOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Relations/ConflictRelation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Relations/ConflictRelation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Relations/HappenBeforeOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Relations/HappenBeforeOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Relations/IncrementalCausalOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Relations/IncrementalCausalOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Relations/IncrementalHappenBeforeOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Relations/IncrementalHappenBeforeOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Relations/IncrementalHappenBeforeOrderV2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Relations/IncrementalHappenBeforeOrderV2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Relations/ProgramOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Relations/ProgramOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Relations/ReadFrom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Relations/ReadFrom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/generateAndTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/generateAndTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/runWithMongo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/runWithMongo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/testFileAnalysis.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/testFileAnalysis.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CausalChecker.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Checker/CCChecker.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Checker/CCvChecker.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Checker/CMChecker.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Datastructure/BitMap.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/History/CMOperation.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/History/History.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/History/HistoryReader.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/History/Operation$OpType.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/History/Operation.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Relations/BasicCausalOrder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Relations/BasicHappenBeforeOrder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Relations/BasicRelation.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Relations/BasicRelationInterface.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Relations/CausalOrder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Relations/ConflictRelation.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Relations/HappenBeforeOrder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Relations/IncrementalCausalOrder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Relations/IncrementalHappenBeforeOrder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Relations/ProgramOrder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Relations/ReadFrom.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Relations/incrementalProcess.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/IncrementalCCC/HappenBeforeGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/HappenBeforeGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Relations/BasicHappenBeforeOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Relations/BasicHappenBeforeOrder.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,6 +66,11 @@
     </findStrings>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GradleLocalSettings">
@@ -723,7 +665,22 @@
       <workItem from="1621668893290" duration="16510000" />
       <workItem from="1621784114224" duration="984000" />
       <workItem from="1621786873950" duration="6609000" />
+      <workItem from="1621834781724" duration="1712000" />
+      <workItem from="1621838176621" duration="10000" />
+      <workItem from="1621838306134" duration="60000" />
+      <workItem from="1621838517050" duration="126000" />
+      <workItem from="1621844904175" duration="162000" />
+      <workItem from="1621845620527" duration="1616000" />
+      <workItem from="1621855107869" duration="602000" />
     </task>
+    <task id="LOCAL-00001" summary="Update structure">
+      <created>1621834955877</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1621834955877</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -787,6 +744,10 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Update structure" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update structure" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />

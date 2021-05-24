@@ -47,7 +47,7 @@ public class BasicHappenBeforeOrder extends HappenBeforeOrder{
             Future<BasicRelation> submit = completionService.take();
             BasicRelation processResult = submit.get();
             processMatrix.put(processResult.getProcessID(), processResult);
-            System.out.println("Loop time for closure alg: " + processResult.getLoopTime() + " process:" + processResult.getProcessID() );
+//            System.out.println("Loop time for closure alg: " + processResult.getLoopTime() + " process:" + processResult.getProcessID() );
             if(processResult.getLoopTime() > this.maxLoop){
                 this.maxLoop = processResult.getLoopTime();
             }
@@ -168,7 +168,7 @@ class basicProcess implements Callable<BasicRelation> {
                                     forward = true;
 //                                    break cont;
                                 }
-//                                System.out.println("Add an edge from " + j + " to " + o.getCorrespondingWriteID() + "process" + this.processID);
+                                System.out.println("Add an edge from " + j + " to " + o.getCorrespondingWriteID() + "process" + this.processID);
                             }
                         }
                     }
