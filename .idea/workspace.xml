@@ -5,39 +5,78 @@
       <artifact name="IncrementalCCC:jar" />
     </artifacts-to-build>
   </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="0dc98262-2b33-485b-86e5-a2794ff4c6f0" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/BadPatternExamples/CCvNotCM_history.edn" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/BadPatternExamples/CyclicHB_perProcess_history.edn" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/BadPatternExamples/TransitiveHBo_history.edn" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/BadPatternExamples/WriteReadWrite_history.edn" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/CausalChecker.class" afterPath="$PROJECT_DIR$/target/classes/CausalChecker.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/Relations/BasicHappenBeforeOrder.class" afterPath="$PROJECT_DIR$/target/classes/Relations/BasicHappenBeforeOrder.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/Relations/BasicRelation.class" afterPath="$PROJECT_DIR$/target/classes/Relations/BasicRelation.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/Relations/IncrementalHappenBeforeOrder.class" afterPath="$PROJECT_DIR$/target/classes/Relations/IncrementalHappenBeforeOrder.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/Relations/incrementalProcess.class" afterPath="$PROJECT_DIR$/target/classes/Relations/incrementalProcess.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/CausalChecker.java" afterPath="$PROJECT_DIR$/src/main/java/CausalChecker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Debugger.java" afterPath="$PROJECT_DIR$/src/main/java/Debugger.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/History/CMOperation.java" afterPath="$PROJECT_DIR$/src/main/java/History/CMOperation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/HistoryProducer/CCProducer.java" afterPath="$PROJECT_DIR$/src/main/java/HistoryProducer/CCProducer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/HistoryProducer/LinProducer.java" afterPath="$PROJECT_DIR$/src/main/java/HistoryProducer/LinProducer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/HistoryProducer/generatedOperation.java" afterPath="$PROJECT_DIR$/src/main/java/HistoryProducer/generatedOperation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/HistoryProducer/operationProducer.java" afterPath="$PROJECT_DIR$/src/main/java/HistoryProducer/operationProducer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/HistoryProducer/randomProducer.java" afterPath="$PROJECT_DIR$/src/main/java/HistoryProducer/randomProducer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Main.java" afterPath="$PROJECT_DIR$/src/main/java/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Relations/BasicHappenBeforeOrder.java" afterPath="$PROJECT_DIR$/src/main/java/Relations/BasicHappenBeforeOrder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Relations/BasicRelation.java" afterPath="$PROJECT_DIR$/src/main/java/Relations/BasicRelation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Relations/IncrementalHappenBeforeOrder.java" afterPath="$PROJECT_DIR$/src/main/java/Relations/IncrementalHappenBeforeOrder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Relations/IncrementalHappenBeforeOrderV2.java" afterPath="$PROJECT_DIR$/src/main/java/Relations/IncrementalHappenBeforeOrderV2.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Relations/ReadFrom.java" afterPath="$PROJECT_DIR$/src/main/java/Relations/ReadFrom.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/generateAndTest.java" afterPath="$PROJECT_DIR$/src/main/java/generateAndTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/runWithMongo.java" afterPath="$PROJECT_DIR$/src/main/java/runWithMongo.java" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/HappenBeforeGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_projectlombok_lombok_1_18_18.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_projectlombok_lombok_1_18_20.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IncrementalCCC.iml" beforeDir="false" afterPath="$PROJECT_DIR$/IncrementalCCC.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Analyzer/LogFileAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Analyzer/LogFileAnalyzer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Analyzer/LogFileAnalyzerV2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Analyzer/LogFileAnalyzerV2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Analyzer/LogFileAnalyzerV3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Analyzer/LogFileAnalyzerV3.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BatchChecking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/BatchChecking.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CausalChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/CausalChecker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Checker/CCChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Checker/CCChecker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Checker/CCvChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Checker/CCvChecker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Checker/CMChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Checker/CMChecker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DBConnector/mongoConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/DBConnector/mongoConnector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Datastructure/BitMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Datastructure/BitMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Debugger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Debugger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/History/CMOperation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/History/CMOperation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/History/History.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/History/History.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/History/HistoryReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/History/HistoryReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/History/Operation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/History/Operation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/HistoryProducer/CCProducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/HistoryProducer/CCProducer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/HistoryProducer/LinProducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/HistoryProducer/LinProducer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/HistoryProducer/generatedOperation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/HistoryProducer/generatedOperation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/HistoryProducer/operationProducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/HistoryProducer/operationProducer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/HistoryProducer/randomProducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/HistoryProducer/randomProducer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Relations/BasicCausalOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Relations/BasicCausalOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Relations/BasicHappenBeforeOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Relations/BasicHappenBeforeOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Relations/BasicRelation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Relations/BasicRelation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Relations/BasicRelationInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Relations/BasicRelationInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Relations/CausalOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Relations/CausalOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Relations/ConflictRelation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Relations/ConflictRelation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Relations/HappenBeforeOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Relations/HappenBeforeOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Relations/IncrementalCausalOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Relations/IncrementalCausalOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Relations/IncrementalHappenBeforeOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Relations/IncrementalHappenBeforeOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Relations/IncrementalHappenBeforeOrderV2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Relations/IncrementalHappenBeforeOrderV2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Relations/ProgramOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Relations/ProgramOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Relations/ReadFrom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/Relations/ReadFrom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/generateAndTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/generateAndTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/runWithMongo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/runWithMongo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/testFileAnalysis.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IncrementalCCC/testFileAnalysis.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/CausalChecker.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Checker/CCChecker.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Checker/CCvChecker.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Checker/CMChecker.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Datastructure/BitMap.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/History/CMOperation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/History/History.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/History/HistoryReader.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/History/Operation$OpType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/History/Operation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Relations/BasicCausalOrder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Relations/BasicHappenBeforeOrder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Relations/BasicRelation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Relations/BasicRelationInterface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Relations/CausalOrder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Relations/ConflictRelation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Relations/HappenBeforeOrder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Relations/IncrementalCausalOrder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Relations/IncrementalHappenBeforeOrder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Relations/ProgramOrder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Relations/ReadFrom.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Relations/incrementalProcess.class" beforeDir="false" />
     </list>
-    <ignored path="$PROJECT_DIR$/out/" />
-    <ignored path="$PROJECT_DIR$/target/" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -45,122 +84,6 @@
   </component>
   <component name="CompilerWorkspaceConfiguration">
     <option name="PARALLEL_COMPILATION" value="true" />
-  </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="BasicHappenBeforeOrder.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Relations/BasicHappenBeforeOrder.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1190">
-              <caret line="89" column="5" lean-forward="true" selection-start-line="89" selection-start-column="5" selection-end-line="89" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BasicRelation.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Relations/BasicRelation.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4946">
-              <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CausalChecker.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/CausalChecker.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="41" column="0" lean-forward="false" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CMOperation.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/History/CMOperation.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="122">
-              <caret line="20" column="58" lean-forward="false" selection-start-line="20" selection-start-column="58" selection-end-line="20" selection-end-column="58" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="History.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/History/History.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="392">
-              <caret line="184" column="51" lean-forward="true" selection-start-line="184" selection-start-column="51" selection-end-line="184" selection-end-column="51" />
-              <folding>
-                <element signature="e#6301#6302#0" expanded="true" />
-                <element signature="e#6338#6339#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IncrementalHappenBeforeOrder.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Relations/IncrementalHappenBeforeOrder.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="876">
-              <caret line="604" column="0" lean-forward="true" selection-start-line="604" selection-start-column="0" selection-end-line="604" selection-end-column="0" />
-              <folding>
-                <element signature="e#1656#1671#0" expanded="true" />
-                <element signature="e#26570#26583#0" expanded="true" />
-                <element signature="e#26661#26670#0" expanded="true" />
-                <element signature="e#27585#27594#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IncrementalHappenBeforeOrderV2.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Relations/IncrementalHappenBeforeOrderV2.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3802">
-              <caret line="65" column="6" lean-forward="false" selection-start-line="65" selection-start-column="6" selection-end-line="65" selection-end-column="6" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ProgramOrder.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Relations/ProgramOrder.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-142">
-              <caret line="33" column="46" lean-forward="false" selection-start-line="33" selection-start-column="46" selection-end-line="33" selection-end-column="46" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ReadFrom.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Relations/ReadFrom.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="26" column="33" lean-forward="true" selection-start-line="26" selection-start-column="33" selection-end-line="26" selection-end-column="33" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="runWithMongo.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/runWithMongo.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5865">
-              <caret line="404" column="64" lean-forward="false" selection-start-line="404" selection-start-column="64" selection-end-line="404" selection-end-column="64" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -282,6 +205,7 @@
     <option name="width" value="1348" />
     <option name="height" value="1028" />
   </component>
+  <component name="ProjectId" id="1swWPqAAwh9Q7bqryWJJvmwWDd0" />
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
@@ -392,116 +316,33 @@
       <pane id="AndroidView" />
     </panes>
   </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="project.propCompiler" />
-    <property name="nodejs_interpreter_path" value="$USER_HOME$/.nvm/versions/node/v11.13.0/bin/node" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="SearchEverywhereHistoryKey" value="flush&#9;PSI&#9;JAVA://History.Operation#flushCoList" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path" value="node" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="SearchEverywhereHistoryKey" value="flush&#9;PSI&#9;JAVA://History.Operation#flushCoList" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
-  <component name="RunManager" selected="Application.CausalChecker">
-    <configuration name="CausalChecker" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="CausalChecker" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="IncrementalCCC" />
-      <envs />
-    </configuration>
-    <configuration name="Debugger" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="Debugger" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="IncrementalCCC" />
-      <envs />
-    </configuration>
-    <configuration name="LogFileAnalyzerV3" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="Analyzer.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="MAIN_CLASS_NAME" value="Analyzer.LogFileAnalyzerV3" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="IncrementalCCC" />
-      <envs />
-    </configuration>
+  <component name="RunManager" selected="Application.HappenBeforeGenerator">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
       <option name="WIDTH" value="400" />
       <option name="HEIGHT" value="300" />
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <module />
-    </configuration>
-    <configuration default="true" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="" />
-      <envs />
-    </configuration>
-    <configuration default="true" type="JUnit" factoryName="JUnit">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
     </configuration>
     <configuration default="true" type="ClojureREPL" factoryName="Local" activateToolWindowBeforeRun="false">
       <setting name="replType" value="NREPL" />
@@ -514,318 +355,321 @@
       <setting name="aliases" value="" />
       <setting name="fixLineNumbers" value="false" />
     </configuration>
-    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="fixLineNumbers" value="false" />
+      <module name="" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="fixLineNumbers" value="false" />
+      <module name="" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="fixLineNumbers" value="false" />
+      <module name="" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="fixLineNumbers" value="false" />
+      <module name="" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="fixLineNumbers" value="false" />
+      <module name="" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="fixLineNumbers" value="false" />
+      <module name="" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="fixLineNumbers" value="false" />
+      <module name="" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="fixLineNumbers" value="false" />
+      <module name="" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="fixLineNumbers" value="false" />
+      <module name="" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="fixLineNumbers" value="false" />
+      <module name="" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="fixLineNumbers" value="false" />
+      <module name="" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="fixLineNumbers" value="false" />
+      <module name="" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="fixLineNumbers" value="false" />
+      <module name="" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="fixLineNumbers" value="false" />
+      <module name="" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="fixLineNumbers" value="false" />
+      <module name="" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="fixLineNumbers" value="false" />
+      <module name="" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="fixLineNumbers" value="false" />
+      <module name="" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="fixLineNumbers" value="false" />
+      <module name="" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="fixLineNumbers" value="false" />
+      <module name="" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="fixLineNumbers" value="false" />
+      <module name="" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="fixLineNumbers" value="false" />
+      <module name="" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="fixLineNumbers" value="false" />
+      <module name="" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="fixLineNumbers" value="false" />
+      <module name="" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="fixLineNumbers" value="false" />
+      <module name="" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="fixLineNumbers" value="false" />
+      <module name="" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="fixLineNumbers" value="false" />
+      <module name="" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="fixLineNumbers" value="false" />
+      <module name="" />
+    </configuration>
+    <configuration name="CausalChecker" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="IncrementalCCC.CausalChecker" />
+      <module name="IncrementalCCC" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Debugger" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="IncrementalCCC.Debugger" />
+      <module name="IncrementalCCC" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HappenBeforeGenerator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="IncrementalCCC.HappenBeforeGenerator" />
+      <module name="IncrementalCCC" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="generateAndTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="IncrementalCCC.generateAndTest" />
+      <module name="IncrementalCCC" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="runWithMongo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="IncrementalCCC.runWithMongo" />
+      <module name="IncrementalCCC" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="testFileAnalysis" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="IncrementalCCC.testFileAnalysis" />
+      <module name="IncrementalCCC" />
+      <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/../MongoTrace/tempData/majority_stable ALL" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="TestNG">
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
       <option name="PROGRAM_PARAMETERS" />
-      <predefined_log_file id="idea.log" enabled="true" />
+      <predefined_log_file enabled="true" id="idea.log" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
-    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
-      <setting name="host" value="" />
-      <setting name="port" value="0" />
-      <setting name="replType" value="SOCKET" />
-      <setting name="configType" value="SPECIFY" />
-      <setting name="fixLineNumbers" value="false" />
-      <module name="" />
-    </configuration>
-    <configuration default="true" type="TestNG" factoryName="TestNG">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <envs />
-      <properties />
-      <listeners />
-    </configuration>
-    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
-      <setting name="host" value="" />
-      <setting name="port" value="0" />
-      <setting name="replType" value="SOCKET" />
-      <setting name="configType" value="SPECIFY" />
-      <setting name="fixLineNumbers" value="false" />
-      <module name="" />
-    </configuration>
-    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
-      <setting name="host" value="" />
-      <setting name="port" value="0" />
-      <setting name="replType" value="SOCKET" />
-      <setting name="configType" value="SPECIFY" />
-      <setting name="fixLineNumbers" value="false" />
-      <module name="" />
-    </configuration>
-    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
-      <setting name="host" value="" />
-      <setting name="port" value="0" />
-      <setting name="replType" value="SOCKET" />
-      <setting name="configType" value="SPECIFY" />
-      <setting name="fixLineNumbers" value="false" />
-      <module name="" />
-    </configuration>
-    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
-      <setting name="host" value="" />
-      <setting name="port" value="0" />
-      <setting name="replType" value="SOCKET" />
-      <setting name="configType" value="SPECIFY" />
-      <setting name="fixLineNumbers" value="false" />
-      <module name="" />
-    </configuration>
-    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
-      <setting name="host" value="" />
-      <setting name="port" value="0" />
-      <setting name="replType" value="SOCKET" />
-      <setting name="configType" value="SPECIFY" />
-      <setting name="fixLineNumbers" value="false" />
-      <module name="" />
-    </configuration>
-    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
-      <setting name="host" value="" />
-      <setting name="port" value="0" />
-      <setting name="replType" value="SOCKET" />
-      <setting name="configType" value="SPECIFY" />
-      <setting name="fixLineNumbers" value="false" />
-      <module name="" />
-    </configuration>
-    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
-      <setting name="host" value="" />
-      <setting name="port" value="0" />
-      <setting name="replType" value="SOCKET" />
-      <setting name="configType" value="SPECIFY" />
-      <setting name="fixLineNumbers" value="false" />
-      <module name="" />
-    </configuration>
-    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
-      <setting name="host" value="" />
-      <setting name="port" value="0" />
-      <setting name="replType" value="SOCKET" />
-      <setting name="configType" value="SPECIFY" />
-      <setting name="fixLineNumbers" value="false" />
-      <module name="" />
-    </configuration>
-    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
-      <setting name="host" value="" />
-      <setting name="port" value="0" />
-      <setting name="replType" value="SOCKET" />
-      <setting name="configType" value="SPECIFY" />
-      <setting name="fixLineNumbers" value="false" />
-      <module name="" />
-    </configuration>
-    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
-      <setting name="host" value="" />
-      <setting name="port" value="0" />
-      <setting name="replType" value="SOCKET" />
-      <setting name="configType" value="SPECIFY" />
-      <setting name="fixLineNumbers" value="false" />
-      <module name="" />
-    </configuration>
-    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
-      <setting name="host" value="" />
-      <setting name="port" value="0" />
-      <setting name="replType" value="SOCKET" />
-      <setting name="configType" value="SPECIFY" />
-      <setting name="fixLineNumbers" value="false" />
-      <module name="" />
-    </configuration>
-    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
-      <setting name="host" value="" />
-      <setting name="port" value="0" />
-      <setting name="replType" value="SOCKET" />
-      <setting name="configType" value="SPECIFY" />
-      <setting name="fixLineNumbers" value="false" />
-      <module name="" />
-    </configuration>
-    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
-      <setting name="host" value="" />
-      <setting name="port" value="0" />
-      <setting name="replType" value="SOCKET" />
-      <setting name="configType" value="SPECIFY" />
-      <setting name="fixLineNumbers" value="false" />
-      <module name="" />
-    </configuration>
-    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
-      <setting name="host" value="" />
-      <setting name="port" value="0" />
-      <setting name="replType" value="SOCKET" />
-      <setting name="configType" value="SPECIFY" />
-      <setting name="fixLineNumbers" value="false" />
-      <module name="" />
-    </configuration>
-    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
-      <setting name="host" value="" />
-      <setting name="port" value="0" />
-      <setting name="replType" value="SOCKET" />
-      <setting name="configType" value="SPECIFY" />
-      <setting name="fixLineNumbers" value="false" />
-      <module name="" />
-    </configuration>
-    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
-      <setting name="host" value="" />
-      <setting name="port" value="0" />
-      <setting name="replType" value="SOCKET" />
-      <setting name="configType" value="SPECIFY" />
-      <setting name="fixLineNumbers" value="false" />
-      <module name="" />
-    </configuration>
-    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
-      <setting name="host" value="" />
-      <setting name="port" value="0" />
-      <setting name="replType" value="SOCKET" />
-      <setting name="configType" value="SPECIFY" />
-      <setting name="fixLineNumbers" value="false" />
-      <module name="" />
-    </configuration>
-    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
-      <setting name="host" value="" />
-      <setting name="port" value="0" />
-      <setting name="replType" value="SOCKET" />
-      <setting name="configType" value="SPECIFY" />
-      <setting name="fixLineNumbers" value="false" />
-      <module name="" />
-    </configuration>
-    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
-      <setting name="host" value="" />
-      <setting name="port" value="0" />
-      <setting name="replType" value="SOCKET" />
-      <setting name="configType" value="SPECIFY" />
-      <setting name="fixLineNumbers" value="false" />
-      <module name="" />
-    </configuration>
-    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
-      <setting name="host" value="" />
-      <setting name="port" value="0" />
-      <setting name="replType" value="SOCKET" />
-      <setting name="configType" value="SPECIFY" />
-      <setting name="fixLineNumbers" value="false" />
-      <module name="" />
-    </configuration>
-    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
-      <setting name="host" value="" />
-      <setting name="port" value="0" />
-      <setting name="replType" value="SOCKET" />
-      <setting name="configType" value="SPECIFY" />
-      <setting name="fixLineNumbers" value="false" />
-      <module name="" />
-    </configuration>
-    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
-      <setting name="host" value="" />
-      <setting name="port" value="0" />
-      <setting name="replType" value="SOCKET" />
-      <setting name="configType" value="SPECIFY" />
-      <setting name="fixLineNumbers" value="false" />
-      <module name="" />
-    </configuration>
-    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
-      <setting name="host" value="" />
-      <setting name="port" value="0" />
-      <setting name="replType" value="SOCKET" />
-      <setting name="configType" value="SPECIFY" />
-      <setting name="fixLineNumbers" value="false" />
-      <module name="" />
-    </configuration>
-    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
-      <setting name="host" value="" />
-      <setting name="port" value="0" />
-      <setting name="replType" value="SOCKET" />
-      <setting name="configType" value="SPECIFY" />
-      <setting name="fixLineNumbers" value="false" />
-      <module name="" />
-    </configuration>
-    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
-      <setting name="host" value="" />
-      <setting name="port" value="0" />
-      <setting name="replType" value="SOCKET" />
-      <setting name="configType" value="SPECIFY" />
-      <setting name="fixLineNumbers" value="false" />
-      <module name="" />
-    </configuration>
-    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
-      <setting name="host" value="" />
-      <setting name="port" value="0" />
-      <setting name="replType" value="SOCKET" />
-      <setting name="configType" value="SPECIFY" />
-      <setting name="fixLineNumbers" value="false" />
-      <module name="" />
-    </configuration>
-    <configuration name="generateAndTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="generateAndTest" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="IncrementalCCC" />
-      <envs />
-    </configuration>
-    <configuration name="runWithMongo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="runWithMongo" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="IncrementalCCC" />
-      <envs />
-    </configuration>
-    <configuration name="testFileAnalysis" type="Application" factoryName="Application" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="testFileAnalysis" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/../MongoTrace/tempData/majority_stable ALL" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="IncrementalCCC" />
-      <envs />
-    </configuration>
-    <list size="6">
-      <item index="0" class="java.lang.String" itemvalue="Application.testFileAnalysis" />
-      <item index="1" class="java.lang.String" itemvalue="Application.runWithMongo" />
-      <item index="2" class="java.lang.String" itemvalue="Application.LogFileAnalyzerV3" />
-      <item index="3" class="java.lang.String" itemvalue="Application.Debugger" />
-      <item index="4" class="java.lang.String" itemvalue="Application.generateAndTest" />
-      <item index="5" class="java.lang.String" itemvalue="Application.CausalChecker" />
+    <list>
+      <item itemvalue="Application.testFileAnalysis" />
+      <item itemvalue="Application.runWithMongo" />
+      <item itemvalue="Application.Debugger" />
+      <item itemvalue="Application.generateAndTest" />
+      <item itemvalue="Application.CausalChecker" />
+      <item itemvalue="Application.HappenBeforeGenerator" />
     </list>
     <recent_temporary>
-      <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Application.CausalChecker" />
-        <item index="1" class="java.lang.String" itemvalue="Application.generateAndTest" />
-        <item index="2" class="java.lang.String" itemvalue="Application.runWithMongo" />
-        <item index="3" class="java.lang.String" itemvalue="Application.Debugger" />
-        <item index="4" class="java.lang.String" itemvalue="Application.LogFileAnalyzerV3" />
+      <list>
+        <item itemvalue="Application.HappenBeforeGenerator" />
+        <item itemvalue="Application.CausalChecker" />
+        <item itemvalue="Application.generateAndTest" />
+        <item itemvalue="Application.runWithMongo" />
+        <item itemvalue="Application.Debugger" />
       </list>
     </recent_temporary>
   </component>
-  <component name="ShelveChangesManager" show_recycled="false">
-    <option name="remove_strategy" value="false" />
-  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -877,6 +721,8 @@
       <workItem from="1620698734870" duration="50911000" />
       <workItem from="1621580687724" duration="4145000" />
       <workItem from="1621668893290" duration="16510000" />
+      <workItem from="1621784114224" duration="984000" />
+      <workItem from="1621786873950" duration="6609000" />
     </task>
     <servers />
   </component>
@@ -928,16 +774,19 @@
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
   </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <option name="time" value="15" />
-    </breakpoint-manager>
-    <watches-manager />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
