@@ -33,8 +33,8 @@ public class generateAndTest {
 //        ccProducer.printToFile();
 //        ccProducer.printToFileDebug(1);
 
-        int opNum = 1000;
-        LinProducer linProducer = new LinProducer(opNum, 10, 3,1);
+        int opNum = 100;
+        LinProducer linProducer = new LinProducer(opNum, 5, 3,1);
         linProducer.generatePath();
         linProducer.generateLinHistory();
         linProducer.printToFile();

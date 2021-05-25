@@ -111,10 +111,12 @@ class basicProcess implements Callable<BasicRelation> {
     public void ignoreInvisibleOps(){
         BitSet lastCoList = this.lastOp.getCoList();
         Operation tempOp;
-        for (int i = lastCoList.nextClearBit(0); i >= 0; i = lastCoList.nextSetBit(i + 1)) { //注意这里用的是next clear bit
-            tempOp = this.opList.get(i); //tempOp为对该线程不可见的操作
-            tempOp.flushCoList();
-            this.matrix.ignoreOp(i); //随后在邻接矩阵中把该操作忽略
+        for (int i = lastCoList.nextClearBit(0); i >= 0 && i < this.size; i = lastCoList.nextClearBit(i + 1)) { //注意这里用的是next clear bit
+            if(i != lastOp.getID()) { //不能把自己删掉
+                tempOp = this.opList.get(i); //tempOp为对该线程不可见的操作
+                tempOp.flushCoList();
+                this.matrix.ignoreOp(i); //随后在邻接矩阵中把该操作忽略
+            }
         }
     }
 
@@ -124,8 +126,9 @@ class basicProcess implements Callable<BasicRelation> {
         this.matrix.setProcessID(this.processID);
         //利用causal order初始化可达性矩阵
         this.matrix.union(this.matrix, this.co);
-        this.ignoreInvisibleOps(); //在利用co初始化完成后，需要将对此线程不可见的操作忽略
+//        System.out.println("last op in process" + this.processID +":" + lastOp.toString() + "id:" + lastOp.getID());
         this.matrix.updateListByMatrix(this.opList);
+        this.ignoreInvisibleOps(); //在利用co初始化完成后，需要将对此线程不可见的操作忽略
         this.ignoreOtherRead();
 
     }

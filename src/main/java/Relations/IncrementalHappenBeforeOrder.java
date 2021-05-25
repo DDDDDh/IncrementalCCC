@@ -111,6 +111,7 @@ class incrementalProcess implements Callable<BasicRelation>{
     ProgramOrder po;
     BasicRelation matrix; //用来存储最后的关系矩阵
     int loopTime;
+    Operation lastOp;
 
     //debug
     String processLog = "target/RandomHistories/StressTestOriginalCheckLog0319_processLog.txt";
@@ -173,7 +174,12 @@ class incrementalProcess implements Callable<BasicRelation>{
             if(op.isRead() && op.getProcess() == processID){ //是当前进程上的读操作
                 this.curReadList.add(op.getID());
             }
+            if(op.getProcess() == this.processID){
+                lastOp = op;
+            }
         }
+
+        ignoreInvisibleOps();
 
 //        CMOperation op;
 //        for(int i = 0; i < this.size; i++){
@@ -488,6 +494,9 @@ class incrementalProcess implements Callable<BasicRelation>{
         //完成关系计算之后，把操作的可见集合整合到邻接矩阵中
         this.matrix.updateMatrixByCMList(this.opList);
         this.matrix.computeTransitiveClosure();  //因为incremental算法省略了一些边，所以要得到完整的HBo矩阵，需要通过传递闭包计算
+
+//        ignoreInvisibleOps();
+
         this.matrix.setLoopTime(this.loopTime);
 
         //将不在本线程的读操作相关矩阵元素全部置零
@@ -503,6 +512,21 @@ class incrementalProcess implements Callable<BasicRelation>{
 //        System.out.println("Finish computation of HBo at process " + this.processID);
         return true;
     }
+
+    public void ignoreInvisibleOps(){
+        BitSet lastCoList = this.lastOp.getCoList();
+        Operation tempOp;
+        for (int i = lastCoList.nextClearBit(0); i >= 0 && i < this.size; i = lastCoList.nextClearBit(i + 1)) { //注意这里用的是next clear bit
+            if(i!= lastOp.getID()) { //不能把自己忽略
+                tempOp = this.opList.get(i); //tempOp为对该线程不可见的操作
+                tempOp.flushCoList();
+                for (int j = 0; j < this.opList.size(); j++) {
+                    this.opList.get(j).getCoList().set(j, false);
+                }
+            }
+        }
+    }
+
 
     //对于每个读操作的downset，这里用该操作o的coList标示
     public void initReachability(int rPrime, int r){

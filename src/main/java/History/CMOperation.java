@@ -149,4 +149,9 @@ public class CMOperation extends Operation{
         this.setIDone(false);
     }
 
+    @Override
+    public String toString(){
+        return "Type:"+ this.getType()+ " Key:" + this.getKey() +" Value:" + this.getValue();
+    }
+
 }
