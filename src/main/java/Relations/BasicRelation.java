@@ -42,6 +42,16 @@ public class BasicRelation implements BasicRelationInterface{
         }
     }
 
+    public void ignoreOpList(LinkedList<Integer> invisibleList){
+        BitSet emptyList = new BitSet(this.getMatrixSize());
+        for(Integer i: invisibleList){
+            this.relationMatrix[i] = emptyList;
+            for(int j = 0; j < this.matrixSize; j++){
+                this.relationMatrix[j].set(i, false);
+            }
+        }
+    }
+
     public void setTrue(int fromIndex, int toIndex){
         BitSet tempSet = this.relationMatrix[fromIndex];
         tempSet.set(toIndex, true);

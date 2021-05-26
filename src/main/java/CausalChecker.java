@@ -14,8 +14,9 @@ public class CausalChecker {
 //        String url = "src/main/resources/hy_history.edn";
 //        String url = "src/main/resources/SpecialCases/CCvNotCM_history.edn";
 //        String url = "src/main/resources/BadPatternExamples/CyclicHB2_history.edn";
-//        String url = "target/ParameterChoosing/Running_202151410_opNum1000_processNum10_varRange20_valRange100_rRate3_wRate1.edn";
-        String url = "/Users/yi-huang/Project/IncrementalCCC/target/ParameterChoosing/debug/special_01.edn";
+//        String url = "target/ParameterChoosing/Running_202152612_opNum500_processNum5_varRange20_valRange100_rRate3_wRate1.edn";
+//        String url = "/Users/yi-huang/Project/IncrementalCCC/target/ParameterChoosing/debug/special_01.edn";
+        String url = "target/debug/oy01.edn";
         HistoryReader reader = new HistoryReader(url);
 //        LinkedList<Operation> opList = reader.readHistory();
 //        for(int i = 0; i < opList.size(); i++){
@@ -54,18 +55,21 @@ public class CausalChecker {
         bco.computeCO(history, po, rf);
         endTime = System.nanoTime();
         System.out.println("Running time of brute-force computation of co:" + (endTime - startTime) + "ns");
-        System.out.println("bco Matrix:");
+//        System.out.println("bco Matrix:");
 //        bco.printMatrix();
-
+//
 //        boolean coEquality = bco.checkEqual(ico);
 //        if(coEquality){
-//            System.out.println();
+//            System.out.println("ico is equal to bco");
 //        }
 
 
         System.out.println("---Begin to check CC---");
         CCChecker ccChecker = new CCChecker(history, po, rf, ico);
         System.out.println("Chekcing CC, result:" + ccChecker.checkCC());
+        if(!ccChecker.checkCC()){
+            System.out.println("fail reason:" + ccChecker.failReason());
+        }
 
 //        BasicCausalOrder bco1 = new BasicCausalOrder(history.getOpNum());
 //        bco1.computeCOBFS(history, po, rf);
