@@ -28,38 +28,38 @@ public class runWithMongo {
 
     public static void main(String args[]) throws Exception {
 
-//        for(int k = 1; k <= 5; k++) {
+        for(int k = 1; k <= 10; k++) {
 
 //        int k = 1;
             int processNum = 5;
-            int opNum = 1000;
+            int opNum = 100*k;
 //
 
-//            for (int j = 5; j >= 1; j--) {
+            for (int j = 5; j >= 1; j--) {
 
-//                int varRange = j*5;
+                int varRange = j*5;
 //                if(k == 3 && varRange > 10){
 //                    continue;
 //                }
-            int varRange = 10;
+//            int varRange = 10;
 
 
-//                for (int i = 10; i >= 1; i--) {
+                for (int i = 10; i >= 1; i--) {
 
-//                    int valRange = i*50;
-            int valRange = 50;
+                    int valRange = i*50;
+//            int valRange = 50;
 
-//                    if(varRange*valRange <= opNum/4){
-//                        continue;
-//                    }
+                    if(varRange*valRange <= opNum/4){
+                        continue;
+                    }
 //
 
 
 
-                    String stressTestOut = "target/ParameterChoosing/debug/StressTestLogfile0512_process"+ processNum + "_var"+ varRange + "_val" + valRange  +"_opNum"+ opNum +".txt";
+                    String stressTestOut = "target/ParameterChoosing/debug/StressTestLogfile0528_process"+ processNum + "_var"+ varRange + "_val" + valRange  +"_opNum"+ opNum +".txt";
                     File outfile = new File(stressTestOut);
                     PrintWriter logout = new PrintWriter(outfile);
-                    String mongoCheckLog = "target/ParameterChoosing//debug/StressTestMongoCheckLog0512_process"+ processNum + "_var"+ varRange + "_val" + valRange  +"_opNum"+ opNum +".txt";
+                    String mongoCheckLog = "target/ParameterChoosing//debug/StressTestMongoCheckLog0528_process"+ processNum + "_var"+ varRange + "_val" + valRange  +"_opNum"+ opNum +".txt";
 
                     logout.println("-----Begin Stress Test-----Round OpNum: "+opNum);
                     System.out.println("-----Begin Stress Test-----Round OpNum: "+ opNum);
@@ -279,7 +279,7 @@ public class runWithMongo {
 //                    //end
 
                     mongoConnector connector = new mongoConnector();
-                    String mongoLog = "target/ParameterChoosing/debug/mongoLogfile_0512" + "_opNum" + opNum + "_processNum" + ccProducer.getProcessNum() + ".edn";
+                    String mongoLog = "target/ParameterChoosing/debug/mongoLogfile_0528" + "_opNum" + opNum + "_processNum" + ccProducer.getProcessNum() + ".edn";
 //                    connector.mongoRun("mongodb+srv://m220student:m220password@mflix.9pm5g.mongodb.net/test?maxIdleTimeMS=3000&connectTimeoutMS=5000&socketTimeoutMS=5000", "test_mongo", "original_data", newPath, mongoLog);
 //                    connector.mongoRun("mongodb://127.0.0.1:27013", "test_mongo", "original_data", url, mongoLog);
                     connector.mongoRun("mongodb://dh:dh@n3.disalg.cn:26011/?maxIdleTimeMS=60000", "test_mongo", "original_data", url, mongoLog);
@@ -449,11 +449,11 @@ public class runWithMongo {
 
 
                     logout.close();
-//                }
-//            }
+                }
+            }
 
 
-//        }
+        }
 
     }
 }

@@ -135,7 +135,7 @@ class basicProcess implements Callable<BasicRelation> {
 //        System.out.println("last op in process" + this.processID +":" + lastOp.toString() + "id:" + lastOp.getID());
         this.matrix.updateListByMatrix(this.opList);
         this.ignoreInvisibleOps(); //在利用co初始化完成后，需要将对此线程不可见的操作忽略
-//        this.ignoreOtherRead();
+        this.ignoreOtherRead();
 
     }
 
@@ -208,6 +208,12 @@ class basicProcess implements Callable<BasicRelation> {
                     this.matrix.setFalse(oID, i);
                 }
             }
+        }
+
+        if(this.processID == 2){
+            System.out.println("M[22][104]:" + this.matrix.existEdge(22, 104));
+            System.out.println("op22:" + this.opList.get(22).easyPrint());
+            System.out.println("op104:" + this.opList.get(104).easyPrint());
         }
 
 //        System.out.println("basic hbo Matrix for process" + this.processID);

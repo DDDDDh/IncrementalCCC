@@ -435,8 +435,8 @@ class incrementalProcess implements Callable<BasicRelation>{
             }
             else{
                 rPrime = this.curReadList.get(rOp.getProcessReadID()-1);
-                System.out.println("i:" + i + "rPrime:" + rPrime);
-                System.out.println("r:" + rOp.easyPrint() + " rPrime:" + this.opList.get(rPrime).easyPrint());
+//                System.out.println("i:" + i + "rPrime:" + rPrime);
+//                System.out.println("r:" + rOp.easyPrint() + " rPrime:" + this.opList.get(rPrime).easyPrint());
             }
 
 
@@ -460,12 +460,24 @@ class incrementalProcess implements Callable<BasicRelation>{
                 wPrime = this.opList.get(j);
 //                System.out.println("wPrime:" + wPrime.easyPrint() + "index:" + j);
                 if(wPrime.isWrite() && wPrime.getKey().equals(rOp.getKey()) && wPrime.getID() != wOp.getID()){
-//                    System.out.println("Applying rule C to add edge:" + wPrime.easyPrint() + " to " + wOp.easyPrint());
+//                    System.out.println("Applying rule C to add edge:" + wPrime.easyPrint() + " to " + wOp.easyPrint());\
                     applied = true;
-                    if(applyRuleC(wPrime, wOp, rOp)){
-                        this.matrix.setCyclicHB(true);
+                    if(wOp.getCoList().get(j) == true){
+//                        System.out.println("wPrime is visible to w, do not need to add w'w!!!===================" + processID);
+//                        System.out.println("wPime:" + wPrime.easyPrint() + " w:" + wOp.easyPrint() + " r:" + rOp.easyPrint());
+                        applied = false;
+                        if(cycleDetection(wPrime, wOp)){
+                            this.matrix.setCyclicHB(true);
+                            return false;
+                        }
+//                        updateReachability(wPrime, wOp, rOp);
+                    }
+                    if(applied) {
+                        if (applyRuleC(wPrime, wOp, rOp)) {
+                            this.matrix.setCyclicHB(true);
 //                        System.out.printf("Rule C caused cycle here!");
-                        return false;
+                            return false;
+                        }
                     }
                 }
             }
@@ -483,9 +495,9 @@ class incrementalProcess implements Callable<BasicRelation>{
                 continue;
             }
             else{
-                if(applied) { //只有加过w'w边才需要重新排列
+                if(applied) { //只有加过w'w边才需要重新排列 //0528note:错，topoSchedule中包含了可达性更新和新的w'w检测
                     this.loopTime++;
-                    System.out.println("loop inc for r':" + this.opList.get(rPrime).easyPrint() + " r:" + rOp.easyPrint() + " process:" + this.processID);
+//                    System.out.println("loop inc for r':" + this.opList.get(rPrime).easyPrint() + " r:" + rOp.easyPrint() + " process:" + this.processID);
 //                System.out.println("wOp:" + wOp.easyPrint() + "is visible to rPrime:" + this.opList.get(rPrime).easyPrint() +", begin to topoSchedule...looptime:" + this.loopTime);
                     if (topoSchedule(rOp)) {
 //                    System.out.println("Cycle detected when topo scheduling..."); //在逆拓扑排序中成环，意味着包含CyclicHB
@@ -805,16 +817,45 @@ class incrementalProcess implements Callable<BasicRelation>{
             wPrime.getRrList().add(w.getLastRead());
         }
 
-        //更新w的PW
-        w.updatePrecedingWrite(wPrime, this.opList);
+        //new: 添加w'->w边后，将w'的前驱节点都添加到w的后继节点的可见集合中去，并把w的后继节点都加到w'的前驱节点的后继中
+        CMOperation preOp;
+        CMOperation sucOp;
+        BitSet wPrimeCoList = wPrime.getCoList();
+        BitSet wCoList = w.getCoList();
+        for(int i = wPrimeCoList.nextSetBit(0); i >= 0; i = wPrimeCoList.nextSetBit(i + 1)) {
+            preOp = this.opList.get(i);
+            if (w.getLastRead() < preOp.getLastRead()) { //更新w'的前驱节点的rr
+                preOp.setLastRR(preOp.getLastRead());
+                preOp.setLastRead(w.getLastRead());
+                preOp.getRrList().add(w.getLastRead());
+                for (Integer j : w.getSucList()) {
+                    sucOp = this.opList.get(j);
+                    if (!preOp.getSucList().contains(j)) {
+                        preOp.getSucList().add(j);
+                    }
+                    if (!sucOp.getPreList().contains(i)) {
+                        sucOp.getPreList().add(i);
+                        sucOp.getCoList().set(i, true);
+                    }
+                    sucOp.updatePrecedingWrite(preOp, this.opList);
+                    sucOp.updatePrecedingWrite(wPrime, this.opList);
+                    assertTrue("sucOp should be in w's sucList!", w.getSucList().contains(j));
+                }
+            }
+        }
+
+            //更新w的PW
+            w.updatePrecedingWrite(wPrime, this.opList);
 //        System.out.println("Update Reachability: PW of " +w.easyPrint() +  "by " + wPrime.easyPrint());
 
-        CMOperation curOp;
-        for (Integer i : w.getSucList()) {
-            curOp = this.opList.get(i);
-            curOp.updatePrecedingWrite(wPrime, this.opList);
-//            System.out.println("Update Reachability: PW of " +curOp.easyPrint() +  "by " + wPrime.easyPrint());
-        }
+//            CMOperation curOp;
+
+//        for (Integer i : w.getSucList()) {
+//            curOp = this.opList.get(i);
+//            curOp.updatePrecedingWrite(wPrime, this.opList);
+////            System.out.println("Update Reachability: PW of " +curOp.easyPrint() +  "by " + wPrime.easyPrint());
+//        }
+
     }
 
     public boolean applyRuleC(CMOperation wPrime, CMOperation w, CMOperation r){

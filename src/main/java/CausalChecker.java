@@ -13,10 +13,10 @@ public class CausalChecker {
     public static void main(String args[]) throws Exception {
 //        String url = "src/main/resources/hy_history.edn";
 //        String url = "src/main/resources/SpecialCases/CCvNotCM_history.edn";
-//        String url = "src/main/resources/BadPatternExamples/CyclicHB2_history.edn";
-//        String url = "target/ParameterChoosing/Running_202152612_opNum500_processNum5_varRange20_valRange100_rRate3_wRate1.edn";
+//        String url = "src/main/resources/BadPatternExamples/CyclicCO_history.edn";
+        String url = "target/ParameterChoosing/debug/mongoLogfile_0528_opNum200_processNum5.edn";
 //        String url = "/Users/yi-huang/Project/IncrementalCCC/target/ParameterChoosing/debug/special_01.edn";
-        String url = "target/debug/oy01.edn";
+//        String url = "target/debug/oy01.edn";
         HistoryReader reader = new HistoryReader(url);
 //        LinkedList<Operation> opList = reader.readHistory();
 //        for(int i = 0; i < opList.size(); i++){
@@ -110,6 +110,7 @@ public class CausalChecker {
             System.out.println("Cannot compare matrix! Reason: isCyclicCO:" + ihbo.isCyclicCO() + " isThinAirRead:" + ihbo.isThinAirRead() + " isCyclicHB:" + ihbo.isCyclicHB());
         }
         else {
+//            boolean hboEquality = hbo.checkEqualDebug(ihbo, history.getOperationList());
             boolean hboEquality = hbo.checkEqual(ihbo);
             if (!hboEquality) {
                 System.out.println("ihbo is not equal to bhbo???");
