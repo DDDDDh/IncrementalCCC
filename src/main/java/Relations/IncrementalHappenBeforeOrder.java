@@ -203,7 +203,14 @@ class incrementalProcess implements Callable<BasicRelation>{
             curOp.setProcessReadID(i); //读全序编号
             if(curOp.getCorrespondingWriteID() != -1) { //如果存在对应写操作，则一同更新
                 cWrite = this.opList.get(curOp.getCorrespondingWriteID());
-                cWrite.setProcessReadID(i); //写全序编号
+
+                //0531fix:写操作的写全序编号仅对应于它在当前操作的第一个读的读全序编号
+                if(cWrite.getProcessReadID() == -1) {
+                    cWrite.setProcessReadID(i); //写全序编号
+                }
+                else if(cWrite.getProcessReadID() > i){
+                    cWrite.setProcessReadID(i);
+                }
 //                System.out.println("Set process readID of " + cWrite.easyPrint() +  " to " + i);
                 cWrite.setHasDictatedRead(true);
                 cWrite.getPrecedingWrite().put(cWrite.getKey(), cWrite.getID()); //为每一有效力的写操作更新自身的PW
