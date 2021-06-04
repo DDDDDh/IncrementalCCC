@@ -2,6 +2,7 @@ package Relations;
 
 import History.*;
 
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
@@ -33,6 +34,8 @@ public class IncrementalHappenBeforeOrder extends HappenBeforeOrder{
 
     public void incrementalHBO(History history, ProgramOrder po, ReadFrom rf, CausalOrder co) throws Exception{
 
+        long incSTime = System.nanoTime();
+
         //当包含ThinAirRead与CyclicCO的时候均不能用增量算法计算Happen-before关系
         if(rf.checkThinAirRead()){
             this.setThinAirRead(true);
@@ -51,7 +54,21 @@ public class IncrementalHappenBeforeOrder extends HappenBeforeOrder{
         int processNum = history.getProcessOpList().keySet().size();
 
         //把history中操作的可见集合更新为co
+
+        System.out.println("Point 0.5:" + (System.nanoTime() - incSTime));
         co.updateListByMatrix(history.getOperationList());
+        System.out.println("Point 0.8:" + (System.nanoTime() - incSTime));
+
+        long tek = System.nanoTime();
+        int t = 0;
+        for(int i = 0; i < history.getOperationList().size(); i++){
+            for(int j = 0; j < history.getOperationList().size(); j++){
+                t = i*j;
+            }
+        }
+        System.out.println("Point 0.9 time:" + (System.nanoTime() - tek) + "t:" + t);
+
+        System.out.println("Point 1 time:" + (System.nanoTime() - incSTime));
 
 //        //返回结果为每个线程按照read-centric方法计算得到的HBo邻接矩阵
 //        HashMap<Integer, BasicRelation> processMatrix = new HashMap<>();
@@ -67,8 +84,12 @@ public class IncrementalHappenBeforeOrder extends HappenBeforeOrder{
 //            System.out.println("Check no" + processID + " Result:");
 //            processMatrix.get(processID).printMatrix();
 //            this.union(this, processMatrix.get(processID));
+//            Future<BasicRelation> submit = executorService.submit(proc);
+//            processMatrix.put(processID, submit.get());
+
         }
 
+        System.out.println("Point 2 time: " + (System.nanoTime() - incSTime));
 
         //把每个线程上计算得到的hbo关系存入线程-hbo关系矩阵中
         for(int i = 0; i <  history.getProcessOpList().keySet().size(); i++){
@@ -91,17 +112,20 @@ public class IncrementalHappenBeforeOrder extends HappenBeforeOrder{
             }
         }
         this.setLoopTime(this.maxLoop);
+        System.out.println("Point 3 time: " + (System.nanoTime() - incSTime));
 
 //        System.out.println("Finally we get a matrix:");
 //        this.printMatrix();
 
         executorService.shutdown();
 
+        long incETime = System.nanoTime();
+        System.out.println("inc hbo time:" + (incETime - incSTime));
 
     }
 }
 
-class incrementalProcess implements Callable<BasicRelation>{
+class  incrementalProcess implements Callable<BasicRelation>{
 
     History history;
     int processID; //当前计算的线程id
@@ -114,8 +138,10 @@ class incrementalProcess implements Callable<BasicRelation>{
     int loopTime;
     Operation lastOp;
 
+
     //debug
     String processLog = "target/RandomHistories/StressTestOriginalCheckLog0319_processLog.txt";
+    long beginTime;
     long lastTime;
     long curTime;
     public static void appendLog(String fileName, String content) throws IOException {
@@ -132,6 +158,8 @@ class incrementalProcess implements Callable<BasicRelation>{
 
 
     public incrementalProcess (History history, int processID, ProgramOrder po) throws Exception{
+        this.beginTime = System.nanoTime();
+        this.curTime = this.beginTime;
         this.history = history;
         this.processID = processID;
         this.size = history.getOpNum();
@@ -147,7 +175,10 @@ class incrementalProcess implements Callable<BasicRelation>{
         this.matrix.updateMatrixByList(history.getOperationList()); //用history中的操作列表更新当前可达性矩阵（默认包含了co信息)
         this.matrix.setProcessID(processID);
         this.loopTime = 0;
-
+        this.lastTime = this.curTime;
+        this.curTime = System.nanoTime();
+        System.out.println("Init time for process " + this.processID + ": " + (this.curTime - this.lastTime) );
+        this.lastTime = this.curTime;
     }
 
     public void initProcessInfo(){
@@ -381,6 +412,8 @@ class incrementalProcess implements Callable<BasicRelation>{
         //0523fix: 要针对所有操作把其他线程上的读忽略，否则在后面更新wwGroup信息时会出错
         //由这些读操作传递而来的可达性信息已经由co保存在每个写操作的colist中了
         //针对所有操作忽略其他线程上的读操作
+        CMOperation correspondingWrite;
+        CMOperation surWrite;
         for(int i = 0; i < size; i++){
             curOp = this.opList.get(i);
             curCoList = curOp.getCoList();
@@ -388,6 +421,12 @@ class incrementalProcess implements Callable<BasicRelation>{
                 visOp = this.opList.get(j);
                 if(visOp.isRead() && visOp.getProcess() != this.processID){ //找到位于其他process上的读操作
                     curCoList.set(j, false);
+                    if(!visOp.isInitRead()){//如果是有对应写的读，则把其对应写加入其同线程后继写的前驱中
+                        correspondingWrite = this.opList.get(visOp.getCorrespondingWriteID());
+                        surWrite = this.opList.get(visOp.getNextWrite());
+                        correspondingWrite.getSuccessors().set(surWrite.getID(), true);
+                        surWrite.getPredecessors().set(correspondingWrite.getID(), true);
+                    }
                 }
             }
         }
@@ -403,6 +442,9 @@ class incrementalProcess implements Callable<BasicRelation>{
 //        System.out.println("Read size:" + readSize);
 
         this.lastTime = System.nanoTime();
+
+        long fTime;
+        long sTime;
 
         for(int i = 0; i < readSize; i++){
             curID = this.curReadList.get(i);
@@ -425,6 +467,8 @@ class incrementalProcess implements Callable<BasicRelation>{
         }
 
         this.curTime = System.nanoTime();
+        System.out.println("Detected time for process " + this.processID + ":" + (curTime - lastTime)+ " process:" + this.processID);
+        this.lastTime = this.curTime;
 //        appendLog(this.processLog, "Detected time for process " + this.processID + ":" + (curTime - lastTime));
 
         int r, rPrime;
@@ -432,6 +476,7 @@ class incrementalProcess implements Callable<BasicRelation>{
         CMOperation wPrime;
         CMOperation wOp;
         BitSet curCoList;
+
 
         for(int i = 0; i < readSize; i++){
 
@@ -443,7 +488,7 @@ class incrementalProcess implements Callable<BasicRelation>{
             else{
                 rPrime = this.curReadList.get(rOp.getProcessReadID()-1);
 //                System.out.println("i:" + i + "rPrime:" + rPrime);
-//                System.out.println("r:" + rOp.easyPrint() + " rPrime:" + this.opList.get(rPrime).easyPrint());
+                System.out.println("r:" + rOp.easyPrint() + " rPrime:" + this.opList.get(rPrime).easyPrint());
             }
 
 
@@ -458,9 +503,14 @@ class incrementalProcess implements Callable<BasicRelation>{
 //            else{
 ////                System.out.println("Dealing with read:" + rOp.easyPrint() + "position:" + rOp.getPosition() + " at process " + this.processID + " corresponding write:" + wOp.easyPrint() + "rPrime:null " + "position:" + wOp.getPosition() + "process:" + this.processID);
 //            }
+            fTime = System.nanoTime();
             initReachability(rPrime, r);
+            sTime = System.nanoTime();
+            System.out.println("Time for Init-Reach:" + (sTime - fTime)+ " process:" + this.processID);
             //此处应该添加：读操作按照
 //            System.out.println("r:" + rOp.easyPrint() + "process" + this.processID);
+
+            fTime = System.nanoTime();
             curCoList = rOp.getCoList();
             boolean applied = false; //标记是否有添加w'->w的边
             for(int j = curCoList.nextSetBit(0); j >= 0; j = curCoList.nextSetBit(j+1)){
@@ -488,6 +538,8 @@ class incrementalProcess implements Callable<BasicRelation>{
                     }
                 }
             }
+            sTime = System.nanoTime();
+            System.out.println("Time for apply-rule-c:" + (sTime-fTime)+ " process:" + this.processID);
 
             if(i == 0){ //跳过当r为第一个操作的情况
 //                System.out.println(rOp.easyPrint() + "is the First read at process " + this.processID +", continue...");
@@ -495,6 +547,7 @@ class incrementalProcess implements Callable<BasicRelation>{
                 continue;
             }
 
+            fTime = System.nanoTime();
             //如果w对r'不可见的话，直接跳过
             if(!this.opList.get(rPrime).getCoList().get(wOp.getID())){ //2020.12.23 modified here...//2021.01.05 remodify
 //                System.out.println(wOp.easyPrint() + "is not visible to r':" + this.opList.get(rPrime).easyPrint() + " continue...");
@@ -504,7 +557,7 @@ class incrementalProcess implements Callable<BasicRelation>{
             else{
                 if(applied) { //只有加过w'w边才需要重新排列 //0528note:错，topoSchedule中包含了可达性更新和新的w'w检测
                     this.loopTime++;
-//                    System.out.println("loop inc for r':" + this.opList.get(rPrime).easyPrint() + " r:" + rOp.easyPrint() + " process:" + this.processID);
+                    System.out.println("loop inc for r':" + this.opList.get(rPrime).easyPrint() + " r:" + rOp.easyPrint() + " process:" + this.processID);
 //                System.out.println("wOp:" + wOp.easyPrint() + "is visible to rPrime:" + this.opList.get(rPrime).easyPrint() +", begin to topoSchedule...looptime:" + this.loopTime);
                     if (topoSchedule(rOp)) {
 //                    System.out.println("Cycle detected when topo scheduling..."); //在逆拓扑排序中成环，意味着包含CyclicHB
@@ -517,12 +570,14 @@ class incrementalProcess implements Callable<BasicRelation>{
 ////                    System.out.println("do not add any w'w edge, do not need to reschedule!");
 //                }
             }
+            sTime = System.nanoTime();
+            System.out.println("Time for reschedule:" + (sTime - fTime) + " process:" + this.processID);
         }
 
 //        System.out.println("Now looptime:" +loopTime);
         //完成关系计算之后，把操作的可见集合整合到邻接矩阵中
         this.matrix.updateMatrixByCMList(this.opList);
-        this.matrix.computeTransitiveClosure();  //因为incremental算法省略了一些边，所以要得到完整的HBo矩阵，需要通过传递闭包计算
+//        this.matrix.computeTransitiveClosure();  //因为incremental算法省略了一些边，所以要得到完整的HBo矩阵，需要通过传递闭包计算
 
 //        ignoreInvisibleOps();
         ignoreInvisibleOps();
@@ -539,6 +594,8 @@ class incrementalProcess implements Callable<BasicRelation>{
                 }
             }
         }
+        this.curTime = System.nanoTime();
+        System.out.println("Compute time for process " + this.processID + ":" + (this.curTime - this.lastTime));
 //        System.out.println("Finish computation of HBo at process " + this.processID);
         return true;
     }
@@ -569,6 +626,8 @@ class incrementalProcess implements Callable<BasicRelation>{
         CMOperation rOp = this.opList.get(r);
         CMOperation correspondingWrite = this.opList.get(rOp.getCorrespondingWriteID());
 
+        long st, et;
+
         if(rPrime == -2){ //r'为-2，标示r为当前线程第一个读操作
             //当r为当前线程的第一个读操作时，只需要从它的对应写操作更新
             //->原因：由于co=(po u rf)+, 因此该操作的可见操作只有1、其对应写操作；2、po位于它之前的其他写操作；而2这一部分在initProcessInfo里已经更新完成了
@@ -585,6 +644,7 @@ class incrementalProcess implements Callable<BasicRelation>{
             correspondingWrite.setLastRead(rOp.getID()); //把对应写操作的lastRead值设置为r的下标
         }
         else {
+            st = System.nanoTime();
             HashSet<Integer> rDelta = new HashSet();
             BitSet rCoList = this.opList.get(r).getCoList();
             BitSet rPrimeCoList = this.opList.get(rPrime).getCoList();
@@ -626,7 +686,10 @@ class incrementalProcess implements Callable<BasicRelation>{
                     }
                 }
             }
+            et = System.nanoTime();
+            System.out.println("devide rr and ww time:" + (et - st));
 
+            st = System.nanoTime();
             //在rr组内的操作都是在同一线程，因此按照顺序更新即可
             CMOperation curOp = new CMOperation();
             CMOperation lastOp;
@@ -639,6 +702,8 @@ class incrementalProcess implements Callable<BasicRelation>{
             }
             //先根据rr组的最后一个操作更新r操作的PW
             rOp.updatePrecedingWrite(curOp,this.opList);
+            et = System.nanoTime();
+            System.out.println("Update rr time:" + (et-st));
 
             //0523fix：采用新策略更新
 //            //此处有问题 在wwGroup中，所有操作不一定是在同一个线程。
@@ -654,11 +719,14 @@ class incrementalProcess implements Callable<BasicRelation>{
 //            //添加：更新完之后读操作要根据最后一个操作更新自身的PW
 //            rOp.updatePrecedingWrite(curOp,this.opList);
 
-
+            st = System.nanoTime();
             //备选策略：对wwGroup中的操作进行拓扑排序，然后按照拓扑序更新
             BitSet curCoList;
             CMOperation curCoOp;
             LinkedList<Integer> wwList = topoSortCoDr(correspondingWrite, this.opList);
+            et = System.nanoTime();
+            System.out.println("TopoSortCoDr time: " + (et-st));
+            st = System.nanoTime();
             for(int i = 0; i < wwList.size(); i++){
                 curOp = this.opList.get(wwList.get(i));
                 if(curOp.isInWWGroup()) { //只为wwGroup中的操作更新，因为其余操作的信息在之前已经更新过了
@@ -669,11 +737,32 @@ class incrementalProcess implements Callable<BasicRelation>{
                         correspondingWrite.updatePrecedingWrite(curCoOp, this.opList);
                     }
                 }
+//                curOp.setInWWGroup(false); //更新完成后，将该操作从wwGroup中退出(因为后续可能还会遍历到，但是它已经不属于ww了
+            }
+
+            //添加：更新完之后读操作要根据最后一个操作更新自身的PW
+            rOp.updatePrecedingWrite(correspondingWrite,this.opList);
+            et = System.nanoTime();
+            System.out.println("Update ww time:" + (et-st));
+
+            int n =0;
+            st = System.nanoTime();
+            for(int i = 0; i < wwList.size(); i++){
+                curOp = this.opList.get(wwList.get(i));
+                if(curOp.isInWWGroup()) { //只为wwGroup中的操作更新，因为其余操作的信息在之前已经更新过了
+                    curCoList = curOp.getCoList();
+                    for(int j = curCoList.nextSetBit(0); j >= 0; j = curCoList.nextSetBit(j + 1)){
+                        n += i+j;
+                    }
+                }
                 curOp.setInWWGroup(false); //更新完成后，将该操作从wwGroup中退出(因为后续可能还会遍历到，但是它已经不属于ww了
             }
 
             //添加：更新完之后读操作要根据最后一个操作更新自身的PW
             rOp.updatePrecedingWrite(correspondingWrite,this.opList);
+            et = System.nanoTime();
+            System.out.println("Update ww time1:" + (et-st) + ":" +n);
+
 
 
         }
@@ -873,6 +962,10 @@ class incrementalProcess implements Callable<BasicRelation>{
         BitSet wCoList = w.getCoList();
         wCoList.set(wPrime.getID());
 
+        //将w与wPrime分别加入彼此的直接后继（前驱）关系中
+        w.getPredecessors().set(wPrime.getID(), true);
+        wPrime.getSuccessors().set(w.getID(), true);
+
 //        //加边后计算矩阵的传递闭包 -> 其实没必要，将wPrime的可见操作集合继承给w即可
 //        this.matrix.setTrue(wPrime.getID(), w.getID());
 //        this.matrix.computeTransitiveClosure();
@@ -920,9 +1013,12 @@ class incrementalProcess implements Callable<BasicRelation>{
         CMOperation curOp;
         CMOperation visOp;
         BitSet curOpList;
+        long t1;
+        long t2;
 
         //初始化诱导子图
 
+        t1 = System.nanoTime();
         HashSet<Integer> inducedSubgraph = new HashSet<>();
         CMOperation dR = this.opList.get(r.getCorrespondingWriteID());
 //        System.out.println("r:" + r.easyPrint() + "D(r)" + dR.easyPrint());
@@ -934,15 +1030,49 @@ class incrementalProcess implements Callable<BasicRelation>{
         }
         dR.initInducedSubGraph();
         inducedSubgraph.add(dR.getID()); //将D(r)也加入到D(r)-downset中
+        t2 = System.nanoTime();
+//        System.out.println("induced Subgraph init time:" + (t2-t1) + " process:" + this.processID);
+
 
         //根据诱导子图初始化信息
+
+//        //to fix: 只需要考虑直接前驱
+//        t1 = System.nanoTime();
+//        for(Integer i: inducedSubgraph){
+//            curOp = this.opList.get(i);
+////            System.out.println("CurOp:" + curOp.easyPrint() + "initial prelist:" + curOp.getIPreList());
+//            curOpList = curOp.getCoList();
+//            int count = 0;
+//            for(int j = curOpList.nextSetBit(0); j >= 0; j = curOpList.nextSetBit(j+1)){
+//                count++;
+//                visOp = this.opList.get(j);
+//                if(inducedSubgraph.contains(j)){ //能加入信息的前提是可见操作也在诱导子图中
+//                    if(!visOp.getISucList().contains(i)) { //避免重复添加
+//                        visOp.getISucList().add(i); //将i加入j的后继链表
+//                        visOp.setICount(visOp.getICount()+1);
+//                    }
+//                    if(!curOp.getIPreList().contains(j)) {
+//                        curOp.getIPreList().add(j); //将j加入i的前驱链表
+//                    }
+//                }
+//                visOp.setIDone(false);
+//            }
+//            System.out.println("Predecessors for " + curOp.easyPrint() + ": " + count);
+//        }
+//        t2 = System.nanoTime();
+
+
+        //new:使用直接前驱
+        t1 = System.nanoTime();
+        BitSet curPres;
         for(Integer i: inducedSubgraph){
             curOp = this.opList.get(i);
-//            System.out.println("CurOp:" + curOp.easyPrint() + "initial prelist:" + curOp.getIPreList());
-            curOpList = curOp.getCoList();
-            for(int j = curOpList.nextSetBit(0); j >= 0; j = curOpList.nextSetBit(j+1)){
+            curPres = curOp.getPredecessors();
+            int count = 0;
+            for(int j = curPres.nextSetBit(0); j>= 0; j = curPres.nextSetBit(j+1)){
+                count++;
                 visOp = this.opList.get(j);
-                if(inducedSubgraph.contains(j)){ //能加入信息的前提是可见操作也在诱导子图中
+                if(inducedSubgraph.contains(j)){
                     if(!visOp.getISucList().contains(i)) { //避免重复添加
                         visOp.getISucList().add(i); //将i加入j的后继链表
                         visOp.setICount(visOp.getICount()+1);
@@ -953,11 +1083,17 @@ class incrementalProcess implements Callable<BasicRelation>{
                 }
                 visOp.setIDone(false);
             }
+//            System.out.println("Predecessors for " + curOp.easyPrint() + ": " + count);
         }
+        t2 = System.nanoTime();
 
+
+//        System.out.println("induced Subgraph info time: " + (t2-t1) + " process:" + this.processID);
+//        System.out.println("topo-scheduleling...wriop:" + dR.easyPrint() + " downset size:" + inducedSubgraph.size());
 //        System.out.println("Induced sub graph node:" + inducedSubgraph);
 
 
+        t1 = System.nanoTime();
         Queue<Integer> QZERO = new LinkedList<>();
         QZERO.offer(dR.getID());
 
@@ -1028,6 +1164,8 @@ class incrementalProcess implements Callable<BasicRelation>{
             }
 //            System.out.println("Stack size:" + QZERO.size());
         }
+        t2 = System.nanoTime();
+//        System.out.println("main part time: " + (t2-t1) + " process:" + this.processID);
 //        System.out.println("exit topo-schedule");
         return false;
     }
@@ -1050,23 +1188,28 @@ class incrementalProcess implements Callable<BasicRelation>{
     public BasicRelation call() throws Exception{
 //        LinkedList<Integer> thisOpList = history.getProcessOpList().get(this.processID);
 //        LinkedList<Operation> opList = history.getOperationList();
-
+        System.out.println("dot 1: " + this.processID + ":" + (System.nanoTime() - this.beginTime));
         if(this.readCentric(po)){
 //            System.out.println("no cycle in HBo of process" + this.processID);
         }
         else{
 //            System.out.println("Cycle detected! process " + this.processID);
         }
+        System.out.println("dot 2: " + this.processID + ":" + (System.nanoTime() - this.beginTime));
 
         BasicRelation matrix = this.getMatrix();
-//        matrix.updateMatrixByCMList(this.opList);
-//        matrix.computeTransitiveClosure(); //因为incremental算法省略了一些边，所以要得到完整的HBo矩阵，需要通过传递闭包计算
+//
+        matrix.updateMatrixByCMList(this.opList);
+        matrix.computeTransitiveClosure(); //因为incremental算法省略了一些边，所以要得到完整的HBo矩阵，需要通过传递闭包计算
+
 //        System.out.println("HBo Matrix for process" + this.processID +":");
 //        matrix.printMatrix();
 //        System.out.println("Info of process" + this.processID + "??:" + this.curReadList.size());
 //        for(int i = 0; i < this.curReadList.size(); i++){
 //            System.out.println("Op" + i + ":" + this.opList.get(curReadList.get(i)).easyPrint());
 //        }
+
+        System.out.println("Total time for process" + this.processID + ":"+(System.nanoTime() - this.beginTime));
         isCaculated = true;
         return matrix;
     }

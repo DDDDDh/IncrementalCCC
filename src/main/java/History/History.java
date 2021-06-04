@@ -6,10 +6,7 @@
 package History;
 
 
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.HashMap;
-import java.util.Set;
+import java.util.*;
 
 public class History {
 
@@ -30,6 +27,7 @@ public class History {
 //        this.printOpGroupByKey();
         this.initOpGroupByProcess();
 //        this.lastIndex = histories.get(histories.size() - 1).getIndex(); // the max index in the  histories
+        this.initPresAndSucs();
     }
 
     public void initOperations(){
@@ -205,6 +203,15 @@ public class History {
             System.out.print(this.operationList.get(i).easyPrint());
         }
 
+    }
+
+    public void initPresAndSucs(){
+
+        int size = this.getOperationList().size();
+        for(Operation op: this.getOperationList()){
+            op.setPredecessors(new BitSet(size));
+            op.setSuccessors(new BitSet(size));
+        }
     }
 
     public HashSet<String> getKeySet() {

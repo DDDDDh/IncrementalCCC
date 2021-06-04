@@ -14,7 +14,8 @@ public class CausalChecker {
 //        String url = "src/main/resources/hy_history.edn";
 //        String url = "src/main/resources/SpecialCases/CCvNotCM_history.edn";
 //        String url = "src/main/resources/BadPatternExamples/CyclicCO_history.edn";
-        String url = "target/ParameterChoosing/debug/mongoLogfile_0528_opNum200_processNum5.edn";
+//        String url = "target/ParameterChoosing/debug/mongoLogfile_0528_opNum200_processNum5.edn"; //需要debug！！！
+        String url = "/Users/yi-huang/Project/IncrementalCCC/target/ParameterChoosing/Running_20216222_opNum1000_processNum10_varRange20_valRange100_rRate3_wRate1.edn";
 //        String url = "/Users/yi-huang/Project/IncrementalCCC/target/ParameterChoosing/debug/special_01.edn";
 //        String url = "target/debug/oy01.edn";
         HistoryReader reader = new HistoryReader(url);
@@ -104,20 +105,20 @@ public class CausalChecker {
         long ihboTime = endTime - startTime;
         System.out.println("Finish computation of happen-before relation (inc)");
 
-
-        //如果包含这三种非法模式，ihbo不能完整计算得到每个线程hbo的关系矩阵
-        if(ihbo.isCyclicCO() || ihbo.isThinAirRead() || ihbo.isCyclicHB()){
-            System.out.println("Cannot compare matrix! Reason: isCyclicCO:" + ihbo.isCyclicCO() + " isThinAirRead:" + ihbo.isThinAirRead() + " isCyclicHB:" + ihbo.isCyclicHB());
-        }
-        else {
-//            boolean hboEquality = hbo.checkEqualDebug(ihbo, history.getOperationList());
-            boolean hboEquality = hbo.checkEqual(ihbo);
-            if (!hboEquality) {
-                System.out.println("ihbo is not equal to bhbo???");
-            } else {
-                System.out.println("ihbo is equal to bhbo ^.^");
-            }
-        }
+//
+//        //如果包含这三种非法模式，ihbo不能完整计算得到每个线程hbo的关系矩阵
+//        if(ihbo.isCyclicCO() || ihbo.isThinAirRead() || ihbo.isCyclicHB()){
+//            System.out.println("Cannot compare matrix! Reason: isCyclicCO:" + ihbo.isCyclicCO() + " isThinAirRead:" + ihbo.isThinAirRead() + " isCyclicHB:" + ihbo.isCyclicHB());
+//        }
+//        else {
+////            boolean hboEquality = hbo.checkEqualDebug(ihbo, history.getOperationList());
+//            boolean hboEquality = hbo.checkEqual(ihbo);
+//            if (!hboEquality) {
+//                System.out.println("ihbo is not equal to bhbo???");
+//            } else {
+//                System.out.println("ihbo is equal to bhbo ^.^");
+//            }
+//        }
 
 
 //        IncrementalHappenBeforeOrder ihbo = new IncrementalHappenBeforeOrder(history.getOpNum());

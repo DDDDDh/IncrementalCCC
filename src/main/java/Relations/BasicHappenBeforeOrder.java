@@ -78,9 +78,11 @@ class basicProcess implements Callable<BasicRelation> {
     BasicRelation matrix;
     int loopTime;
     Operation lastOp; //当前处理线程的最后一个操作
+    long beginTime;
 
 
     public basicProcess(History history, int processID, ProgramOrder po, CausalOrder co){
+        this.beginTime = System.nanoTime();
         this.history = history;
         this.processID = processID;
         this.size = history.getOpNum();
@@ -90,6 +92,7 @@ class basicProcess implements Callable<BasicRelation> {
         this.co = co;
         this.loopTime = 0;
         this.init();
+        System.out.println("Basic init time for process " + this.processID + ":" + (System.nanoTime() - beginTime));
     }
 
     //复制history中的操作，并初始化自身操作列表
@@ -136,6 +139,7 @@ class basicProcess implements Callable<BasicRelation> {
         this.matrix.updateListByMatrix(this.opList);
         this.ignoreInvisibleOps(); //在利用co初始化完成后，需要将对此线程不可见的操作忽略
         this.ignoreOtherRead();
+//        System.out.println("Init time for process " + this.processID + ":" + (System.nanoTime() - this.beginTime));
 
     }
 
@@ -210,11 +214,11 @@ class basicProcess implements Callable<BasicRelation> {
             }
         }
 
-        if(this.processID == 2){
-            System.out.println("M[22][104]:" + this.matrix.existEdge(22, 104));
-            System.out.println("op22:" + this.opList.get(22).easyPrint());
-            System.out.println("op104:" + this.opList.get(104).easyPrint());
-        }
+//        if(this.processID == 2){
+//            System.out.println("M[22][104]:" + this.matrix.existEdge(22, 104));
+//            System.out.println("op22:" + this.opList.get(22).easyPrint());
+//            System.out.println("op104:" + this.opList.get(104).easyPrint());
+//        }
 
 //        System.out.println("basic hbo Matrix for process" + this.processID);
 //        this.matrix.printMatrix();
@@ -229,7 +233,7 @@ class basicProcess implements Callable<BasicRelation> {
 //        LinkedList<Integer> thisOpList = history.getProcessOpList().get(this.processID);
 //        LinkedList<Operation> opList = history.getOperationList();
 //        System.out.println("Here we are running process:" + this.processID);
-
+        this.beginTime = System.nanoTime();
         caculateHBoProcess();
         BasicRelation matrix = this.getMatrix();
 //        if(this.processID == 1){
@@ -243,6 +247,7 @@ class basicProcess implements Callable<BasicRelation> {
 //        }
         isCaculated = true;
 //        System.out.println("End of process" + this.processID);
+        System.out.println("Basic compute time for process " + this.processID + ":" + (System.nanoTime() - this.beginTime));
         return matrix;
     }
 

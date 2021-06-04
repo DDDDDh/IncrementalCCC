@@ -304,6 +304,7 @@ public class BasicRelation implements BasicRelationInterface{
 
     //使用Washall算法计算传递闭包
     public void computeTransitiveClosure(){
+        long time1 = System.nanoTime();
         int size = this.getMatrixSize();
         for(int k = 0; k < size; k++){
             for(int i = 0; i < size; i++){
@@ -316,6 +317,7 @@ public class BasicRelation implements BasicRelationInterface{
                 }
             }
         }
+        System.out.println("Closure time:" + (System.nanoTime() - time1) + " total num:" + this.getMatrixSize());
     }
 
     //使用BFS计算传递闭包
@@ -353,20 +355,29 @@ public class BasicRelation implements BasicRelationInterface{
 
         BitSet curList;
 
+        long st;
+        long et;
+
         for(int i = 0; i < size; i++){
+            st = System.nanoTime();
             curList = this.getRelationMatrix()[i]; //得到点i的后继列表
             //对于每条i->j的边，在j的前驱列表里设置可见
 //            for(int j = curList.nextSetBit(0); j >= 0; j = curList.nextSetBit(j+1)){
 //                opList.get(j).getCoList().set(i,true);
 //            }
             for(int j = 0; j < size; j++){
+                long st1 = System.nanoTime();
                 if(curList.get(j)){
                     opList.get(j).getCoList().set(i,true);
                 }
                 else{
                     opList.get(j).getCoList().set(i,false);
                 }
+                long et1 = System.nanoTime();
+//                System.out.println("Set time for no." + i + ".j:" + j + ":" + (et1-st1));
             }
+            et = System.nanoTime();
+//            System.out.println("Set time for no." + i + ": " + (et-st));
         }
     }
 

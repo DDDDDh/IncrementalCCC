@@ -62,6 +62,10 @@ public class ReadFrom extends BasicRelation{
                     else {
                         this.setTrue(correspondingWriteID, curOp.getID());
                         curOp.setCorrespondingWriteID(correspondingWriteID);
+
+                        //为读操作与对应写操作加上直接前驱（后继）关系
+                        curOp.getPredecessors().set(correspondingWriteID, true);
+                        opList.get(correspondingWriteID).getSuccessors().set(curOpList.get(i), true);
 //                        System.out.println("Adding read from relation:" + opList.get(correspondingWriteID).easyPrint() + "to " + curOp.easyPrint());
 //                        System.out.println("That is, " + correspondingWriteID + " to " + curOp.getID());
                     }

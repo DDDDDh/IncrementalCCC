@@ -11,8 +11,20 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/BadPatternExamples/CyclicHB_perProcess_history.edn" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/BadPatternExamples/TransitiveHBo_history.edn" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/BadPatternExamples/WriteReadWrite_history.edn" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/CausalChecker.class" afterPath="$PROJECT_DIR$/target/classes/CausalChecker.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/Relations/BasicRelation.class" afterPath="$PROJECT_DIR$/target/classes/Relations/BasicRelation.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/Relations/IncrementalHappenBeforeOrder.class" afterPath="$PROJECT_DIR$/target/classes/Relations/IncrementalHappenBeforeOrder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/Relations/incrementalProcess.class" afterPath="$PROJECT_DIR$/target/classes/Relations/incrementalProcess.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/CausalChecker.java" afterPath="$PROJECT_DIR$/src/main/java/CausalChecker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/History/History.java" afterPath="$PROJECT_DIR$/src/main/java/History/History.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/History/Operation.java" afterPath="$PROJECT_DIR$/src/main/java/History/Operation.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/HistoryProducer/operationProducer.java" afterPath="$PROJECT_DIR$/src/main/java/HistoryProducer/operationProducer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Relations/BasicHappenBeforeOrder.java" afterPath="$PROJECT_DIR$/src/main/java/Relations/BasicHappenBeforeOrder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Relations/BasicRelation.java" afterPath="$PROJECT_DIR$/src/main/java/Relations/BasicRelation.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Relations/IncrementalHappenBeforeOrder.java" afterPath="$PROJECT_DIR$/src/main/java/Relations/IncrementalHappenBeforeOrder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Relations/ProgramOrder.java" afterPath="$PROJECT_DIR$/src/main/java/Relations/ProgramOrder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Relations/ReadFrom.java" afterPath="$PROJECT_DIR$/src/main/java/Relations/ReadFrom.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -31,8 +43,8 @@
       <file leaf-file-name="BasicHappenBeforeOrder.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Relations/BasicHappenBeforeOrder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2985">
-              <caret line="205" column="17" lean-forward="false" selection-start-line="205" selection-start-column="17" selection-end-line="205" selection-end-column="17" />
+            <state relative-caret-position="-157">
+              <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -41,13 +53,22 @@
       <file leaf-file-name="BasicRelation.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Relations/BasicRelation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="960">
-              <caret line="64" column="19" lean-forward="false" selection-start-line="64" selection-start-column="19" selection-end-line="64" selection-end-column="19" />
+            <state relative-caret-position="1588">
+              <caret line="366" column="15" lean-forward="true" selection-start-line="366" selection-start-column="15" selection-end-line="366" selection-end-column="15" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1959#1960#0" expanded="true" />
-                <element signature="e#2025#2026#0" expanded="true" />
+                <element signature="e#2561#2562#0" expanded="true" />
+                <element signature="e#2603#2604#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BitSet.java" pinned="false" current-in-tab="false">
+        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home/lib/src.zip!/java.base/java/util/BitSet.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1815">
+              <caret line="152" column="52" lean-forward="true" selection-start-line="152" selection-start-column="52" selection-end-line="152" selection-end-column="52" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -55,86 +76,78 @@
       <file leaf-file-name="CausalChecker.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/CausalChecker.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1605">
-              <caret line="113" column="41" lean-forward="false" selection-start-line="113" selection-start-column="41" selection-end-line="113" selection-end-column="41" />
+            <state relative-caret-position="399">
+              <caret line="123" column="38" lean-forward="false" selection-start-line="123" selection-start-column="38" selection-end-line="123" selection-end-column="38" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CMOperation.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CMOperation.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/History/CMOperation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-512">
-              <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+            <state relative-caret-position="217">
+              <caret line="83" column="16" lean-forward="false" selection-start-line="83" selection-start-column="16" selection-end-line="83" selection-end-column="16" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CyclicCF_history_2.edn" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/BadPatternExamples/CyclicCF_history_2.edn">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CyclicCO_history.edn" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/BadPatternExamples/CyclicCO_history.edn">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CyclicHB_history.edn" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/BadPatternExamples/CyclicHB_history.edn">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HappenBeforeOrder.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Relations/HappenBeforeOrder.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="29" column="34" lean-forward="false" selection-start-line="29" selection-start-column="34" selection-end-line="29" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IncrementalHappenBeforeOrder.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="IncrementalHappenBeforeOrder.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Relations/IncrementalHappenBeforeOrder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="649">
-              <caret line="206" column="56" lean-forward="false" selection-start-line="206" selection-start-column="56" selection-end-line="206" selection-end-column="56" />
+            <state relative-caret-position="186">
+              <caret line="735" column="38" lean-forward="true" selection-start-line="735" selection-start-column="38" selection-end-line="735" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1699#1714#0" expanded="true" />
-                <element signature="e#23032#23041#0" expanded="true" />
-                <element signature="e#29788#29801#0" expanded="true" />
-                <element signature="e#29879#29888#0" expanded="true" />
-                <element signature="e#30803#30812#0" expanded="true" />
+                <element signature="e#2307#2322#0" expanded="true" />
+                <element signature="e#25808#25817#0" expanded="true" />
+                <element signature="e#33928#33941#0" expanded="true" />
+                <element signature="e#34019#34028#0" expanded="true" />
+                <element signature="e#34943#34952#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="runWithMongo.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/runWithMongo.java">
+      <file leaf-file-name="IncrementalHappenBeforeOrderV2.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Relations/IncrementalHappenBeforeOrderV2.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="46" column="47" lean-forward="false" selection-start-line="46" selection-start-column="47" selection-end-line="46" selection-end-column="47" />
+            <state relative-caret-position="60">
+              <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LinkedList.java" pinned="false" current-in-tab="false">
+        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home/lib/src.zip!/java.base/java/util/LinkedList.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="217">
+              <caret line="479" column="0" lean-forward="false" selection-start-line="479" selection-start-column="0" selection-end-line="479" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProgramOrder.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Relations/ProgramOrder.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="9">
+              <caret line="43" column="32" lean-forward="true" selection-start-line="43" selection-start-column="32" selection-end-line="43" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ReadFrom.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Relations/ReadFrom.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="543">
+              <caret line="74" column="9" lean-forward="false" selection-start-line="74" selection-start-column="9" selection-end-line="74" selection-end-column="9" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -152,36 +165,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>url</find>
-      <find>lastSame</find>
-      <find>-3</find>
-      <find>CheckCC</find>
-      <find>-2</find>
-      <find>appendlog</find>
-      <find>w(b)14; process0</find>
-      <find>w(b)14; proces</find>
-      <find>w(b)14; process</find>
-      <find>Now w(b)14</find>
-      <find>now w(c)33</find>
-      <find>Now w(c)33</find>
-      <find>Now w(a)42</find>
-      <find>dealing with r(a)42; process4</find>
-      <find>to 39</find>
-      <find>21 to 39</find>
-      <find>dealing with r(a)40; process4</find>
-      <find>finish op:w(a)40</find>
-      <find>now w(a)40</find>
-      <find>Now</find>
-      <find>debug</find>
-      <find>System</find>
-      <find>curReadList</find>
-      <find>do</find>
-      <find>process:</find>
-      <find>process:78</find>
-      <find>ignore</find>
-      <find>printMa</find>
-      <find>apply</find>
-      <find>updatere</find>
+      <find>loop inc</find>
+      <find>Time for app</find>
+      <find>Time for reschedule</find>
+      <find>r(h)90</find>
+      <find>r(h)53</find>
+      <find>r(j)96</find>
+      <find>induced</find>
+      <find>applyru</find>
+      <find>prede</find>
+      <find>time for res</find>
+      <find>compute time for</find>
+      <find>predecessors</find>
+      <find>topos</find>
+      <find>compute</find>
+      <find>time for reschedule</find>
+      <find>Point</find>
+      <find>closure time</find>
+      <find>point</find>
+      <find>set</find>
+      <find>basic i</find>
+      <find>point 2</find>
+      <find>point 1</find>
+      <find>total time for process3</find>
+      <find>dot 1</find>
+      <find>coList</find>
+      <find>dot 2: 2</find>
+      <find>Update rr</find>
+      <find>Update ww</find>
+      <find>Topo</find>
+      <find>Init-Re</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -218,8 +231,6 @@
         <option value="$PROJECT_DIR$/src/main/java/Checker/CCChecker.java" />
         <option value="$PROJECT_DIR$/src/main/java/Checker/CCvChecker.java" />
         <option value="$PROJECT_DIR$/src/main/java/BatchChecking.java" />
-        <option value="$PROJECT_DIR$/src/main/java/History/Operation.java" />
-        <option value="$PROJECT_DIR$/src/main/java/History/History.java" />
         <option value="$PROJECT_DIR$/src/main/java/History/HistoryReader.java" />
         <option value="$PROJECT_DIR$/src/main/java/Analyzer/LogFileAnalyzerV2.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
@@ -229,7 +240,6 @@
         <option value="$PROJECT_DIR$/src/main/java/Analyzer/LogFileAnalyzerV3.java" />
         <option value="$PROJECT_DIR$/src/main/java/testFileAnalysis.java" />
         <option value="$PROJECT_DIR$/src/main/java/DBConnector/mongoConnector.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Relations/ProgramOrder.java" />
         <option value="$PROJECT_DIR$/src/main/java/Relations/IncrementalHappenBeforeOrderV2.java" />
         <option value="$PROJECT_DIR$/src/main/java/Debugger.java" />
         <option value="$PROJECT_DIR$/src/main/java/Main.java" />
@@ -237,14 +247,17 @@
         <option value="$PROJECT_DIR$/src/main/java/HistoryProducer/CCProducer.java" />
         <option value="$PROJECT_DIR$/src/main/java/HistoryProducer/LinProducer.java" />
         <option value="$PROJECT_DIR$/src/main/java/HistoryProducer/randomProducer.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Relations/ReadFrom.java" />
         <option value="$PROJECT_DIR$/src/main/java/History/CMOperation.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Relations/BasicRelation.java" />
-        <option value="$PROJECT_DIR$/src/main/java/HistoryProducer/operationProducer.java" />
-        <option value="$PROJECT_DIR$/src/main/java/generateAndTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/runWithMongo.java" />
-        <option value="$PROJECT_DIR$/src/main/java/CausalChecker.java" />
+        <option value="$PROJECT_DIR$/src/main/java/generateAndTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/HistoryProducer/operationProducer.java" />
         <option value="$PROJECT_DIR$/src/main/java/Relations/BasicHappenBeforeOrder.java" />
+        <option value="$PROJECT_DIR$/src/main/java/History/Operation.java" />
+        <option value="$PROJECT_DIR$/src/main/java/History/History.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Relations/ReadFrom.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Relations/ProgramOrder.java" />
+        <option value="$PROJECT_DIR$/src/main/java/CausalChecker.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Relations/BasicRelation.java" />
         <option value="$PROJECT_DIR$/src/main/java/Relations/IncrementalHappenBeforeOrder.java" />
       </list>
     </option>
@@ -256,9 +269,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="397" />
+    <option name="x" value="734" />
     <option name="y" value="25" />
-    <option name="width" value="1539" />
+    <option name="width" value="1314" />
     <option name="height" value="1028" />
   </component>
   <component name="ProjectView">
@@ -313,6 +326,14 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="Analyzer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="IncrementalCCC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="IncrementalCCC" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="Datastructure" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -348,15 +369,6 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="Relations" type="462c0819:PsiDirectoryNode" />
               <item name="IncrementalHappenBeforeOrder.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
-            </path>
-            <path>
-              <item name="IncrementalCCC" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IncrementalCCC" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="Relations" type="462c0819:PsiDirectoryNode" />
-              <item name="IncrementalHappenBeforeOrderV2.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
             </path>
             <path>
               <item name="IncrementalCCC" type="b2602c69:ProjectViewProjectNode" />
@@ -822,8 +834,8 @@
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Application.CausalChecker" />
-        <item index="1" class="java.lang.String" itemvalue="Application.runWithMongo" />
-        <item index="2" class="java.lang.String" itemvalue="Application.generateAndTest" />
+        <item index="1" class="java.lang.String" itemvalue="Application.generateAndTest" />
+        <item index="2" class="java.lang.String" itemvalue="Application.runWithMongo" />
         <item index="3" class="java.lang.String" itemvalue="Application.Debugger" />
         <item index="4" class="java.lang.String" itemvalue="Application.LogFileAnalyzerV3" />
       </list>
@@ -883,12 +895,12 @@
       <workItem from="1620698734870" duration="50911000" />
       <workItem from="1621580687724" duration="4145000" />
       <workItem from="1621668893290" duration="89916000" />
-      <workItem from="1622466623756" duration="814000" />
+      <workItem from="1622466623756" duration="53305000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1429441000" />
+    <option name="totallyTimeSpent" value="1481932000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -900,23 +912,23 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="397" y="25" width="1539" height="1028" extended-state="0" />
-    <editor active="true" />
+    <frame x="734" y="25" width="1314" height="1028" extended-state="0" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32944915" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32470334" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30063966" sideWeight="0.5136646" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="REPL" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24487594" sideWeight="0.4863354" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24487594" sideWeight="0.4863354" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32944915" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32944915" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1783567" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14386792" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -928,7 +940,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24906832" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32470334" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Thumbnails" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32988626" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32944915" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -981,13 +992,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Relations/CausalOrder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Analyzer/LogFileAnalyzerV2.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="876">
@@ -1030,21 +1034,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home/lib/src.zip!/java.base/java/util/BitSet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="13455">
-          <caret line="936" column="16" lean-forward="false" selection-start-line="936" selection-start-column="16" selection-end-line="936" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="358">
-          <caret line="57" column="39" lean-forward="false" selection-start-line="57" selection-start-column="39" selection-end-line="57" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/HistoryProducer/generatedOperation.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-149">
@@ -1064,6 +1053,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="404">
           <caret line="36" column="5" lean-forward="true" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1100,25 +1090,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/History/History.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="184" column="51" lean-forward="true" selection-start-line="184" selection-start-column="51" selection-end-line="184" selection-end-column="51" />
-          <folding>
-            <element signature="e#6301#6302#0" expanded="true" />
-            <element signature="e#6338#6339#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Relations/ProgramOrder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-142">
-          <caret line="33" column="46" lean-forward="false" selection-start-line="33" selection-start-column="46" selection-end-line="33" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home/lib/src.zip!/java.base/java/util/concurrent/FutureTask.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="206">
@@ -1127,57 +1098,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/History/Operation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="222" column="4" lean-forward="false" selection-start-line="222" selection-start-column="4" selection-end-line="225" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home/lib/src.zip!/java.base/java/util/LinkedList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="479" column="0" lean-forward="false" selection-start-line="479" selection-start-column="0" selection-end-line="479" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Relations/IncrementalHappenBeforeOrderV2.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="65" column="6" lean-forward="false" selection-start-line="65" selection-start-column="6" selection-end-line="65" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/HistoryProducer/randomProducer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-339">
           <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/History/HistoryReader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="40" column="20" lean-forward="true" selection-start-line="40" selection-start-column="20" selection-end-line="40" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/HistoryProducer/LinProducer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="26" column="53" lean-forward="false" selection-start-line="26" selection-start-column="53" selection-end-line="26" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/HistoryProducer/operationProducer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-150">
-          <caret line="76" column="26" lean-forward="false" selection-start-line="76" selection-start-column="26" selection-end-line="76" selection-end-column="26" />
           <folding />
         </state>
       </provider>
@@ -1186,34 +1110,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
           <caret line="37" column="68" lean-forward="true" selection-start-line="37" selection-start-column="68" selection-end-line="37" selection-end-column="68" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Relations/ReadFrom.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="67" column="17" lean-forward="true" selection-start-line="67" selection-start-column="17" selection-end-line="67" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3029#3030#0" expanded="true" />
-            <element signature="e#3070#3071#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Relations/IncrementalCausalOrder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="958">
-          <caret line="106" column="0" lean-forward="false" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/generateAndTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-638">
-          <caret line="53" column="9" lean-forward="true" selection-start-line="53" selection-start-column="9" selection-end-line="53" selection-end-column="9" />
           <folding />
         </state>
       </provider>
@@ -1298,14 +1194,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/CausalChecker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1605">
-          <caret line="113" column="41" lean-forward="false" selection-start-line="113" selection-start-column="41" selection-end-line="113" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Relations/HappenBeforeOrder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
@@ -1314,46 +1202,176 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Relations/BasicRelation.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/HistoryProducer/LinProducer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="960">
-          <caret line="64" column="19" lean-forward="false" selection-start-line="64" selection-start-column="19" selection-end-line="64" selection-end-column="19" />
+        <state relative-caret-position="375">
+          <caret line="26" column="54" lean-forward="true" selection-start-line="26" selection-start-column="54" selection-end-line="26" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/HistoryProducer/operationProducer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="76" column="60" lean-forward="true" selection-start-line="76" selection-start-column="60" selection-end-line="76" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="656">
+          <caret line="57" column="39" lean-forward="false" selection-start-line="57" selection-start-column="39" selection-end-line="57" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/generateAndTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="35" column="23" lean-forward="true" selection-start-line="35" selection-start-column="23" selection-end-line="35" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Relations/IncrementalCausalOrder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="645">
+          <caret line="106" column="0" lean-forward="false" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/History/HistoryReader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="40" column="20" lean-forward="false" selection-start-line="40" selection-start-column="20" selection-end-line="40" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Relations/CausalOrder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="23" column="26" lean-forward="false" selection-start-line="23" selection-start-column="26" selection-end-line="23" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/History/Operation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2616">
+          <caret line="258" column="46" lean-forward="false" selection-start-line="258" selection-start-column="46" selection-end-line="258" selection-end-column="46" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1959#1960#0" expanded="true" />
-            <element signature="e#2025#2026#0" expanded="true" />
+            <element signature="e#4798#4799#0" expanded="true" />
+            <element signature="e#4833#4834#0" expanded="true" />
+            <element signature="e#4941#4942#0" expanded="true" />
+            <element signature="e#4974#4975#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/History/History.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3030">
+          <caret line="212" column="44" lean-forward="false" selection-start-line="212" selection-start-column="44" selection-end-line="212" selection-end-column="44" />
+          <folding>
+            <element signature="e#6250#6251#0" expanded="true" />
+            <element signature="e#6287#6288#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Relations/ReadFrom.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="543">
+          <caret line="74" column="9" lean-forward="false" selection-start-line="74" selection-start-column="9" selection-end-line="74" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home/lib/src.zip!/java.base/java/util/LinkedList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="217">
+          <caret line="479" column="0" lean-forward="false" selection-start-line="479" selection-start-column="0" selection-end-line="479" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Relations/ProgramOrder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9">
+          <caret line="43" column="32" lean-forward="true" selection-start-line="43" selection-start-column="32" selection-end-line="43" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/CausalChecker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="123" column="38" lean-forward="false" selection-start-line="123" selection-start-column="38" selection-end-line="123" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Relations/IncrementalHappenBeforeOrderV2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home/lib/src.zip!/java.base/java/util/BitSet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1815">
+          <caret line="152" column="52" lean-forward="true" selection-start-line="152" selection-start-column="52" selection-end-line="152" selection-end-column="52" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Relations/BasicHappenBeforeOrder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2985">
-          <caret line="205" column="17" lean-forward="false" selection-start-line="205" selection-start-column="17" selection-end-line="205" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/History/CMOperation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-512">
+        <state relative-caret-position="-157">
           <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Relations/BasicRelation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1588">
+          <caret line="366" column="15" lean-forward="true" selection-start-line="366" selection-start-column="15" selection-end-line="366" selection-end-column="15" />
+          <folding>
+            <element signature="e#2561#2562#0" expanded="true" />
+            <element signature="e#2603#2604#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Relations/IncrementalHappenBeforeOrder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="649">
-          <caret line="206" column="56" lean-forward="false" selection-start-line="206" selection-start-column="56" selection-end-line="206" selection-end-column="56" />
+        <state relative-caret-position="186">
+          <caret line="735" column="38" lean-forward="true" selection-start-line="735" selection-start-column="38" selection-end-line="735" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1699#1714#0" expanded="true" />
-            <element signature="e#23032#23041#0" expanded="true" />
-            <element signature="e#29788#29801#0" expanded="true" />
-            <element signature="e#29879#29888#0" expanded="true" />
-            <element signature="e#30803#30812#0" expanded="true" />
+            <element signature="e#2307#2322#0" expanded="true" />
+            <element signature="e#25808#25817#0" expanded="true" />
+            <element signature="e#33928#33941#0" expanded="true" />
+            <element signature="e#34019#34028#0" expanded="true" />
+            <element signature="e#34943#34952#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/History/CMOperation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="217">
+          <caret line="83" column="16" lean-forward="false" selection-start-line="83" selection-start-column="16" selection-end-line="83" selection-end-column="16" />
+          <folding />
         </state>
       </provider>
     </entry>

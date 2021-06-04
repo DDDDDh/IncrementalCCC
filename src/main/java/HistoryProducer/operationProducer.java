@@ -74,7 +74,7 @@ public class operationProducer {
         this.ops.add(methods.Read);
         this.ops.add(methods.Write);
         this.weightTemp = new LinkedList<>();
-        this.varRange = 20; //默认生成5个变量 //0312->观察变量数对验证效率的影响
+        this.varRange = 10; //默认生成5个变量 //0312->观察变量数对验证效率的影响
         this.updateWeightList();
         this.varValueMap = new HashMap<>();
         this.valueRange = 100; //默认生成0-100的值

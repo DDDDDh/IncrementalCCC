@@ -1,6 +1,7 @@
 package History;
 
 import java.util.BitSet;
+import java.util.LinkedList;
 
 public class Operation {
 
@@ -20,6 +21,9 @@ public class Operation {
     private int topoID; //拓扑序号，从0开始; ->在IncrementalCausalOrder里初始化
     private int lastOpID; //同一线程位于前一位的操作ID，如果该操作为某线程第一个操作，该值为-1; ->在ProgramOrder里初始化
     private BitSet coList;
+    private BitSet predecessors; //直接前驱列表
+    private BitSet successors; //直接后继列表
+    private int nextWrite; //为读操作存储同线程上的下一个写操作（用于将其在别的线程上忽略时把对应写连接过去）
 
 
 
@@ -36,6 +40,9 @@ public class Operation {
         this.setTopoID(-1);
         this.setLastOpID(-1);
         this.setCoList(null);
+        this.setPredecessors(null);
+        this.setSuccessors(null);
+        this.setNextWrite(-1);
     }
 
 
@@ -66,6 +73,9 @@ public class Operation {
         this.setTopoID(-1);
         this.setLastOpID(-1);
         this.setCoList(null);
+        this.setPredecessors(null);
+        this.setSuccessors(null);
+        this.setNextWrite(-1);
     }
 
     public void copyOperation(Operation otherOp){
@@ -83,6 +93,9 @@ public class Operation {
         this.setLastOpID(otherOp.getLastOpID());
         this.copyCoList(otherOp.getCoList());
 //        this.setCoList(otherOp.getVisList());
+        this.copyPredecessors(otherOp.getPredecessors());
+        this.copySuccessors(otherOp.getSuccessors());
+        this.setNextWrite(otherOp.getNextWrite());
     }
 
     public void setKey(String key) {
@@ -139,6 +152,16 @@ public class Operation {
     }
     public int getLastOpID(){return this.lastOpID;}
     public void setCoList(BitSet bitSet){this.coList = bitSet;}
+    public void setPredecessors(BitSet bitSet){this.predecessors = bitSet;}
+    public BitSet getPredecessors() {
+        return predecessors;
+    }
+    public void setSuccessors(BitSet bitSet){this.successors = bitSet;}
+    public BitSet getSuccessors() {
+        return successors;
+    }
+    public void setNextWrite(int nextWriteId){this.nextWrite = nextWriteId;}
+    public int getNextWrite(){return this.nextWrite;}
 
     //用于拷贝构造
     public void copyVisList(BitSet bitSet){
@@ -155,6 +178,24 @@ public class Operation {
             this.coList = new BitSet(bitSet.size());
             for (int j = bitSet.nextSetBit(0); j >= 0; j = bitSet.nextSetBit(j + 1)) {
                 this.coList.set(j);
+            }
+        }
+    }
+
+    public void copyPredecessors(BitSet bitSet){
+        if(bitSet!= null) {
+            this.predecessors = new BitSet(bitSet.size());
+            for (int j = bitSet.nextSetBit(0); j >= 0; j = bitSet.nextSetBit(j + 1)) {
+                this.predecessors.set(j);
+            }
+        }
+    }
+
+    public void copySuccessors(BitSet bitSet){
+        if(bitSet!= null) {
+            this.successors = new BitSet(bitSet.size());
+            for (int j = bitSet.nextSetBit(0); j >= 0; j = bitSet.nextSetBit(j + 1)) {
+                this.successors.set(j);
             }
         }
     }
