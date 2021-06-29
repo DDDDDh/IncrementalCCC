@@ -118,7 +118,7 @@ replication:
 
 ​		(--eval <javascript>)
 
-​		当指定了replica set name时，不论制定那个端口，都会自动连上当前的primary节点：
+​		当指定了replica set name时，不论指定那个端口，都会自动连上当前的primary节点：
 
 ​		例：当primary为27011时，执行mongo admin --username dh --host "dh-example/114.212.82.99:27013" --password dh后，仍会连接上27011。如果需要连接指定的secondary node，则不能指定replica set name。
 
@@ -287,6 +287,3 @@ processManagement:
 3.11 开启负载均衡：
 
 ​	>sh.startBalancer()
-
-
-

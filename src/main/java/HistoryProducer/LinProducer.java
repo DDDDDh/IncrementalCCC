@@ -1,9 +1,8 @@
 package HistoryProducer;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 
-public class LinProducer extends randomProducer{
+public class LinProducer extends RandomProducer {
 
     HashMap<String, Integer> kvMap;
 
@@ -24,9 +23,9 @@ public class LinProducer extends randomProducer{
     public void generateLinHistory(){
 
         //根据当前生成器的配置生成操作，随后用本地kvMap模拟得到返回值
-        operationProducer oProducer = new operationProducer(this.getRRate(), this.getWRate());
+        OperationProducer oProducer = new OperationProducer(this.getRRate(), this.getWRate());
         oProducer.setProcessRange(this.getProcessNum());
-        generatedOperation curOp;
+        GeneratedOperation curOp;
         for(int i = 0; i < this.getOpNum(); i++) {
             curOp = oProducer.nextOperation(); //先随机生成一个操作，再根据其具体情况调整
             this.opList.add(curOp);

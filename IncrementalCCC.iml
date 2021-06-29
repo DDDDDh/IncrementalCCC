@@ -21,5 +21,14 @@
     <orderEntry type="library" name="Maven: org.mongodb:mongodb-driver-sync:3.9.1" level="project" />
     <orderEntry type="library" name="Maven: org.mongodb:bson:3.9.1" level="project" />
     <orderEntry type="library" name="Maven: org.mongodb:mongodb-driver-core:3.9.1" level="project" />
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/ycsb0.17.0_core.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

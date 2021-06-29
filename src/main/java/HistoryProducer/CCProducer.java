@@ -1,13 +1,10 @@
 package HistoryProducer;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
 import java.util.*;
 import lombok.*;
 
 @Data
-public class CCProducer extends randomProducer{
+public class CCProducer extends RandomProducer {
 
 //    HashMap<String, LinkedList> globalActiveVar;
     HashMap<Integer, HashMap<String, Integer>> processVarValue; //存储每个线程上为某个变量最新写入的写操作index
@@ -38,8 +35,8 @@ public class CCProducer extends randomProducer{
 
     public int maxWriteIndexOfCausalPast(HashSet<Integer> causalPast, String var){
         int maxIndex = -2;
-        generatedOperation tempOp;
-        generatedOperation maxWrite;
+        GeneratedOperation tempOp;
+        GeneratedOperation maxWrite;
         for(Integer i : causalPast){
             tempOp = this.opList.get(i);
             if(tempOp.getVariable().equals(var) && tempOp.isWrite()){ //在causalPast中有对应变量的写操作
@@ -68,7 +65,7 @@ public class CCProducer extends randomProducer{
 
     public boolean InCausalPast(HashSet<Integer> causalPast, int targetIndex){
 
-        generatedOperation tempOp;
+        GeneratedOperation tempOp;
         for(Integer i: causalPast){
             tempOp = this.opList.get(i);
             if(tempOp.isWrite() && tempOp.getCausalPast().contains(targetIndex)){ //不能在causalPast中任一写操作的causalPast里，否则会引发WriteCORead
@@ -117,16 +114,16 @@ public class CCProducer extends randomProducer{
     public void generateCCHistory(){
 
         //根据当前生成器的配置生成操作
-        operationProducer oProducer = new operationProducer(this.getRRate(), this.getWRate(), this.getVarRange(), this.getValRange(), this.getProcessNum());
+        OperationProducer oProducer = new OperationProducer(this.getRRate(), this.getWRate(), this.getVarRange(), this.getValRange(), this.getProcessNum());
 //        oProducer.setProcessRange(this.getProcessNum());
 
-        generatedOperation curOp;
+        GeneratedOperation curOp;
         int processID;
-        generatedOperation lastSameProcessOp;
+        GeneratedOperation lastSameProcessOp;
         int processOpNum;
         LinkedList<Integer> tempList = new LinkedList<Integer>();
-        generatedOperation latestWrite;
-        generatedOperation tempOp;
+        GeneratedOperation latestWrite;
+        GeneratedOperation tempOp;
 
 
         for(int i = 0; i < this.getOpNum(); i++){
@@ -179,7 +176,7 @@ public class CCProducer extends randomProducer{
                     //如果CausalPast中有相关变量的写操作，则视情况更新
 //                    System.out.println("latestWrite:" + latestWrite);
                     if(maxWriteIndex != -2) {
-                        generatedOperation maxWrite = this.opList.get(maxWriteIndex);
+                        GeneratedOperation maxWrite = this.opList.get(maxWriteIndex);
 //                        System.out.println("maxWrite:" + maxWrite);
                         if (InCausalPast(curOp.getCausalPast(), latestWrite.getIndex())){ //如果随机生成的写操作在当前操作的causalPast中,则不能读到该值，改为读到maxWrite
                             latestWrite = maxWrite;
