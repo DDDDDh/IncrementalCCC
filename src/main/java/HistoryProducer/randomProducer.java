@@ -11,11 +11,11 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
 @Data
-public class randomProducer {
+public class RandomProducer {
 
     int opNum;
     int processNum;
-    LinkedList<generatedOperation> opList;
+    LinkedList<GeneratedOperation> opList;
     String outputPath;
     int wRate;
     int rRate;
@@ -24,7 +24,7 @@ public class randomProducer {
     HashMap<Integer, LinkedList> processOpList;
 //    String url = "src/main/resources/BadPatternExamples/CyclicHB2_history.edn";
 
-    randomProducer(){
+    RandomProducer(){
         this.setOpNum(20); //默认生成20个操作
         this.setProcessNum(5); //默认分配在5个线程
         this.setRRate(3);  //默认读写比例为3：1
@@ -35,7 +35,7 @@ public class randomProducer {
         this.processOpList = new HashMap<>();
     }
 
-    randomProducer(int opNum, int processNum, int rRate, int wRate){
+    RandomProducer(int opNum, int processNum, int rRate, int wRate){
         this.setOpNum(opNum);
         this.setProcessNum(processNum);
         this.setRRate(rRate);
@@ -51,7 +51,7 @@ public class randomProducer {
         }
     }
 
-    randomProducer(int opNum, int processNum, int rRate, int wRate, int varRange, int valRange){
+    RandomProducer(int opNum, int processNum, int rRate, int wRate, int varRange, int valRange){
         this.setOpNum(opNum);
         this.setProcessNum(processNum);
         this.setRRate(rRate);
@@ -76,7 +76,7 @@ public class randomProducer {
         this.setOutputPath(url);
     }
 
-    public String printOp(generatedOperation tempOp){
+    public String printOp(GeneratedOperation tempOp){
         String tempStr = "{";
         //填充type字段
         if(tempOp.getType() ==1){ //暂时只考虑生成type ok的操作
@@ -87,10 +87,10 @@ public class randomProducer {
         }
 
         //填充f字段
-        if(tempOp.getMethod() == methods.Write){
+        if(tempOp.getMethod() == Methods.methods.Write){
             tempStr += ":f :write, ";
         }
-        else if(tempOp.getMethod() == methods.Read){
+        else if(tempOp.getMethod() == Methods.methods.Read){
             tempStr += ":f :read, ";
         }
 
@@ -122,7 +122,7 @@ public class randomProducer {
     public void printToFile() throws FileNotFoundException{
         File outfile = new File(this.getOutputPath());
         PrintWriter output = new PrintWriter(outfile);
-        generatedOperation tempOp;
+        GeneratedOperation tempOp;
         String tempStr = "";
         for(int i = 0; i < this.opList.size(); i++){
             tempOp = this.opList.get(i);
@@ -136,7 +136,7 @@ public class randomProducer {
         String debugPath = this.getOutputPath().replace(".edn", "_debug.edn");
         File outfile = new File(debugPath);
         PrintWriter output = new PrintWriter(outfile);
-        generatedOperation tempOp;
+        GeneratedOperation tempOp;
         LinkedList<Integer> tempOpList;
         String tempStr = "";
         if(mode == 1) {
@@ -173,9 +173,9 @@ public class randomProducer {
     public static void main(String args[]) throws Exception{
 
 
-//        randomProducer rProducer = new randomProducer();
+//        RandomProducer rProducer = new RandomProducer();
 //
-//        operationProducer oProducer = new operationProducer(rProducer.getRRate(), rProducer.getWRate());
+//        OperationProducer oProducer = new OperationProducer(rProducer.getRRate(), rProducer.getWRate());
 //        generatedOperation tempOp;
 //
 //        int wCount = 0;

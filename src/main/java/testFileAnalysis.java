@@ -8,7 +8,7 @@ import java.io.*;
 
 
 
-public class testFileAnalysis {
+public class TestFileAnalysis {
 
     String globalLog;
     long ihboTime;
@@ -219,7 +219,7 @@ public class testFileAnalysis {
 
 //        File file = new File("/Users/yi-huang/Project/MongoTrace/1227/no-memesis/majority-linearizable/100-3000_test/");
         File file = new File(args[0]);
-        testFileAnalysis tfa = new testFileAnalysis();
+        TestFileAnalysis tfa = new TestFileAnalysis();
         tfa.globalLog = "/home/oy/DH/CheckingSelectedLog0402.txt";
         long initialTime = System.nanoTime();
 

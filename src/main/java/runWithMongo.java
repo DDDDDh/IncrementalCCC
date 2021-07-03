@@ -1,11 +1,10 @@
 import Checker.CCChecker;
 import Checker.CCvChecker;
 import Checker.CMChecker;
-import DBConnector.mongoConnector;
+import DBConnector.MongoConnector;
 import History.History;
 import History.HistoryReader;
 import HistoryProducer.CCProducer;
-import HistoryProducer.LinProducer;
 import Relations.*;
 
 import java.io.File;
@@ -13,7 +12,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class runWithMongo {
+public class RunWithMongo {
 
     public static void appendLog(String fileName, String content) throws IOException {
         try {
@@ -278,7 +277,7 @@ public class runWithMongo {
 //
 //                    //end
 
-                    mongoConnector connector = new mongoConnector();
+                    MongoConnector connector = new MongoConnector();
                     String mongoLog = "target/ParameterChoosing/debug/mongoLogfile_0528" + "_opNum" + opNum + "_processNum" + ccProducer.getProcessNum() + ".edn";
 //                    connector.mongoRun("mongodb+srv://m220student:m220password@mflix.9pm5g.mongodb.net/test?maxIdleTimeMS=3000&connectTimeoutMS=5000&socketTimeoutMS=5000", "test_mongo", "original_data", newPath, mongoLog);
 //                    connector.mongoRun("mongodb://127.0.0.1:27013", "test_mongo", "original_data", url, mongoLog);

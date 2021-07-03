@@ -12,7 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class generateAndTest {
+public class GenerateAndTest {
 
     public static void main(String args[]) throws Exception {
 
@@ -33,7 +33,7 @@ public class generateAndTest {
 //        ccProducer.printToFile();
 //        ccProducer.printToFileDebug(1);
 
-        int opNum = 1000;
+        int opNum = 600;
         LinProducer linProducer = new LinProducer(opNum, 10, 3,1);
         linProducer.generatePath();
         linProducer.generateLinHistory();

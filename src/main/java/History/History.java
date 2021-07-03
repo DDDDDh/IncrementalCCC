@@ -116,6 +116,23 @@ public class History {
         }
     }
 
+    public HashMap<Integer, LinkedList<Operation>> generateProcessOpList(){
+        HashMap pOpList = new HashMap<Integer, LinkedList<Operation>>();
+        int curProcess;
+        for(Operation op: this.operationList){
+            curProcess = op.getProcess();
+            if(!this.processOpList.containsKey(curProcess)){
+                this.processOpList.put(curProcess, new LinkedList<>());
+            }
+            LinkedList<Operation> tList = (LinkedList<Operation>)pOpList.get(curProcess);
+            if(tList == null){
+                tList = new LinkedList<Operation>();
+            }
+            tList.add(op);
+        }
+        return pOpList;
+    }
+
     public void printOpGroupByProcess(){
         System.out.println("-----------------------------------");
         Set processes = this.processOpList.keySet();

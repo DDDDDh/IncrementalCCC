@@ -18,14 +18,14 @@ import lombok.*;
 //
 
 @Data
-public class operationProducer {
+public class OperationProducer {
 
 
     int globalIndex;
     int writeRate;
     int readRate;
     LinkedList<Integer> weightList; //存储读写比率的权重列表
-    LinkedList<methods> ops;
+    LinkedList<Methods.methods> ops;
     int weightSum; //按权重生成随机数辅助变量
     LinkedList<Integer> weightTemp; //按权重生成随机数辅助数据结构
     int varRange; //用数字表示生成的变量范围（默认从'a'开始，顺序往后)
@@ -37,7 +37,7 @@ public class operationProducer {
     int globalPosition;
 
     //默认的读写比例是1：1
-    operationProducer(){
+    OperationProducer(){
 
         //globalIndex从0开始计数，globalTime和globalPosition从1开始计数
         this.setGlobalIndex(0);
@@ -49,8 +49,8 @@ public class operationProducer {
         this.weightList = new LinkedList<Integer>();
         this.setWeightSum(0);
         this.ops = new LinkedList<>();
-        this.ops.add(methods.Read);
-        this.ops.add(methods.Write);
+        this.ops.add(Methods.methods.Read);
+        this.ops.add(Methods.methods.Write);
         this.weightTemp = new LinkedList<>();
         this.varRange = 10; //默认生成5个变量
         this.updateWeightList();
@@ -61,7 +61,7 @@ public class operationProducer {
 
     }
 
-    operationProducer(int rRate, int wRate){
+    OperationProducer(int rRate, int wRate){
         this.setGlobalIndex(0);
         this.setGlobalTime(1);
         this.setGlobalPosition(1);
@@ -71,8 +71,8 @@ public class operationProducer {
         this.weightList = new LinkedList<Integer>();
         this.setWeightSum(0);
         this.ops = new LinkedList<>();
-        this.ops.add(methods.Read);
-        this.ops.add(methods.Write);
+        this.ops.add(Methods.methods.Read);
+        this.ops.add(Methods.methods.Write);
         this.weightTemp = new LinkedList<>();
         this.varRange = 10; //默认生成5个变量 //0312->观察变量数对验证效率的影响
         this.updateWeightList();
@@ -82,7 +82,7 @@ public class operationProducer {
         this.processRange = 5; //默认有5个线程
     }
 
-    operationProducer(int rRate, int wRate, int varRange, int valueRange, int processRange){
+    OperationProducer(int rRate, int wRate, int varRange, int valueRange, int processRange){
         this.setGlobalIndex(0);
         this.setGlobalTime(1);
         this.setGlobalPosition(1);
@@ -92,8 +92,8 @@ public class operationProducer {
         this.weightList = new LinkedList<Integer>();
         this.setWeightSum(0);
         this.ops = new LinkedList<>();
-        this.ops.add(methods.Read);
-        this.ops.add(methods.Write);
+        this.ops.add(Methods.methods.Read);
+        this.ops.add(Methods.methods.Write);
         this.weightTemp = new LinkedList<>();
         this.varRange = varRange;
         this.updateWeightList();
@@ -121,8 +121,8 @@ public class operationProducer {
         return 1;
     }
 
-    //根据制定的读写比率生成操作类型
-    methods randomMethod(){
+    //根据指定的读写比率生成操作类型
+    Methods.methods randomMethod(){
         Random random = new Random();
         int rand = random.nextInt(this.weightSum);
         int index = 0;
@@ -135,7 +135,7 @@ public class operationProducer {
         return this.ops.get(index);
     }
 
-    String randomVar(methods type){
+    String randomVar(Methods.methods type){
         String temp = "";
         Random random = new Random();
         int rand;
@@ -165,7 +165,7 @@ public class operationProducer {
         rand = random.nextInt(this.varRange);
         a = a + rand;
         temp = String.valueOf((char) a);
-        if(!this.varValueMap.containsKey(temp) && type == methods.Write){ //如果写操作没有访问过该变量，则将其放入map中
+        if(!this.varValueMap.containsKey(temp) && type == Methods.methods.Write){ //如果写操作没有访问过该变量，则将其放入map中
             this.varValueMap.put(temp, -1); //初始时把-1暂存入数据结构，待之后更新
             Set tempSet = new HashSet();
             this.usedValue.put(temp, tempSet);
@@ -173,10 +173,10 @@ public class operationProducer {
         return temp;
     }
 
-    int randomValue(generatedOperation op){
+    int randomValue(GeneratedOperation op){
         int temp = 0;
         Random random = new Random();
-        if(op.getMethod() == methods.Write){ //如果是写操作，随机写入一个范围内的值
+        if(op.getMethod() == Methods.methods.Write){ //如果是写操作，随机写入一个范围内的值
             temp = random.nextInt(this.valueRange);
             while(this.usedValue.get(op.getVariable()).contains(temp) || temp == 0){ //如果对同一变量写入了重复的值，则重新生成 //不能写0
                 temp = random.nextInt(this.valueRange);
@@ -186,7 +186,7 @@ public class operationProducer {
             tempSet.add(temp);
             this.usedValue.put(op.getVariable(), tempSet);
         }
-        else if(op.getMethod() == methods.Read){ //如果是读操作，返回该变量被写入的最新值
+        else if(op.getMethod() == Methods.methods.Read){ //如果是读操作，返回该变量被写入的最新值
             if(this.varValueMap.containsKey(op.getVariable())) {
                 temp = this.varValueMap.get(op.getVariable());
             }
@@ -205,9 +205,9 @@ public class operationProducer {
     }
 
 
-    public generatedOperation nextOperation(){
+    public GeneratedOperation nextOperation(){
 
-        generatedOperation op = new generatedOperation();
+        GeneratedOperation op = new GeneratedOperation();
         op.setType(this.randomType());
         op.setIndex(this.globalIndex++);
         op.setMethod(this.randomMethod());
