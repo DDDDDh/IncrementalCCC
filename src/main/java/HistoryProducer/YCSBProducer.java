@@ -5,8 +5,10 @@ import site.ycsb.WorkloadException;
 import site.ycsb.generator.*;
 import lombok.*;
 
+import java.io.FileNotFoundException;
+
 @Data
-public class YCSBProducer { //利用YCSB生成操作
+public class YCSBProducer extends RandomProducer{ //利用YCSB生成操作
 
     int opNum;
     double readProportion; //读操作比例(0 to 1)
@@ -21,6 +23,7 @@ public class YCSBProducer { //利用YCSB生成操作
     protected int[] varCounter;
     int readCount;
     int writeCount;
+    int globalIndex;
 
     protected NumberGenerator varProducer; //访问变量生成器
     protected DiscreteGenerator typeProducer; //操作类型生成器
@@ -43,6 +46,7 @@ public class YCSBProducer { //利用YCSB生成操作
         this.init();
         this.setReadCount(0);
         this.setWriteCount(0);
+        this.setGlobalIndex(0);
     }
 
     public YCSBProducer(int opNum, double rp, double wp, int varR, int valR, int pr, String vd, String pd) throws WorkloadException{
@@ -61,6 +65,7 @@ public class YCSBProducer { //利用YCSB生成操作
         this.init();
         this.setReadCount(0);
         this.setWriteCount(0);
+        this.setGlobalIndex(0);
     }
 
     protected void initTypeProducer(){ //初始化操作类型生成器
@@ -121,8 +126,7 @@ public class YCSBProducer { //利用YCSB生成操作
         this.initTypeProducer();
         this.initVarProducer();
         this.initProcessProducer();
-
-        System.out.println("Init OK");
+//        System.out.println("Init OK");
     }
 
     public static long nextVarNum(NumberGenerator varProducer, AcknowledgedCounterGenerator transactionInsertVarSequence){
@@ -141,9 +145,11 @@ public class YCSBProducer { //利用YCSB生成操作
 
     public GeneratedOperation nextOperation(){
         GeneratedOperation nextOp = new GeneratedOperation();
+        nextOp.setIndex(this.globalIndex++);
+        nextOp.setType(1);
         String opType = this.typeProducer.nextString();
         int varInt = (int)nextVarNum(this.varProducer, this.transactionInsertVarSequence);
-        System.out.println("varInt:" + varInt);
+//        System.out.println("varInt:" + varInt);
         if(opType.equals("Read")){
 //            System.out.println("type read");
             nextOp.setMethod(Methods.methods.Read);
@@ -178,15 +184,23 @@ public class YCSBProducer { //利用YCSB生成操作
         return nextOp;
     }
 
-    public static void main(String args[]) throws WorkloadException{
+    public void generateHistory(){
 
-        Client c = new Client();
-        c.testJar();
-        YCSBProducer producer = new YCSBProducer(100,0.75,0.25,20,100,5,"uniform","uniform");
-        for(int i = 0; i < 100; i++){
-            GeneratedOperation op = producer.nextOperation();
-            System.out.println("op" + i + ":" + op.printBare());
+        GeneratedOperation curOp;
+        for(int i = 0; i < this.getOpNum(); i++){
+            curOp = this.nextOperation();
+            this.opList.add(curOp);
         }
+    }
+
+    public static void main(String args[]) throws WorkloadException, FileNotFoundException{
+
+        YCSBProducer producer = new YCSBProducer(100,0.75,0.25,20,100,5,"uniform","uniform");
+        System.out.println("Begin to produce history...");
+        producer.generatePath();
+        producer.generateHistory();
+        producer.printToFile();
+        System.out.println("History is printed to file, log path:" + producer.getOutputPath());
         System.out.println("Total Read:" + producer.getReadCount() + " Total Write:" + producer.getWriteCount());
     }
 

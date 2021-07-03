@@ -116,21 +116,23 @@ public class History {
         }
     }
 
-    public HashMap<Integer, LinkedList<Operation>> generateProcessOpList(){
-        HashMap pOpList = new HashMap<Integer, LinkedList<Operation>>();
+    public void generateProcessOpList(HashMap<Integer, LinkedList<Operation>> pOpList){
+//        HashMap pOpList = new HashMap<Integer, LinkedList<Operation>>();
         int curProcess;
         for(Operation op: this.operationList){
+//            System.out.println("Dealing with op:" + op.easyPrint());
             curProcess = op.getProcess();
             if(!this.processOpList.containsKey(curProcess)){
+                System.out.println("impossible!");
                 this.processOpList.put(curProcess, new LinkedList<>());
             }
             LinkedList<Operation> tList = (LinkedList<Operation>)pOpList.get(curProcess);
             if(tList == null){
+                System.out.println("impossible too");
                 tList = new LinkedList<Operation>();
             }
             tList.add(op);
         }
-        return pOpList;
     }
 
     public void printOpGroupByProcess(){

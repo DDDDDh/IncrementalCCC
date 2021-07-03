@@ -40,6 +40,7 @@ public class HistoryReader {
         BufferedReader in = new BufferedReader(new FileReader(this.url));
         String line;
         while ((line = in.readLine()) != null) {
+//            System.out.println("Line...");
             line = StringUtils.strip(line, "{}");
             Operation op = this.getOperation(line);
             if (op != null) {
@@ -47,7 +48,8 @@ public class HistoryReader {
             }
         }
         in.close();
-//        System.out.println("Finish reading");
+        System.out.println("Finish reading");
+//        System.out.println("oplist num:" + opList.size());
         return opList;
 
     }

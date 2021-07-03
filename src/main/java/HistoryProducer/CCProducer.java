@@ -125,7 +125,6 @@ public class CCProducer extends RandomProducer {
         GeneratedOperation latestWrite;
         GeneratedOperation tempOp;
 
-
         for(int i = 0; i < this.getOpNum(); i++){
 
             curOp = oProducer.nextOperation(); //先随机生成一个操作，再根据其具体情况调整

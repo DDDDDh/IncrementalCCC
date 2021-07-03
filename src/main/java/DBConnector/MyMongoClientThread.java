@@ -84,9 +84,17 @@ public class MyMongoClientThread implements Runnable{
                 op.setTime(System.nanoTime());
                 op.setPosition(this.globalIndex.getAndIncrement());
             }
+            else{
+//                System.out.println("Not found, set to -1");
+                op.setValue(-1);
+                op.setTime(System.nanoTime());
+                op.setPosition(this.globalIndex.getAndIncrement());
+            }
+
             return queryResult != null ? Status.OK : Status.NOT_FOUND;
         } catch (Exception e){
             System.err.println(e.toString());
+            System.out.println("ewwwwwwwwwww");
             return Status.ERROR;
         }
     }
@@ -103,6 +111,7 @@ public class MyMongoClientThread implements Runnable{
             op.setPosition(this.globalIndex.getAndIncrement());
             return Status.OK;
         } catch (Exception e){
+            System.out.println("hmmmmmmmmmmmmm");
             System.err.println(e.toString());
             return Status.ERROR;
         }
@@ -147,7 +156,7 @@ public class MyMongoClientThread implements Runnable{
     @Override
     public void run(){
         this.startConnection();
-
+        System.out.println("Thread " + this.threadid + " start!");
         //NOTE: Switching to using nanoTime and parkNanos for time management here such that the measurements
         // and the client thread have the same view on time.
 
@@ -165,11 +174,16 @@ public class MyMongoClientThread implements Runnable{
         for(int i = 0; i < this.opList.size(); i++){
             curOp = this.opList.get(i);
             if(curOp.isRead()){
-                if(this.read(curOp) == Status.OK){
+                Status readStat = this.read(curOp);
+                if(readStat == Status.OK){
+                    output.println(printOp("ok", curOp, index++));
+                }
+                else if(readStat == Status.NOT_FOUND){
                     output.println(printOp("ok", curOp, index++));
                 }
                 else{
                     System.out.println("Error when doing op:" + curOp.easyPrint());
+                    System.out.println("status:");
                 }
             }
             else if(curOp.isWrite()){
@@ -188,8 +202,10 @@ public class MyMongoClientThread implements Runnable{
             throttleNanos(startTimeNanos);
         }
 
+
         output.close(); //结束运行之前记得把文件输出关闭
         this.closeConnection(); //关闭与数据库的连接
+        System.out.println("Thread " + this.threadid + " ends!");
         completeLatch.countDown();
     }
 }

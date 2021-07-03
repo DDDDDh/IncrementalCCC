@@ -38,7 +38,7 @@ public class MyMongoClient {
     WriteConcern writeConcern;
     PrintWriter output;
 
-    MyMongoClient(String mongoSRV, String dbName, String collectionName, int target, String logPath, ReadConcern readConcern, WriteConcern writeConcern) throws FileNotFoundException{
+    public MyMongoClient(String mongoSRV, String dbName, String collectionName, int target, String logPath, ReadConcern readConcern, WriteConcern writeConcern) throws FileNotFoundException{
         this.mongoSRV = mongoSRV;
         this.dbName = dbName;
         this.collectionName = collectionName;
@@ -49,7 +49,7 @@ public class MyMongoClient {
         this.readConcern = readConcern;
         this.writeConcern = writeConcern;
         this.startConnection();
-
+        this.clearDB();//开始运行前先清理数据库
     }
 
     public void startConnection(){
@@ -87,8 +87,10 @@ public class MyMongoClient {
         String runningLog = "";
         HistoryReader reader = new HistoryReader(srcLog);
         History inputHis = new History(reader.readHistory());
+        inputHis.setOpNum(reader.getTotalNum());
         Set<Integer> processes = inputHis.getProcessOpList().keySet();
         int processNum = processes.size();
+        System.out.println("processNum:" + processNum);
 
         //compute the target throughput
         double targetperthreadperms = -1;
@@ -97,7 +99,11 @@ public class MyMongoClient {
             targetperthreadperms = targetperthread / 1000.0;
         }
 
-        HashMap<Integer, LinkedList<Operation>> processOpList = inputHis.generateProcessOpList();
+        HashMap<Integer, LinkedList<Operation>> processOpList = new HashMap<Integer, LinkedList<Operation>>();
+        for(Integer curProcess: processes){
+            processOpList.put(curProcess, new LinkedList<Operation>());
+        }
+        inputHis.generateProcessOpList(processOpList);
         HashMap<Integer, String> processLogPath = new HashMap<Integer, String>();
 //        int curProcess;
         final CountDownLatch completeLatch = new CountDownLatch(processNum);
@@ -107,7 +113,10 @@ public class MyMongoClient {
         AtomicInteger globalIndex = new AtomicInteger(0);
         for(Integer curProcess: processes){
             curOpList = processOpList.get(curProcess);
-            curLog = this.logPath.substring(0, this.logPath.indexOf(".log")) + "_" + curProcess + ".log";
+            if(curOpList == null){
+                System.out.println("A null???");
+            }
+            curLog = this.logPath.substring(0, this.logPath.indexOf(".edn")) + "_" + curProcess + ".edn";
             processLogPath.put(curProcess, curLog);
             MyMongoClientThread t =  new MyMongoClientThread(this.mongoSRV, this.dbName, this.collectionName,
                     curLog, this.readConcern, this.writeConcern, targetperthreadperms, curOpList, completeLatch, globalIndex);
@@ -135,6 +144,7 @@ public class MyMongoClient {
 
         //检查opsDone是否等于history.num
         assertTrue("opsDone should equals history op num", opsDone == inputHis.getOpNum());
+//        System.out.println("OpsDone:" + opsDone);
 
         //TODO:将多线程的log整合成一个log
 
@@ -168,12 +178,6 @@ public class MyMongoClient {
 
 
     //TODO: split multi-thread and single thread.
-    public void multiThreadRun(){
-
-    }
-    public void singleThreadRun(){
-
-    }
 
     public static void main(String args[]) throws Exception {
         System.out.println("hello world");
