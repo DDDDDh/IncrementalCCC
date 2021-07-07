@@ -146,7 +146,7 @@ public class YCSBProducer extends RandomProducer{ //利用YCSB生成操作
     public GeneratedOperation nextOperation(){
         GeneratedOperation nextOp = new GeneratedOperation();
         nextOp.setIndex(this.globalIndex++);
-        nextOp.setType(1);
+        nextOp.setType(1); //type OK
         String opType = this.typeProducer.nextString();
         int varInt = (int)nextVarNum(this.varProducer, this.transactionInsertVarSequence);
 //        System.out.println("varInt:" + varInt);

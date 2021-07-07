@@ -36,7 +36,7 @@ public class Main {
 
         int opNum = 500;
 
-        YCSBProducer producer = new YCSBProducer(200,0.75,0.25,20,100,5,"uniform","uniform");
+        YCSBProducer producer = new YCSBProducer(200,0.75,0.25,10,100,5,"uniform","uniform");
         System.out.println("Begin to produce history...");
         producer.generatePath();
         producer.generateHistory();
