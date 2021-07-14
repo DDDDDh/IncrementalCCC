@@ -31,7 +31,6 @@ public class ConflictRelation extends BasicRelation{
                 continue;
             }
             else if(curOp.isRead()){
-
                 int correspondingWriteID = curOp.getCorrespondingWriteID();
                 if(correspondingWriteID != -1) { //只取存在对应写操作的读添加cf关系
                     correspondingWrite = opList.get(curOp.getCorrespondingWriteID());

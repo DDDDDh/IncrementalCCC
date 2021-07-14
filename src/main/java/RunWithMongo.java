@@ -367,7 +367,7 @@ public class RunWithMongo {
 
 
                     startTime = System.nanoTime();
-                    IncrementalHappenBeforeOrder ihbo = new IncrementalHappenBeforeOrder(history.getOpNum());
+                    IncrementalHappenBeforeOrder ihbo = new IncrementalHappenBeforeOrder(history.getOpNum(),1);
                     ihbo.incrementalHBO(history, po, rf, ico);
                     endTime = System.nanoTime();
                     long ihboTime = endTime - startTime;

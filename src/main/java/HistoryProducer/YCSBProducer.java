@@ -56,6 +56,7 @@ public class YCSBProducer extends RandomProducer{ //利用YCSB生成操作
         this.setVarRange(varR);
         this.setValueRange(valR);
         this.setProcessRange(pr);
+        this.setProcessNum(pr);
         this.setGlobalTime(0);
         this.setGlobalPosition(0);
         this.setVarDistribution(vd);

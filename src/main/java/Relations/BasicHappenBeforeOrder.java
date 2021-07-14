@@ -45,7 +45,7 @@ public class BasicHappenBeforeOrder extends HappenBeforeOrder{
             Future<BasicRelation> submit = completionService.take();
             BasicRelation processResult = submit.get();
             processMatrix.put(processResult.getProcessID(), processResult);
-            System.out.println("Loop time for closure alg: " + processResult.getLoopTime() + " process:" + processResult.getProcessID() );
+//            System.out.println("Loop time for closure alg: " + processResult.getLoopTime() + " process:" + processResult.getProcessID() );
 //            System.out.println("Matrix for process:" + processResult.getProcessID());
 //            processResult.printMatrix();
             if(processResult.getLoopTime() > this.maxLoop){
@@ -92,7 +92,7 @@ class basicProcess implements Callable<BasicRelation> {
         this.co = co;
         this.loopTime = 0;
         this.init();
-        System.out.println("Basic init time for process " + this.processID + ":" + (System.nanoTime() - beginTime));
+//        System.out.println("Basic init time for process " + this.processID + ":" + (System.nanoTime() - beginTime));
     }
 
     //复制history中的操作，并初始化自身操作列表
@@ -247,7 +247,7 @@ class basicProcess implements Callable<BasicRelation> {
 //        }
         isCaculated = true;
 //        System.out.println("End of process" + this.processID);
-        System.out.println("Basic compute time for process " + this.processID + ":" + (System.nanoTime() - this.beginTime));
+//        System.out.println("Basic compute time for process " + this.processID + ":" + (System.nanoTime() - this.beginTime));
         return matrix;
     }
 

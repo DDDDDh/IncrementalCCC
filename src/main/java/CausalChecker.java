@@ -99,7 +99,7 @@ public class CausalChecker {
 
         System.out.println("Begin to compute happen-before relation (inc)");
         startTime = System.nanoTime();
-        IncrementalHappenBeforeOrder ihbo = new IncrementalHappenBeforeOrder(history.getOpNum());
+        IncrementalHappenBeforeOrder ihbo = new IncrementalHappenBeforeOrder(history.getOpNum(),1);
         ihbo.incrementalHBO(history,po, rf, bco);
         endTime = System.nanoTime();
         long ihboTime = endTime - startTime;

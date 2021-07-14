@@ -123,7 +123,7 @@ public class BatchChecking {
             output.println("bhbo Time:" + (endTime - startTime) + "ns");
 
             startTime = System.nanoTime();
-            IncrementalHappenBeforeOrder ihbo = new IncrementalHappenBeforeOrder(history.getOpNum());
+            IncrementalHappenBeforeOrder ihbo = new IncrementalHappenBeforeOrder(history.getOpNum(),1);
             ihbo.incrementalHBO(history,po, rf, ico);
             endTime = System.nanoTime();
             System.out.println("ihbo Time:" + (endTime - startTime) + "ns");

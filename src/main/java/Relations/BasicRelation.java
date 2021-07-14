@@ -317,7 +317,7 @@ public class BasicRelation implements BasicRelationInterface{
                 }
             }
         }
-        System.out.println("Closure time:" + (System.nanoTime() - time1) + " total num:" + this.getMatrixSize());
+//        System.out.println("Closure time:" + (System.nanoTime() - time1) + " total num:" + this.getMatrixSize());
     }
 
     //使用BFS计算传递闭包

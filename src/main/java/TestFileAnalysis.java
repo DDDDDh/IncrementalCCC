@@ -89,7 +89,7 @@ public class TestFileAnalysis {
             System.out.println("Incremental Computation of HBo");
             output.println("Incremental Computation of HBo");
             long startTime = System.nanoTime();
-            IncrementalHappenBeforeOrder ihbo = new IncrementalHappenBeforeOrder(history.getOpNum());
+            IncrementalHappenBeforeOrder ihbo = new IncrementalHappenBeforeOrder(history.getOpNum(),1);
             ihbo.incrementalHBO(history,po, rf, co);
             long endTime = System.nanoTime();
             System.out.println("ihbo Time:" + (endTime - startTime) + "ns");
@@ -120,7 +120,7 @@ public class TestFileAnalysis {
             System.out.println("Incremental Computation of HBo");
             output.println("Incremental Computation of HBo");
             long startTime = System.nanoTime();
-            IncrementalHappenBeforeOrder ihbo = new IncrementalHappenBeforeOrder(history.getOpNum());
+            IncrementalHappenBeforeOrder ihbo = new IncrementalHappenBeforeOrder(history.getOpNum(),1);
             ihbo.incrementalHBO(history,po, rf, co);
             long endTime = System.nanoTime();
             System.out.println("ihbo Time:" + (endTime - startTime) + "ns");

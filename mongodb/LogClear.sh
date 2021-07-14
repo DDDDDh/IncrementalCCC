@@ -13,7 +13,8 @@ set port [lindex $argv 1]
 
 spawn ssh $address
 expect ""
-send "bash\n" #为了保证能够进入bash而确认一遍(n6需要手动输入)
+send "bash\n"
+#为了保证能够进入bash而确认一遍(n6需要手动输入)
 
 #连接mongodb并认证
 expect ""
