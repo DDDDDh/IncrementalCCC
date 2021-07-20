@@ -2,6 +2,7 @@ package DBConnector;
 
 import History.Operation;
 import com.mongodb.ReadConcern;
+import com.mongodb.ReadPreference;
 import com.mongodb.WriteConcern;
 import com.mongodb.client.*;
 import com.mongodb.client.model.UpdateOptions;
@@ -77,7 +78,7 @@ public class MyMongoClientThread implements Runnable{
     public Status read(Operation op){
         try{
             Document tempDoc = new Document("Field", op.getKey());
-            FindIterable<Document> findIterable = this.mongoCollection.withReadConcern(this.readConcern).find(tempDoc);
+            FindIterable<Document> findIterable = this.mongoCollection.withReadPreference(ReadPreference.secondaryPreferred()).withReadConcern(this.readConcern).find(tempDoc);
             Document queryResult = findIterable.first();
             if(queryResult != null){
                 op.setValue((int)queryResult.get("Value"));

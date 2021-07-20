@@ -66,8 +66,10 @@ public class Main {
                     System.out.println("----------------Begin Running Part-------------------");
 
                     String mongoLog = "target/ParameterChoosing/debug/mongoLogfile_" + month + "_" + day + "_opNum" + producer.getOpNum() + "_processNum" + producer.getProcessNum() + ".edn";
-                    MyMongoClient client = new MyMongoClient("mongodb://dh:dh@n1.disalg.cn:26011,n3.disalg.cn:26011,n6.disalg.cn:26011/?maxIdleTimeMS=60000", "test_mongo", "original_data",
-                            50, mongoLog, ReadConcern.MAJORITY, WriteConcern.MAJORITY);
+//                    MyMongoClient client = new MyMongoClient("mongodb://dh:dh@n1.disalg.cn:26011,n3.disalg.cn:26011,n6.disalg.cn:26011/?maxIdleTimeMS=60000&readPreference=secondaryPreferred", "test_mongo", "original_data",
+//                            50, mongoLog, ReadConcern.MAJORITY, WriteConcern.MAJORITY); //connection string
+                    MyMongoClient client = new MyMongoClient("mongodb://dh:dh@n0.disalg.cn:26011,n1.disalg.cn:26011,n2.disalg.cn:26011,n3.disalg.cn:26011,n4.disalg.cn:26011,n6.disalg.cn:26011/?maxIdleTimeMS=60000", "test_mongo", "original_data",
+                            50, mongoLog, ReadConcern.MAJORITY, WriteConcern.MAJORITY); //connection string
 //                    MyMongoClient client = new MyMongoClient("mongodb://dh:dh@n0.disalg.cn:29004,n2.disalg.cn:29004,n4.disalg.cn:29004/?maxIdleTimeMS=60000", "test_mongo", "original_data",
 //                            50, mongoLog, ReadConcern.MAJORITY, WriteConcern.MAJORITY);
                     //访问分片集群时，要确保MongoDB URI里包含2个及以上的mongos地址，来实现负载均衡及高可用
@@ -168,17 +170,18 @@ public class Main {
                     long bhboTime = endTime - startTime;
 
 
-                    //如果包含这三种非法模式，ihbo不能完整计算得到每个线程hbo的关系矩阵
-                    if (ihbo.isCyclicCO() || ihbo.isThinAirRead() || ihbo.isCyclicHB()) {
-                        System.out.println("Cannot compare matrix! Reason: isCyclicCO:" + ihbo.isCyclicCO() + " isThinAirRead:" + ihbo.isThinAirRead() + " isCyclicHB:" + ihbo.isCyclicHB());
-                        boolean hboEquality = hbo.checkEqual(ihbo);
-                        if (!hboEquality) {
-                            System.out.println("ihbo is not equal to bhbo???");
-                            System.exit(-1);
-                        } else {
-                            System.out.println("ihbo is equal to bhbo ^.^");
-                        }
-                    }
+//                    //如果包含这三种非法模式，ihbo不能完整计算得到每个线程hbo的关系矩阵
+                      //mode=2时无法比较
+//                    if (ihbo.isCyclicCO() || ihbo.isThinAirRead() || ihbo.isCyclicHB()) {
+//                        System.out.println("Cannot compare matrix! Reason: isCyclicCO:" + ihbo.isCyclicCO() + " isThinAirRead:" + ihbo.isThinAirRead() + " isCyclicHB:" + ihbo.isCyclicHB());
+//                        boolean hboEquality = hbo.checkEqual(ihbo);
+//                        if (!hboEquality) {
+//                            System.out.println("ihbo is not equal to bhbo???");
+//                            System.exit(-1);
+//                        } else {
+//                            System.out.println("ihbo is equal to bhbo ^.^");
+//                        }
+//                    }
 
                     CMChecker cmChecker = new CMChecker(history, po, rf, bco, hbo);
                     cmResult = cmChecker.checkCM();

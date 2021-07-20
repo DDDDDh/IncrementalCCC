@@ -84,6 +84,7 @@ public class MyMongoClient {
     }
 
     public String loadAndRun(String srcLog) throws IOException{
+//        clearDB(); //每次运行之前将数据库清零
         String runningLog = "";
         HistoryReader reader = new HistoryReader(srcLog);
         History inputHis = new History(reader.readHistory());

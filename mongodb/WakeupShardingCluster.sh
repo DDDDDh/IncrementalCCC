@@ -1,8 +1,8 @@
 set timeout 15 #设置超时，单位秒
-#Usage: ./BatchClear.sh 需配合参数设置在alicloud_mongodb.conf中
-csrs_config="alicloud_mongodb_csrs.conf"
-mongos_config="alicloud_mongodb_mongos.conf"
-shards_config="alicloud_mongodb_shards.conf"
+#Usage: ./WakeupShardingCluster.sh 需配合参数设置在alicloud_mongodb.conf中
+csrs_config="configs/alicloud_mongodb_csrs.conf"
+mongos_config="configs/alicloud_mongodb_mongos.conf"
+shards_config="configs/alicloud_mongodb_shards.conf"
 
 #先启动csrs
 bak=$IFS
@@ -26,13 +26,13 @@ IFS=$bak                    #将环境变量IFS的值改回原值
 
 #随后启动mongos
 bak=$IFS #
-if [[ ! -f $mongos_config ]];then              #判断位置参数是否为文件
+if [[ ! -f $mongos_config ]];then              
   echo "the $mongos_config is not a file"
   exit
 fi
 
-IFS=$'\n'                    #将环境变量IFS的值修改为换行符
-for i in `cat $mongos_config`                #逐行读取文件内容并打印到屏幕
+IFS=$'\n'                    
+for i in `cat $mongos_config`                
 do
   IFS=$' '
   echo "Current Parameter:" $i
@@ -42,17 +42,17 @@ do
   expect WakeupMongos.sh $address $filePath
   IFS=$'\n'
 done
-IFS=$bak                    #将环境变量IFS的值改回原值
+IFS=$bak                    
 
 #最后启动shards
 bak=$IFS
-if [[ ! -f $shards_config ]];then               #判断位置参数是否为文件
+if [[ ! -f $shards_config ]];then               
   echo "the $shards_config is not a file"
   exit
 fi
 
-IFS=$'\n'                    #将环境变量IFS的值修改为换行符
-for i in `cat $shards_config`                #逐行读取文件内容并打印到屏幕
+IFS=$'\n'                    
+for i in `cat $shards_config`               
 do
   IFS=$' '
   echo "Current Parameter:" $i
@@ -62,7 +62,7 @@ do
   expect WakeupServer.sh $address $filePath
   IFS=$'\n'
 done
-IFS=$bak                    #将环境变量IFS的值改回原值
+IFS=$bak                    
 
 echo "The sharding cluster is running."
 

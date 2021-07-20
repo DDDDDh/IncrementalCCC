@@ -1,0 +1,989 @@
+Current Parameter: n1.disalg.cn 27001 /home/huangyi/mongoDB/configs/shard1_1.conf
+spawn ssh n1.disalg.cn
+bash
+mongo --port 27001
+use admin
+db.auth("dh","dh")
+db.shutdownServer({"force":true})
+exit
+exit
+exit
+Welcome to Ubuntu 16.04.7 LTS (GNU/Linux 4.4.0-190-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+New release '18.04.5 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Welcome to Alibaba Cloud Elastic Compute Service !
+
+Last login: Tue Jul 20 10:01:59 2021 from 36.152.24.150
+bash
+mongo --port 27001
+use admin
+db.auth("dh","dh")
+db.shutdownServer({"force":true})
+exit
+exit
+exit
+]0;root@Disalg.Hangzhou.I.01: ~root@Disalg.Hangzhou.I.01:~# bash
+]0;root@Disalg.Hangzhou.I.01: ~root@Disalg.Hangzhou.I.01:~# mongo --port 27001
+MongoDB shell version v4.4.4
+connecting to: mongodb://127.0.0.1:27001/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("273f79f7-dea8-4f28-8115-26580e8b2c0f") }
+MongoDB server version: 4.4.4
+dh-shard1:PRIMARY> use admin[20G[Juse admin[29G
+switched to db admin
+dh-shard1:PRIMARY> db.auth("dh","dh")[20G[Jdb.auth("dh","dh")[38G
+1
+dh-shard1:PRIMARY> db.shutdownServer({"force":true})[20G[Jdb.shutdownServer({"force":true})[53G
+server should be down...
+> exit[3G[Jexit[7G
+bye
+{"t":{"$date":"2021-07-20T02:39:30.534Z"},"s":"I",  "c":"QUERY",    "id":22791,   "ctx":"js","msg":"Failed to end logical session","attr":{"lsid":{"id":{"$uuid":"273f79f7-dea8-4f28-8115-26580e8b2c0f"}},"error":{"code":9001,"codeName":"SocketException","errmsg":"socket exception [CONNECT_ERROR] server [couldn't connect to server 127.0.0.1:27001, connection attempt failed: SocketException: Error connecting to 127.0.0.1:27001 :: caused by :: Connection refused]"}}}
+]0;root@Disalg.Hangzhou.I.01: ~root@Disalg.Hangzhou.I.01:~# exit
+exit
+]0;root@Disalg.Hangzhou.I.01: ~root@Disalg.Hangzhou.I.01:~# exit
+logout
+Connection to n1.disalg.cn closed.
+Current Parameter: n2.disalg.cn 27001 /home/huangyi/mongoDB/configs/shard1_2.conf
+spawn ssh n2.disalg.cn
+bash
+mongo --port 27001
+use admin
+db.auth("dh","dh")
+db.shutdownServer({"force":true})
+exit
+exit
+exit
+Welcome to Ubuntu 16.04.7 LTS (GNU/Linux 4.4.0-190-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+New release '18.04.5 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Welcome to Alibaba Cloud Elastic Compute Service !
+
+Last login: Tue Jul 20 10:14:07 2021 from 36.152.24.150
+bash
+mongo --port 27001
+use admin
+db.auth("dh","dh")
+db.shutdownServer({"force":true})
+exit
+exit
+exit
+]0;root@Disalg.Hangzhou.I.02: ~root@Disalg.Hangzhou.I.02:~# bash
+]0;root@Disalg.Hangzhou.I.02: ~root@Disalg.Hangzhou.I.02:~# mongo --port 27001
+MongoDB shell version v4.4.4
+connecting to: mongodb://127.0.0.1:27001/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("433f3429-6cad-45a6-8607-0aa00c243e47") }
+MongoDB server version: 4.4.4
+dh-shard1:PRIMARY> use admin[20G[Juse admin[29G
+switched to db admin
+dh-shard1:PRIMARY> db.auth("dh","dh")[20G[Jdb.auth("dh","dh")[38G
+1
+dh-shard1:PRIMARY> db.shutdownServer({"force":true})[20G[Jdb.shutdownServer({"force":true})[53G
+server should be down...
+> exit[3G[Jexit[7G
+bye
+{"t":{"$date":"2021-07-20T02:39:32.700Z"},"s":"I",  "c":"QUERY",    "id":22791,   "ctx":"js","msg":"Failed to end logical session","attr":{"lsid":{"id":{"$uuid":"433f3429-6cad-45a6-8607-0aa00c243e47"}},"error":{"code":9001,"codeName":"SocketException","errmsg":"socket exception [CONNECT_ERROR] server [couldn't connect to server 127.0.0.1:27001, connection attempt failed: SocketException: Error connecting to 127.0.0.1:27001 :: caused by :: Connection refused]"}}}
+]0;root@Disalg.Hangzhou.I.02: ~root@Disalg.Hangzhou.I.02:~# exit
+exit
+]0;root@Disalg.Hangzhou.I.02: ~root@Disalg.Hangzhou.I.02:~# exit
+logout
+Connection to n2.disalg.cn closed.
+Current Parameter: n3.disalg.cn 27001 /home/huangyi/mongoDB/configs/shard1_3.conf
+spawn ssh n3.disalg.cn
+bash
+mongo --port 27001
+use admin
+db.auth("dh","dh")
+db.shutdownServer({"force":true})
+exit
+exit
+exit
+Welcome to Ubuntu 16.04.7 LTS (GNU/Linux 4.4.0-190-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+New release '18.04.5 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Welcome to Alibaba Cloud Elastic Compute Service !
+
+Last login: Tue Jul 20 10:14:59 2021 from 36.152.24.150
+bash
+mongo --port 27001
+use admin
+db.auth("dh","dh")
+db.shutdownServer({"force":true})
+exit
+exit
+exit
+]0;root@Disalg.Hangzhou.H.03: ~root@Disalg.Hangzhou.H.03:~# bash
+]0;root@Disalg.Hangzhou.H.03: ~root@Disalg.Hangzhou.H.03:~# mongo --port 27001
+MongoDB shell version v4.4.4
+connecting to: mongodb://127.0.0.1:27001/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("68f030f0-c67e-4c23-9d34-3cde56990e54") }
+MongoDB server version: 4.4.4
+dh-shard1:PRIMARY> use admin[20G[Juse admin[29G
+switched to db admin
+dh-shard1:PRIMARY> db.auth("dh","dh")[20G[Jdb.auth("dh","dh")[38G
+1
+dh-shard1:PRIMARY> db.shutdownServer({"force":true})[20G[Jdb.shutdownServer({"force":true})[53G
+Current Parameter: n2.disalg.cn 27002 /home/huangyi/mongoDB/configs/shard2_1.conf
+spawn ssh n2.disalg.cn
+bash
+mongo --port 27002
+use admin
+db.auth("dh","dh")
+db.shutdownServer({"force":true})
+exit
+exit
+exit
+Welcome to Ubuntu 16.04.7 LTS (GNU/Linux 4.4.0-190-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+New release '18.04.5 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Welcome to Alibaba Cloud Elastic Compute Service !
+
+Last login: Tue Jul 20 10:39:30 2021 from 36.152.24.150
+bash
+mongo --port 27002
+use admin
+db.auth("dh","dh")
+db.shutdownServer({"force":true})
+exit
+exit
+exit
+]0;root@Disalg.Hangzhou.I.02: ~root@Disalg.Hangzhou.I.02:~# bash
+]0;root@Disalg.Hangzhou.I.02: ~root@Disalg.Hangzhou.I.02:~# mongo --port 27002
+MongoDB shell version v4.4.4
+connecting to: mongodb://127.0.0.1:27002/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("2daef9c1-b762-4683-9da2-f7612345c299") }
+MongoDB server version: 4.4.4
+dh-shard2:PRIMARY> use admin[20G[Juse admin[29G
+switched to db admin
+dh-shard2:PRIMARY> db.auth("dh","dh")[20G[Jdb.auth("dh","dh")[38G
+1
+dh-shard2:PRIMARY> db.shutdownServer({"force":true})[20G[Jdb.shutdownServer({"force":true})[53G
+server should be down...
+> exit[3G[Jexit[7G
+bye
+{"t":{"$date":"2021-07-20T02:39:43.888Z"},"s":"I",  "c":"QUERY",    "id":22791,   "ctx":"js","msg":"Failed to end logical session","attr":{"lsid":{"id":{"$uuid":"2daef9c1-b762-4683-9da2-f7612345c299"}},"error":{"code":9001,"codeName":"SocketException","errmsg":"socket exception [CONNECT_ERROR] server [couldn't connect to server 127.0.0.1:27002, connection attempt failed: SocketException: Error connecting to 127.0.0.1:27002 :: caused by :: Connection refused]"}}}
+]0;root@Disalg.Hangzhou.I.02: ~root@Disalg.Hangzhou.I.02:~# exit
+exit
+]0;root@Disalg.Hangzhou.I.02: ~root@Disalg.Hangzhou.I.02:~# exit
+logout
+Connection to n2.disalg.cn closed.
+Current Parameter: n3.disalg.cn 27002 /home/huangyi/mongoDB/configs/shard2_2.conf
+spawn ssh n3.disalg.cn
+bash
+mongo --port 27002
+use admin
+db.auth("dh","dh")
+db.shutdownServer({"force":true})
+exit
+exit
+exit
+Welcome to Ubuntu 16.04.7 LTS (GNU/Linux 4.4.0-190-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+New release '18.04.5 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Welcome to Alibaba Cloud Elastic Compute Service !
+
+Last login: Tue Jul 20 10:39:33 2021 from 36.152.24.150
+bash
+mongo --port 27002
+use admin
+db.auth("dh","dh")
+db.shutdownServer({"force":true})
+exit
+exit
+exit
+]0;root@Disalg.Hangzhou.H.03: ~root@Disalg.Hangzhou.H.03:~# bash
+]0;root@Disalg.Hangzhou.H.03: ~root@Disalg.Hangzhou.H.03:~# mongo --port 27002
+MongoDB shell version v4.4.4
+connecting to: mongodb://127.0.0.1:27002/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("d2afb8b1-c300-4464-8a01-b3613ad037fa") }
+MongoDB server version: 4.4.4
+dh-shard2:PRIMARY> use admin[20G[Juse admin[29G
+switched to db admin
+dh-shard2:PRIMARY> db.auth("dh","dh")[20G[Jdb.auth("dh","dh")[38G
+1
+dh-shard2:PRIMARY> db.shutdownServer({"force":true})[20G[Jdb.shutdownServer({"force":true})[53G
+server should be down...
+> exit[3G[Jexit[7G
+bye
+{"t":{"$date":"2021-07-20T02:39:46.030Z"},"s":"I",  "c":"QUERY",    "id":22791,   "ctx":"js","msg":"Failed to end logical session","attr":{"lsid":{"id":{"$uuid":"d2afb8b1-c300-4464-8a01-b3613ad037fa"}},"error":{"code":9001,"codeName":"SocketException","errmsg":"socket exception [CONNECT_ERROR] server [couldn't connect to server 127.0.0.1:27002, connection attempt failed: SocketException: Error connecting to 127.0.0.1:27002 :: caused by :: Connection refused]"}}}
+]0;root@Disalg.Hangzhou.H.03: ~root@Disalg.Hangzhou.H.03:~# exit
+exit
+]0;root@Disalg.Hangzhou.H.03: ~root@Disalg.Hangzhou.H.03:~# exit
+logout
+Connection to n3.disalg.cn closed.
+Current Parameter: n4.disalg.cn 27002 /home/huangyi/mongoDB/configs/shard2_3.conf
+spawn ssh n4.disalg.cn
+bash
+mongo --port 27002
+use admin
+db.auth("dh","dh")
+db.shutdownServer({"force":true})
+exit
+exit
+exit
+Welcome to Ubuntu 16.04.7 LTS (GNU/Linux 4.4.0-190-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+New release '18.04.5 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Welcome to Alibaba Cloud Elastic Compute Service !
+
+Last login: Tue Jul 20 10:15:42 2021 from 36.152.24.150
+bash
+mongo --port 27002
+use admin
+db.auth("dh","dh")
+db.shutdownServer({"force":true})
+exit
+exit
+exit
+]0;root@Disalg.Hangzhou.H.04: ~root@Disalg.Hangzhou.H.04:~# bash
+]0;root@Disalg.Hangzhou.H.04: ~root@Disalg.Hangzhou.H.04:~# mongo --port 27002
+MongoDB shell version v4.4.4
+connecting to: mongodb://127.0.0.1:27002/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("4f6359d7-247f-4acc-ad02-aef35026c5c0") }
+MongoDB server version: 4.4.4
+dh-shard2:PRIMARY> use admin[20G[Juse admin[29G
+switched to db admin
+dh-shard2:PRIMARY> db.auth("dh","dh")[20G[Jdb.auth("dh","dh")[38G
+1
+dh-shard2:PRIMARY> db.shutdownServer({"force":true})[20G[Jdb.shutdownServer({"force":true})[53G
+server should be down...
+Current Parameter: n4.disalg.cn 27003 /home/huangyi/mongoDB/configs/shard3_1.conf
+spawn ssh n4.disalg.cn
+bash
+mongo --port 27003
+use admin
+db.auth("dh","dh")
+db.shutdownServer({"force":true})
+exit
+exit
+exit
+Welcome to Ubuntu 16.04.7 LTS (GNU/Linux 4.4.0-190-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+New release '18.04.5 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Welcome to Alibaba Cloud Elastic Compute Service !
+
+Last login: Tue Jul 20 10:39:46 2021 from 36.152.24.150
+bash
+mongo --port 27003
+use admin
+db.auth("dh","dh")
+db.shutdownServer({"force":true})
+exit
+exit
+exit
+]0;root@Disalg.Hangzhou.H.04: ~root@Disalg.Hangzhou.H.04:~# bash
+]0;root@Disalg.Hangzhou.H.04: ~root@Disalg.Hangzhou.H.04:~# mongo --port 27003
+MongoDB shell version v4.4.4
+connecting to: mongodb://127.0.0.1:27003/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("a1071400-ab1a-4b18-8554-30604543319f") }
+MongoDB server version: 4.4.4
+dh-shard3:PRIMARY> use admin[20G[Juse admin[29G
+switched to db admin
+dh-shard3:PRIMARY> db.auth("dh","dh")[20G[Jdb.auth("dh","dh")[38G
+1
+dh-shard3:PRIMARY> db.shutdownServer({"force":true})[20G[Jdb.shutdownServer({"force":true})[53G
+server should be down...
+> exit[3G[Jexit[7G
+bye
+{"t":{"$date":"2021-07-20T02:39:57.642Z"},"s":"I",  "c":"QUERY",    "id":22791,   "ctx":"js","msg":"Failed to end logical session","attr":{"lsid":{"id":{"$uuid":"a1071400-ab1a-4b18-8554-30604543319f"}},"error":{"code":9001,"codeName":"SocketException","errmsg":"socket exception [CONNECT_ERROR] server [couldn't connect to server 127.0.0.1:27003, connection attempt failed: SocketException: Error connecting to 127.0.0.1:27003 :: caused by :: Connection refused]"}}}
+]0;root@Disalg.Hangzhou.H.04: ~root@Disalg.Hangzhou.H.04:~# exit
+exit
+]0;root@Disalg.Hangzhou.H.04: ~root@Disalg.Hangzhou.H.04:~# exit
+logout
+Connection to n4.disalg.cn closed.
+Current Parameter: n6.disalg.cn 27003 /home/huangyi/mongoDB/configs/shard3_2.conf
+spawn ssh n6.disalg.cn
+bash
+mongo --port 27003
+use admin
+db.auth("dh","dh")
+db.shutdownServer({"force":true})
+exit
+exit
+exit
+Welcome to Ubuntu 16.04.7 LTS (GNU/Linux 4.4.0-190-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+New release '18.04.5 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Welcome to Alibaba Cloud Elastic Compute Service !
+
+Last login: Tue Jul 20 10:16:08 2021 from 36.152.24.150
+bash
+mongo --port 27003
+use admin
+db.auth("dh","dh")
+db.shutdownServer({"force":true})
+exit
+exit
+exit
+[1m[7m#[27m[1m[0m                                                                                                                                                               [0m[27m[24m[JDisalg# [K[?1h=[?2004hbbash[?1l>[?2004l
+]0;root@Disalg.Hangzhou.H.06: ~root@Disalg.Hangzhou.H.06:~# mongo --port 27003
+MongoDB shell version v4.4.4
+connecting to: mongodb://127.0.0.1:27003/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("05fbac06-4729-408c-bd04-ac89647dfb59") }
+MongoDB server version: 4.4.4
+dh-shard3:PRIMARY> use admin[20G[Juse admin[29G
+switched to db admin
+dh-shard3:PRIMARY> db.auth("dh","dh")[20G[Jdb.auth("dh","dh")[38G
+1
+dh-shard3:PRIMARY> db.shutdownServer({"force":true})[20G[Jdb.shutdownServer({"force":true})[53G
+server should be down...
+> exit[3G[Jexit[7G
+bye
+{"t":{"$date":"2021-07-20T02:39:59.851Z"},"s":"I",  "c":"QUERY",    "id":22791,   "ctx":"js","msg":"Failed to end logical session","attr":{"lsid":{"id":{"$uuid":"05fbac06-4729-408c-bd04-ac89647dfb59"}},"error":{"code":9001,"codeName":"SocketException","errmsg":"socket exception [CONNECT_ERROR] server [couldn't connect to server 127.0.0.1:27003, connection attempt failed: SocketException: Error connecting to 127.0.0.1:27003 :: caused by :: Connection refused]"}}}
+]0;root@Disalg.Hangzhou.H.06: ~root@Disalg.Hangzhou.H.06:~# exit
+exit
+[1m[7m#[27m[1m[0m                                                                                                                                                               [0m[27m[24m[JDisalg# [K[?1h=[?2004heexit[?1l>[?2004l
+Connection to n6.disalg.cn closed.
+Current Parameter: n0.disalg.cn 27003 /home/huangyi/mongoDB/configs/shard3_3.conf
+spawn ssh n0.disalg.cn
+bash
+mongo --port 27003
+use admin
+db.auth("dh","dh")
+db.shutdownServer({"force":true})
+exit
+exit
+exit
+Welcome to Ubuntu 16.04.7 LTS (GNU/Linux 4.4.0-190-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+New release '18.04.5 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Welcome to Alibaba Cloud Elastic Compute Service !
+
+Last login: Tue Jul 20 09:26:38 2021 from 36.152.24.150
+bash
+mongo --port 27003
+use admin
+db.auth("dh","dh")
+db.shutdownServer({"force":true})
+exit
+exit
+exit
+]0;root@Disalg.Hangzhou.I.00: ~root@Disalg.Hangzhou.I.00:~# bash
+]0;root@Disalg.Hangzhou.I.00: ~root@Disalg.Hangzhou.I.00:~# mongo --port 27003
+MongoDB shell version v4.4.4
+connecting to: mongodb://127.0.0.1:27003/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("ffbb6d85-0342-4b37-bfbb-e03c9f1f5e23") }
+MongoDB server version: 4.4.4
+dh-shard3:PRIMARY> use admin[20G[Juse admin[29G
+switched to db admin
+dh-shard3:PRIMARY> db.auth("dh","dh")[20G[Jdb.auth("dh","dh")[38G
+1
+dh-shard3:PRIMARY> db.shutdownServer({"force":true})[20G[Jdb.shutdownServer({"force":true})[53G
+Current Parameter: n6.disalg.cn 27004 /home/huangyi/mongoDB/configs/shard4_1.conf
+spawn ssh n6.disalg.cn
+bash
+mongo --port 27004
+use admin
+db.auth("dh","dh")
+db.shutdownServer({"force":true})
+exit
+exit
+exit
+Welcome to Ubuntu 16.04.7 LTS (GNU/Linux 4.4.0-190-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+New release '18.04.5 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Welcome to Alibaba Cloud Elastic Compute Service !
+
+Last login: Tue Jul 20 10:39:58 2021 from 36.152.24.150
+bash
+mongo --port 27004
+use admin
+db.auth("dh","dh")
+db.shutdownServer({"force":true})
+exit
+exit
+exit
+[1m[7m#[27m[1m[0m                                                                                                                                                               [0m[27m[24m[JDisalg# [K[?1h=[?2004hbbash[?1l>[?2004l
+]0;root@Disalg.Hangzhou.H.06: ~root@Disalg.Hangzhou.H.06:~# mongo --port 27004
+MongoDB shell version v4.4.4
+connecting to: mongodb://127.0.0.1:27004/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("3b5d6a06-3d7a-4e92-bd45-b2a053494308") }
+MongoDB server version: 4.4.4
+dh-shard4:PRIMARY> use admin[20G[Juse admin[29G
+switched to db admin
+dh-shard4:PRIMARY> db.auth("dh","dh")[20G[Jdb.auth("dh","dh")[38G
+1
+dh-shard4:PRIMARY> db.shutdownServer({"force":true})[20G[Jdb.shutdownServer({"force":true})[53G
+server should be down...
+> exit[3G[Jexit[7G
+bye
+{"t":{"$date":"2021-07-20T02:40:11.251Z"},"s":"I",  "c":"QUERY",    "id":22791,   "ctx":"js","msg":"Failed to end logical session","attr":{"lsid":{"id":{"$uuid":"3b5d6a06-3d7a-4e92-bd45-b2a053494308"}},"error":{"code":9001,"codeName":"SocketException","errmsg":"socket exception [CONNECT_ERROR] server [couldn't connect to server 127.0.0.1:27004, connection attempt failed: SocketException: Error connecting to 127.0.0.1:27004 :: caused by :: Connection refused]"}}}
+]0;root@Disalg.Hangzhou.H.06: ~root@Disalg.Hangzhou.H.06:~# exit
+exit
+[1m[7m#[27m[1m[0m                                                                                                                                                               [0m[27m[24m[JDisalg# [K[?1h=[?2004heexit[?1l>[?2004l
+Connection to n6.disalg.cn closed.
+Current Parameter: n0.disalg.cn 27004 /home/huangyi/mongoDB/configs/shard4_2.conf
+spawn ssh n0.disalg.cn
+bash
+mongo --port 27004
+use admin
+db.auth("dh","dh")
+db.shutdownServer({"force":true})
+exit
+exit
+exit
+Welcome to Ubuntu 16.04.7 LTS (GNU/Linux 4.4.0-190-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+New release '18.04.5 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Welcome to Alibaba Cloud Elastic Compute Service !
+
+Last login: Tue Jul 20 10:40:00 2021 from 36.152.24.150
+bash
+mongo --port 27004
+use admin
+db.auth("dh","dh")
+db.shutdownServer({"force":true})
+exit
+exit
+exit
+]0;root@Disalg.Hangzhou.I.00: ~root@Disalg.Hangzhou.I.00:~# bash
+]0;root@Disalg.Hangzhou.I.00: ~root@Disalg.Hangzhou.I.00:~# mongo --port 27004
+MongoDB shell version v4.4.4
+connecting to: mongodb://127.0.0.1:27004/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("bbfcb502-0ec2-4383-82dd-15d9f6c4086c") }
+MongoDB server version: 4.4.4
+dh-shard4:SECONDARY> use admin[22G[Juse admin[31G
+switched to db admin
+dh-shard4:SECONDARY> db.auth("dh","dh")[22G[Jdb.auth("dh","dh")[40G
+1
+dh-shard4:SECONDARY> db.shutdownServer({"force":true})[22G[Jdb.shutdownServer({"force":true})[55G
+server should be down...
+> exit[3G[Jexit[7G
+bye
+{"t":{"$date":"2021-07-20T02:40:12.895Z"},"s":"I",  "c":"QUERY",    "id":22791,   "ctx":"js","msg":"Failed to end logical session","attr":{"lsid":{"id":{"$uuid":"bbfcb502-0ec2-4383-82dd-15d9f6c4086c"}},"error":{"code":9001,"codeName":"SocketException","errmsg":"socket exception [CONNECT_ERROR] server [couldn't connect to server 127.0.0.1:27004, connection attempt failed: SocketException: Error connecting to 127.0.0.1:27004 :: caused by :: Connection refused]"}}}
+]0;root@Disalg.Hangzhou.I.00: ~root@Disalg.Hangzhou.I.00:~# exit
+exit
+]0;root@Disalg.Hangzhou.I.00: ~root@Disalg.Hangzhou.I.00:~# exit
+logout
+Connection to n0.disalg.cn closed.
+Current Parameter: n1.disalg.cn 27004 /home/huangyi/mongoDB/configs/shard4_3.conf
+spawn ssh n1.disalg.cn
+bash
+mongo --port 27004
+use admin
+db.auth("dh","dh")
+db.shutdownServer({"force":true})
+exit
+exit
+exit
+Welcome to Ubuntu 16.04.7 LTS (GNU/Linux 4.4.0-190-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+New release '18.04.5 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Welcome to Alibaba Cloud Elastic Compute Service !
+
+Last login: Tue Jul 20 10:39:29 2021 from 36.152.24.150
+]0;root@Disalg.Hangzhou.I.01: ~root@Disalg.Hangzhou.I.01:~# bash
+]0;root@Disalg.Hangzhou.I.01: ~root@Disalg.Hangzhou.I.01:~# mongo --port 27004
+MongoDB shell version v4.4.4
+connecting to: mongodb://127.0.0.1:27004/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("c1743e7b-e1c0-4334-8850-0403f9dfd8b5") }
+MongoDB server version: 4.4.4
+dh-shard4:PRIMARY> use admin[20G[Juse admin[29G
+switched to db admin
+dh-shard4:PRIMARY> db.auth("dh","dh")[20G[Jdb.auth("dh","dh")[38G
+1
+dh-shard4:PRIMARY> db.shutdownServer({"force":true})[20G[Jdb.shutdownServer({"force":true})[53G
+server should be down...
+> exit[3G[Jexit[7G
+bye
+{"t":{"$date":"2021-07-20T02:40:14.617Z"},"s":"I",  "c":"QUERY",    "id":22791,   "ctx":"js","msg":"Failed to end logical session","attr":{"lsid":{"id":{"$uuid":"c1743e7b-e1c0-4334-8850-0403f9dfd8b5"}},"error":{"code":9001,"codeName":"SocketException","errmsg":"socket exception [CONNECT_ERROR] server [couldn't connect to server 127.0.0.1:27004, connection attempt failed: SocketException: Error connecting to 127.0.0.1:27004 :: caused by :: Connection refused]"}}}
+]0;root@Disalg.Hangzhou.I.01: ~root@Disalg.Hangzhou.I.01:~# exit
+exit
+]0;root@Disalg.Hangzhou.I.01: ~root@Disalg.Hangzhou.I.01:~# exit
+logout
+Connection to n1.disalg.cn closed.
+Current Parameter: n0.disalg.cn 26011 /home/huangyi/mongoDB/configs/mongos_0.conf
+spawn ssh n0.disalg.cn
+bash
+mongo --port 26011
+use admin
+db.auth("dh","dh")
+db.shutdownServer({"force":true})
+exit
+exit
+exit
+Welcome to Ubuntu 16.04.7 LTS (GNU/Linux 4.4.0-190-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+New release '18.04.5 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Welcome to Alibaba Cloud Elastic Compute Service !
+
+Last login: Tue Jul 20 10:40:11 2021 from 36.152.24.150
+bash
+mongo --port 26011
+use admin
+db.auth("dh","dh")
+db.shutdownServer({"force":true})
+exit
+exit
+exit
+]0;root@Disalg.Hangzhou.I.00: ~root@Disalg.Hangzhou.I.00:~# bash
+]0;root@Disalg.Hangzhou.I.00: ~root@Disalg.Hangzhou.I.00:~# mongo --port 26011
+MongoDB shell version v4.4.4
+connecting to: mongodb://127.0.0.1:26011/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("304238ef-b121-42c4-9cc0-219f1800d389") }
+MongoDB server version: 4.4.4
+mongos> use admin[9G[Juse admin[18G
+switched to db admin
+mongos> db.auth("dh","dh")[9G[Jdb.auth("dh","dh")[27G
+1
+mongos> db.shutdownServer({"force":true})[9G[Jdb.shutdownServer({"force":true})[42G
+server should be down...
+> exit[3G[Jexit[7G
+bye
+{"t":{"$date":"2021-07-20T02:40:15.330Z"},"s":"I",  "c":"QUERY",    "id":22791,   "ctx":"js","msg":"Failed to end logical session","attr":{"lsid":{"id":{"$uuid":"304238ef-b121-42c4-9cc0-219f1800d389"}},"error":{"code":9001,"codeName":"SocketException","errmsg":"socket exception [CONNECT_ERROR] server [couldn't connect to server 127.0.0.1:26011, connection attempt failed: SocketException: Error connecting to 127.0.0.1:26011 :: caused by :: Connection refused]"}}}
+]0;root@Disalg.Hangzhou.I.00: ~root@Disalg.Hangzhou.I.00:~# exit
+exit
+]0;root@Disalg.Hangzhou.I.00: ~root@Disalg.Hangzhou.I.00:~# exit
+logout
+Connection to n0.disalg.cn closed.
+Current Parameter: n1.disalg.cn 26011 /home/huangyi/mongoDB/configs/mongos_1.conf
+spawn ssh n1.disalg.cn
+bash
+mongo --port 26011
+use admin
+db.auth("dh","dh")
+db.shutdownServer({"force":true})
+exit
+exit
+exit
+Welcome to Ubuntu 16.04.7 LTS (GNU/Linux 4.4.0-190-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+New release '18.04.5 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Welcome to Alibaba Cloud Elastic Compute Service !
+
+Last login: Tue Jul 20 10:40:13 2021 from 36.152.24.150
+]0;root@Disalg.Hangzhou.I.01: ~root@Disalg.Hangzhou.I.01:~# bash
+]0;root@Disalg.Hangzhou.I.01: ~root@Disalg.Hangzhou.I.01:~# mongo --port 26011
+MongoDB shell version v4.4.4
+connecting to: mongodb://127.0.0.1:26011/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("c23d4119-114c-4834-982a-df7e4a410627") }
+MongoDB server version: 4.4.4
+mongos> use admin[9G[Juse admin[18G
+switched to db admin
+mongos> db.auth("dh","dh")[9G[Jdb.auth("dh","dh")[27G
+1
+mongos> db.shutdownServer({"force":true})[9G[Jdb.shutdownServer({"force":true})[42G
+server should be down...
+> exit[3G[Jexit[7G
+bye
+{"t":{"$date":"2021-07-20T02:40:15.971Z"},"s":"I",  "c":"QUERY",    "id":22791,   "ctx":"js","msg":"Failed to end logical session","attr":{"lsid":{"id":{"$uuid":"c23d4119-114c-4834-982a-df7e4a410627"}},"error":{"code":9001,"codeName":"SocketException","errmsg":"socket exception [CONNECT_ERROR] server [couldn't connect to server 127.0.0.1:26011, connection attempt failed: SocketException: Error connecting to 127.0.0.1:26011 :: caused by :: Connection refused]"}}}
+]0;root@Disalg.Hangzhou.I.01: ~root@Disalg.Hangzhou.I.01:~# exit
+exit
+]0;root@Disalg.Hangzhou.I.01: ~root@Disalg.Hangzhou.I.01:~# exit
+logout
+Connection to n1.disalg.cn closed.
+Current Parameter: n2.disalg.cn 26011 /home/huangyi/mongoDB/configs/mongos_2.conf
+spawn ssh n2.disalg.cn
+bash
+mongo --port 26011
+use admin
+db.auth("dh","dh")
+db.shutdownServer({"force":true})
+exit
+exit
+exit
+Welcome to Ubuntu 16.04.7 LTS (GNU/Linux 4.4.0-190-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+New release '18.04.5 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Welcome to Alibaba Cloud Elastic Compute Service !
+
+Last login: Tue Jul 20 10:39:42 2021 from 36.152.24.150
+]0;root@Disalg.Hangzhou.I.02: ~root@Disalg.Hangzhou.I.02:~# bash
+]0;root@Disalg.Hangzhou.I.02: ~root@Disalg.Hangzhou.I.02:~# mongo --port 26011
+MongoDB shell version v4.4.4
+connecting to: mongodb://127.0.0.1:26011/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("633d663e-8aeb-4a25-b748-8a5ef63a5288") }
+MongoDB server version: 4.4.4
+mongos> use admin[9G[Juse admin[18G
+switched to db admin
+mongos> db.auth("dh","dh")[9G[Jdb.auth("dh","dh")[27G
+1
+mongos> db.shutdownServer({"force":true})[9G[Jdb.shutdownServer({"force":true})[42G
+server should be down...
+> exit[3G[Jexit[7G
+bye
+{"t":{"$date":"2021-07-20T02:40:16.623Z"},"s":"I",  "c":"QUERY",    "id":22791,   "ctx":"js","msg":"Failed to end logical session","attr":{"lsid":{"id":{"$uuid":"633d663e-8aeb-4a25-b748-8a5ef63a5288"}},"error":{"code":9001,"codeName":"SocketException","errmsg":"socket exception [CONNECT_ERROR] server [couldn't connect to server 127.0.0.1:26011, connection attempt failed: SocketException: Error connecting to 127.0.0.1:26011 :: caused by :: Connection refused]"}}}
+]0;root@Disalg.Hangzhou.I.02: ~root@Disalg.Hangzhou.I.02:~# exit
+exit
+]0;root@Disalg.Hangzhou.I.02: ~root@Disalg.Hangzhou.I.02:~# exit
+logout
+Connection to n2.disalg.cn closed.
+Current Parameter: n3.disalg.cn 26011 /home/huangyi/mongoDB/configs/mongos_3.conf
+spawn ssh n3.disalg.cn
+bash
+mongo --port 26011
+use admin
+db.auth("dh","dh")
+db.shutdownServer({"force":true})
+exit
+exit
+exit
+Welcome to Ubuntu 16.04.7 LTS (GNU/Linux 4.4.0-190-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+New release '18.04.5 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Welcome to Alibaba Cloud Elastic Compute Service !
+
+Last login: Tue Jul 20 10:39:44 2021 from 36.152.24.150
+bash
+mongo --port 26011
+use admin
+db.auth("dh","dh")
+db.shutdownServer({"force":true})
+exit
+exit
+exit
+]0;root@Disalg.Hangzhou.H.03: ~root@Disalg.Hangzhou.H.03:~# bash
+]0;root@Disalg.Hangzhou.H.03: ~root@Disalg.Hangzhou.H.03:~# mongo --port 26011
+MongoDB shell version v4.4.4
+connecting to: mongodb://127.0.0.1:26011/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("f882aa89-fa10-405b-bca8-341259c1235e") }
+MongoDB server version: 4.4.4
+mongos> use admin[9G[Juse admin[18G
+switched to db admin
+mongos> db.auth("dh","dh")[9G[Jdb.auth("dh","dh")[27G
+1
+mongos> db.shutdownServer({"force":true})[9G[Jdb.shutdownServer({"force":true})[42G
+server should be down...
+> exit[3G[Jexit[7G
+bye
+{"t":{"$date":"2021-07-20T02:40:17.236Z"},"s":"I",  "c":"QUERY",    "id":22791,   "ctx":"js","msg":"Failed to end logical session","attr":{"lsid":{"id":{"$uuid":"f882aa89-fa10-405b-bca8-341259c1235e"}},"error":{"code":9001,"codeName":"SocketException","errmsg":"socket exception [CONNECT_ERROR] server [couldn't connect to server 127.0.0.1:26011, connection attempt failed: SocketException: Error connecting to 127.0.0.1:26011 :: caused by :: Connection refused]"}}}
+]0;root@Disalg.Hangzhou.H.03: ~root@Disalg.Hangzhou.H.03:~# exit
+exit
+]0;root@Disalg.Hangzhou.H.03: ~root@Disalg.Hangzhou.H.03:~# exit
+logout
+Connection to n3.disalg.cn closed.
+Current Parameter: n4.disalg.cn 26011 /home/huangyi/mongoDB/configs/mongos_4.conf
+spawn ssh n4.disalg.cn
+bash
+mongo --port 26011
+use admin
+db.auth("dh","dh")
+db.shutdownServer({"force":true})
+exit
+exit
+exit
+Welcome to Ubuntu 16.04.7 LTS (GNU/Linux 4.4.0-190-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+New release '18.04.5 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Welcome to Alibaba Cloud Elastic Compute Service !
+
+Last login: Tue Jul 20 10:39:56 2021 from 36.152.24.150
+bash
+mongo --port 26011
+use admin
+db.auth("dh","dh")
+db.shutdownServer({"force":true})
+exit
+exit
+exit
+]0;root@Disalg.Hangzhou.H.04: ~root@Disalg.Hangzhou.H.04:~# bash
+]0;root@Disalg.Hangzhou.H.04: ~root@Disalg.Hangzhou.H.04:~# mongo --port 26011
+MongoDB shell version v4.4.4
+connecting to: mongodb://127.0.0.1:26011/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("c164b081-8e61-479e-bbc3-a12687672fb3") }
+MongoDB server version: 4.4.4
+mongos> use admin[9G[Juse admin[18G
+switched to db admin
+mongos> db.auth("dh","dh")[9G[Jdb.auth("dh","dh")[27G
+1
+mongos> db.shutdownServer({"force":true})[9G[Jdb.shutdownServer({"force":true})[42G
+server should be down...
+> exit[3G[Jexit[7G
+bye
+{"t":{"$date":"2021-07-20T02:40:17.818Z"},"s":"I",  "c":"QUERY",    "id":22791,   "ctx":"js","msg":"Failed to end logical session","attr":{"lsid":{"id":{"$uuid":"c164b081-8e61-479e-bbc3-a12687672fb3"}},"error":{"code":9001,"codeName":"SocketException","errmsg":"socket exception [CONNECT_ERROR] server [couldn't connect to server 127.0.0.1:26011, connection attempt failed: SocketException: Error connecting to 127.0.0.1:26011 :: caused by :: Connection refused]"}}}
+]0;root@Disalg.Hangzhou.H.04: ~root@Disalg.Hangzhou.H.04:~# exit
+exit
+]0;root@Disalg.Hangzhou.H.04: ~root@Disalg.Hangzhou.H.04:~# exit
+logout
+Connection to n4.disalg.cn closed.
+Current Parameter: n6.disalg.cn 26011 /home/huangyi/mongoDB/configs/mongos_6.conf
+spawn ssh n6.disalg.cn
+bash
+mongo --port 26011
+use admin
+db.auth("dh","dh")
+db.shutdownServer({"force":true})
+exit
+exit
+exit
+Welcome to Ubuntu 16.04.7 LTS (GNU/Linux 4.4.0-190-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+New release '18.04.5 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Welcome to Alibaba Cloud Elastic Compute Service !
+
+Last login: Tue Jul 20 10:40:10 2021 from 36.152.24.150
+bash
+mongo --port 26011
+use admin
+db.auth("dh","dh")
+db.shutdownServer({"force":true})
+exit
+exit
+exit
+[1m[7m#[27m[1m[0m                                                                                                                                                               [0m[27m[24m[JDisalg# [K[?1h=[?2004hbbash[?1l>[?2004l
+]0;root@Disalg.Hangzhou.H.06: ~root@Disalg.Hangzhou.H.06:~# mongo --port 26011
+MongoDB shell version v4.4.4
+connecting to: mongodb://127.0.0.1:26011/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("16a70f76-2216-4874-bc95-4b1e894ba71a") }
+MongoDB server version: 4.4.4
+mongos> use admin[9G[Juse admin[18G
+switched to db admin
+mongos> db.auth("dh","dh")[9G[Jdb.auth("dh","dh")[27G
+1
+mongos> db.shutdownServer({"force":true})[9G[Jdb.shutdownServer({"force":true})[42G
+server should be down...
+> exit[3G[Jexit[7G
+bye
+{"t":{"$date":"2021-07-20T02:40:18.444Z"},"s":"I",  "c":"QUERY",    "id":22791,   "ctx":"js","msg":"Failed to end logical session","attr":{"lsid":{"id":{"$uuid":"16a70f76-2216-4874-bc95-4b1e894ba71a"}},"error":{"code":9001,"codeName":"SocketException","errmsg":"socket exception [CONNECT_ERROR] server [couldn't connect to server 127.0.0.1:26011, connection attempt failed: SocketException: Error connecting to 127.0.0.1:26011 :: caused by :: Connection refused]"}}}
+]0;root@Disalg.Hangzhou.H.06: ~root@Disalg.Hangzhou.H.06:~# exit
+exit
+[1m[7m#[27m[1m[0m                                                                                                                                                               [0m[27m[24m[JDisalg# [K[?1h=[?2004heexit[?1l>[?2004l
+Connection to n6.disalg.cn closed.
+Current Parameter: n0.disalg.cn 26005 /home/huangyi/mongoDB/configs/csrs_1.conf
+spawn ssh n0.disalg.cn
+bash
+mongo --port 26005
+use admin
+db.auth("dh","dh")
+db.shutdownServer({"force":true})
+exit
+exit
+exit
+Welcome to Ubuntu 16.04.7 LTS (GNU/Linux 4.4.0-190-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+New release '18.04.5 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Welcome to Alibaba Cloud Elastic Compute Service !
+
+Last login: Tue Jul 20 10:40:15 2021 from 36.152.24.150
+bash
+mongo --port 26005
+use admin
+db.auth("dh","dh")
+db.shutdownServer({"force":true})
+exit
+exit
+exit
+]0;root@Disalg.Hangzhou.I.00: ~root@Disalg.Hangzhou.I.00:~# bash
+]0;root@Disalg.Hangzhou.I.00: ~root@Disalg.Hangzhou.I.00:~# mongo --port 26005
+MongoDB shell version v4.4.4
+connecting to: mongodb://127.0.0.1:26005/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("82bac675-68ff-410d-9f1e-b1f16117cf5c") }
+MongoDB server version: 4.4.4
+dh-csrs:PRIMARY> use admin[18G[Juse admin[27G
+switched to db admin
+dh-csrs:PRIMARY> db.auth("dh","dh")[18G[Jdb.auth("dh","dh")[36G
+1
+dh-csrs:PRIMARY> db.shutdownServer({"force":true})[18G[Jdb.shutdownServer({"force":true})[51G
+server should be down...
+> exit[3G[Jexit[7G
+bye
+{"t":{"$date":"2021-07-20T02:40:20.192Z"},"s":"I",  "c":"QUERY",    "id":22791,   "ctx":"js","msg":"Failed to end logical session","attr":{"lsid":{"id":{"$uuid":"82bac675-68ff-410d-9f1e-b1f16117cf5c"}},"error":{"code":9001,"codeName":"SocketException","errmsg":"socket exception [CONNECT_ERROR] server [couldn't connect to server 127.0.0.1:26005, connection attempt failed: SocketException: Error connecting to 127.0.0.1:26005 :: caused by :: Connection refused]"}}}
+]0;root@Disalg.Hangzhou.I.00: ~root@Disalg.Hangzhou.I.00:~# exit
+exit
+]0;root@Disalg.Hangzhou.I.00: ~root@Disalg.Hangzhou.I.00:~# exit
+logout
+Connection to n0.disalg.cn closed.
+Current Parameter: n2.disalg.cn 26005 /home/huangyi/mongoDB/configs/csrs_2.conf
+spawn ssh n2.disalg.cn
+bash
+mongo --port 26005
+use admin
+db.auth("dh","dh")
+db.shutdownServer({"force":true})
+exit
+exit
+exit
+Welcome to Ubuntu 16.04.7 LTS (GNU/Linux 4.4.0-190-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+New release '18.04.5 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Welcome to Alibaba Cloud Elastic Compute Service !
+
+Last login: Tue Jul 20 10:40:16 2021 from 36.152.24.150
+bash
+mongo --port 26005
+use admin
+db.auth("dh","dh")
+db.shutdownServer({"force":true})
+exit
+exit
+exit
+]0;root@Disalg.Hangzhou.I.02: ~root@Disalg.Hangzhou.I.02:~# bash
+]0;root@Disalg.Hangzhou.I.02: ~root@Disalg.Hangzhou.I.02:~# mongo --port 26005
+MongoDB shell version v4.4.4
+connecting to: mongodb://127.0.0.1:26005/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("2f0790e1-47a7-4d21-b2fa-ed3f8bf12ed9") }
+MongoDB server version: 4.4.4
+dh-csrs:PRIMARY> use admin[18G[Juse admin[27G
+switched to db admin
+dh-csrs:PRIMARY> db.auth("dh","dh")[18G[Jdb.auth("dh","dh")[36G
+1
+dh-csrs:PRIMARY> db.shutdownServer({"force":true})[18G[Jdb.shutdownServer({"force":true})[51G
+server should be down...
+> exit[3G[Jexit[7G
+bye
+{"t":{"$date":"2021-07-20T02:40:21.846Z"},"s":"I",  "c":"QUERY",    "id":22791,   "ctx":"js","msg":"Failed to end logical session","attr":{"lsid":{"id":{"$uuid":"2f0790e1-47a7-4d21-b2fa-ed3f8bf12ed9"}},"error":{"code":9001,"codeName":"SocketException","errmsg":"socket exception [CONNECT_ERROR] server [couldn't connect to server 127.0.0.1:26005, connection attempt failed: SocketException: Error connecting to 127.0.0.1:26005 :: caused by :: Connection refused]"}}}
+]0;root@Disalg.Hangzhou.I.02: ~root@Disalg.Hangzhou.I.02:~# exit
+exit
+]0;root@Disalg.Hangzhou.I.02: ~root@Disalg.Hangzhou.I.02:~# exit
+logout
+Connection to n2.disalg.cn closed.
+Current Parameter: n4.disalg.cn 26005 /home/huangyi/mongoDB/configs/csrs_3.conf
+spawn ssh n4.disalg.cn
+bash
+mongo --port 26005
+use admin
+db.auth("dh","dh")
+db.shutdownServer({"force":true})
+exit
+exit
+exit
+Welcome to Ubuntu 16.04.7 LTS (GNU/Linux 4.4.0-190-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+New release '18.04.5 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Welcome to Alibaba Cloud Elastic Compute Service !
+
+Last login: Tue Jul 20 10:40:17 2021 from 36.152.24.150
+bash
+mongo --port 26005
+use admin
+db.auth("dh","dh")
+db.shutdownServer({"force":true})
+exit
+exit
+exit
+]0;root@Disalg.Hangzhou.H.04: ~root@Disalg.Hangzhou.H.04:~# bash
+]0;root@Disalg.Hangzhou.H.04: ~root@Disalg.Hangzhou.H.04:~# mongo --port 26005
+MongoDB shell version v4.4.4
+connecting to: mongodb://127.0.0.1:26005/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("8732ab6d-d891-4cb4-bd5a-ca520d464ca2") }
+MongoDB server version: 4.4.4
+dh-csrs:PRIMARY> use admin[18G[Juse admin[27G
+switched to db admin
+dh-csrs:PRIMARY> db.auth("dh","dh")[18G[Jdb.auth("dh","dh")[36G
+1
+dh-csrs:PRIMARY> db.shutdownServer({"force":true})[18G[Jdb.shutdownServer({"force":true})[51G
+The cluster is shut down.
