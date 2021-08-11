@@ -1,8 +1,9 @@
 set timeout 15 #设置超时，单位秒
 #Usage: ./WakeupShardingCluster.sh 需配合参数设置在alicloud_mongodb.conf中
-csrs_config="configs/alicloud_mongodb_csrs.conf"
-mongos_config="configs/alicloud_mongodb_mongos.conf"
-shards_config="configs/alicloud_mongodb_shards.conf"
+#为了配合java调用，此处使用绝对路径
+csrs_config="/Users/yi-huang/Project/IncrementalCCC/mongodb/configs/alicloud_mongodb_csrs.conf"
+mongos_config="/Users/yi-huang/Project/IncrementalCCC/mongodb/configs/alicloud_mongodb_mongos.conf"
+shards_config="/Users/yi-huang/Project/IncrementalCCC/mongodb/configs/alicloud_mongodb_shards.conf"
 
 #先启动csrs
 bak=$IFS

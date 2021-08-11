@@ -10,16 +10,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0dc98262-2b33-485b-86e5-a2794ff4c6f0" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/mongodb/configs/alicloud_mongodb.conf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mongodb/configs/alicloud_mongodb_csrs.conf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mongodb/configs/alicloud_mongodb_mongos.conf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mongodb/configs/alicloud_mongodb_shards.conf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mongodb/documents/Aliyun Sharding Cluster Setup.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mongodb/documents/Remote Mongo Setup.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mongodb/shutdownLog.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mongodb/wakeupLog.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__cglib_cglib_3_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_easyexcel_2_2_10.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_virtuald_curvesapi_1_04.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_10.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_collections4_4_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_poi_poi_3_17.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_poi_poi_ooxml_3_17.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_poi_poi_ooxml_schemas_3_17.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlbeans_xmlbeans_2_6_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_ehcache_ehcache_3_4_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_ow2_asm_asm_4_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_26.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__stax_stax_api_1_0_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/slf4j-nop-1.7.26.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/matlab/COCompare.m" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/matlab/HBOCompare.m" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_projectlombok_lombok_1_18_18.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IncrementalCCC.iml" beforeDir="false" afterPath="$PROJECT_DIR$/IncrementalCCC.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mongodb/Aliyun Sharding Cluster Setup.md" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/mongodb/BatchClear.sh" beforeDir="false" afterPath="$PROJECT_DIR$/mongodb/BatchClear.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mongodb/Remote Mongo Setup.md" beforeDir="false" />
@@ -30,13 +39,21 @@
       <change beforePath="$PROJECT_DIR$/mongodb/alicloud_mongodb_mongos.conf" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/mongodb/alicloud_mongodb_shards.conf" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/mongodb/clear.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Analyzer/LogFileAnalyzerV4.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Analyzer/LogFileAnalyzerV4.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/DBConnector/MyMongoClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DBConnector/MyMongoClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/DBConnector/MyMongoClientThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DBConnector/MyMongoClientThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Debugger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Debugger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/History/History.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/History/History.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/HistoryProducer/RandomProducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/HistoryProducer/RandomProducer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/HistoryProducer/YCSBProducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/HistoryProducer/YCSBProducer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/RunWithMongo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RunWithMongo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/BadPatternExamples/CCvNotCM_history.edn" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/BadPatternExamples/CyclicHB_perProcess_history.edn" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/BadPatternExamples/TransitiveHBo_history.edn" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/BadPatternExamples/WriteReadWrite_history.edn" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/History/History.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/History/History.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -337,12 +354,12 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="nodejs_interpreter_path" value="$USER_HOME$/.nvm/versions/node/v11.13.0/bin/node" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="Errors" />
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Application.LogFileAnalyzerV4">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
       <option name="WIDTH" value="400" />
@@ -350,42 +367,6 @@
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <module />
     </configuration>
-    <configuration default="true" type="ClojureREPL" factoryName="Local" activateToolWindowBeforeRun="false">
-      <setting name="displayName" value="" />
-      <setting name="replType" value="NREPL" />
-      <setting name="execution" value="LEININGEN" />
-      <setting name="jvmArgs" value="" />
-      <setting name="parameters" value="" />
-      <setting name="workingDir" value="" />
-      <setting name="profiles" value="" />
-      <setting name="aliases" value="" />
-      <setting name="fixLineNumbers" value="false" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
-      <setting name="host" value="" />
-      <setting name="port" value="0" />
-      <setting name="replType" value="SOCKET" />
-      <setting name="configType" value="SPECIFY" />
-      <setting name="fixLineNumbers" value="false" />
-      <module name="" />
-    </configuration>
-    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
-      <setting name="host" value="" />
-      <setting name="port" value="0" />
-      <setting name="replType" value="SOCKET" />
-      <setting name="configType" value="SPECIFY" />
-      <setting name="fixLineNumbers" value="false" />
-      <module name="" />
-    </configuration>
-    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
-      <setting name="host" value="" />
-      <setting name="port" value="0" />
-      <setting name="replType" value="SOCKET" />
-      <setting name="configType" value="SPECIFY" />
-      <setting name="fixLineNumbers" value="false" />
-      <module name="" />
-    </configuration>
     <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
       <setting name="host" value="" />
       <setting name="port" value="0" />
@@ -505,12 +486,15 @@
       <module name="" />
     </configuration>
     <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="displayName" value="" />
       <setting name="host" value="" />
       <setting name="port" value="0" />
       <setting name="replType" value="SOCKET" />
       <setting name="configType" value="SPECIFY" />
+      <setting name="replPortFileType" value="STANDARD" />
+      <setting name="customPortFile" value="" />
       <setting name="fixLineNumbers" value="false" />
-      <module name="" />
+      <method v="2" />
     </configuration>
     <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
       <setting name="host" value="" />
@@ -543,6 +527,25 @@
       <setting name="configType" value="SPECIFY" />
       <setting name="fixLineNumbers" value="false" />
       <module name="" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="fixLineNumbers" value="false" />
+      <module name="" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="displayName" value="" />
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="replPortFileType" value="STANDARD" />
+      <setting name="customPortFile" value="" />
+      <setting name="fixLineNumbers" value="false" />
+      <method v="2" />
     </configuration>
     <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
       <setting name="host" value="" />
@@ -623,12 +626,15 @@
       <method v="2" />
     </configuration>
     <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="displayName" value="" />
       <setting name="host" value="" />
       <setting name="port" value="0" />
       <setting name="replType" value="SOCKET" />
       <setting name="configType" value="SPECIFY" />
+      <setting name="replPortFileType" value="STANDARD" />
+      <setting name="customPortFile" value="" />
       <setting name="fixLineNumbers" value="false" />
-      <module name="" />
+      <method v="2" />
     </configuration>
     <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
       <setting name="host" value="" />
@@ -670,8 +676,8 @@
       <setting name="fixLineNumbers" value="false" />
       <module name="" />
     </configuration>
-    <configuration name="GenerateAndTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="GenerateAndTest" />
+    <configuration name="Debugger" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Debugger" />
       <module name="IncrementalCCC" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <method v="2">
@@ -681,7 +687,7 @@
     <configuration name="LogFileAnalyzerV4" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Analyzer.LogFileAnalyzerV4" />
       <module name="IncrementalCCC" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="VM_PARAMETERS" value="--illegal-access=deny --add-opens java.base/java.lang=ALL-UNNAMED" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="Analyzer.*" />
@@ -695,21 +701,15 @@
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="IncrementalCCC" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="VM_PARAMETERS" value="--illegal-access=deny --add-opens java.base/java.lang=ALL-UNNAMED" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MyMongoClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="DBConnector.MyMongoClient" />
+    <configuration name="RunWithMongo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="RunWithMongo" />
       <module name="IncrementalCCC" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="DBConnector.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -726,7 +726,6 @@
     <configuration name="YCSBProducer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="HistoryProducer.YCSBProducer" />
       <module name="IncrementalCCC" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="HistoryProducer.*" />
@@ -742,6 +741,40 @@
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Local" activateToolWindowBeforeRun="false">
+      <setting name="displayName" value="" />
+      <setting name="replType" value="NREPL" />
+      <setting name="execution" value="LEININGEN" />
+      <setting name="jvmArgs" value="" />
+      <setting name="parameters" value="" />
+      <setting name="workingDir" value="" />
+      <setting name="profiles" value="" />
+      <setting name="aliases" value="" />
+      <setting name="fixLineNumbers" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="displayName" value="" />
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="replPortFileType" value="STANDARD" />
+      <setting name="customPortFile" value="" />
+      <setting name="fixLineNumbers" value="false" />
+      <method v="2" />
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="TEST_OBJECT" value="class" />
@@ -770,19 +803,19 @@
     </configuration>
     <list>
       <item itemvalue="Application.TestFileAnalysis" />
-      <item itemvalue="Application.GenerateAndTest" />
       <item itemvalue="Application.Main" />
-      <item itemvalue="Application.MyMongoClient" />
       <item itemvalue="Application.YCSBProducer" />
       <item itemvalue="Application.LogFileAnalyzerV4" />
+      <item itemvalue="Application.Debugger" />
+      <item itemvalue="Application.RunWithMongo" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
         <item itemvalue="Application.LogFileAnalyzerV4" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.RunWithMongo" />
+        <item itemvalue="Application.Debugger" />
         <item itemvalue="Application.YCSBProducer" />
-        <item itemvalue="Application.MyMongoClient" />
-        <item itemvalue="Application.GenerateAndTest" />
       </list>
     </recent_temporary>
   </component>
@@ -852,7 +885,13 @@
       <workItem from="1625715934397" duration="47099000" />
       <workItem from="1626497132328" duration="4236000" />
       <workItem from="1626747722269" duration="176000" />
-      <workItem from="1626747940115" duration="1756000" />
+      <workItem from="1626747940115" duration="19630000" />
+      <workItem from="1627299117129" duration="511000" />
+      <workItem from="1627303542524" duration="39522000" />
+      <workItem from="1627955812274" duration="16104000" />
+      <workItem from="1628134808065" duration="3326000" />
+      <workItem from="1628344665962" duration="5337000" />
+      <workItem from="1628435608069" duration="22412000" />
     </task>
     <servers />
   </component>

@@ -68,7 +68,7 @@ public class RandomProducer {
     }
 
     public void generatePath(){
-        String url = "target/ParameterChoosing/";
+        String url = "target/Exp/";
         Calendar cTime = Calendar.getInstance();
         String timeStamp = "" + cTime.get(Calendar.YEAR)  + (cTime.get(Calendar.MONTH)+1)  + cTime.get(Calendar.DAY_OF_MONTH) + cTime.get(Calendar.HOUR_OF_DAY);
         url += "Running_"+timeStamp+"_opNum"+this.getOpNum()+"_processNum" +this.getProcessNum()

@@ -174,6 +174,8 @@ public class History {
 
                     if(valueSet.contains(tempOp.getValue())){ //写入了重复值
                         System.out.println("Duplicated Date Detected!");
+                        System.out.println(tempOp.easyPrint());
+                        System.out.println(tempOp.printOpInfo());
                         return false;
                     }
                     valueSet.add(tempOp.getValue());

@@ -5,8 +5,11 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+
+import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.annotation.ExcelProperty;
+
 
 //Batch file analyzer for logs in different parameters
 public class LogFileAnalyzerV4 {
@@ -15,30 +18,47 @@ public class LogFileAnalyzerV4 {
     class Para{
         int opNum;
         int processNum;
+        int varNum;
 
         Para(){
             opNum = 0;
             processNum = 0;
+            varNum = 0;
         }
         Para(int opNum, int processNum){
             this.opNum = opNum;
             this.processNum = processNum;
+            this.varNum = 0;
         }
-
+        Para(int opNum, int processNum, int varNum){
+            this.opNum = opNum;
+            this.processNum = processNum;
+            this.varNum = varNum;
+        }
         @Override
         public String toString(){
-            return this.opNum + "    "+ this.processNum;
+            return this.opNum + "    "+ this.processNum + "    "+ this.varNum;
         }
     }
 
     @Data
     class Info{
+        @ExcelProperty("opNum")
         int count;
-        long bco_avg;
+        @ExcelProperty("processNum")
+        long processNum;
+        @ExcelProperty("varNum")
+        long varNum;
+        @ExcelProperty("ico_avg")
         long ico_avg;
+        @ExcelProperty("bco_avg")
+        long bco_avg;
+        @ExcelProperty("cf_avg")
         long cf_avg;
-        long bhbo_avg;
+        @ExcelProperty("ihbo_avg")
         long ihbo_avg;
+        @ExcelProperty("bhbo_avg")
+        long bhbo_avg;
 
         Info(){
             count = 0;
@@ -47,6 +67,18 @@ public class LogFileAnalyzerV4 {
             cf_avg = 0;
             bhbo_avg = 0;
             ihbo_avg = 0;
+            processNum = 0;
+            varNum = 0;
+        }
+        Info(int count, long processNum, long varNum, long ico_avg, long bco_avg, long cf_avg, long ihbo_avg, long bhbo_avg){
+            this.count = count;
+            this.processNum = processNum;
+            this.varNum = varNum;
+            this.ico_avg = ico_avg;
+            this.bco_avg = bco_avg;
+            this.cf_avg = cf_avg;
+            this.ihbo_avg = ihbo_avg;
+            this.bhbo_avg = bhbo_avg;
         }
     }
 
@@ -54,7 +86,7 @@ public class LogFileAnalyzerV4 {
         return lastAvg + ((cur - lastAvg) / (count+1));
     }
 
-    public void logFileAnalyzer(String logPath, int readBuffer) throws Exception{
+    public List<Info> logFileAnalyzer(String logPath, int readBuffer) throws Exception{
 
         Map<Integer, String> lineData = new HashMap<>();
         Map<LogFileAnalyzerV4.Para, LogFileAnalyzerV4.Info> globalInfo = new HashMap<>();
@@ -68,6 +100,7 @@ public class LogFileAnalyzerV4 {
             String tempLine;
             int opNum;
             int processNum;
+            int varNum;
             while ((lineContent = bufferedReader.readLine())!= null){
                 if(index > line){
                     lineData.put(index-1, lineContent);
@@ -77,8 +110,13 @@ public class LogFileAnalyzerV4 {
 //                        }
                         tempLine = lineData.get(line+2);
                         opNum = Integer.valueOf(tempLine.substring(tempLine.indexOf("opNum")+5, tempLine.indexOf("processNum")-1));
-                        processNum = Integer.valueOf(tempLine.substring(tempLine.indexOf("processNum")+10, tempLine.indexOf(".edn")));
-                        LogFileAnalyzerV4.Para key = new Para(opNum, processNum);
+                        processNum = Integer.valueOf(tempLine.substring(tempLine.indexOf("processNum")+10, tempLine.indexOf("varNum")-1));
+                        if (tempLine.indexOf("_", tempLine.indexOf("varNum") + 6) == -1) {
+                            varNum = Integer.valueOf(tempLine.substring(tempLine.indexOf("varNum")+6, tempLine.indexOf(".",tempLine.indexOf("varNum")+6)));
+                        }else {
+                            varNum = Integer.valueOf(tempLine.substring(tempLine.indexOf("varNum") + 6, tempLine.indexOf("_", tempLine.indexOf("varNum") + 6)));
+                        }
+                        LogFileAnalyzerV4.Para key = new Para(opNum, processNum, varNum);
 //                        int key = Integer.valueOf(tempLine.substring(tempLine.indexOf("num:")+4)) / 10 *10;
 //                        int key = Integer.valueOf(tempLine.substring(tempLine.indexOf("ops-")+4, tempLine.indexOf("-no-")));
                         LogFileAnalyzerV4.Info tempInfo;
@@ -122,7 +160,9 @@ public class LogFileAnalyzerV4 {
             bufferedReader.close();
         }
 
-        System.out.println("opNum   processNum  ico_avg bco_avg cf_avg  ihbo_avg    bhbo_avg");
+        System.out.println("opNum   processNum  varNum  ico_avg bco_avg cf_avg  ihbo_avg    bhbo_avg");
+
+        List<Info> infoList = new LinkedList<>();
 
         for(Para key: globalInfo.keySet()){
 //            System.out.println("-----------------------------------------------------");
@@ -134,13 +174,20 @@ public class LogFileAnalyzerV4 {
 //            System.out.println("BHBO: " + globalInfo.get(key).bhbo_avg);
 //            System.out.println("IHBO: " + globalInfo.get(key).ihbo_avg);
             System.out.println(key + "  " + globalInfo.get(key).ico_avg + "  " + globalInfo.get(key).bco_avg + " " + globalInfo.get(key).cf_avg + " " + globalInfo.get(key).ihbo_avg+ " " + globalInfo.get(key).bhbo_avg  +"");
+            Info tempInfo = new Info(key.getOpNum(), key.getProcessNum(), key.getVarNum(), globalInfo.get(key).ico_avg, globalInfo.get(key).bco_avg, globalInfo.get(key).cf_avg, globalInfo.get(key).ihbo_avg, globalInfo.get(key).bhbo_avg);
+            infoList.add(tempInfo);
         }
+        return infoList;
     }
 
+    public void printToExcel(String fileName, List<Info> infoList){
+        EasyExcel.write(fileName, Info.class).sheet("sheet1").doWrite(infoList);
+    }
 
     public static void main(String args[]) throws Exception{
         LogFileAnalyzerV4 analyzer = new LogFileAnalyzerV4();
-        analyzer.logFileAnalyzer("target/Data/GlobalLog0709/GlobalLog_7_9_merge.txt", 11);
+        List<Info> tList = analyzer.logFileAnalyzer("target/Data/Running_8_10/GlobalLog_8_10.txt", 11);
+        analyzer.printToExcel("target/Data/Running_8_10/mergeResults.xlsx", tList);
     }
 
 }

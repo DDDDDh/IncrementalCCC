@@ -31,10 +31,10 @@ public class RunWithMongo {
 
 //        int k = 1;
             int processNum = 5;
-            int opNum = 100*k;
+            int opNum = 500*k;
 //
 
-            for (int j = 5; j >= 1; j--) {
+            for (int j = 6; j >= 1; j--) {
 
                 int varRange = j*5;
 //                if(k == 3 && varRange > 10){

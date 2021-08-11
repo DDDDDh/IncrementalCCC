@@ -1,0 +1,26 @@
+%读取文件输入，这里采用绝对路径
+T=readtable("/Users/yi-huang/Project/IncrementalCCC/target/Data/Running0808/testExcel.xlsx")
+%注意变量的选择，要对应表格中相应的列
+opNum=table2array(T(:,1));
+processNum=table2array(T(:,2));
+bhbo_avg=table2array(T(:,8));
+ihbo_avg=table2array(T(:,7));
+xmax=max(opNum);
+xmin=min(opNum);
+ymax=max(processNum);
+ymin=min(processNum);
+[X,Y]=meshgrid(xmin:100:xmax,ymin:5:ymax);
+J=griddata(opNum,processNum,bhbo_avg,X,Y);
+K=griddata(opNum,processNum,ihbo_avg,X,Y);
+bhbo=mesh(X,Y,J,'FaceAlpha','0','EdgeColor','b');
+bhbo.LineStyle='-';
+hold on
+ihbo=mesh(X,Y,K,'FaceAlpha','0','EdgeColor','r');
+ihbo.LineStyle='--';
+xlabel('opNum');
+ylabel('processNum');
+zlabel('Time(ns)');
+legend('bhbo','ihbo')
+%输出到指定文件
+savefig("/Users/yi-huang/Project/IncrementalCCC/target/Data/Running0808/HBoCompare.fig");
+saveas(gcf,"/Users/yi-huang/Project/IncrementalCCC/target/Data/Running0808/HBoCompare.jpg");

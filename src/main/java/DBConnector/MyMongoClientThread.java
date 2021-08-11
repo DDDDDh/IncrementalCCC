@@ -1,6 +1,7 @@
 package DBConnector;
 
 import History.Operation;
+import com.mongodb.ClientSessionOptions;
 import com.mongodb.ReadConcern;
 import com.mongodb.ReadPreference;
 import com.mongodb.WriteConcern;
@@ -32,6 +33,7 @@ public class MyMongoClientThread implements Runnable{
     WriteConcern writeConcern;
     int threadid;
     AtomicInteger globalIndex;
+    ClientSession session;
 
     //Used to control ops throughput
     private double targetOpsPerMs;
@@ -67,6 +69,7 @@ public class MyMongoClientThread implements Runnable{
 
     public void startConnection(){
         mongoClient = MongoClients.create(this.mongoSRV);
+        this.session = mongoClient.startSession(ClientSessionOptions.builder().causallyConsistent(true).build());
         mongoDatabase = mongoClient.getDatabase(this.dbName);
         mongoCollection = mongoDatabase.getCollection(this.collectionName);
     }
@@ -78,7 +81,9 @@ public class MyMongoClientThread implements Runnable{
     public Status read(Operation op){
         try{
             Document tempDoc = new Document("Field", op.getKey());
-            FindIterable<Document> findIterable = this.mongoCollection.withReadPreference(ReadPreference.secondaryPreferred()).withReadConcern(this.readConcern).find(tempDoc);
+//            FindIterable<Document> findIterable = this.mongoCollection.withReadPreference(ReadPreference.secondaryPreferred()).withReadConcern(this.readConcern).find(tempDoc);
+            FindIterable<Document> findIterable = this.mongoCollection.withReadConcern(this.readConcern).find(session,tempDoc);
+//            .withReadPreference(ReadPreference.secondaryPreferred())
             Document queryResult = findIterable.first();
             if(queryResult != null){
                 op.setValue((int)queryResult.get("Value"));
@@ -107,7 +112,7 @@ public class MyMongoClientThread implements Runnable{
             Document tempDoc = new Document("Field", op.getKey());
             Document queryDoc = new Document("Field", op.getKey());
             tempDoc.put("Value", op.getValue());
-            this.mongoCollection.withWriteConcern(this.writeConcern).updateOne(queryDoc, new Document("$set", tempDoc), options);
+            this.mongoCollection.withWriteConcern(this.writeConcern).updateOne(session, queryDoc, new Document("$set", tempDoc), options);
             op.setTime(System.nanoTime());
             op.setPosition(this.globalIndex.getAndIncrement());
             return Status.OK;

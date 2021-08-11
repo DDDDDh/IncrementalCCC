@@ -144,6 +144,20 @@ public class YCSBProducer extends RandomProducer{ //利用YCSB生成操作
         return varNum;
     }
 
+    public String varTransformer(int varNum){
+        String var = "";
+        int tempNum = varNum;
+        StringBuilder builder = new StringBuilder();
+        while(tempNum>=26){
+            builder.append("A");
+            tempNum = tempNum-26;
+        }
+        String tempVar = String.valueOf((char)(65+tempNum));
+        builder.append(tempVar);
+        var = builder.toString();
+        return var;
+    }
+
     public GeneratedOperation nextOperation(){
         GeneratedOperation nextOp = new GeneratedOperation();
         nextOp.setIndex(this.globalIndex++);
@@ -172,9 +186,10 @@ public class YCSBProducer extends RandomProducer{ //利用YCSB生成操作
 
         //将varInt变为以'A'开始的char值
         //65 is the ASCII code for 'A'
-        long a = 65;
-        a = a+varInt;
-        String varName = String.valueOf((char) a);
+//        long a = 65;
+//        a = a+varInt;
+//        String varName = String.valueOf((char) a);
+        String varName = varTransformer(varInt);
 //        System.out.println("var name:" + varName);
         nextOp.setVariable(varName);
 //        System.out.println("Return" + nextOp.printBare());

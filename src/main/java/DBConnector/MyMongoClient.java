@@ -76,10 +76,10 @@ public class MyMongoClient {
 
         Document tempDocument = new Document();
         long docCount = mongoCollection.countDocuments();
-//        System.out.println("number of documents before clear:" + docCount);
-        mongoCollection.deleteMany(tempDocument);
+        System.out.println("number of documents before clear:" + docCount);
+        mongoCollection.withWriteConcern(WriteConcern.MAJORITY).deleteMany(tempDocument);
         docCount = mongoCollection.countDocuments();
-//        System.out.println("number of documents after clear:" + docCount);
+        System.out.println("number of documents after clear:" + docCount);
 
     }
 

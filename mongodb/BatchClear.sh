@@ -1,6 +1,9 @@
 set timeout 15 #设置超时，单位秒
 #Usage: ./BatchClear.sh 需配合参数设置在alicloud_mongodb.conf中
-config_file="configs/alicloud_mongodb.conf"
+#文件路径为了方便java调用，这里暂时采用绝对路径
+#相对路径：config_file="configs/alicloud_mongodb.conf"
+
+config_file="/Users/yi-huang/Project/IncrementalCCC/mongodb/configs/alicloud_mongodb.conf"
 
 bak=$IFS
 

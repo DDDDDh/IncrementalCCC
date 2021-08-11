@@ -1,8 +1,9 @@
 set timeout 15 #设置超时，单位秒
 #Usage: ./ShutdownTestShardingCluster.sh 需配合参数设置在.conf文件中
-csrs_config="configs/alicloud_mongodb_csrs.conf"
-mongos_config="configs/alicloud_mongodb_mongos.conf"
-shards_config="configs/alicloud_mongodb_shards.conf"
+#为了配合java调用，此处使用绝对路径
+csrs_config="/Users/yi-huang/Project/IncrementalCCC/mongodb/configs/alicloud_mongodb_csrs.conf"
+mongos_config="/Users/yi-huang/Project/IncrementalCCC/mongodb/configs/alicloud_mongodb_mongos.conf"
+shards_config="/Users/yi-huang/Project/IncrementalCCC/mongodb/configs/alicloud_mongodb_shards.conf"
 
 
 #先关闭shards

@@ -15,7 +15,7 @@ public class Debugger {
 //        String curFile = "/Users/yi-huang/Project/IncrementalCCC/src/main/resources/BadPatternExamples/CyclicHB_history.edn";
 //        String curFile = "/Users/yi-huang/Project/IncrementalCCC/target/RandomHistories/CC/100/Running_202111310_opNum100_processNum5_rRate3_wRate1_7.edn";
 //        String curFile = "/Users/yi-huang/Project/IncrementalCCC/target/RandomHistories/CC/400/Running_202111722_opNum400_processNum10_rRate3_wRate1_76.edn";
-        String curFile = "/Users/yi-huang/Project/IncrementalCCC/target/ParameterChoosing/debug/special_01.edn";
+        String curFile = "/Users/yi-huang/Project/IncrementalCCC/target/Exp/mongoLogfile_7_26_opNum500_processNum20_varNum30.edn";
 //        String curFile = "/Users/yi-huang/Project/MongoTrace/Debug/Running_202111722_opNum300_processNum10_rRate3_wRate1_27.edn";
 //        String curFile = "/Users/yi-huang/Project/IncrementalCCC/target/RandomHistories/CC/600/Running_202012210_opNum600_processNum5_rRate3_wRate1_59.edn";
 //        String curFile = "/Users/yi-huang/Project/MongoTrace/mongo-causal-register-wc-:majority-rc-:majority-ti-180-sd-2-cry-10-wp-0.25-rp-0.75-ops-600-no-nemesis_202012225/history600_0.edn";
