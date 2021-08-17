@@ -1,6 +1,8 @@
 package DBConnector;
 
+import DataStructure.JsonLine;
 import History.Operation;
+import com.alibaba.fastjson.JSON;
 import com.mongodb.ClientSessionOptions;
 import com.mongodb.ReadConcern;
 import com.mongodb.ReadPreference;
@@ -159,6 +161,13 @@ public class MyMongoClientThread implements Runnable{
         }
     }
 
+    public String printOpJson(Operation op, int index){
+        String tempStr;
+        JsonLine tempLine = new JsonLine(op, index);
+        tempStr = JSON.toJSONString(tempLine);
+        return tempStr;
+    }
+
     @Override
     public void run(){
         this.startConnection();
@@ -182,19 +191,22 @@ public class MyMongoClientThread implements Runnable{
             if(curOp.isRead()){
                 Status readStat = this.read(curOp);
                 if(readStat == Status.OK){
-                    output.println(printOp("ok", curOp, index++));
+//                    output.println(printOp("ok", curOp, index++));
+                    output.println(printOpJson(curOp, index++));
                 }
                 else if(readStat == Status.NOT_FOUND){
-                    output.println(printOp("ok", curOp, index++));
+//                    output.println(printOp("ok", curOp, index++));
+                    output.println(printOpJson(curOp, index++));
                 }
                 else{
                     System.out.println("Error when doing op:" + curOp.easyPrint());
-                    System.out.println("status:");
+                    System.out.println("status:" + readStat);
                 }
             }
             else if(curOp.isWrite()){
                 if(this.write(curOp) == Status.OK){
-                    output.println(printOp("ok", curOp, index++));
+//                    output.println(printOp("ok", curOp, index++));
+                    output.println(printOpJson(curOp, index++));
                 }
                 else{
                     System.out.println("Error when doing op:" + curOp.easyPrint());

@@ -10,41 +10,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0dc98262-2b33-485b-86e5-a2794ff4c6f0" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__cglib_cglib_3_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_easyexcel_2_2_10.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_virtuald_curvesapi_1_04.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_10.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_collections4_4_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_poi_poi_3_17.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_poi_poi_ooxml_3_17.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_poi_poi_ooxml_schemas_3_17.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlbeans_xmlbeans_2_6_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_ehcache_ehcache_3_4_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_ow2_asm_asm_4_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_26.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__stax_stax_api_1_0_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/slf4j-nop-1.7.26.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/matlab/COCompare.m" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/matlab/HBOCompare.m" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/fastjson-1.2.78.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Analyzer/LogFileTransformer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DataStructure/JsonLine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_projectlombok_lombok_1_18_18.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IncrementalCCC.iml" beforeDir="false" afterPath="$PROJECT_DIR$/IncrementalCCC.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mongodb/Aliyun Sharding Cluster Setup.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mongodb/BatchClear.sh" beforeDir="false" afterPath="$PROJECT_DIR$/mongodb/BatchClear.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mongodb/Remote Mongo Setup.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mongodb/ShutdownShardingCluster.sh" beforeDir="false" afterPath="$PROJECT_DIR$/mongodb/ShutdownShardingCluster.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mongodb/WakeupShardingCluster.sh" beforeDir="false" afterPath="$PROJECT_DIR$/mongodb/WakeupShardingCluster.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mongodb/alicloud_mongodb.conf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mongodb/alicloud_mongodb_csrs.conf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mongodb/alicloud_mongodb_mongos.conf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mongodb/alicloud_mongodb_shards.conf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mongodb/clear.log" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Analyzer/LogFileAnalyzerV4.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Analyzer/LogFileAnalyzerV4.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DBConnector/MongoConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DBConnector/MongoConnector.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/DBConnector/MyMongoClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DBConnector/MyMongoClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/DBConnector/MyMongoClientThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DBConnector/MyMongoClientThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Debugger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Debugger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/History/History.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/History/History.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Datastructure/BitMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataStructure/BitMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GenerateAndTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GenerateAndTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/History/HistoryReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/History/HistoryReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/History/Operation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/History/Operation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/HistoryProducer/RandomProducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/HistoryProducer/RandomProducer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/HistoryProducer/YCSBProducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/HistoryProducer/YCSBProducer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
@@ -53,7 +34,6 @@
       <change beforePath="$PROJECT_DIR$/src/main/resources/BadPatternExamples/CyclicHB_perProcess_history.edn" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/BadPatternExamples/TransitiveHBo_history.edn" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/BadPatternExamples/WriteReadWrite_history.edn" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/History/History.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/History/History.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -359,7 +339,12 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="Errors" />
   </component>
-  <component name="RunManager" selected="Application.LogFileAnalyzerV4">
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="Analyzer" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Main">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
       <option name="WIDTH" value="400" />
@@ -811,8 +796,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.LogFileAnalyzerV4" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.LogFileAnalyzerV4" />
         <item itemvalue="Application.RunWithMongo" />
         <item itemvalue="Application.Debugger" />
         <item itemvalue="Application.YCSBProducer" />
@@ -891,7 +876,7 @@
       <workItem from="1627955812274" duration="16104000" />
       <workItem from="1628134808065" duration="3326000" />
       <workItem from="1628344665962" duration="5337000" />
-      <workItem from="1628435608069" duration="22412000" />
+      <workItem from="1628435608069" duration="60882000" />
     </task>
     <servers />
   </component>

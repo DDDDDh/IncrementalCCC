@@ -213,7 +213,7 @@ public class YCSBProducer extends RandomProducer{ //利用YCSB生成操作
 
         YCSBProducer producer = new YCSBProducer(100,0.75,0.25,20,100,5,"uniform","uniform");
         System.out.println("Begin to produce history...");
-        producer.generatePath();
+        producer.generatePath("target/Exp/");
         producer.generateHistory();
         producer.printToFile();
         System.out.println("History is printed to file, log path:" + producer.getOutputPath());

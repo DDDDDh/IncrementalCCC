@@ -5,10 +5,14 @@ package HistoryProducer;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.LinkedList;
+
+import DataStructure.JsonLine;
+import com.sun.tools.javah.Gen;
 import lombok.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import com.alibaba.fastjson.JSON;
 
 @Data
 public class RandomProducer {
@@ -67,12 +71,13 @@ public class RandomProducer {
         }
     }
 
-    public void generatePath(){
-        String url = "target/Exp/";
+    public void generatePath(String folderPath){
+//        String url = "target/Exp/";
+        String url = folderPath;
         Calendar cTime = Calendar.getInstance();
         String timeStamp = "" + cTime.get(Calendar.YEAR)  + (cTime.get(Calendar.MONTH)+1)  + cTime.get(Calendar.DAY_OF_MONTH) + cTime.get(Calendar.HOUR_OF_DAY);
         url += "Running_"+timeStamp+"_opNum"+this.getOpNum()+"_processNum" +this.getProcessNum()
-                +"_varRange" + this.getVarRange() + "_valRange" + this.getValRange() +"_rRate"+this.getRRate()+"_wRate" + this.getWRate()+".edn";
+                +"_varRange" + this.getVarRange() + "_valRange" + this.getValRange() +"_rRate"+this.getRRate()+"_wRate" + this.getWRate()+".json";
         this.setOutputPath(url);
     }
 
@@ -83,9 +88,7 @@ public class RandomProducer {
             tempStr +=":type :ok, ";
         }
         else{
-
         }
-
         //填充f字段
         if(tempOp.getMethod() == Methods.methods.Write){
             tempStr += ":f :write, ";
@@ -119,6 +122,13 @@ public class RandomProducer {
         return tempStr;
     }
 
+    public String printOpJson(GeneratedOperation op){
+        String tempStr;
+        JsonLine tempLine = new JsonLine(op);
+        tempStr = JSON.toJSONString(tempLine);
+        return tempStr;
+    }
+
     public void printToFile() throws FileNotFoundException{
         File outfile = new File(this.getOutputPath());
         PrintWriter output = new PrintWriter(outfile);
@@ -127,6 +137,19 @@ public class RandomProducer {
         for(int i = 0; i < this.opList.size(); i++){
             tempOp = this.opList.get(i);
             tempStr = printOp(tempOp);
+            output.println(tempStr);
+        }
+        output.close();
+    }
+
+    public void printToJsonFile() throws FileNotFoundException{
+        File outfile = new File(this.getOutputPath());
+        PrintWriter output = new PrintWriter(outfile);
+        GeneratedOperation tempOp;
+        String tempStr = "";
+        for(int i = 0; i < this.opList.size(); i++){
+            tempOp = this.opList.get(i);
+            tempStr = printOpJson(tempOp);
             output.println(tempStr);
         }
         output.close();
@@ -200,9 +223,9 @@ public class RandomProducer {
 //        rProducer.printToFile();
 
         CCProducer ccProducer = new CCProducer(100, 5, 3, 1, 10, 100);
-        ccProducer.generatePath();
+        ccProducer.generatePath("target/Exp/");
         ccProducer.generateCCHistory();
-        ccProducer.printToFile();
+        ccProducer.printToJsonFile();
         ccProducer.printToFileDebug(1);
 
     }

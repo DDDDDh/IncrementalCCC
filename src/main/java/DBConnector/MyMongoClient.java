@@ -1,12 +1,12 @@
 package DBConnector;
 
+import DataStructure.JsonLine;
 import History.*;
+import com.alibaba.fastjson.JSON;
 import com.mongodb.ReadConcern;
 import com.mongodb.WriteConcern;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.*;
+import com.mongodb.client.result.DeleteResult;
 import org.bson.Document;
 import site.ycsb.Status;
 import static org.junit.Assert.assertTrue;
@@ -67,27 +67,35 @@ public class MyMongoClient {
         }
     }
 
+    public String printOpJson(Operation op, int index){
+        String tempStr;
+        JsonLine tempLine = new JsonLine(op, index);
+        tempStr = JSON.toJSONString(tempLine);
+        return tempStr;
+    }
+
     public void closeConnection(){
         this.output.close();
         mongoClient.close();
     }
 
     public void clearDB(){
-
         Document tempDocument = new Document();
-        long docCount = mongoCollection.countDocuments();
-        System.out.println("number of documents before clear:" + docCount);
-        mongoCollection.withWriteConcern(WriteConcern.MAJORITY).deleteMany(tempDocument);
-        docCount = mongoCollection.countDocuments();
-        System.out.println("number of documents after clear:" + docCount);
+        long docCount1 = mongoCollection.countDocuments();
+        System.out.println("number of documents before clear:" + docCount1);
+        DeleteResult result = mongoCollection.withWriteConcern(WriteConcern.MAJORITY).deleteMany(tempDocument);
+        long docCount2 = result.getDeletedCount();
+        long docCount3 = mongoCollection.countDocuments();
+        System.out.println("number of documents after clear:" + docCount3);
+        assertTrue("Must clear all documents", docCount1 == docCount2);
 
     }
 
     public String loadAndRun(String srcLog) throws IOException{
-//        clearDB(); //每次运行之前将数据库清零
+//        clearDB(); //每次运行之前将数据库清零->建立连接的时候已经清理过了
         String runningLog = "";
         HistoryReader reader = new HistoryReader(srcLog);
-        History inputHis = new History(reader.readHistory());
+        History inputHis = new History(reader.readJsonHistory());
         inputHis.setOpNum(reader.getTotalNum());
         Set<Integer> processes = inputHis.getProcessOpList().keySet();
         int processNum = processes.size();
@@ -112,12 +120,18 @@ public class MyMongoClient {
         LinkedList<Operation> curOpList;
         String curLog;
         AtomicInteger globalIndex = new AtomicInteger(0);
+        String clientsFolderPath = this.logPath.substring(0,this.logPath.indexOf(".json")) + "_clients/";
+        File folder = new File(clientsFolderPath);
+        if(!folder.isDirectory()){
+            folder.mkdir();
+        }
+
         for(Integer curProcess: processes){
             curOpList = processOpList.get(curProcess);
             if(curOpList == null){
                 System.out.println("A null???");
             }
-            curLog = this.logPath.substring(0, this.logPath.indexOf(".edn")) + "_" + curProcess + ".edn";
+            curLog = clientsFolderPath + "Client_" +curProcess + ".json";
             processLogPath.put(curProcess, curLog);
             MyMongoClientThread t =  new MyMongoClientThread(this.mongoSRV, this.dbName, this.collectionName,
                     curLog, this.readConcern, this.writeConcern, targetperthreadperms, curOpList, completeLatch, globalIndex);
@@ -150,8 +164,8 @@ public class MyMongoClient {
         //TODO:将多线程的log整合成一个log
 
         LinkedList<Operation> globalOpList = new LinkedList<Operation>();
-        for(Integer curProess: processes){
-            curOpList = processOpList.get(curProess);
+        for(Integer curProcess: processes){
+            curOpList = processOpList.get(curProcess);
             for(Operation curOp: curOpList){
                 boolean arranged = false;
                 for(int i = 0; i < globalOpList.size(); i++){
@@ -170,6 +184,7 @@ public class MyMongoClient {
         for(int i = 0; i < globalOpList.size(); i++){
             Operation curOp = globalOpList.get(i);
             output.println(printOp("ok", curOp, i));
+            output.println(printOpJson(curOp, i));
         }
 
         this.closeConnection();
@@ -177,12 +192,9 @@ public class MyMongoClient {
         return runningLog;
     }
 
-
     //TODO: split multi-thread and single thread.
 
     public static void main(String args[]) throws Exception {
         System.out.println("hello world");
     }
-
-
 }

@@ -66,7 +66,7 @@ public class RunWithMongo {
 
                     CCProducer ccProducer = new CCProducer(opNum, processNum, 3, 1, varRange, valRange);
 
-                    ccProducer.generatePath();
+                    ccProducer.generatePath("target/Exp/");
 
                     ccProducer.generateCCHistory();
 

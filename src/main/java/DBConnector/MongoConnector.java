@@ -96,7 +96,7 @@ public class MongoConnector {
 
         //读取historyPath中的文件,按照配置连接到mongodb,模拟运行后输出结果到logPath
         HistoryReader reader = new HistoryReader(historyPath);
-        LinkedList<Operation> opList = reader.readHistory();
+        LinkedList<Operation> opList = reader.readJsonHistory();
         Operation curOp;
         Document tempDoc;
         Document queryDoc;

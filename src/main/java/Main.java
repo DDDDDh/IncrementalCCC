@@ -1,3 +1,4 @@
+import Analyzer.LogFileAnalyzerV4;
 import Checker.CCChecker;
 import Checker.CCvChecker;
 import Checker.CMChecker;
@@ -13,6 +14,7 @@ import java.io.*;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.LinkedList;
+import java.util.List;
 
 
 public class Main {
@@ -44,7 +46,7 @@ public class Main {
         appendLog(runningLog, "MongoDB running log for month:" + month + " day:" + day);
         LinkedList<String> traceList = new LinkedList<String>();
 //        for(int i = 1; i <= 10; i++) { //控制轮数
-        for(int i = 1; i <= 5; i++) { //控制轮数
+        for(int i = 1; i <= 1; i++) { //控制轮数
             System.out.println("Round " + i);
 //            appendLog(globalLog, "Round" + i);
 //            for (int k = 1; k <= 30; k++) { //控制操作数
@@ -57,11 +59,11 @@ public class Main {
 //                } else {
 //                    continue;
 //                }
-                opNum = 100 * k;
+                opNum = 500 * k;
 //                for(int j = 1; j <=4; j++) {
                 for (int j = 1; j <= 20; j++) {
                     int processNum = j*5;
-                    int varRange = 30;
+                    int varRange = 50;
 //                    int processNum = 10;
                     System.out.println("-----------------Begin Workload Part-----------------");
                     appendLog(runningLog,"-----------------Begin Workload Part-----------------");
@@ -70,9 +72,9 @@ public class Main {
                     YCSBProducer producer = new YCSBProducer(opNum, 0.75, 0.25, varRange, 100, processNum, "uniform", "uniform");
                     System.out.println("Begin to produce history...");
                     appendLog(runningLog, "Begin to produce history...");
-                    producer.generatePath();
+                    producer.generatePath(folderPath);
                     producer.generateHistory();
-                    producer.printToFile();
+                    producer.printToJsonFile();
                     System.out.println("History is printed to file, log path:" + producer.getOutputPath());
                     appendLog(runningLog,"History is printed to file, log path:" + producer.getOutputPath());
                     System.out.println("Total Read:" + producer.getReadCount() + " Total Write:" + producer.getWriteCount());
@@ -83,7 +85,7 @@ public class Main {
                     appendLog(runningLog, "-----------------End Workload Part-------------------");
                     System.out.println("----------------Begin Running Part-------------------");
                     appendLog(runningLog,"----------------Begin Running Part-------------------");
-                    String mongoLog = "target/Exp/mongoLogfile_" + month + "_" + day + "_opNum" + producer.getOpNum() + "_processNum" + producer.getProcessNum() + "_varNum" + producer.getVarRange() + ".edn";
+                    String mongoLog = folderPath+"mongoLogfile_" + month + "_" + day + "_opNum" + producer.getOpNum() + "_processNum" + producer.getProcessNum() + "_varNum" + producer.getVarRange() + ".json";
 //                    MyMongoClient client = new MyMongoClient("mongodb://dh:dh@n1.disalg.cn:26011,n3.disalg.cn:26011,n6.disalg.cn:26011/?maxIdleTimeMS=60000&readPreference=secondaryPreferred", "test_mongo", "original_data",
 //                            50, mongoLog, ReadConcern.MAJORITY, WriteConcern.MAJORITY); //connection string
                     MyMongoClient client = new MyMongoClient("mongodb://dh:dh@n0.disalg.cn:26011,n1.disalg.cn:26011,n2.disalg.cn:26011,n3.disalg.cn:26011,n4.disalg.cn:26011,n6.disalg.cn:26011/?maxIdleTimeMS=60000", "test_mongo", "original_data",
@@ -142,7 +144,7 @@ public class Main {
             boolean cmResult;
 
             HistoryReader reader = new HistoryReader(mongoLog);
-            History history = new History(reader.readHistory());
+            History history = new History(reader.readJsonHistory());
             history.setOpNum(reader.getTotalNum()); //读取完一个历史记录之后，一定一定要记得设置总操作数...
 
             if (!history.isDifferentiated()) {
@@ -280,6 +282,10 @@ public class Main {
             appendLog(runningLog, "----------------End Checking Part-------------------");
         }
         appendLog(runningLog, "End of running");
+
+        LogFileAnalyzerV4 analyzer = new LogFileAnalyzerV4();
+        List<LogFileAnalyzerV4.Info> tList = analyzer.logFileAnalyzer(globalLog, 11);
+        analyzer.printToExcel(folderPath+"mergeResults.xlsx", tList);
     }
 
 }

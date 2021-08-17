@@ -11,8 +11,10 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
+import DataStructure.*;
 
 import Relations.*;
+import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.StringUtils;
 
 
@@ -54,6 +56,24 @@ public class HistoryReader {
 
     }
 
+    public LinkedList<Operation> readJsonHistory() throws IOException{
+        System.out.println("Reading history in " + url);
+        LinkedList<Operation> opList = new LinkedList<Operation>();
+        BufferedReader in = new BufferedReader(new FileReader(this.url));
+        String line;
+        while ((line = in.readLine()) != null) {
+//            System.out.println("Line...");
+            Operation op = this.getOperationFromJson(line);
+            if (op != null) {
+                opList.add(op);
+            }
+        }
+        in.close();
+        System.out.println("Finish reading");
+//        System.out.println("oplist num:" + opList.size());
+        return opList;
+    }
+
     public Operation getOperation(String line) {
         String[] subs = line.split(",");
         String type = StringUtils.remove(subs[0], KEY_TYPE);
@@ -77,6 +97,11 @@ public class HistoryReader {
         long position = Long.parseLong(StringUtils.remove(subs[5], KEY_POSITION));
         int index = idx++; //注意，这个index是读入正常操作之后进行的另外编号，与历史记录里本身的index无关
         return new Operation(f, key, value, process, time, position, index);
+    }
+
+    public Operation getOperationFromJson(String jsonLine){
+        JsonLine line1Read = JSON.parseObject(jsonLine, JsonLine.class);
+        return new Operation(line1Read);
     }
 
     public int getTotalNum(){

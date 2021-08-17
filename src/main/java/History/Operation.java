@@ -1,5 +1,7 @@
 package History;
 
+import DataStructure.JsonLine;
+
 import java.util.BitSet;
 import java.util.LinkedList;
 
@@ -11,11 +13,11 @@ public class Operation {
 
     private OpType type;
     private String key;
-    private int value;
-    private int process;
+    private long value;
+    private long process;
     private long time;
     private long position;
-    private int id; //index等价于每个操作的全局标识符，很重要
+    private long id; //index等价于每个操作的全局标识符，很重要
     private BitSet visList; //暂时等价于poList
     private int correspondingWriteID; //只有该操作是读操作时，对应的写操作下标才有意义，初值为-1(读入初值为-2); ->在ReadFrom里初始化
     private int topoID; //拓扑序号，从0开始; ->在IncrementalCausalOrder里初始化
@@ -35,6 +37,38 @@ public class Operation {
         this.setTime(-1);
         this.setPosition(-1);
         this.setID(-1);
+        this.setVisList(null);
+        this.setCorrespondingWriteID(-1);
+        this.setTopoID(-1);
+        this.setLastOpID(-1);
+        this.setCoList(null);
+        this.setPredecessors(null);
+        this.setSuccessors(null);
+        this.setNextWrite(-1);
+    }
+
+    Operation(JsonLine jsonLine){
+        if(jsonLine.getType().equals("write")){
+            this.setType(OpType.write);
+        }
+        else if(jsonLine.getType().equals("read")){
+            this.setType(OpType.read);
+            if(jsonLine.getValue() == -1){
+                this.setCorrespondingWriteID(-2);
+            }
+            else{
+                this.setCorrespondingWriteID(-1);
+            }
+        }
+        else{
+            this.setType(OpType.other);
+        }
+        this.setKey(jsonLine.getKey());
+        this.setValue(jsonLine.getValue());
+        this.setProcess(jsonLine.getProcess());
+        this.setTime(jsonLine.getTime());
+        this.setPosition(jsonLine.getPosition());
+        this.setID(jsonLine.getIndex());
         this.setVisList(null);
         this.setCorrespondingWriteID(-1);
         this.setTopoID(-1);
@@ -110,16 +144,16 @@ public class Operation {
     public OpType getType() {
         return this.type;
     }
-    public void setValue(int value){
+    public void setValue(long value){
         this.value = value;
     }
-    public int getValue(){
+    public long getValue(){
         return this.value;
     }
-    public void setProcess(int process){
+    public void setProcess(long process){
         this.process = process;
     }
-    public int getProcess(){
+    public long getProcess(){
         return this.process;
     }
     public void setTime(long time){
@@ -134,12 +168,12 @@ public class Operation {
     public long getPosition(){
         return this.position;
     }
-    public void setID(int index){
+    public void setID(long index){
         this.id = index;
     }
     public void setCorrespondingWriteID(int index){this.correspondingWriteID = index;}
     public int getCorrespondingWriteID(){return this.correspondingWriteID;}
-    public int getID(){
+    public long getID(){
         return this.id;
     }
     public void setVisList(BitSet bitSet){this.visList = bitSet;}

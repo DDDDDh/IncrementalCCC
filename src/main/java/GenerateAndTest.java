@@ -35,7 +35,7 @@ public class GenerateAndTest {
 
         int opNum = 600;
         LinProducer linProducer = new LinProducer(opNum, 10, 3,1);
-        linProducer.generatePath();
+        linProducer.generatePath("target/Exp/");
         linProducer.generateLinHistory();
         linProducer.printToFile();
         linProducer.printToFileDebug(2);
@@ -45,7 +45,7 @@ public class GenerateAndTest {
 //        String url = ccProducer.getOutputPath();
         HistoryReader reader = new HistoryReader(url);
 //
-        History history = new History(reader.readHistory());
+        History history = new History(reader.readJsonHistory());
         history.setOpNum(reader.getTotalNum()); //读取完一个历史记录之后，一定一定要记得设置总操作数...
 
         if (!history.isDifferentiated()) {

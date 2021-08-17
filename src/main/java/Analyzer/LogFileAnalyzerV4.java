@@ -15,7 +15,7 @@ import com.alibaba.excel.annotation.ExcelProperty;
 public class LogFileAnalyzerV4 {
     public static final String FILE_ENCODING = "UTF-8";
     @Data
-    class Para{
+    public class Para{
         int opNum;
         int processNum;
         int varNum;
@@ -42,7 +42,7 @@ public class LogFileAnalyzerV4 {
     }
 
     @Data
-    class Info{
+    public class Info{
         @ExcelProperty("opNum")
         int count;
         @ExcelProperty("processNum")
@@ -186,8 +186,8 @@ public class LogFileAnalyzerV4 {
 
     public static void main(String args[]) throws Exception{
         LogFileAnalyzerV4 analyzer = new LogFileAnalyzerV4();
-        List<Info> tList = analyzer.logFileAnalyzer("target/Data/Running_8_10/GlobalLog_8_10.txt", 11);
-        analyzer.printToExcel("target/Data/Running_8_10/mergeResults.xlsx", tList);
+        List<Info> tList = analyzer.logFileAnalyzer("target/Data/Running_8_13/GlobalLog_8_13.txt", 11);
+        analyzer.printToExcel("target/Data/Running_8_13/mergeResults.xlsx", tList);
     }
 
 }
