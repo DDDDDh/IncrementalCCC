@@ -50,7 +50,7 @@ public class Main {
             System.out.println("Round " + i);
 //            appendLog(globalLog, "Round" + i);
 //            for (int k = 1; k <= 30; k++) { //控制操作数
-            for (int k = 1; k <= 10; k++) { //控制操作数
+            for (int k = 1; k <= 30; k++) { //控制操作数
                 int opNum = 0;
 //                if (0 < k && k <= 15) {
 //                    opNum = 100 * k;
@@ -59,11 +59,11 @@ public class Main {
 //                } else {
 //                    continue;
 //                }
-                opNum = 500 * k;
+                opNum = 100 * k;
 //                for(int j = 1; j <=4; j++) {
-                for (int j = 1; j <= 20; j++) {
-                    int processNum = j*5;
-                    int varRange = 50;
+                for (int j = 1; j <= 10; j++) {
+                    int processNum = j*10;
+                    int varRange = 30;
 //                    int processNum = 10;
                     System.out.println("-----------------Begin Workload Part-----------------");
                     appendLog(runningLog,"-----------------Begin Workload Part-----------------");
@@ -89,7 +89,8 @@ public class Main {
 //                    MyMongoClient client = new MyMongoClient("mongodb://dh:dh@n1.disalg.cn:26011,n3.disalg.cn:26011,n6.disalg.cn:26011/?maxIdleTimeMS=60000&readPreference=secondaryPreferred", "test_mongo", "original_data",
 //                            50, mongoLog, ReadConcern.MAJORITY, WriteConcern.MAJORITY); //connection string
                     MyMongoClient client = new MyMongoClient("mongodb://dh:dh@n0.disalg.cn:26011,n1.disalg.cn:26011,n2.disalg.cn:26011,n3.disalg.cn:26011,n4.disalg.cn:26011,n6.disalg.cn:26011/?maxIdleTimeMS=60000", "test_mongo", "original_data",
-                            50, mongoLog, ReadConcern.MAJORITY, WriteConcern.MAJORITY); //connection string
+                            30, mongoLog, ReadConcern.LOCAL, WriteConcern.W1); //connection string
+                    //每秒30个操作
 //                    MyMongoClient client = new MyMongoClient("mongodb://dh:dh@n0.disalg.cn:29004,n2.disalg.cn:29004,n4.disalg.cn:29004/?maxIdleTimeMS=60000", "test_mongo", "original_data",
 //                            50, mongoLog, ReadConcern.MAJORITY, WriteConcern.MAJORITY);
                     //访问分片集群时，要确保MongoDB URI里包含2个及以上的mongos地址，来实现负载均衡及高可用
@@ -114,14 +115,14 @@ public class Main {
 
                     File newFile = new File(newPath);
                     if (newFile.exists()) {
-                        newPath = newPath.replace(".edn", "_1.edn");
+                        newPath = newPath.replace(".json", "_1.json");
                         newFile = new File(newPath);
                         String version;
                         int v;
                         while (newFile.exists()) { //如果不是第一次创建同名文件，则迭代号进行更新即可
                             version = newPath.substring(newPath.lastIndexOf("_") + 1, newPath.lastIndexOf("."));
                             v = Integer.valueOf(version) + 1;
-                            newPath = newPath.replace("_" + version + ".edn", "_" + v + ".edn");
+                            newPath = newPath.replace("_" + version + ".json", "_" + v + ".json");
                             newFile = new File(newPath);
                         }
                     }

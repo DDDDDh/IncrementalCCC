@@ -19,11 +19,11 @@ public class ReadFrom extends BasicRelation{
         assertTrue ("The history must be differentiated for read-from computation",history.isDifferentiated()); //一定要是differentiated history
         LinkedList<Operation> opList = history.getOperationList();
         HashMap<String, LinkedList<Integer>> keyOpList = history.getKeyOpList();
-        HashMap<Integer, Integer> valueToWriteID = new HashMap<Integer, Integer>();
+        HashMap<Long, Integer> valueToWriteID = new HashMap<Long, Integer>();
         LinkedList<Integer> curOpList;
         int listSize;
         Operation curOp;
-        int curValue;
+        Long curValue;
         int correspondingWriteID;
         for(String key: keyOpList.keySet()){
 

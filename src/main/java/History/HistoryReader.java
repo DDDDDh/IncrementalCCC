@@ -94,14 +94,15 @@ public class HistoryReader {
         }
         int process = Integer.parseInt(StringUtils.remove(subs[3], KEY_PROCESS));
         long time = Long.parseLong(StringUtils.remove(subs[4], KEY_TIME));
-        long position = Long.parseLong(StringUtils.remove(subs[5], KEY_POSITION));
+        int position = Integer.parseInt(StringUtils.remove(subs[5], KEY_POSITION));
         int index = idx++; //注意，这个index是读入正常操作之后进行的另外编号，与历史记录里本身的index无关
         return new Operation(f, key, value, process, time, position, index);
     }
 
     public Operation getOperationFromJson(String jsonLine){
         JsonLine line1Read = JSON.parseObject(jsonLine, JsonLine.class);
-        return new Operation(line1Read);
+        int index = idx++; //注意，这个index是读入正常操作之后进行的另外编号，与历史记录里本身的index无关
+        return new Operation(line1Read, index);
     }
 
     public int getTotalNum(){

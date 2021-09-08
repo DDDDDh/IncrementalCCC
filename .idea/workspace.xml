@@ -10,30 +10,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0dc98262-2b33-485b-86e5-a2794ff4c6f0" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/fastjson-1.2.78.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Analyzer/LogFileTransformer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/DataStructure/JsonLine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_projectlombok_lombok_1_18_18.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IncrementalCCC.iml" beforeDir="false" afterPath="$PROJECT_DIR$/IncrementalCCC.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Analyzer/LogFileAnalyzerV4.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Analyzer/LogFileAnalyzerV4.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DBConnector/MongoConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DBConnector/MongoConnector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Analyzer/LogFileTransformer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Analyzer/LogFileTransformer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BatchChecking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BatchChecking.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/DBConnector/MyMongoClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DBConnector/MyMongoClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/DBConnector/MyMongoClientThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DBConnector/MyMongoClientThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Datastructure/BitMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataStructure/BitMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/GenerateAndTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GenerateAndTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DataStructure/JsonLine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataStructure/JsonLine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Datastructure/BitMap.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/History/History.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/History/History.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/History/HistoryReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/History/HistoryReader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/History/Operation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/History/Operation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/HistoryProducer/RandomProducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/HistoryProducer/RandomProducer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/HistoryProducer/YCSBProducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/HistoryProducer/YCSBProducer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/RunWithMongo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RunWithMongo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Relations/ReadFrom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Relations/ReadFrom.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/BadPatternExamples/CCvNotCM_history.edn" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/BadPatternExamples/CyclicHB_perProcess_history.edn" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/BadPatternExamples/TransitiveHBo_history.edn" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/BadPatternExamples/WriteReadWrite_history.edn" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Datastructure/BitMap.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Datastructure/BitMap.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/History/CMOperation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/History/CMOperation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/History/History.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/History/History.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/History/HistoryReader.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/History/HistoryReader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/History/Operation$OpType.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/History/Operation$OpType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/History/Operation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/History/Operation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Relations/ConflictRelation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Relations/ConflictRelation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Relations/ReadFrom.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Relations/ReadFrom.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,6 +90,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="GradleLocalSettings">
     <option name="externalProjectsViewState">
@@ -396,6 +406,25 @@
       <module name="" />
     </configuration>
     <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="displayName" value="" />
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="replPortFileType" value="STANDARD" />
+      <setting name="customPortFile" value="" />
+      <setting name="fixLineNumbers" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="fixLineNumbers" value="false" />
+      <module name="" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
       <setting name="host" value="" />
       <setting name="port" value="0" />
       <setting name="replType" value="SOCKET" />
@@ -461,84 +490,6 @@
       <setting name="customPortFile" value="" />
       <setting name="fixLineNumbers" value="false" />
       <method v="2" />
-    </configuration>
-    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
-      <setting name="host" value="" />
-      <setting name="port" value="0" />
-      <setting name="replType" value="SOCKET" />
-      <setting name="configType" value="SPECIFY" />
-      <setting name="fixLineNumbers" value="false" />
-      <module name="" />
-    </configuration>
-    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
-      <setting name="displayName" value="" />
-      <setting name="host" value="" />
-      <setting name="port" value="0" />
-      <setting name="replType" value="SOCKET" />
-      <setting name="configType" value="SPECIFY" />
-      <setting name="replPortFileType" value="STANDARD" />
-      <setting name="customPortFile" value="" />
-      <setting name="fixLineNumbers" value="false" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
-      <setting name="host" value="" />
-      <setting name="port" value="0" />
-      <setting name="replType" value="SOCKET" />
-      <setting name="configType" value="SPECIFY" />
-      <setting name="fixLineNumbers" value="false" />
-      <module name="" />
-    </configuration>
-    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
-      <setting name="host" value="" />
-      <setting name="port" value="0" />
-      <setting name="replType" value="SOCKET" />
-      <setting name="configType" value="SPECIFY" />
-      <setting name="fixLineNumbers" value="false" />
-      <module name="" />
-    </configuration>
-    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
-      <setting name="host" value="" />
-      <setting name="port" value="0" />
-      <setting name="replType" value="SOCKET" />
-      <setting name="configType" value="SPECIFY" />
-      <setting name="fixLineNumbers" value="false" />
-      <module name="" />
-    </configuration>
-    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
-      <setting name="host" value="" />
-      <setting name="port" value="0" />
-      <setting name="replType" value="SOCKET" />
-      <setting name="configType" value="SPECIFY" />
-      <setting name="fixLineNumbers" value="false" />
-      <module name="" />
-    </configuration>
-    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
-      <setting name="host" value="" />
-      <setting name="port" value="0" />
-      <setting name="replType" value="SOCKET" />
-      <setting name="configType" value="SPECIFY" />
-      <setting name="fixLineNumbers" value="false" />
-      <module name="" />
-    </configuration>
-    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
-      <setting name="displayName" value="" />
-      <setting name="host" value="" />
-      <setting name="port" value="0" />
-      <setting name="replType" value="SOCKET" />
-      <setting name="configType" value="SPECIFY" />
-      <setting name="replPortFileType" value="STANDARD" />
-      <setting name="customPortFile" value="" />
-      <setting name="fixLineNumbers" value="false" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
-      <setting name="host" value="" />
-      <setting name="port" value="0" />
-      <setting name="replType" value="SOCKET" />
-      <setting name="configType" value="SPECIFY" />
-      <setting name="fixLineNumbers" value="false" />
-      <module name="" />
     </configuration>
     <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
       <setting name="displayName" value="" />
@@ -636,6 +587,71 @@
       <setting name="configType" value="SPECIFY" />
       <setting name="fixLineNumbers" value="false" />
       <module name="" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="fixLineNumbers" value="false" />
+      <module name="" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="fixLineNumbers" value="false" />
+      <module name="" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="fixLineNumbers" value="false" />
+      <module name="" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="displayName" value="" />
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="replPortFileType" value="STANDARD" />
+      <setting name="customPortFile" value="" />
+      <setting name="fixLineNumbers" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="displayName" value="" />
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="replPortFileType" value="STANDARD" />
+      <setting name="customPortFile" value="" />
+      <setting name="fixLineNumbers" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="fixLineNumbers" value="false" />
+      <module name="" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="displayName" value="" />
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="replPortFileType" value="STANDARD" />
+      <setting name="customPortFile" value="" />
+      <setting name="fixLineNumbers" value="false" />
+      <method v="2" />
     </configuration>
     <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
       <setting name="host" value="" />
@@ -876,7 +892,9 @@
       <workItem from="1627955812274" duration="16104000" />
       <workItem from="1628134808065" duration="3326000" />
       <workItem from="1628344665962" duration="5337000" />
-      <workItem from="1628435608069" duration="60882000" />
+      <workItem from="1628435608069" duration="95028000" />
+      <workItem from="1630139900826" duration="22511000" />
+      <workItem from="1630981571775" duration="3766000" />
     </task>
     <servers />
   </component>

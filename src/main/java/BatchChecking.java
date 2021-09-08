@@ -5,7 +5,7 @@ import Relations.*;
 import java.util.*;
 import java.io.*;
 
-
+//批量检测文件夹中的历史记录
 
 public class BatchChecking {
 
@@ -25,12 +25,24 @@ public class BatchChecking {
 
     }
 
+    public static void appendLog(String fileName, String content) throws IOException{
+        try {
+            FileWriter writer = new FileWriter(fileName, true);
+            writer.write(content);
+            writer.write("\n");
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String args[]) throws Exception{
 
 //        String path = "/Users/yi-huang/Project/MongoTrace/store/test2_majority_majority_no-nemesis_2000-5000/Part1/";
-        String path = "/Users/yi-huang/Project/MongoTrace/1227/no-memesis/majority-linearizable/100-3000/";
+        String path = "/Users/yi-huang/Project/IncrementalCCC/target/Data/Running_8_15/RemainPart/";
 //        String logPath = "/Users/yi-huang/Project/MongoTrace/store/test2Part1CheckingLogfile.txt";
-        String logPath = "/Users/yi-huang/Project/MongoTrace/1227/no-memesis/majority-linearizable/100-3000/CheckingLogFile.txt";
+        String logPath = "/Users/yi-huang/Project/IncrementalCCC/target/Data/Running_8_15/RemainPart/CheckingLogFile.txt";
+        String globalLog = "/Users/yi-huang/Project/IncrementalCCC/target/Data/Running_8_15/RemainPart/GlobalLog.txt";
         File outfile = new File(logPath);
         PrintWriter output = new PrintWriter(outfile);
 
@@ -73,16 +85,18 @@ public class BatchChecking {
             IncrementalCausalOrder ico = new IncrementalCausalOrder(history.getOpNum());
             ico.incrementalCO(history, po, rf);
             long endTime = System.nanoTime();
-            System.out.println("ico Time:" + (endTime - startTime) + "ns");
-            output.println("ico Time:" + (endTime - startTime) + "ns");
+            long icoTime = endTime - startTime;
+            System.out.println("ico Time:" + icoTime + "ns");
+            output.println("ico Time:" + icoTime + "ns");
 
             startTime = System.nanoTime();
             BasicCausalOrder bco = new BasicCausalOrder(history.getOpNum());
 //            System.out.println("Finish initialization of bco");
             bco.computeCO(history, po, rf);
             endTime = System.nanoTime();
-            System.out.println("bco Time:" + (endTime - startTime) + "ns");
-            output.println("bco Time:" + (endTime - startTime) + "ns");
+            long bcoTime = endTime - startTime;
+            System.out.println("bco Time:" + bcoTime + "ns");
+            output.println("bco Time:" + bcoTime + "ns");
 
 //            boolean coEquality = bco.checkEqual(ico);
 //            if(coEquality){
@@ -107,8 +121,9 @@ public class BatchChecking {
             ConflictRelation cf = new ConflictRelation(history.getOpNum());
             cf.caculateConflictRelation(history, bco);
             endTime = System.nanoTime();
-            System.out.println("cf Time:" + (endTime - startTime) + "ns");
-            output.println("cf Time:" + (endTime - startTime) + "ns");
+            long cfTime = endTime - startTime;
+            System.out.println("cf Time:" + cfTime + "ns");
+            output.println("cf Time:" + cfTime + "ns");
 
             CCvChecker ccvChecker = new CCvChecker(history, po, rf, ico, cf);
 
@@ -119,15 +134,17 @@ public class BatchChecking {
             BasicHappenBeforeOrder hbo = new BasicHappenBeforeOrder(history.getOpNum());
             hbo.calculateHBo(history, po, rf, ico);
             endTime = System.nanoTime();
-            System.out.println("bhbo Time:" + (endTime - startTime) + "ns");
-            output.println("bhbo Time:" + (endTime - startTime) + "ns");
+            long bhboTime = endTime - startTime;
+            System.out.println("bhbo Time:" + bhboTime + "ns");
+            output.println("bhbo Time:" + bhboTime + "ns");
 
             startTime = System.nanoTime();
             IncrementalHappenBeforeOrder ihbo = new IncrementalHappenBeforeOrder(history.getOpNum(),1);
             ihbo.incrementalHBO(history,po, rf, ico);
             endTime = System.nanoTime();
-            System.out.println("ihbo Time:" + (endTime - startTime) + "ns");
-            output.println("ihbo Time:" + (endTime - startTime) + "ns");
+            long ihboTime = endTime - startTime;
+            System.out.println("ihbo Time:" + ihboTime + "ns");
+            output.println("ihbo Time:" + ihboTime + "ns");
 
 //            System.out.println("Finish computation of happen-before relation");
 
@@ -143,6 +160,10 @@ public class BatchChecking {
 
 
             CMChecker cmChecker = new CMChecker(history, po, rf, ico, hbo);
+
+            boolean ccResult = ccChecker.checkCC();
+            boolean ccvResult = ccvChecker.checkCCv();
+            boolean cmResult = cmChecker.checkCM();
 
             if(ccChecker.checkCC()){
                 System.out.println("Chekcing CC, result:true");
@@ -179,6 +200,18 @@ public class BatchChecking {
 
             System.out.println("---------------------------------------------------------");
             output.println("---------------------------------------------------------");
+
+            appendLog(globalLog, "----------------------------------------------------------");
+            appendLog(globalLog, "File Location:" + curFile);
+            appendLog(globalLog, "Checking " + curFile);
+            appendLog(globalLog, "CC Result: " + ccResult);
+            appendLog(globalLog, "CCv Result: " + ccvResult);
+            appendLog(globalLog, "CM Result: " + cmResult);
+            appendLog(globalLog, "BCO time: " + bcoTime);
+            appendLog(globalLog, "ICO time: " + icoTime);
+            appendLog(globalLog, "CF time: " + cfTime);
+            appendLog(globalLog, "Basic HBo time: " + bhboTime);
+            appendLog(globalLog, "Incremental HBo time: " + ihboTime);
 
         }
         output.close();

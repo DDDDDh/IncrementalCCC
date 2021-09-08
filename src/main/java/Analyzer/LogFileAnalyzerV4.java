@@ -186,8 +186,8 @@ public class LogFileAnalyzerV4 {
 
     public static void main(String args[]) throws Exception{
         LogFileAnalyzerV4 analyzer = new LogFileAnalyzerV4();
-        List<Info> tList = analyzer.logFileAnalyzer("target/Data/Running_8_13/GlobalLog_8_13.txt", 11);
-        analyzer.printToExcel("target/Data/Running_8_13/mergeResults.xlsx", tList);
+        List<Info> tList = analyzer.logFileAnalyzer("target/Data/Running_8_15/GlobalLog_8_15.txt", 11);
+        analyzer.printToExcel("target/Data/Running_8_15/mergeResults.xlsx", tList);
     }
 
 }

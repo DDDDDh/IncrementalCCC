@@ -1,4 +1,4 @@
-package Datastructure;
+package DataStructure;
 
 import java.util.BitSet;
 

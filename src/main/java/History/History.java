@@ -157,7 +157,7 @@ public class History {
 
     //需要在initOpGroupByKey()之后调用
     public boolean isDifferentiated(){
-        HashSet<Integer> valueSet;
+        HashSet<Long> valueSet;
         Operation tempOp;
         for(String key: this.keySet){  //遍历每个变量，筛查写入重复值的操作
             LinkedList<Integer> tempOpList = this.keyOpList.get(key);

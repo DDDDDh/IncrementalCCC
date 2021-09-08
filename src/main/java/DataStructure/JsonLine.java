@@ -11,17 +11,17 @@ public class JsonLine {
     private Operation.OpType opType;
     private String key;
     private long value;
-    private long process;
+    private int process;
     private long time;
-    private long position;
-    private long index;
+    private int position;
+    private int index;
 
-    public JsonLine(String type, String opType, String key, int value, int process, long time, long position, int index){
-        this.setType(type.substring(1)); //去掉一开始的冒号
-        if(opType.equals(":write")){
+    public JsonLine(String type, String opType, String key, int value, int process, long time, int position, int index){
+        this.setType(type); //去掉一开始的冒号
+        if(opType.equals("write")){
             this.setOpType(Operation.OpType.write);
         }
-        else if(opType.equals(":read")){
+        else if(opType.equals("read")){
             this.setOpType(Operation.OpType.read);
         }
         else{
@@ -45,6 +45,7 @@ public class JsonLine {
         }
         this.setKey(operation.getVariable());
         this.setValue(operation.getValue());
+        this.setTime(operation.getTime());
         this.setProcess(operation.getProcess());
         this.setPosition(operation.getPosition());
         this.setIndex(operation.getIndex());
@@ -55,6 +56,7 @@ public class JsonLine {
         this.setType("ok");
         this.setKey(op.getKey());
         this.setValue(op.getValue());
+        this.setTime(op.getTime());
         this.setProcess(op.getProcess());
         this.setPosition(op.getPosition());
         this.setIndex(index);

@@ -88,7 +88,7 @@ public class MyMongoClientThread implements Runnable{
 //            .withReadPreference(ReadPreference.secondaryPreferred())
             Document queryResult = findIterable.first();
             if(queryResult != null){
-                op.setValue((int)queryResult.get("Value"));
+                op.setValue((Long) queryResult.get("Value"));
                 op.setTime(System.nanoTime());
                 op.setPosition(this.globalIndex.getAndIncrement());
             }
@@ -101,7 +101,7 @@ public class MyMongoClientThread implements Runnable{
 
             return queryResult != null ? Status.OK : Status.NOT_FOUND;
         } catch (Exception e){
-            System.err.println(e.toString());
+            System.err.println("hi" + e.toString());
             System.out.println("ewwwwwwwwwww");
             return Status.ERROR;
         }
@@ -179,7 +179,8 @@ public class MyMongoClientThread implements Runnable{
         // GH issue 4 - throws exception if _target>1 because random.nextInt argument must be >0
         // and the sleep() doesn't make sense for granularities < 1 ms anyway
         if ((targetOpsPerMs > 0) && (targetOpsPerMs <= 1.0)) {
-            long randomMinorDelay = ThreadLocalRandom.current().nextInt((int) targetOpsTickNs);
+//            System.out.println("targetOpsTickNS:" + (int)targetOpsTickNs);
+            long randomMinorDelay = ThreadLocalRandom.current().nextLong(targetOpsTickNs);
             sleepUntil(System.nanoTime() + randomMinorDelay);
         }
 
@@ -188,6 +189,7 @@ public class MyMongoClientThread implements Runnable{
         long startTimeNanos = System.nanoTime();
         for(int i = 0; i < this.opList.size(); i++){
             curOp = this.opList.get(i);
+//            System.out.println("curOp:" + curOp.toString() + " thread:" + this.threadid);
             if(curOp.isRead()){
                 Status readStat = this.read(curOp);
                 if(readStat == Status.OK){

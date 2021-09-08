@@ -158,6 +158,7 @@ public class MyMongoClient {
         }
 
         //检查opsDone是否等于history.num
+        System.out.println("opsDone:" + opsDone + " history op num:"+ inputHis.getOpNum());
         assertTrue("opsDone should equals history op num", opsDone == inputHis.getOpNum());
 //        System.out.println("OpsDone:" + opsDone);
 
@@ -183,7 +184,7 @@ public class MyMongoClient {
 
         for(int i = 0; i < globalOpList.size(); i++){
             Operation curOp = globalOpList.get(i);
-            output.println(printOp("ok", curOp, i));
+//            output.println(printOp("ok", curOp, i));
             output.println(printOpJson(curOp, i));
         }
 
