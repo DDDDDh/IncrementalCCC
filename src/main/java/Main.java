@@ -46,10 +46,53 @@ public class Main {
         appendLog(runningLog, "MongoDB running log for month:" + month + " day:" + day);
         LinkedList<String> traceList = new LinkedList<String>();
 //        for(int i = 1; i <= 10; i++) { //控制轮数
-        for(int i = 1; i <= 1; i++) { //控制轮数
+        for(int i = 1; i <= 9; i++) { //控制轮数
             System.out.println("Round " + i);
 //            appendLog(globalLog, "Round" + i);
 //            for (int k = 1; k <= 30; k++) { //控制操作数
+            double rp; //控制读操作比例
+            double wp; //控制写操作比例
+            if(i == 1){ //r:w = 50:1
+                rp = 0.98;
+                wp = 0.02;
+            }
+            else if(i == 2){ //r:w = 20:1
+                rp = 0.95;
+                wp = 0.05;
+            }
+            else if(i == 3){ //r:w = 10:1
+                rp = 0.91;
+                wp = 0.09;
+            }
+            else if(i == 4){ //r:w = 5:1
+                rp = 0.83;
+                wp = 0.17;
+            }
+            else if(i == 5){//r:w = 1:1
+                rp = 0.5;
+                wp = 0.5;
+            }
+            else if(i == 6){ //r:w = 1:5
+                rp = 0.17;
+                wp = 0.83;
+            }
+            else if(i == 7){ //r:w = 1:10
+                rp = 0.09;
+                wp = 0.91;
+            }
+            else if(i == 8){ //r:w = 1:20
+                rp = 0.05;
+                wp = 0.95;
+            }
+            else if(i == 9){ //r:w = 1:50
+                rp = 0.02;
+                wp = 0.98;
+            }
+            else {
+                rp = 0.75;
+                wp = 0.25;
+            }
+
             for (int k = 1; k <= 30; k++) { //控制操作数
                 int opNum = 0;
 //                if (0 < k && k <= 15) {
@@ -69,7 +112,7 @@ public class Main {
                     appendLog(runningLog,"-----------------Begin Workload Part-----------------");
 
 //                    YCSBProducer producer = new YCSBProducer(opNum, 0.75, 0.25, 20, 100, processNum, "uniform", "uniform");
-                    YCSBProducer producer = new YCSBProducer(opNum, 0.75, 0.25, varRange, 100, processNum, "uniform", "uniform");
+                    YCSBProducer producer = new YCSBProducer(opNum, rp, wp, varRange, 100, processNum, "uniform", "uniform");
                     System.out.println("Begin to produce history...");
                     appendLog(runningLog, "Begin to produce history...");
                     producer.generatePath(folderPath);
